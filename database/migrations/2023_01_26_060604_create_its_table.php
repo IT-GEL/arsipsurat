@@ -13,17 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('its', function (Blueprint $table) {
+        Schema::create('i_t_s', function (Blueprint $table) {
             $table->id();
-            $table->string('kodeSurat');
+            $table->string('perihal');
             $table->string('noSurat')->unique();
             $table->string('nama');
-            $table->string('nik');
-            $table->string('tempatTglLahir');
-            $table->string('pekerjaan');
-            $table->text('alamat');
+            $table->string('jabatan');
+            $table->string('divisi');
             $table->text('keterangan');
             $table->date('tglSurat');
+            $table->string('ettd');
             $table->string('ttd');
             $table->string('namaTtd');
             $table->timestamps();
