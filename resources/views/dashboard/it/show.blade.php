@@ -94,7 +94,7 @@
                             </tr>
                         </table>
                         <table width="545">
-                            <td width="200">Divisii</td>
+                            <td width="200">Divisi</td>
                             <td width="10">:</td>
                             <td width="335">{{ $it->divisi }}</td>
                             </tr>
