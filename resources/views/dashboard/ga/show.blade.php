@@ -114,12 +114,6 @@
                             <td>Dengan ini mengajukan permohonan pembuatan kartu akses Gedung Artha Graha untuk karyawan PT. Global Energi Lestari, berikut data karyawan kami</td>
                             </tr>
                         </table>
-                        <br /><br />
-                        <table width="545">
-                            <tr>
-                            <td>Dengan ini mengajukan ijin untuk {{ $ga->perihal }} : </td>
-                            </tr>
-                        </table>
                         <table width="545">
                             <tr>
                             <td>
