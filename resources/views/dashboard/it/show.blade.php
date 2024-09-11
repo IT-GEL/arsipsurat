@@ -29,7 +29,7 @@
         $indonesianDay = $indonesianDayNames[$dayIndex];
         $indonesianMonth = $indonesianMonthNames[$monthIndex];
 
-        return date('j', strtotime($date)) . ' ' . $indonesianMonth . ' ' . date('Y', strtotime($date)) . ', ' . $indonesianDay;
+        return $indonesianDay . ', ' . date('j', strtotime($date)) . ' ' . $indonesianMonth . ' ' . date('Y', strtotime($date));
     }
 
     $monthNumber = date('n', strtotime($it->tglSurat));

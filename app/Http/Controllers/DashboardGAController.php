@@ -43,11 +43,11 @@ class DashboardGAController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kodeSurat' => 'required|numeric',
             'noSurat' => 'required|numeric',
             'nama' => 'required|max:255',
-            'nik' => 'required|numeric',
-            'tempatTglLahir' => 'required|max:255',
+            'pt' => 'required|numeric',
+            'vendor' => 'required|max:255',
+            'alamat' => 'max:255',
             'pekerjaan' => 'required|max:255',
             'alamat' => 'required|max:255',
             'keterangan' => 'required|max:255',
