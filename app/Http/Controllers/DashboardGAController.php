@@ -6,7 +6,7 @@ use App\Models\GA;
 use Illuminate\Http\Request;
 use PDF;
 
-class DashboardUsaController extends Controller
+class DashboardGAController extends Controller
 {
     /**
      * Display a listing of the resource.

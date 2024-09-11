@@ -51,7 +51,7 @@ class DashboardITController extends Controller
             'divisi' => 'required',
             'keterangan' => 'required',
             'tglSurat' => 'required|date',
-            'ettd' => 'required|max:255',
+            'ettd' => 'max:255',
             'ttd' => 'required|max:255',
             'namaTtd' => 'required|max:255',
         ]);
@@ -137,10 +137,9 @@ class DashboardITController extends Controller
 
     public function cetak(IT $it)
     {
-        $pdf = PDF::loadview('dashboard.it.cetak', [
-            'title' => 'Cetak',
+        return view('dashboard.it.cetak', [
+            'title' => 'IT',
             'it' => $it,
-        ])->setPaper('a4', 'potrait');
-        return $pdf->stream('IT_' . '' . $it->noSurat . '.pdf');
+        ]);
     }
 }

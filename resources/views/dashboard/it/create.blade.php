@@ -9,11 +9,14 @@
                     <form method="post" action="/dashboard/it">
                         @csrf
                         
-                        <!-- <div class="mb-3">
+                         <div class="mb-3">
                             <label for="perihal" class="form-label">Perihal Surat</label>
                             <select class="form-select @error('perihal') is-invalid @enderror" id="perihal" name="perihal" required autofocus>
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
-                                <option value="FORMULIR KEBUTUHAN BASIS IT">FORMULIR KEBUTUHAN BASIS IT</option>
+                                <option value="Pembuatan Akun Shared Folder JKT-DS">Pembuatan Akun Shared Folder JKT-DS</option>
+                                <option value="Penutupan Akun Shared Folder JKT-DS">Penutupan Akun Shared Folder JKT-DS</option>
+                                <option value="Pembuatan Akun Gelsys">Pembuatan Akun Gelsys</option>
+                                <option value="Penutupan Akun Gelsys">Penutupan Akun Gelsys</option>
                             </select>
                             @error('perihal')
                                 <div class="invalid-feedback">
@@ -22,7 +25,7 @@
                             @enderror
                         </div>
 
-                    -->
+                
                         <div class="mb-3">
                             <label for="noSurat" class="form-label">Nomor Surat</label>
                             <input type="number" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required value="{{ old('noSurat') }}">

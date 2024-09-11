@@ -12,7 +12,8 @@
         return $romanMonths[$monthNumber] ?? '';
     }
 
-    function formatDateIndonesian($date) {
+    function formatDateIndonesian($date)
+    {
         $englishDayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         $indonesianDayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
@@ -28,11 +29,12 @@
         $indonesianDay = $indonesianDayNames[$dayIndex];
         $indonesianMonth = $indonesianMonthNames[$monthIndex];
 
-        return $indonesianDay . ', ' . date('j', strtotime($date)) . ' ' . $indonesianMonth . ' ' . date('Y', strtotime($date));
+        return date('j', strtotime($date)) . ' ' . $indonesianMonth . ' ' . date('Y', strtotime($date)) . ', ' . $indonesianDay;
     }
 
     $monthNumber = date('n', strtotime($it->tglSurat));
     $romanMonth = monthToRoman($monthNumber);
+    $formattedDate = formatDateIndonesian($it->tglSurat);
 @endphp
 
 <!-- Recent Sales Start -->
@@ -60,20 +62,13 @@
                         <table width="545">
                             <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; font-weight: bold" class="text">
-                                <u>{{ $it->perihal }}</u>
+                                <u>FORMULIR KEBUTUHAN BASIS IT</u>
                             </td>
                             </tr>
                             <tr>
-                            <td style="text-align: center">Nomor : ITS/00{{ $it->noSurat }}/GELJKT/{{ $romanMonth }}/2024</td>
+                            <td style="text-align: center">Nomor : ITS/{{ $it->noSurat }}/GELJKT/{{ $romanMonth }}/2024</td>
                             </tr>
                         </table> 
-                        <br>
-                        <table width="545">
-                            <tr>
-                               <td>Perihal : </td>
-                            <tr>
-                            
-                        </table>   
                         <br>
                         <table width="545">
                             <tr>
@@ -102,7 +97,7 @@
                         <br /><br />
                         <table width="545">
                             <tr>
-                            <td>Dengan ini mengajukan ijin untuk : </td>
+                            <td>Dengan ini mengajukan ijin untuk {{ $it->perihal }} : </td>
                             </tr>
                         </table>
                         <table width="545">
