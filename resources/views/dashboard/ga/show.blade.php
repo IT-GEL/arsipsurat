@@ -111,8 +111,10 @@
                         </table>
                         <table width="545">
                         <tr>
-                            <td>Dengan ini mengajukan permohonan pembuatan kartu akses Gedung Artha Graha untuk karyawan PT. Global Energi Lestari, berikut data karyawan kami</td>
+                            <td>Dengan ini mengajukan permohonan pembuatan kartu akses Gedung Artha Graha untuk karyawan PT. Global Energi Lestari,</td>
+                            
                             </tr>
+                            <tr><td>berikut data karyawan kami :</td></tr>
                         </table>
                         <table width="545">
                             <tr>
