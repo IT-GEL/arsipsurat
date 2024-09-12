@@ -1,7 +1,6 @@
 @extends('dashboard.layouts.main')
 
 @php
-    $userName = auth()->user()->name ?? '';
     $date = $mss->tglSurat ?? null;
     $formattedDate = '';
     $total = 'N/A';
@@ -26,7 +25,7 @@
                         
                          <div class="mb-3">
                             <label for="perihal" class="form-label">Perihal Surat</label>
-                            <select class="form-select @error('perihal') is-invalid @enderror" id="perihal" name="perihal" required autofocus disabled>
+                            <select class="form-select @error('perihal') is-invalid @enderror" id="perihal" name="perihal" autofocus disabled>
                                 <option value="{{ old('perihal', $mss->perihal) }}" disabled selected>{{ old('perihal', $mss->perihal) }}</option>
                             </select>
                             @error('perihal')
@@ -39,7 +38,7 @@
                 
                         <div class="mb-3">
                             <label for="noSurat" class="form-label">Nomor Surat</label>
-                            <input type="text" value="Ref. No:MSS/GEL/BA-{{ old('noSurat', $mss->noSurat) }}/{{ $romanMonth }}/2024"  class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat"  required disabled>
+                            <input type="text" value="Ref. No:MSS/GEL/BA-{{ old('noSurat', $mss->noSurat) }}/{{ $romanMonth }}/2024"  class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat"  disabled>
                             @error('noSurat')
                                 <div class="invalid-feedback">
                                     {{ $message }}

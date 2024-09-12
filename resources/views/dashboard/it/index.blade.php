@@ -37,15 +37,17 @@
                             <th scope="col">No Surat</th>
                  
                             <th scope="col">Tanggal Surat</th>
+                            <th scope="col">Nama User</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($its as $it)
                         <tr>
-                            <td>{{ $it->noSurat }}</td>
+                            <td>ITS/{{ $it->noSurat }}/GELJKT/{{ $it->romanMonth }}/2024</td>
                            
                             <td>{{ date('d M Y', strtotime($it->tglSurat)); }}</td>
+                            <td>{{ $it->nama }}</td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="/dashboard/it/{{ $it->noSurat }}">Detail</a>
                                 <a class="btn btn-sm btn-warning" href="/dashboard/it/{{ $it->noSurat }}/edit">Edit</a>

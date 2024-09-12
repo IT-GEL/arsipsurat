@@ -16,12 +16,24 @@ class DashboardMSSController extends Controller
      */
     public function index()
     {
+        $mss = MSS::latest()->paginate(8);
+        $totalMSS = MSS::count();
+    
+        // Add romanMonth to each MSS item
+        $mss->getCollection()->transform(function ($item) {
+            $monthNumber = \Carbon\Carbon::parse($item->tglSurat)->month;
+            $item->romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+            return $item;
+        });
+    
         return view('dashboard.mss.index', [
             'title' => 'Surat Divisi',
-            'mss' => MSS::latest()->paginate(8),
-            'totalMSS' => MSS::count(),
+            'mss' => $mss,
+            'totalMSS' => $totalMSS,
         ]);
     }
+    
+    
 
     /**
      * Show the form for creating a new resource.
@@ -111,8 +123,6 @@ class DashboardMSSController extends Controller
     public function update(Request $request, MSS $mss)
     {
         $rules = [
-            'perihal' => 'required',
-            'noSurat' => 'required|numeric',
             'pttujuan' => 'required',
             'alamat' => 'required',
             'commodity' => 'required',

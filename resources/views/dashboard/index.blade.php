@@ -8,21 +8,21 @@
     $formattedDate = '';
     $total = 'N/A';
     $records = [];
-    $romanMonth = ''; // Define the variable here
+    $romanMonth = '';
 
     switch ($userName) {
         case "IT Support":
-            $date = $it->tglSurat ?? null;
+            $date = $its->first()->tglSurat ?? null;
             $total = $totalIT ?? 'N/A';
             $records = $its ?? [];
             break;
         case "General Affair":
-            $date = $ga->tglSurat ?? null;
+            $date = $ga->first()->tglSurat ?? null;
             $total = $totalGA ?? 'N/A';
             $records = $ga ?? [];
             break;
         case "Marketing Sales Shipping":
-            $date = $mss->tglSurat ?? null;
+            $date = $mss->first()->tglSurat ?? null;
             $total = $totalMSS ?? 'N/A';
             $records = $mss ?? [];
             break;
@@ -34,15 +34,15 @@
 
     if ($date) {
         $monthNumber = \Carbon\Carbon::parse($date)->month;
-        $romanMonth = monthToRoman($monthNumber); // Define $romanMonth here
-        $formattedDate = formatDateIndonesian($date);
+        $romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+        $formattedDate = formatDateIndonesian($date); // Ensure this function is defined and available
     }
 @endphp
 
 <!-- Sale & Revenue Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
-        @if ($userName == "IT Support")
+        @if ($userName == "IT Support" || $userName == "superadmin")
         <div class="col-sm-6 col-xl-5">
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-line fa-3x text-primary"></i>
@@ -54,7 +54,7 @@
         </div>
         @endif
 
-        @if ($userName == "General Affair")
+        @if ($userName == "General Affair" || $userName == "superadmin")
         <div class="col-sm-6 col-xl-5">
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
@@ -66,7 +66,7 @@
         </div>
         @endif
 
-        @if ($userName == "Marketing Sales Shipping")
+        @if ($userName == "Marketing Sales Shipping" || $userName == "superadmin")
         <div class="col-sm-6 col-xl-5">
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
@@ -81,7 +81,7 @@
 </div>
 <!-- Sale & Revenue End -->
 
-@if ($userName == "IT Support")
+@if ($userName == "IT Support" || $userName == "superadmin")
 <!-- Recent Sales Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
@@ -94,14 +94,16 @@
                 <thead>
                     <tr class="text-dark">
                         <th scope="col">No Surat</th>
-                        <th scope="col">Nama Surat</th>
+                        <th scope="col">Perihal Surat</th>
+                        <th scope="col">Nama User</th>
                         <th scope="col">Tanggal Surat</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($records as $record)
                     <tr>
-                        <td>{{ $record->noSurat }}</td>
+                        <td>ITS/{{ $record->noSurat }}/GELJKT/{{ $romanMonth }}/2024</td>
+                        <td>{{ $record->perihal }}</td>
                         <td>{{ $record->nama }}</td>
                         <td>{{ date('d M Y', strtotime($record->tglSurat)) }}</td>
                     </tr>
@@ -118,7 +120,7 @@
 <!-- Recent Sales End -->
 @endif
 
-@if ($userName == "General Affair")
+@if ($userName == "General Affair" || $userName == "superadmin")
 <!-- Recent Sales Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
@@ -155,7 +157,7 @@
 <!-- Recent Sales End -->
 @endif
 
-@if ($userName == "Marketing Sales Shipping")
+@if ($userName == "Marketing Sales Shipping" || $userName == "superadmin")
 <!-- Recent Sales Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
@@ -175,7 +177,6 @@
                 <tbody>
                     @forelse ($records as $record)
                     <tr>
-                        
                         <td style="font-weight:bold;">Ref. No:MSS/GEL/BA-{{ $record->noSurat }}/{{ $romanMonth }}/2024</td>
                         <td>{{ $record->perihal }}</td>
                         <td>{{ date('d M Y', strtotime($record->tglSurat)) }}</td>

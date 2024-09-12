@@ -15,13 +15,23 @@ class DashboardITController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('dashboard.it.index', [
-            'title' => 'Surat Divisi',
-            'its' => IT::latest()->paginate(8),
-            'totalIT' => IT::count(),
-        ]);
-    }
+{
+    $it = IT::latest()->paginate(8);
+    $totalIT = IT::count();
+
+    // Add romanMonth to each IT item
+    $it->getCollection()->transform(function ($item) {
+        $monthNumber = \Carbon\Carbon::parse($item->tglSurat)->month;
+        $item->romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+        return $item;
+    });
+
+    return view('dashboard.it.index', [
+        'title' => 'Surat Divisi',
+        'its' => $it,
+        'totalIT' => $totalIT,
+    ]);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -69,12 +79,19 @@ class DashboardITController extends Controller
      */
     public function show(IT $it)
     {
+        // Get the month number from the 'tglSurat' attribute
+        $monthNumber = \Carbon\Carbon::parse($it->tglSurat)->month;
+    
+        // Calculate the Roman month representation
+        $romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+    
+        // Pass the 'romanMonth' along with the 'IT' model to the view
         return view('dashboard.it.show', [
             'title' => 'IT',
             'it' => $it,
+            'romanMonth' => $romanMonth, // Pass the Roman month to the view
         ]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -83,11 +100,19 @@ class DashboardITController extends Controller
      */
     public function edit(IT $it)
     {
+        // Get the month number from the 'tglSurat' attribute
+        $monthNumber = \Carbon\Carbon::parse($it->tglSurat)->month;
+    
+        // Calculate the Roman month representation
+        $romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+    
         return view('dashboard.it.edit', [
             'title' => 'Edit',
             'it' => $it,
+            'romanMonth' => $romanMonth, // Pass the Roman month to the view
         ]);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -137,9 +162,18 @@ class DashboardITController extends Controller
 
     public function cetak(IT $it)
     {
+        // Get the month number from the 'tglSurat' attribute
+        $monthNumber = \Carbon\Carbon::parse($it->tglSurat)->month;
+    
+        // Calculate the Roman month representation
+        $romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+    
+        // Pass the 'romanMonth' along with the 'IT' model to the view
         return view('dashboard.it.cetak', [
             'title' => 'IT',
             'it' => $it,
+            'romanMonth' => $romanMonth, // Pass the Roman month to the view
         ]);
     }
+    
 }

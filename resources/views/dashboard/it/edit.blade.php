@@ -22,21 +22,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="noSurat" class="form-label">Nomor Surat</label>
-                            <input type="number" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required value="{{ old('noSurat', $it->noSurat) }}" disabled>
+                            <input type="text" value="ITS/{{ old('noSurat', $it->noSurat) }}/GELJKT/{{ $romanMonth }}/2024" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required value="{{ old('noSurat', $it->noSurat) }}" disabled>
                             @error('noSurat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamat" class="form-label">Alamat</label>
-                            <textarea class="form-control @error('alamat') is-invalid @enderror" placeholder="Tulis alamat lengkap disini..."
-                                id="alamat" name="alamat" style="height: 150px;" required value="{{ old('alamat', $it->alamat) }}"></textarea>
-                            @error('alamat')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div> 
                             @enderror
                         </div>
                         <div class="mb-3">
