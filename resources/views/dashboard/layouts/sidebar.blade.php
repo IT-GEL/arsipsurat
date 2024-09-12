@@ -27,6 +27,9 @@
                         @if (auth()->user()->name == "General Affair")
                             <a href="/dashboard/ga" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-window"></i>  Surat {{ auth()->user()->name }}</a>
                         @endif
+                        @if (auth()->user()->name == "Marketing Sales Shipping")
+                            <a href="/dashboard/mss" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-window"></i>  Surat {{ auth()->user()->name }}</a>
+                        @endif
                         </div>
                     </div>
                 </div>

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\IT;
+use App\Models\MSS;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ITPolicy
+class MSSPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class ITPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\IT  $it
+     * @param  \App\Models\MSS  $mss
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, IT $it)
+    public function view(User $user, MSS $mss)
     {
         //
     }
@@ -48,10 +48,10 @@ class ITPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\IT  $it
+     * @param  \App\Models\MSS  $mss
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, IT $it)
+    public function update(User $user, MSS $mss)
     {
         //
     }
@@ -60,10 +60,10 @@ class ITPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\IT  $it
+     * @param  \App\Models\MSS  $mss
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, IT $it)
+    public function delete(User $user, MSS $mss)
     {
         //
     }
@@ -72,10 +72,10 @@ class ITPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\IT  $it
+     * @param  \App\Models\MSS  $mss
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, IT $it)
+    public function restore(User $user, MSS $mss)
     {
         //
     }
@@ -84,10 +84,10 @@ class ITPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\IT  $it
+     * @param  \App\Models\MSS  $mss
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, IT $it)
+    public function forceDelete(User $user, MSS $mss)
     {
         //
     }

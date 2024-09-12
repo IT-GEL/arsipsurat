@@ -7,6 +7,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardITController;
 use App\Http\Controllers\DashboardGAController;
+use App\Http\Controllers\DashboardMSSController;
+use App\Http\Controllers\DashboardTNCController;
+
 
 
 /*
@@ -38,7 +41,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::get('/dashboard/it/{it:noSurat}/cetak', [DashboardITController::class, 'cetak'])->middleware('auth');
 Route::get('/dashboard/ga/{ga:noSurat}/cetak', [DashboardGAController::class, 'cetak'])->middleware('auth');
+Route::get('/dashboard/mss/{mss:noSurat}/cetak', [DashboardMSSController::class, 'cetak'])->middleware('auth');
 Route::resource('/dashboard/it', DashboardITController::class)->middleware('auth');
 Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth');
+Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
 
 // Route::get('/dashboard/it/cetak_pdf', [DashboardITController::class, 'cetak_pdf'])->middleware('auth');
