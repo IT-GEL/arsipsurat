@@ -36,7 +36,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="nama" class="form-label">Nama</label>
+                            <label for="nama" class="form-label">Nama User</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Isi Nama..."
                                 id="nama" name="nama" required value="{{ old('nama') }}">
                             @error('nama')
@@ -46,7 +46,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="jabatan" class="form-label">Jabatan</label>
+                            <label for="jabatan" class="form-label">Jabatan User</label>
                             <input type="text" class="form-control @error('jabatan') is-invalid @enderror" placeholder="Isi Jabatan..."
                                 id="jabatan" name="jabatan" required value="{{ old('jabatan') }}">
                             @error('jabatan')
@@ -56,7 +56,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="divisi" class="form-label">Divisi</label>
+                            <label for="divisi" class="form-label">Divisi User</label>
                             <input type="text" class="form-control @error('divisi') is-invalid @enderror" placeholder="Isi Divisi..."
                                 id="divisi" name="divisi" required value="{{ old('divisi') }}">
                             @error('nama')

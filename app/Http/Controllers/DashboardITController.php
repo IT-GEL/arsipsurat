@@ -122,30 +122,33 @@ class DashboardITController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, IT $it)
-    {
-        $rules = [
-            'perihal' => 'required',
-            'nama' => 'required|max:255',
+{
+
+    $rules = [
+        'perihal' => 'required',
+            'noSurat' => 'required|numeric',
+            'nama' => 'required',
             'jabatan' => 'required',
             'divisi' => 'required',
-            'keterangan' => 'required|max:255',
+            'keterangan' => 'required',
             'tglSurat' => 'required|date',
-            'ettd' => 'required|max:255',
+            'ettd' => 'max:255',
             'ttd' => 'required|max:255',
             'namaTtd' => 'required|max:255',
-        ];
+    ];
 
-        if ($request->noSurat != $it->noSurat) {
-            $rules['noSurat'] = 'required|numeric|unique:its';
-        }
-
-        $validatedData = $request->validate($rules);
-
-        IT::where('id', $it->id)
-            ->update($validatedData);
-
-        return redirect('/dashboard/it')->with('success', 'Surat berhasil di edit!');
+    if ($request->noSurat != $it->noSurat) {
+        $rules['noSurat'] = 'required|numeric|unique:its';
     }
+
+    $validatedData = $request->validate($rules);
+
+    IT::where('id', $it->id)
+        ->update($validatedData);
+
+    return redirect('/dashboard/it')->with('success', 'Surat berhasil di edit!');
+}
+
 
     /**
      * Remove the specified resource from storage.

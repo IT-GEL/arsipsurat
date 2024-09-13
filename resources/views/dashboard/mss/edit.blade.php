@@ -1,53 +1,32 @@
 @extends('dashboard.layouts.main')
 
-@php
-    $date = $mss->tglSurat ?? null;
-    $formattedDate = '';
-    $total = 'N/A';
-    $records = [];
-    $romanMonth = ''; // Define the variable here
-
-    if ($date) {
-        $monthNumber = \Carbon\Carbon::parse($date)->month;
-        $romanMonth = monthToRoman($monthNumber); // Define $romanMonth here
-        $formattedDate = formatDateIndonesian($date);
-    }
-@endphp
-
 @section('container')
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Edit Surat Keterangan Marketing Sales Shipping</h6>
-                    <form method="post" action="/dashboard/mss">
+                    
+                    <form method="post" action="/dashboard/mss/{{ $mss->noSurat }}">
+                    
                         @csrf
+                        @method('put')
                         
                          <div class="mb-3">
-                            <label for="perihal" class="form-label">Perihal Surat</label>
-                            <select class="form-select @error('perihal') is-invalid @enderror" id="perihal" name="perihal" autofocus disabled>
-                                <option value="{{ old('perihal', $mss->perihal) }}" disabled selected>{{ old('perihal', $mss->perihal) }}</option>
-                            </select>
-                            @error('perihal')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <label for="perihal" class="form-label">Perihal Surat : </label>
+                            <label style="font-weight:bold;">{{ old('perihal', $mss->perihal) }}</label>
+                            <input type="hidden" value="{{ old('perihal', $mss->perihal) }}">
                         </div>
 
                 
                         <div class="mb-3">
-                            <label for="noSurat" class="form-label">Nomor Surat</label>
-                            <input type="text" value="Ref. No:MSS/GEL/BA-{{ old('noSurat', $mss->noSurat) }}/{{ $romanMonth }}/2024"  class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat"  disabled>
-                            @error('noSurat')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <label for="noSurat" class="form-label">Nomor Surat: :</label>
+                            <input type="number" value="{{ old('noSurat', $mss->noSurat) }}"  class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat"  hidden>
+                            <label style="font-weight:bold;">Ref. No:MSS/GEL/BA-{{ old('noSurat', $mss->noSurat) }}/{{ $romanMonth }}/2024</label>
                         </div>
                         <div class="mb-3">
                             <label for="pttujuan" class="form-label">PT Tujuan</label>
-                            <input type="text" value="{{ old('pttuuan', $mss->pttujuan) }}" class="form-control @error('pttujuan') is-invalid @enderror"
+                            <input type="text" value="{{ old('pttujuan', $mss->pttujuan) }}" class="form-control @error('pttujuan') is-invalid @enderror"
                                 id="pttujuan" name="pttujuan" required>
                             @error('nama')
                                 <div class="invalid-feedback">
@@ -57,7 +36,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat PT Tujuan</label>
-                            <input id="alamat" type="hidden" name="alamat" value="{{ old('alamat', $mss->alamat) }}">
+                            <input id="alamat" type="text" name="alamat" value="{{ old('alamat', $mss->alamat) }}">
                             <trix-editor class="form-control @error('alamat') is-invalid @enderror" input="alamat" required></trix-editor>
                             @error('keterangan')
                                 <div class="invalid-feedback">
@@ -65,6 +44,7 @@
                                 </div>
                             @enderror
                             <br>
+                        </div>
                         <div class="mb-3">
                             <label for="commodity" class="form-label">Commodity</label>
                             <input type="text" class="form-control @error('commodity') is-invalid @enderror" value="{{ old('commodity', $mss->commodity) }}"

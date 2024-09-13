@@ -37,7 +37,7 @@
                             <label for="pttujuan" class="form-label">PT Tujuan</label>
                             <input type="text" class="form-control @error('pttujuan') is-invalid @enderror" placeholder="Isi PT Tujuan..."
                                 id="pttujuan" name="pttujuan" required value="{{ old('pttujuan') }}">
-                            @error('nama')
+                            @error('pttujuan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div> 
@@ -46,12 +46,20 @@
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat PT Tujuan</label>
                             <input id="alamat" type="hidden" name="alamat">
-                            <trix-editor class="form-control @error('alamat') is-invalid @enderror" input="alamat" required value="{{ old('alamat') }}" placeholder="Alamat PT Tujuan"></trix-editor>
-                            @error('keterangan')
+                            <trix-editor 
+                                class="form-control @error('alamat') is-invalid @enderror" 
+                                input="alamat" 
+                                required 
+                                value="{{ old('alamat') }}" 
+                                placeholder="Alamat PT Tujuan">
+                            </trix-editor>
+                            @error('alamat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
+                        </div>
+
                         <div class="mb-3">
                             <label for="commodity" class="form-label">Commodity</label>
                             <input type="text" class="form-control @error('commodity') is-invalid @enderror" placeholder="Commodity..."

@@ -15,10 +15,20 @@ class DashboardGAController extends Controller
      */
     public function index()
     {
+        $ga = GA::latest()->paginate(8);
+        $totalGA = GA::count();
+
+        // Add romanMonth to each GA item
+        $ga->getCollection()->transform(function ($item) {
+            $monthNumber = \Carbon\Carbon::parse($item->tglSurat)->month;
+            $item->romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+            return $item;
+        });
+
         return view('dashboard.ga.index', [
             'title' => 'GA',
-            'ga' => GA::latest()->paginate(8),
-            'totalGA' => GA::count(),
+            'ga' => $ga,
+            'totalGA' => $totalGA,
         ]);
     }
 
@@ -47,9 +57,8 @@ class DashboardGAController extends Controller
             'nama' => 'required|max:255',
             'pt' => 'required|numeric',
             'vendor' => 'required|max:255',
-            'alamat' => 'max:255',
-            'pekerjaan' => 'required|max:255',
             'alamat' => 'required|max:255',
+            'pekerjaan' => 'required|max:255',
             'keterangan' => 'required|max:255',
             'tglSurat' => 'required|date',
             'ttd' => 'required|max:255',
@@ -69,12 +78,17 @@ class DashboardGAController extends Controller
      */
     public function show(GA $ga)
     {
+        // Add romanMonth to the specific GA item
+        $monthNumber = \Carbon\Carbon::parse($ga->tglSurat)->month;
+        $ga->romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+    
         return view('dashboard.ga.show', [
             'title' => 'GA',
-            'active' => 'ga',
             'ga' => $ga,
+            'romanMonth' => $ga->romanMonth, // Pass the Roman month to the view
         ]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -100,12 +114,12 @@ class DashboardGAController extends Controller
     public function update(Request $request, GA $ga)
     {
         $rules = [
-            'kodeSurat' => 'required|numeric',
+            'noSurat' => 'required|numeric',
             'nama' => 'required|max:255',
-            'nik' => 'required|numeric',
-            'tempatTglLahir' => 'required|max:255',
-            'pekerjaan' => 'required|max:255',
+            'pt' => 'required|numeric',
+            'vendor' => 'required|max:255',
             'alamat' => 'required|max:255',
+            'pekerjaan' => 'required|max:255',
             'keterangan' => 'required|max:255',
             'tglSurat' => 'required|date',
             'ttd' => 'required|max:255',
@@ -118,8 +132,7 @@ class DashboardGAController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        GA::where('id', $ga->id)
-            ->update($validatedData);
+        $ga->update($validatedData);
 
         return redirect('/dashboard/ga')->with('success', 'Surat berhasil di edit!');
     }
@@ -132,7 +145,7 @@ class DashboardGAController extends Controller
      */
     public function destroy(GA $ga)
     {
-        GA::destroy($ga->id);
+        $ga->delete();
 
         return redirect('/dashboard/ga')->with('success', 'Surat berhasil dihapus!');
     }
@@ -143,6 +156,7 @@ class DashboardGAController extends Controller
             'title' => 'Cetak',
             'ga' => $ga,
         ])->setPaper('a4', 'potrait');
+
         return $pdf->stream('ga_' . $ga->noSurat . '.pdf');
     }
 }

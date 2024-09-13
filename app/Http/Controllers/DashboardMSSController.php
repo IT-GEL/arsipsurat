@@ -51,7 +51,7 @@ class DashboardMSSController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function store(Request $request)
     {
@@ -88,7 +88,7 @@ class DashboardMSSController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\IT  $mss
+     * @param  \App\Models\MSS  $mss
      * @return \Illuminate\Http\Response
      */
     public function show(MSS $mss)
@@ -107,9 +107,16 @@ class DashboardMSSController extends Controller
      */
     public function edit(MSS $mss)
     {
+                // Get the month number from the 'tglSurat' attribute
+                $monthNumber = \Carbon\Carbon::parse($mss->tglSurat)->month;
+    
+                // Calculate the Roman month representation
+                $romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
+
         return view('dashboard.mss.edit', [
             'title' => 'Edit',
             'mss' => $mss,
+            'romanMonth' => $romanMonth, // Pass the Roman month to the view
         ]);
     }
 
@@ -121,41 +128,43 @@ class DashboardMSSController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MSS $mss)
-    {
-        $rules = [
-            'pttujuan' => 'required',
-            'alamat' => 'required',
-            'commodity' => 'required',
-            'source' => 'required',
-            'country' => 'required',
-            'spec' => 'required',
-            'vo' => 'required',
-            'qty' => 'required|numeric',
-            'lp' => 'required',
-            'dp' => 'required',
-            'cif' => 'required|numeric',
-            'fob' => 'required|numeric',
-            'freight' => 'required|numeric',
-            'shipschedule' => 'required',
-            'tcd' => 'required',
-            'surveyor' => 'required',
-            'tglSurat' => 'required|date',
-            'ettd' => 'max:255',
-            'ttd' => 'required|max:255',
-            'namaTtd' => 'required|max:255',
-        ];
+{
+    $rules = [
+        'perihal' => '',
+        'noSurat' => '|numeric',
+        'pttujuan' => 'required',
+        'alamat' => 'required',
+        'commodity' => 'required',
+        'source' => 'required',
+        'country' => 'required',
+        'spec' => 'required',
+        'vo' => 'required',
+        'qty' => 'required|numeric',
+        'lp' => 'required',
+        'dp' => 'required',
+        'cif' => 'required|numeric',
+        'fob' => 'required|numeric',
+        'freight' => 'required|numeric',
+        'shipschedule' => 'required',
+        'tcd' => 'required',
+        'surveyor' => 'required',
+        'tglSurat' => 'required|date',
+        'ettd' => 'max:255',
+        'ttd' => 'required|max:255',
+        'namaTtd' => 'required|max:255',
+    ];
 
-        if ($request->noSurat != $mss->noSurat) {
-            $rules['noSurat'] = 'required|numeric|unique:mss';
-        }
-
-        $validatedData = $request->validate($rules);
-
-        MSS::where('id', $mss->id)
-            ->update($validatedData);
-
-        return redirect('/dashboard/mss')->with('success', 'Surat berhasil di edit!');
+    if ($request->noSurat != $mss->noSurat) {
+        $rules['noSurat'] = 'required|numeric|unique:mss';
     }
+
+    $validatedData = $request->validate($rules);
+
+    $mss->update($validatedData);
+
+    return redirect('/dashboard/mss')->with('success', 'Surat berhasil di edit!');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -165,7 +174,7 @@ class DashboardMSSController extends Controller
      */
     public function destroy(MSS $mss)
     {
-        IT::destroy($mss->id);
+        MSS::destroy($mss->id);
 
         return redirect('/dashboard/mss')->with('success', 'Surat berhasil dihapus!');
     }
@@ -174,7 +183,7 @@ class DashboardMSSController extends Controller
     {
         return view('dashboard.mss.cetak', [
             'title' => 'MSS',
-            'it' => $mss,
+            'mss' => $mss,
         ]);
     }
 }
