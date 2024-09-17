@@ -44,7 +44,11 @@
                 <tbody>
                     @foreach ($mss as $item)
                     <tr>
-                        <td style="font-weight:bold;">Ref. No:MSS/GEL/BA-{{ $item->noSurat }}/{{ $item->romanMonth }}/2024</td>
+                        <td style="font-weight:bold;">
+                            Ref. No:MSS/GEL/@if($item->idPerihal == 1)FCO-{{ $item->noSurat }}/{{ $item->romanMonth }}/2024
+                            @elseif($item->idPerihal == 2)BA-{{ $item->noSurat }}/{{ $item->romanMonth }}/2024
+                            @endif
+                        </td>
                         <td>{{ $item->perihal }}</td>
                         <td>{{ date('d M Y', strtotime($item->tglSurat)) }}</td>
                         <td>

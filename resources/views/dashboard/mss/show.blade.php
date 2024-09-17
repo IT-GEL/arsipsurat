@@ -64,7 +64,7 @@
 
                             </tr>
                             <tr>
-                            <td style="text-align: center; font-weight: bold; font:italic">Ref. No:MSS/GEL/BA-{{ $mss->noSurat }}/{{ $romanMonth }}/2024</td>
+                            <td style="text-align: center; font-weight: bold; font:italic">Ref. No:MSS/GEL/FCO-{{ $mss->noSurat }}/{{ $romanMonth }}/2024</td>
                             </tr>
                         </table> 
                         <br>
@@ -241,7 +241,7 @@
                         <br><br>
                         <table width="545">
                             <tr>
-                            <td>{{ $mss->keterangan}}</td>
+                            <td>{!! $mss->keterangan !!}</td>
                             </tr>
                         </table>
                         <br><br>

@@ -74,7 +74,7 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                        <div class="mb-3 mt-3">
+                        <!--<div class="mb-3 mt-3">
                             <label for="tglSurat" class="form-label">Tanggal</label>
                             <input type="date" class="form-control @error('tglSurat') is-invalid @enderror" id="tglSurat" name="tglSurat" required value="{{ old('tglSurat') }}">
                             @error('tglSurat')
@@ -82,7 +82,25 @@
                                     {{ $message }}
                                 </div>
                             @enderror
+                        </div> -->
+                        <div class="mb-3 mt-3">
+                            <label for="tglSurat" class="form-label">Tanggal</label>
+                            <input type="date" class="form-control @error('tglSurat') is-invalid @enderror" id="tglSurat" name="tglSurat" required value="{{ old('tglSurat') }}">
+                            @error('tglSurat')
+                                <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () 
+                                {
+                                var today = new Date().toISOString().split('T')[0];
+                                document.getElementById('tglSurat').value = today;
+                                 }
+                            );
+                        </script>
                         <div class="mb-3">
                             <label for="ttd" class="form-label">Yang Menandatangai</label>
                             <input type="text" class="form-control @error('ttd') is-invalid @enderror" id="ttd" name="ttd" placeholder="Departement Head" required value="{{ old('ttd') }}">

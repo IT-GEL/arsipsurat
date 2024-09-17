@@ -42,10 +42,19 @@ class DashboardMSSController extends Controller
      */
     public function create()
     {
+        // Get the current month number
+        $monthNumber = date('n'); // 'n' returns the numeric representation of the month (1 to 12)
+        
+        // Calculate the Roman numeral for the current month
+        $romanMonth = monthToRoman($monthNumber); // Ensure monthToRoman function is available and included
+    
+        // Pass the variables to the view
         return view('dashboard.mss.create', [
             'title' => 'MSS',
+            'romanMonth' => $romanMonth, // Pass the Roman month to the view
         ]);
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -55,35 +64,41 @@ class DashboardMSSController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $validatedData = $request->validate([
-            'perihal' => 'required',
+            'idPerihal' => 'required|numeric|max:255',
+            'perihal' => 'required|string|max:255',
             'noSurat' => 'required|numeric',
-            'pttujuan' => 'required',
-            'alamat' => 'required',
-            'commodity' => 'required',
-            'source' => 'required',
-            'country' => 'required',
-            'spec' => 'required',
-            'vo' => 'required',
-            'qty' => 'required|numeric',
-            'lp' => 'required',
-            'dp' => 'required',
-            'cif' => 'required|numeric',
-            'fob' => 'required|numeric',
-            'freight' => 'required|numeric',
-            'shipschedule' => 'required',
-            'tcd' => 'required',
-            'surveyor' => 'required',
-            'tglSurat' => 'required|date',
-            'ettd' => 'max:255',
-            'ttd' => 'required|max:255',
-            'namaTtd' => 'required|max:255',
+            'prefix' => 'required|string|max:255',
+            'pttujuan' => 'nullable|string|max:255',
+            'ptkunjungan' => 'nullable|string|max:255',
+            'alamat' => 'nullable|string|max:255',
+            'keterangan' => 'nullable|string|max:255',
+            'commodity' => 'nullable|string|max:255',
+            'source' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'spec' => 'nullable|string|max:255',
+            'vo' => 'nullable|date',
+            'qty' => 'nullable|numeric',
+            'lp' => 'nullable|string|max:255',
+            'dp' => 'nullable|string|max:255',
+            'cif' => 'nullable|numeric',
+            'fob' => 'nullable|numeric',
+            'freight' => 'nullable|numeric',
+            'shipschedule' => 'nullable|string|max:255',
+            'tcd' => 'nullable|string|max:255',
+            'surveyor' => 'nullable|string|max:255',
+            'tglSurat' => 'nullable|date',
+            'ettd' => 'nullable|string|max:255',
+            'ttd' => 'nullable|string|max:255',
+            'namaTtd' => 'nullable|string|max:255',
         ]);
-
+    
         MSS::create($validatedData);
-
+    
         return redirect('/dashboard/mss')->with('success', 'Surat berhasil ditambahkan!');
     }
+    
 
     /**
      * Display the specified resource.
@@ -130,28 +145,30 @@ class DashboardMSSController extends Controller
     public function update(Request $request, MSS $mss)
 {
     $rules = [
-        'perihal' => '',
-        'noSurat' => '|numeric',
-        'pttujuan' => 'required',
-        'alamat' => 'required',
-        'commodity' => 'required',
-        'source' => 'required',
-        'country' => 'required',
-        'spec' => 'required',
-        'vo' => 'required',
-        'qty' => 'required|numeric',
-        'lp' => 'required',
-        'dp' => 'required',
-        'cif' => 'required|numeric',
-        'fob' => 'required|numeric',
-        'freight' => 'required|numeric',
-        'shipschedule' => 'required',
-        'tcd' => 'required',
-        'surveyor' => 'required',
-        'tglSurat' => 'required|date',
-        'ettd' => 'max:255',
-        'ttd' => 'required|max:255',
-        'namaTtd' => 'required|max:255',
+        'perihal' => 'required|string|max:255',
+        'noSurat' => 'required|numeric',
+        'pttujuan' => 'nullable|string|max:255',
+        'ptkunjungan' => 'nullable|string|max:255',
+        'alamat' => 'nullable|string|max:255',
+        'keterangan' => 'nullable|string|max:255',
+        'commodity' => 'nullable|string|max:255',
+        'source' => 'nullable|string|max:255',
+        'country' => 'nullable|string|max:255',
+        'spec' => 'nullable|string|max:255',
+        'vo' => 'nullable|date',
+        'qty' => 'nullable|numeric',
+        'lp' => 'nullable|string|max:255',
+        'dp' => 'nullable|string|max:255',
+        'cif' => 'nullable|numeric',
+        'fob' => 'nullable|numeric',
+        'freight' => 'nullable|numeric',
+        'shipschedule' => 'nullable|string|max:255',
+        'tcd' => 'nullable|string|max:255',
+        'surveyor' => 'nullable|string|max:255',
+        'tglSurat' => 'nullable|date',
+        'ettd' => 'nullable|string|max:255',
+        'ttd' => 'nullable|string|max:255',
+        'namaTtd' => 'nullable|string|max:255',
     ];
 
     if ($request->noSurat != $mss->noSurat) {

@@ -10,15 +10,7 @@
                         @method('put')
                         @csrf
 
-                        <div class="mb-3">
-                            <label for="perihal" class="form-label">Perihal Surat:</label>
-                            <input type="text" id="perihal" name="perihal" class="form-control @error('perihal') is-invalid @enderror" value="{{ old('perihal', $it->perihal) }}" required>
-                            @error('perihal')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                        
 
                         <div class="mb-3">
                             <label for="noSurat" class="form-label">Nomor Surat:</label>
@@ -33,7 +25,7 @@
 
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama User</label>
-                            <input type="nama" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama', $it->nama) }}" required>
+                            <input type="nama" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" value= <span style="font-weight:bold;">ITS/{{ old('noSurat', $it->noSurat) }}/GELJKT/{{ $romanMonth }}/2024</span>required>
                             @error('nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
