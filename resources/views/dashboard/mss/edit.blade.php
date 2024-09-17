@@ -36,7 +36,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat PT Tujuan</label>
-                            <input id="alamat" type="text" name="alamat" value="{{ old('alamat', $mss->alamat) }}">
+                            <input id="alamat" type="hidden" name="alamat" value="{{ old('alamat', $mss->alamat) }}">
                             <trix-editor class="form-control @error('alamat') is-invalid @enderror" input="alamat" required></trix-editor>
                             @error('keterangan')
                                 <div class="invalid-feedback">

@@ -52,7 +52,7 @@
                                 <td style="text-align: left;font-weight: bold; text-transform: uppercase;"> {{ $mss->pttujuan }} </td>
                             </tr>
                             <tr>
-                                <td style="text-align: left;font-weight: bold;"> {{ $mss->alamat }} </td>
+                                <td style="text-align: left;font-weight: bold;"> {!! $mss->alamat !!} </td>
                             </tr>
                         </table>
                         <br>
@@ -179,7 +179,7 @@
 
 @endif
 
-@if ( $mss->perihal  == "Full Corporate Offer (FCO)")
+@if ( $mss->perihal  == "Surat Izin Masuk Tambang")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
@@ -215,7 +215,7 @@
                             </td>
                             </tr>
                             <tr>
-                            <td>{{!! $mss->alamat !!}}</td>
+                            <td>{!! $mss->alamat !!}</td>
                             </tr>
                         </table> 
                         <br>
