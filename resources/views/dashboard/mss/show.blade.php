@@ -8,7 +8,7 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                        <a href="/dashboard/mss/{{ $mss->noSurat }}/cetak" class="btn btn-secondary"><i class="bi bi-printer"></i> Cetak</a>
+                        <a href="/dashboard/mss/{{ $mss->noSurat }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                     </div>
                     <center style="margin-top: 50px;">
                         <table style="align-content: center">
@@ -169,7 +169,7 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary"><i class="bi bi-printer"></i> Cetak</a>
+                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank" download ><i class="bi bi-printer"></i> Cetak</a>
                     </div>
                     <center style="margin-top: 50px;">
                         <table style="align-content: center">
@@ -248,15 +248,26 @@
 
 @endif
 
-@if ( $mss->perihal  == "Surat Izin Masuk Tambang")
+@if ( $mss->perihal  == "Berita Acara Surveyor")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary"><i class="bi bi-printer"></i> Cetak</a>
+                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+
                     </div>
                     <center style="margin-top: 50px;">
+                    <table width="545">
+                            <tr>
+                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase" class="text">
+                                <u>BERITA ACARA</u>
+                            </tr>
+                            <tr>
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
+                            </tr>
+                        </table> 
+                        <br>
 
                         <table width="545">
                             <tr>
@@ -266,50 +277,22 @@
                         <br><br>
                         <table width="545">
                             <tr>
-                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: bold; text-transform:uppercase" class="text">
-                                {{ $mss->pttujuan }}
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>{!! $mss->alamat !!}</td>
-                            </tr>
-                        </table> 
-                        <br>
-                        <table width="545">
-                            <tr>
-                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; font-weight: bold; text-transform:uppercase" class="text">
-                                <u>{{ $mss->perihal }} {{ $mss->ptkunjungan }}</u>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
-                            </tr>
-                        </table> 
-                        <br>
-                        <table width="545">
-                            <tr>
-                            <td>Dear {{ $mss->pttujuan }} </td>
-                            </tr>
-                            <tr>
-                            <td>Kami PT. Global Energi Lestari (GEL) sebagai pemilik tambang batubara. Menindaklanjuti pengajuan permintaan kunjungan yang akan dilakukan oleh {{ $mss->pttujuan }} di tambang {{ $mss->ptkunjungan }} pada tanggal {{ $mss->tglSurat }}. Berikut nama yang akan melakukan kunjungan:</td>
-                            </tr>
-                        </table>
-                        <br><br>
-                        <table width="545">
-                            <tr>
                             <td>{!! $mss->keterangan !!}</td>
                             </tr>
                         </table>
-                        <br><br>
+                        <br>
                         <table width="545">
                             <tr>
-                            <td>Demikianlah surat izin kunjungan ini kami buat. Mohon dapat dipergunakan sebagaimana mestinya.</td>
+                            <td>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pengajuan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</td>
                             </tr>
                         </table>
                         <br /><br />
                         <table width="545">
                             <tr>
-                            <td>Hormat Kami,</td>
+                            <td style="font:center;border:1px so;">Dibuat</td>
+                            </tr>
+                            <tr>
+                            <td>Sales Departement</td>
                             </tr>
                         </table>
                         <br>

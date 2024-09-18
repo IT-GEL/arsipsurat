@@ -45,9 +45,7 @@
                     @foreach ($mss as $item)
                     <tr>
                         <td style="font-weight:bold;">
-                            Ref. No:MSS/GEL/@if($item->idPerihal == 1)FCO-{{ $item->noSurat }}/{{ $item->romanMonth }}/2024
-                            @elseif($item->idPerihal == 2)BA-{{ $item->noSurat }}/{{ $item->romanMonth }}/2024
-                            @endif
+                        {{ $item->prefix }}
                         </td>
                         <td>{{ $item->perihal }}</td>
                         <td>{{ date('d M Y', strtotime($item->tglSurat)) }}</td>
@@ -59,7 +57,8 @@
                                 @csrf 
                                 <button class="btn btn-sm btn-danger border-0" onclick="return confirm('Klik Oke Untuk Menghapus')">Hapus</button>
                             </form>
-                            <a class="btn btn-sm btn-success" href="/dashboard/mss/{{ $item->id }}/cetak">Cetak</a>
+                            <a class="btn btn-sm btn-success" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank">Cetak</a>
+
                         </td>
                     </tr>
                     @endforeach
