@@ -307,23 +307,28 @@
             const perihalInput = document.getElementById('perihal');
             const prefixInput = document.getElementById('prefix');
 
-            if (selectedValue == '1') {
+            switch (selectedValue) {
+            case '1':
                 perihalInput.value = 'Full Corporate Offer';
                 prefixInput.value = 'FCO';
                 noSuratInput.value = maxNoSuratFCO + 1;
-            } else if (selectedValue == '2') {
+                break;
+            case '2':
                 perihalInput.value = 'Surat Izin Masuk Tambang';
                 prefixInput.value = 'BA';
                 noSuratInput.value = maxNoSuratBA + 1;
-            } else if (selectedValue == '3') {
+                break;
+            case '3':
                 perihalInput.value = 'Berita Acara Surveyor';
                 prefixInput.value = 'BAS';
                 noSuratInput.value = maxNoSuratBAS + 1;
-            } else {
+                break;
+            default:
                 perihalInput.value = '';
                 prefixInput.value = '';
                 noSuratInput.value = '';
-            }
+        }
+
             toggleFields();
             updatePrefix(); // Ensure prefix is updated on selection change
         });
@@ -340,8 +345,8 @@
             const romanMonth = toRoman(tglSurat.getMonth() + 1);
             const year = tglSurat.getFullYear();
             const prefixInput = document.getElementById('prefix');
-
             const perihalType = document.getElementById('idPerihal').value == '1' ? 'FCO' : 'BA';
+
             prefixInput.value = `Ref. No:MSS/GEL/${perihalType}-${noSurat}/${romanMonth}/${year}`;
 
             
