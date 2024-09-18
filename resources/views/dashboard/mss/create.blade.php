@@ -53,7 +53,7 @@
                             @enderror
                         </div>
 
-                        <div id="gabungan" class="mb-3">
+                        <div id="pttujuanClass" class="mb-3">
                             <label for="pttujuan" class="form-label">PT Tujuan</label>
                             <input type="text" class="form-control @error('pttujuan') is-invalid @enderror" placeholder="Isi PT Tujuan..." id="pttujuan" name="pttujuan" value="{{ old('pttujuan') }}">
                             @error('pttujuan')
@@ -63,7 +63,7 @@
                             @enderror
                         </div>
                         
-                        <div class="mb-3">
+                        <div id="alamatClass"class="mb-3">
                             <label for="alamat" class="form-label">Alamat PT Tujuan</label>
                             <input id="alamat" type="hidden" name="alamat">
                             <trix-editor class="form-control @error('alamat') is-invalid @enderror" input="alamat" value="{{ old('alamat') }}" placeholder="Alamat PT Tujuan"></trix-editor>
@@ -245,8 +245,8 @@
                         </script>
 
                         <div class="mb-3">
-                            <label for="ttd" class="form-label">Yang Menandatangani</label>
-                            <input type="text" class="form-control @error('ttd') is-invalid @enderror" id="ttd" name="ttd" placeholder="Departement Head" required value="{{ old('ttd') }}">
+                            <label for="ttd" class="form-label">TTD Yang Membuat</label>
+                            <input type="text" class="form-control @error('ttd') is-invalid @enderror" id="ttd" name="ttd" required value="{{ old('ttd') }}">
                             @error('ttd')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -254,7 +254,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="namaTtd" class="form-label">Nama Yang Menandatangani</label>
+                            <label for="namaTtd" class="form-label">Mengetahui</label>
                             <input type="text" class="form-control @error('namaTtd') is-invalid @enderror" id="namaTtd" name="namaTtd" required value="{{ old('namaTtd') }}">
                             @error('namaTtd')
                                 <div class="invalid-feedback">
@@ -294,25 +294,31 @@
             }
 
             function toggleFields() {
+                const isSuratIzin = perihalSelect.value === '2';
+                const isFco = perihalSelect.value === '1';
+
                 // Reset all fields to hidden first
                 suratizinGroup.style.display = 'none';
                 keteranganField.style.display = 'none';
-                gabunganField.style.display = 'none';
+                pttujuanClass.style.display = 'none';
+                alamatClass.style.display = 'none';
                 suratfcoGroups.forEach(group => group.style.display = 'none');
 
                 switch (perihalSelect.value) {
                     case '1':
                         // Show fields specific to FCO
                         suratfcoGroups.forEach(group => group.style.display = 'block');
+                        pttujuanClass.style.display = 'block';
+                        alamatClass.style.display = 'block';
                         break;
                     case '2':
                         suratizinGroup.style.display = 'block';
                         keteranganField.style.display = 'block';
-                        
+                        pttujuanClass.style.display = 'block';
+                        alamatClass.style.display = 'block';
                         break;
                     case '3':
                         keteranganField.style.display = 'block';
-                        gabunganField.style.display = 'none';
                         break;
                     // Add more cases if needed for other perihal options
                     default:
