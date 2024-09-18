@@ -46,4 +46,4 @@ Route::resource('/dashboard/it', DashboardITController::class)->middleware('auth
 Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth');
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
 
-// Route::get('/dashboard/it/cetak_pdf', [DashboardITController::class, 'cetak_pdf'])->middleware('auth');
+//Route::get('/dashboard/it/cetak_pdf', [DashboardITController::class, 'cetak_pdf'])->middleware('auth');

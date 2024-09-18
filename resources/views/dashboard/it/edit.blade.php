@@ -6,7 +6,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Edit Surat Keterangan IT</h6>
-                    <form method="post" action="/dashboard/it/{{ $it->noSurat }}">
+                    <form method="post" action="/dashboard/it/{{ $it->id }}">
                         @method('put')
                         @csrf
 

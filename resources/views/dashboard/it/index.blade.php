@@ -44,20 +44,20 @@
                     <tbody>
                         @foreach ($its as $it)
                         <tr>
-                            <td>ITS/{{ $it->noSurat }}/GELJKT/{{ $it->romanMonth }}/2024</td>
+                            <td>ITS/{{ $it->id }}/GELJKT/{{ $it->romanMonth }}/2024</td>
                            
                             <td>{{ date('d M Y', strtotime($it->tglSurat)); }}</td>
                             <td>{{ $it->nama }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="/dashboard/it/{{ $it->noSurat }}">Detail</a>
-                                <a class="btn btn-sm btn-warning" href="/dashboard/it/{{ $it->noSurat }}/edit">Edit</a>
-                                <form action="/dashboard/it/{{ $it->noSurat }}" method="post" class="d-inline">
+                                <a class="btn btn-sm btn-primary" href="/dashboard/it/{{ $it->id }}">Detail</a>
+                                <a class="btn btn-sm btn-warning" href="/dashboard/it/{{ $it->id }}/edit">Edit</a>
+                                <form action="/dashboard/it/{{ $it->id }}" method="post" class="d-inline">
                                     @method('delete')
                                     @csrf 
                                     <button class="btn btn-sm btn-danger border-0" onclick="return confirm('Kilik Oke Untuk Menghapus')">Hapus</button>
                                 </form>
                                 {{-- <a class="btn btn-sm btn-danger" href="#">Hapus</a> --}}
-                                <a class="btn btn-sm btn-success" href="/dashboard/it/{{ $it->noSurat }}/cetak">Cetak</a>
+                                <a class="btn btn-sm btn-success" href="/dashboard/it/{{ $it->id }}/cetak">Cetak</a>
                             </td>
                         </tr>
                         @endforeach

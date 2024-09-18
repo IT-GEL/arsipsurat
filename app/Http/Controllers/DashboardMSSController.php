@@ -63,7 +63,7 @@ class DashboardMSSController extends Controller
             'romanMonth' => $romanMonth, // Pass the Roman month to the view
             'maxNoSuratFCO' => $maxNoSuratFCO, // Pass max noSurat FCO
             'maxNoSuratBA' => $maxNoSuratBA, // Pass max noSurat BA
-            'maxNoSuratBAS' => $maxNoSuratBAS, // Pass max noSurat BA
+            'maxNoSuratBAS' => $maxNoSuratBA, // Pass max noSurat BA
         ]);
     }
     

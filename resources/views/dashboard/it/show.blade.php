@@ -7,7 +7,7 @@
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <a href="/dashboard/it" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-            <a href="/dashboard/it/{{ $it->noSurat }}/cetak" class="btn btn-secondary"><i class="bi bi-printer"></i> Cetak</a>
+            <a href="/dashboard/it/{{ $it->id }}/cetak" class="btn btn-secondary"><i class="bi bi-printer"></i> Cetak</a>
         </div>
         <center style="margin-top: 50px;">
             <!-- Header -->
