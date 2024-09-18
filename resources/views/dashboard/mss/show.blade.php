@@ -2,22 +2,6 @@
 
 @section('container')
 
-@php
-    $userName = auth()->user()->name ?? '';
-    $date = $mss->tglSurat ?? null;
-    $formattedDate = '';
-    $total = $totalMSS ?? 'N/A'; // Ensure $totalMSS is defined and passed to the view
-    $records = [];
-    $romanMonth = '';
-
-    if ($date) {
-        $monthNumber = \Carbon\Carbon::parse($date)->month;
-        $romanMonth = monthToRoman($monthNumber);
-        $formattedDate = formatDateIndonesian($date);
-    }
-@endphp
-
-
 @if ( $mss->perihal  == "Full Corporate Offer (FCO)")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
@@ -64,7 +48,7 @@
 
                             </tr>
                             <tr>
-                            <td style="text-align: center; font-weight: bold; font:italic">Ref. No:MSS/GEL/FCO-{{ $mss->noSurat }}/{{ $romanMonth }}/2024</td>
+                            <td style="text-align: center; font-weight: bold; font:italic">{{ $mss->prefix }}</td>
                             </tr>
                         </table> 
                         <br>
@@ -185,7 +169,7 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                        <a href="/dashboard/mss/{{ $mss->noSurat }}/cetak" class="btn btn-secondary"><i class="bi bi-printer"></i> Cetak</a>
+                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary"><i class="bi bi-printer"></i> Cetak</a>
                     </div>
                     <center style="margin-top: 50px;">
                         <table style="align-content: center">
@@ -226,7 +210,7 @@
                             </td>
                             </tr>
                             <tr>
-                            <td style="text-align: center; font-weight: bold; font-style: italic;">Ref. No:MSS/GEL/BA-{{ $mss->noSurat }}/{{ $romanMonth }}/2024</td>
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
                             </tr>
                         </table> 
                         <br>

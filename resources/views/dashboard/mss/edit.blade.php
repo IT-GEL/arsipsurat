@@ -7,7 +7,7 @@
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Edit Surat Keterangan Marketing Sales Shipping</h6>
                     
-                    <form method="post" action="/dashboard/mss/{{ $mss->noSurat }}">
+                    <form method="post" action="/dashboard/mss/{{ $mss->id }}">
                     
                         @csrf
                         @method('put')
@@ -57,11 +57,10 @@
                         
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat PT Tujuan</label>
-                            <input id="alamat" type="hidden" name="alamat">
+                            <input id="alamat" type="hidden" name="alamat" value="{{ old('alamat',$mss->alamat) }}" >
                             <trix-editor 
                                 class="form-control @error('alamat') is-invalid @enderror" 
                                 input="alamat"  
-                                value="{{ old('alamat',$mss->alamat) }}" 
                                 placeholder="Alamat PT Tujuan">
                             </trix-editor>
                             @error('alamat')
@@ -73,11 +72,10 @@
 
                         <div id="keterangan-field" class="mb-3" style="display: none;">
                             <label for="keterangan" class="form-label">Keterangan</label>
-                            <input id="keterangan" type="hidden" name="keterangan">
+                            <input id="keterangan" type="hidden" name="keterangan" value="{{ old('keterangan',$mss->keterangan) }}" >
                             <trix-editor 
                                 class="form-control @error('keterangan') is-invalid @enderror" 
                                 input="keterangan" 
-                                value="{{ old('keterangan',$mss->keterangan) }}" 
                                 placeholder="Isi Keterangan">
                             </trix-editor>
                             @error('keterangan')

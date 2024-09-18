@@ -52,14 +52,14 @@
                         <td>{{ $item->perihal }}</td>
                         <td>{{ date('d M Y', strtotime($item->tglSurat)) }}</td>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="/dashboard/mss/{{ $item->noSurat }}">Detail</a>
-                            <a class="btn btn-sm btn-warning" href="/dashboard/mss/{{ $item->noSurat }}/edit">Edit</a>
+                            <a class="btn btn-sm btn-primary" href="/dashboard/mss/{{ $item->id }}">Detail</a>
+                            <a class="btn btn-sm btn-warning" href="/dashboard/mss/{{ $item->id }}/edit">Edit</a>
                             <form action="/dashboard/mss/{{ $item->noSurat }}" method="post" class="d-inline">
                                 @method('delete')
                                 @csrf 
                                 <button class="btn btn-sm btn-danger border-0" onclick="return confirm('Klik Oke Untuk Menghapus')">Hapus</button>
                             </form>
-                            <a class="btn btn-sm btn-success" href="/dashboard/mss/{{ $item->noSurat }}/cetak">Cetak</a>
+                            <a class="btn btn-sm btn-success" href="/dashboard/mss/{{ $item->id }}/cetak">Cetak</a>
                         </td>
                     </tr>
                     @endforeach

@@ -15,6 +15,11 @@
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
                                 <option value="1">Full Corporate Offer</option>
                                 <option value="2">Surat Izin Masuk Tambang</option>
+                                <option value="3">Berita Acara Surveyor</option>
+                                <option value="4">Berita Acara Pembatalan PVR</option>
+                                <option value="5">Berita Acara Keterlambatan Pengaujuan PVR</option>
+                                <option value="6">Permohonan Revisi Invoice dan Pembatalan FP GEL</option>
+                                <option value="7">Tanda Terima</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             
@@ -27,9 +32,9 @@
 
                         <div class="mb-3">
                             <label for="noSurat" class="form-label">Nomor Surat</label>
-                            <input type="number" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required value="{{ old('noSurat') }}">
+                            <input type="hidden" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required value="{{ old('noSurat') }}">
                             <br>
-                            <input type="text" class="form-control" id="prefix" name="prefix" disabled>
+                            <input type="text" class="form-control" id="prefix" name="prefix" readonly>
                             @error('noSurat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -48,7 +53,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
+                        <div id="gabungan" class="mb-3">
                             <label for="pttujuan" class="form-label">PT Tujuan</label>
                             <input type="text" class="form-control @error('pttujuan') is-invalid @enderror" placeholder="Isi PT Tujuan..." id="pttujuan" name="pttujuan" value="{{ old('pttujuan') }}">
                             @error('pttujuan')
@@ -266,64 +271,94 @@
 
     <!-- Add JavaScript to handle form visibility -->
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-    const perihalSelect = document.getElementById('idPerihal');
-    const suratizinGroup = document.getElementById('surat-izin');
-    const keteranganField = document.getElementById('keterangan-field');
-    const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
+    document.addEventListener('DOMContentLoaded', function () {
+        const perihalSelect = document.getElementById('idPerihal');
+        const noSuratInput = document.getElementById('noSurat');
+        const suratizinGroup = document.getElementById('surat-izin');
+        const keteranganField = document.getElementById('keterangan-field');
+        const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
 
-    function toggleFields() {
-        const isSuratIzin = perihalSelect.value == '2';
-        const isFco = perihalSelect.value == '1';
+            let maxNoSuratFCO = {{ $maxNoSuratFCO }};
+            let maxNoSuratBA = {{ $maxNoSuratBA }};
+            let maxNoSuratBAS = {{ $maxNoSuratBAS }};
 
-        suratizinGroup.style.display = isSuratIzin ? 'block' : 'none';
-        keteranganField.style.display = isSuratIzin ? 'block' : 'none';
-        suratfcoGroups.forEach(group => group.style.display = isFco ? 'block' : 'none');
-    }
+            function setInitialNoSurat() {
+                if (perihalSelect.value == '1') {
+                    noSuratInput.value = maxNoSuratFCO + 1;
+                } else if (perihalSelect.value == '2') {
+                    noSuratInput.value = maxNoSuratBA + 1;
+                }
+                else if (perihalSelect.value == '3') {
+                    noSuratInput.value = maxNoSuratBAS + 1;
+                }
+            }
 
-    perihalSelect.addEventListener('change', function() {
-        const selectedValue = this.value;
-        const perihalInput = document.getElementById('perihal');
-        const prefixInput = document.getElementById('prefix');
+        function toggleFields() {
+            const isSuratIzin = perihalSelect.value == '2';
+            const isFco = perihalSelect.value == '1';
 
-        if (selectedValue == '1') {
-            perihalInput.value = 'Full Corporate Offer';
-            prefixInput.value = 'FCO';
-        } else if (selectedValue == '2') {
-            perihalInput.value = 'Surat Izin Masuk Tambang';
-            prefixInput.value = 'BA';
-        } else {
-            perihalInput.value = '';
-            prefixInput.value = '';
+            suratizinGroup.style.display = isSuratIzin ? 'block' : 'none';
+            keteranganField.style.display = isSuratIzin ? 'block' : 'none';
+            suratfcoGroups.forEach(group => group.style.display = isFco ? 'block' : 'none');
         }
+
+        perihalSelect.addEventListener('change', function() {
+            const selectedValue = this.value;
+            const perihalInput = document.getElementById('perihal');
+            const prefixInput = document.getElementById('prefix');
+
+            if (selectedValue == '1') {
+                perihalInput.value = 'Full Corporate Offer';
+                prefixInput.value = 'FCO';
+                noSuratInput.value = maxNoSuratFCO + 1;
+            } else if (selectedValue == '2') {
+                perihalInput.value = 'Surat Izin Masuk Tambang';
+                prefixInput.value = 'BA';
+                noSuratInput.value = maxNoSuratBA + 1;
+            } else if (selectedValue == '3') {
+                perihalInput.value = 'Berita Acara Surveyor';
+                prefixInput.value = 'BAS';
+                noSuratInput.value = maxNoSuratBAS + 1;
+            } else {
+                perihalInput.value = '';
+                prefixInput.value = '';
+                noSuratInput.value = '';
+            }
+            toggleFields();
+            updatePrefix(); // Ensure prefix is updated on selection change
+        });
+
+        function toRoman(num) {
+            const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+            return roman[num - 1] || '';
+        }
+
+        function updatePrefix() {
+            // Get the value of noSurat and ensure it's a number
+            const noSurat = String(document.getElementById('noSurat').value || '0').padStart(3, '0');
+            const tglSurat = new Date(document.getElementById('tglSurat').value);
+            const romanMonth = toRoman(tglSurat.getMonth() + 1);
+            const year = tglSurat.getFullYear();
+            const prefixInput = document.getElementById('prefix');
+
+            const perihalType = document.getElementById('idPerihal').value == '1' ? 'FCO' : 'BA';
+            prefixInput.value = `Ref. No:MSS/GEL/${perihalType}-${noSurat}/${romanMonth}/${year}`;
+
+            
+
+            // Debug log
+            console.log(`Prefix updated to: ${prefixInput.value}`);
+        }
+        document.getElementById('tglSurat').addEventListener('change', updatePrefix);
+        document.getElementById('noSurat').addEventListener('input', updatePrefix);
+        document.getElementById('idPerihal').addEventListener('change', updatePrefix);
+
+        // Initialize
         toggleFields();
+        updatePrefix(); // Update prefix on page load
     });
+</script>
 
-    function toRoman(num) {
-        const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-        return roman[num - 1] || '';
-    }
-
-    function updatePrefix() {
-        const noSurat = document.getElementById('noSurat').value || '0000';
-        const tglSurat = new Date(document.getElementById('tglSurat').value);
-        const romanMonth = toRoman(tglSurat.getMonth() + 1);
-        const year = tglSurat.getFullYear();
-        const prefixInput = document.getElementById('prefix');
-
-        prefixInput.value = `Ref. No:MSS/GEL/${document.getElementById('idPerihal').value == '1' ? 'FCO' : 'BA'}-${noSurat}/${romanMonth}/${year}`;
-    }
-
-    document.getElementById('tglSurat').addEventListener('change', updatePrefix);
-    document.getElementById('noSurat').addEventListener('input', updatePrefix);
-    document.getElementById('idPerihal').addEventListener('change', updatePrefix);
-
-    // Initialize
-    toggleFields();
-    updatePrefix();
-});
-
-            </script>
 
 
 @endsection

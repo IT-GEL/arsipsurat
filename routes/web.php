@@ -39,9 +39,9 @@ Route::controller(RegisterController::class)->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 // Route::get('/dashboard/cetak_pdf', [DashboardController::class, 'cetak_pdf'])->middleware('auth');
 
-Route::get('/dashboard/it/{it:noSurat}/cetak', [DashboardITController::class, 'cetak'])->middleware('auth');
-Route::get('/dashboard/ga/{ga:noSurat}/cetak', [DashboardGAController::class, 'cetak'])->middleware('auth');
-Route::get('/dashboard/mss/{mss:noSurat}/cetak', [DashboardMSSController::class, 'cetak'])->middleware('auth');
+Route::get('/dashboard/it/{it:id}/cetak', [DashboardITController::class, 'cetak'])->middleware('auth');
+Route::get('/dashboard/ga/{ga:id}/cetak', [DashboardGAController::class, 'cetak'])->middleware('auth');
+Route::get('/dashboard/mss/{mss:id}/cetak', [DashboardMSSController::class, 'cetak'])->middleware('auth');
 Route::resource('/dashboard/it', DashboardITController::class)->middleware('auth');
 Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth');
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');

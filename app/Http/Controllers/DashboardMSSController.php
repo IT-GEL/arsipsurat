@@ -48,12 +48,25 @@ class DashboardMSSController extends Controller
         // Calculate the Roman numeral for the current month
         $romanMonth = monthToRoman($monthNumber); // Ensure monthToRoman function is available and included
     
+        // Fetch the maximum noSurat values
+        $maxNoSuratFCO = MSS::where('idPerihal', '1')->max('noSurat') ?? 0;
+        $maxNoSuratBA = MSS::where('idPerihal', '2')->max('noSurat') ?? 0;
+        $maxNoSuratBAS = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
+        $maxNoSuratBA = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
+        $maxNoSuratFCO = MSS::where('idPerihal', '5')->max('noSurat') ?? 0;
+
+        
+    
         // Pass the variables to the view
         return view('dashboard.mss.create', [
             'title' => 'MSS',
             'romanMonth' => $romanMonth, // Pass the Roman month to the view
+            'maxNoSuratFCO' => $maxNoSuratFCO, // Pass max noSurat FCO
+            'maxNoSuratBA' => $maxNoSuratBA, // Pass max noSurat BA
+            'maxNoSuratBAS' => $maxNoSuratBAS, // Pass max noSurat BA
         ]);
     }
+    
     
 
     /**
@@ -64,7 +77,6 @@ class DashboardMSSController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $validatedData = $request->validate([
             'idPerihal' => 'required|numeric|max:255',
             'perihal' => 'required|string|max:255',
