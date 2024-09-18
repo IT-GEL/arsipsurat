@@ -293,14 +293,34 @@
                 }
             }
 
-        function toggleFields() {
-            const isSuratIzin = perihalSelect.value == '2';
-            const isFco = perihalSelect.value == '1';
+            function toggleFields() {
+                // Reset all fields to hidden first
+                suratizinGroup.style.display = 'none';
+                keteranganField.style.display = 'none';
+                gabunganField.style.display = 'none';
+                suratfcoGroups.forEach(group => group.style.display = 'none');
 
-            suratizinGroup.style.display = isSuratIzin ? 'block' : 'none';
-            keteranganField.style.display = isSuratIzin ? 'block' : 'none';
-            suratfcoGroups.forEach(group => group.style.display = isFco ? 'block' : 'none');
-        }
+                switch (perihalSelect.value) {
+                    case '1':
+                        // Show fields specific to FCO
+                        suratfcoGroups.forEach(group => group.style.display = 'block');
+                        break;
+                    case '2':
+                        suratizinGroup.style.display = 'block';
+                        keteranganField.style.display = 'block';
+                        
+                        break;
+                    case '3':
+                        keteranganField.style.display = 'block';
+                        gabunganField.style.display = 'none';
+                        break;
+                    // Add more cases if needed for other perihal options
+                    default:
+                        // Optionally handle other cases or reset fields
+                        break;
+                }
+            }
+
 
         perihalSelect.addEventListener('change', function() {
             const selectedValue = this.value;
@@ -345,15 +365,35 @@
             const romanMonth = toRoman(tglSurat.getMonth() + 1);
             const year = tglSurat.getFullYear();
             const prefixInput = document.getElementById('prefix');
-            const perihalType = document.getElementById('idPerihal').value == '1' ? 'FCO' : 'BA';
-
-            prefixInput.value = `Ref. No:MSS/GEL/${perihalType}-${noSurat}/${romanMonth}/${year}`;
-
             
+            let perihalType;
+
+            switch (document.getElementById('idPerihal').value) {
+                case '1':
+                    prefixInput.value = `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`;
+                    break;
+                case '2':
+                    prefixInput.value = `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`;
+                    break;
+                case '3':
+                    prefixInput.value = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
+                    break;
+                case '4':
+                    perihalType = 'BA-PB';
+                    break;
+                case '5':
+                    perihalType = 'BA-KETERLAMBATAN';
+                    break;
+                default:
+                    perihalType = 'BA'; // Default value if needed
+            }
+
+
 
             // Debug log
             console.log(`Prefix updated to: ${prefixInput.value}`);
         }
+
         document.getElementById('tglSurat').addEventListener('change', updatePrefix);
         document.getElementById('noSurat').addEventListener('input', updatePrefix);
         document.getElementById('idPerihal').addEventListener('change', updatePrefix);
