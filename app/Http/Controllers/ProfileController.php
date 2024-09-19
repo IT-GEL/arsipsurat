@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function profile()
+    public function index()
     {
-        return view('home', [
-            'title' => 'Home',
+        return view('profile', [
+            'title' => 'Profile',
         ]);
     }
 }

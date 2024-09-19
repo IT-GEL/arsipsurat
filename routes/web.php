@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardITController;
@@ -24,6 +25,8 @@ use App\Http\Controllers\DashboardTNCController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/profile', [ProfileController::class, 'index']);
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');

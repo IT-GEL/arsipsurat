@@ -289,7 +289,7 @@
                         <br /><br />
                         <table width="545">
                             <tr>
-                            <td style="font:center;border:1px so;">Dibuat</td>
+                            <td style="font:center;border:1px solid;">Dibuat</td>
                             </tr>
                             <tr>
                             <td>Sales Departement</td>
