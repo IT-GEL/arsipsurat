@@ -253,7 +253,7 @@
                                 </div>
                             @enderror
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="namaTtd" class="form-label">Mengetahui</label>
                             <input type="text" class="form-control @error('namaTtd') is-invalid @enderror" id="namaTtd" name="namaTtd" required value="{{ old('namaTtd') }}">
@@ -263,28 +263,6 @@
                                 </div>
                             @enderror
                         </div>
-
-                        <div class="mb-3">
-                            <label for="idqr" class="form-label">Perihal Surat</label>
-                            <select class="form-select @error('idqr') is-invalid @enderror" id="idqr" name="idqr" required autofocus>
-                                <option value="" disabled selected>Pilih Tanda Tangan</option>
-                                <option value="1">Saskya Yozi/option>
-                                <option value="2">Surat Izin Masuk Tambang</option>
-                            </select>
-                            <input type="hidden" id="qr" name="qr" value="{{ old('qr') }}">
-                            
-                            @error('idqr')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                            
-                        </div>
-                        <div class="mb-3">
-                        <img style="width: 150px; height: 150px;" src="../../img/qr/qr1.png">
-                        </div>
-
                         <button type="submit" class="btn btn-primary">Buat Surat</button>
                     </form>
                 </div>
@@ -296,7 +274,6 @@
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const perihalSelect = document.getElementById('idPerihal');
-        const qrSelect = document.getElementById('idqr');
         const noSuratInput = document.getElementById('noSurat');
         const suratizinGroup = document.getElementById('surat-izin');
         const keteranganField = document.getElementById('keterangan-field');
@@ -360,37 +337,6 @@
             switch (selectedValue) {
             case '1':
                 perihalInput.value = 'Full Corporate Offer';
-                prefixInput.value = 'FCO';
-                noSuratInput.value = maxNoSuratFCO + 1;
-                break;
-            case '2':
-                perihalInput.value = 'Surat Izin Masuk Tambang';
-                prefixInput.value = 'BA';
-                noSuratInput.value = maxNoSuratBA + 1;
-                break;
-            case '3':
-                perihalInput.value = 'Berita Acara Surveyor';
-                prefixInput.value = 'BAS';
-                noSuratInput.value = maxNoSuratBAS + 1;
-                break;
-            default:
-                perihalInput.value = '';
-                prefixInput.value = '';
-                noSuratInput.value = '';
-        }
-
-            toggleFields();
-            updatePrefix(); // Ensure prefix is updated on selection change
-        });
-
-        qrSelect.addEventListener('change', function() {
-            const qrValue = this.value;
-            const namattdInput = document.getElementById('namattd');
-            const qrInput = document.getElementById('qr');
-
-            switch (selectedValue) {
-            case '1':
-                perihalInput.value = 'Mufti Saskya Rina';
                 prefixInput.value = 'FCO';
                 noSuratInput.value = maxNoSuratFCO + 1;
                 break;
