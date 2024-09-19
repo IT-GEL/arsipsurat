@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Arsip Surat | {{ $title }}</title>
+    <title>Arsip Surat | {{ $profiles->name }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -39,19 +39,22 @@
         <div class="container py-5">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 mb-3 animated slideInDown">Ditanda tangganin Oleh,</h1>
+                    <h1 class="display-4 mb-3 animated slideInDown">Signed by,</h1>
                     <div class="animated slideInDown">
-                        <p>Nama : </p>
-                        <p>NIK: </p>
-                        <p>Jabatan : </p>
+                        <p>Nama : {{ $profiles->name }}</p>
+                        <p>NIK: {{ $profiles->NIK }}</p>
+                        <p>Jabatan : {{ $profiles->Jabatan }}</p>
                     </div>
-                
+
                     <button onclick="closeTab()" class="btn btn-primary py-3 px-4 animated slideInDown">Close</button>
                     <script>
                         function closeTab() {
-                            window.close();
+                            
+                                window.close(); // Menutup jendela yang dibuka oleh window.open()
+                       
                         }
                     </script>
+
 
                 </div>
             </div>

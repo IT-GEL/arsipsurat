@@ -26,7 +26,7 @@ use App\Http\Controllers\DashboardTNCController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/profile', [ProfileController::class, 'index']);
+Route::get('/profile/{id}', [ProfileController::class, 'index']);
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');

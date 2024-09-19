@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PR;
+use App\Models\PR; // Tambahkan Model Profile
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return view(
-            'profile.index',
-            [
-                'title' => 'Profile',
-            ]
-        );
+        // Ambil semua data dari tabel profile
+        $profiles = PR::find($id);
+
+        return view('profile.index', [
+            'title' => 'Profile',
+            'profiles' => $profiles, // Kirim data ke view
+            
+        ]);
     }
 }

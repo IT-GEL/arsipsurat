@@ -17,7 +17,7 @@ class DashboardController extends Controller
             'its' => IT::latest()->paginate(5),
             'ga' => GA::latest()->paginate(5),
             'mss' => MSS::latest()->paginate(5),
-            'profile' => PR::latest()->paginate(5),
+            //'profile' => PR::latest()->paginate(5),
             'totalIT' => IT::count(),
             'totalGA' => GA::count(),
             'totalMSS' =>MSS::count(),

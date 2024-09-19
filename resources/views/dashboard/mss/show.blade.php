@@ -286,17 +286,22 @@
                             <td>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pengajuan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</td>
                             </tr>
                         </table>
-                        <br /><br />
+                        <br /><br /><br /><br /><br><br>
                         <table width="545">
-                            <tr style="border:1px solid;">
-                                <td width="100" style="padding-left:500;">Dibuat</td>
-                                <td width="10">:</td>
-                                <td width="100"> Mengetahui</td>
-                            </tr>
+                        <tr style="">
+                            <td style="padding-left: 45px;">Dibuat</td>
+                            <td style="padding-left: 100px;">Mengetahui</td>
+                        </tr>
                             <tr>
                             <td>Sales Departement,</td>
                             </tr>
                         </table>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
                         <br /><br />
                         <br>
                     </center>
