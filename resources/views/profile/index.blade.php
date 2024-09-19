@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,12 +29,51 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+        }
+
+        .hero-header {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-header p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: #ff4b2b;
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #ff416c;
+        }
+
+        .animated {
+            animation-duration: 1.5s;
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- Header Start -->
-    <div class="container-fluid hero-header bg-light py-5">
+    <div class="container-fluid hero-header py-5">
         <div class="container py-5">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
@@ -49,19 +87,16 @@
                     <button onclick="closeTab()" class="btn btn-primary py-3 px-4 animated slideInDown">Close</button>
                     <script>
                         function closeTab() {
-                            
-                                window.close(); // Menutup jendela yang dibuka oleh window.open()
-                       
+                            window.close(); // Menutup jendela yang dibuka oleh window.open()
                         }
                     </script>
-
-
                 </div>
             </div>
         </div>
     </div>
+    <!-- Header End -->
 
-<!-- JavaScript Libraries -->
+    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url('lib/wow/wow.min.js') }}"></script>
@@ -75,10 +110,3 @@
 </body>
 
 </html>
-    
-
-
-
-
-
-    

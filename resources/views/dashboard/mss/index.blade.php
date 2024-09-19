@@ -29,7 +29,7 @@
         @endif
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Daftar Surat Divisi Marketing Sales Shipping</h6>
-            <a href="/dashboard/mss/create" class="btn btn-primary">Tambah Surat</a>
+            <a href="/dashboard/mss/create" class="btn btn-primary"><i class="bi bi-file-text-fill"></i> Tambah Surat</a>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -44,21 +44,20 @@
                 <tbody>
                     @foreach ($mss as $item)
                     <tr>
-                        <td style="font-weight:bold;">
-                        {{ $item->prefix }}
-                        </td>
+                        <td style="font-weight:bold;">{{ $item->prefix }}</td>
                         <td>{{ $item->perihal }}</td>
                         <td>{{ date('d M Y', strtotime($item->tglSurat)) }}</td>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="/dashboard/mss/{{ $item->id }}">Detail</a>
-                            <a class="btn btn-sm btn-warning" href="/dashboard/mss/{{ $item->id }}/edit">Edit</a>
+                            <a class="btn btn-sm btn-primary" href="/dashboard/mss/{{ $item->id }}"><i class="bi bi-info-square"></i></a>
+                            <a class="btn btn-sm btn-warning" href="/dashboard/mss/{{ $item->id }}/edit"><i class="bi bi-pencil-square"></i></a>
                             <form action="/dashboard/mss/{{ $item->noSurat }}" method="post" class="d-inline">
                                 @method('delete')
                                 @csrf 
-                                <button class="btn btn-sm btn-danger border-0" onclick="return confirm('Klik Oke Untuk Menghapus')">Hapus</button>
+                                <button class="btn btn-sm btn-danger border-0" onclick="return confirm('Klik Oke Untuk Menghapus')"><i class="bi bi-trash"></i></button>
                             </form>
-                            <a class="btn btn-sm btn-success" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank">Cetak</a>
-
+                            <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
+                            |
+                            <button class="btn btn-sm btn-secondary" onclick="berhasil(this)"><i class="bi bi-check2-square"></i></button>
                         </td>
                     </tr>
                     @endforeach
@@ -69,5 +68,26 @@
     </div>
 </div>
 <!-- Recent Sales End -->
+
+<!-- SweetAlert CSS and JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.min.css" rel="stylesheet">
+<script type="text/javascript">
+
+function berhasil(button) {
+    // Change the button color to green
+    button.classList.remove('btn-secondary');
+    button.classList.add('btn-success');
+
+    Swal.fire({
+        title: "Approved!",
+        text: "Berhasil di approve",
+        icon: "success",
+        confirmButtonText: "OK"
+    });
+}
+
+
+</script>
 
 @endsection
