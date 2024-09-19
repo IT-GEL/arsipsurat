@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class HomeController extends Controller
 {
-    public function profile()
+    public function index()
     {
         return view('home', [
             'title' => 'Home',

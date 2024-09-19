@@ -260,7 +260,7 @@
                     <center style="margin-top: 50px;">
                     <table width="545">
                             <tr>
-                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase" class="text">
+                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold" class="text">
                                 <u>BERITA ACARA</u>
                             </tr>
                             <tr>
@@ -268,7 +268,7 @@
                             </tr>
                         </table> 
                         <br>
-
+                        <br>
                         <table width="545">
                             <tr>
                                 <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
@@ -288,13 +288,16 @@
                         </table>
                         <br /><br />
                         <table width="545">
-                            <tr>
-                            <td style="font:center;border:1px solid;">Dibuat</td>
+                            <tr style="border:1px solid;">
+                                <td width="100" style="padding-left:500;">Dibuat</td>
+                                <td width="10">:</td>
+                                <td width="100"> Mengetahui</td>
                             </tr>
                             <tr>
-                            <td>Sales Departement</td>
+                            <td>Sales Departement,</td>
                             </tr>
                         </table>
+                        <br /><br />
                         <br>
                     </center>
                 </div>
