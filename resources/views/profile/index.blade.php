@@ -33,8 +33,8 @@
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: #fff;
+            background: linear-gradient(to right, #00c6ff, #ffffff);
+            color:
         }
 
         .hero-header {
@@ -42,30 +42,62 @@
             border-radius: 15px;
             padding: 50px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('path/to/your/background-image.jpg') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: -1;
         }
 
         .hero-header h1 {
-            font-size: 3rem;
+            font-size: 4rem; /* Perbesar ukuran font untuk elemen h1 */
             margin-bottom: 20px;
+            color: #fff;
         }
 
         .hero-header p {
-            font-size: 1.2rem;
+            font-size: 2.5rem; /* Perbesar ukuran font untuk elemen p */
             margin-bottom: 10px;
+            color: #fff;
         }
 
         .btn-primary {
-            background: #ff4b2b;
+            background: #00c6ff;
             border: none;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         .btn-primary:hover {
-            background: #ff416c;
+            background: linear-gradient(to right, #00c6ff, #ffffff);
+            transform: scale(1.05);
         }
 
         .animated {
             animation-duration: 1.5s;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #00c6ff;
         }
     </style>
 </head>

@@ -169,7 +169,7 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank" download ><i class="bi bi-printer"></i> Cetak</a>
+                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank" ><i class="bi bi-printer"></i> Cetak</a>
                     </div>
                     <center style="margin-top: 50px;">
                         <table style="align-content: center">

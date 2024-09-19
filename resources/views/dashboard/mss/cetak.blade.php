@@ -7,13 +7,31 @@
     <title>FORMULIR KEBUTUHAN BASIS MSS | {{ $mss->perihal }}</title>
     <link rel="icon" type="image/png" href="{{ asset('dashmin/img/GEL.png') }}">
     <style>
-        /* General Body Styles */
+    /* General Body Styles */
+    @page {
+        size: A4; /* Specify A4 size */
+        margin: 0; /* Remove default margins */
+    }
+
+    body {
+        margin: 20mm; /* Set your own margins */
+        font-family: 'Times New Roman', Times, serif;
+        background-image: url('{{ asset('img/KOP.png') }}');
+        background-size: contain; /* Adjusts the image to fit within the body without stretching */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        background-position: center; /* Centers the image */
+        height: 100vh; /* Ensures the body takes the full height */
+    }
+
+    /* Ensure background image is printed */
+    @media print {
         body {
-            margin: 0 auto;
-            width: 600px;
-            font-family: 'Times New Roman', Times, serif;
+            -webkit-print-color-adjust: exact; /* Ensure color and background images are printed */
+            print-color-adjust: exact;
         }
-    </style>
+    }
+</style>
+
   </head>
   <body onload="window.print()">
     <center>
@@ -23,15 +41,6 @@
             <td><img src="{{ asset('dashmin/img/GEL.png') }}" width="110" height="110" /></td>
             <td style="font-family: 'Times New Roman', Times, serif; font-size: 13px">
             <center>
-                                <font size="5"><b>GLOBAL ENERGI LESTARI</b> </font><br />
-                                </center>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td colspan="2"><hr style="border: 1px solid" /></td>
-                            </tr>
-                        </table>
-                        <br />
                         <table width="545">
                             <tr>
                                 <td style="text-align: left">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
@@ -172,29 +181,33 @@
     <title>FORMULIR KEBUTUHAN BASIS MSS | {{ $mss->perihal }}</title>
     <link rel="icon" type="image/png" href="{{ asset('dashmin/img/GEL.png') }}">
     <style>
-        /* General Body Styles */
+    /* General Body Styles */
+    @page {
+        size: A4; /* Specify A4 size */
+        margin: 0; /* Remove default margins */
+    }
+
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        background-image: url('{{ asset('img/KOP.png') }}');
+        background-size: contain; /* Adjusts the image to fit within the body without stretching */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        background-position: center; /* Centers the image */
+        height: 99vh; /* Ensures the body takes the full height */
+    }
+
+    /* Ensure background image is printed */
+    @media print {
         body {
-            margin: 0 auto;
-            width: 600px;
-            font-family: 'Times New Roman', Times, serif;
+            -webkit-print-color-adjust: exact; /* Ensure color and background images are printed */
+            print-color-adjust: exact;
         }
-    </style>
+    }
+</style>
   </head>
-  <body onload="window.print()">
+  <body onload="window.print()"><br><br><br><br><br><br>
   <center style="margin-top: 50px;">
-                        <table style="align-content: center">
-                            <tr>
-                            <td><img src="{{ asset('dashmin/img/GEL.png') }}" width="110" height="110" /></td>
-                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 13px">
-                                <center>
-                                <font size="5"><b>GLOBAL ENERGI LESTARI</b> </font>
-                                </center>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td colspan="2"><hr style="border: 1px solid" /></td>
-                            </tr>
-                        </table>
+
 
                         <table width="545">
                             <tr>

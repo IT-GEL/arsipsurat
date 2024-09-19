@@ -263,12 +263,25 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                        <textarea id="editor"></textarea>
+                        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const editor = Jodit.make('#editor');
+    });
+</script>
+                        </div>
+                        
                         <button type="submit" class="btn btn-primary">Buat Surat</button>
+                        
                     </form>
                 </div>
-            </div>
         </div>
     </div>
+
+    <link rel="stylesheet"href="https://unpkg.com/jodit@4.0.1/es2021/jodit.min.css"/>
+<script src="https://unpkg.com/jodit@4.0.1/es2021/jodit.min.js"></script>
 
     <!-- Add JavaScript to handle form visibility -->
     <script>
