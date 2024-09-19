@@ -75,14 +75,13 @@
                         </div>
 
                         <div id="keterangan-field" class="mb-3" style="display: none;">
-                            <label for="keterangan" class="form-label">Keterangan</label>
-                            <input id="keterangan" type="hidden" name="keterangan">
-                            <trix-editor class="form-control @error('keterangan') is-invalid @enderror" input="keterangan" value="{{ old('keterangan') }}" placeholder="Isi Keterangan"></trix-editor>
-                            @error('keterangan')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <label for="keterangan" class="form-label">Keterangan</label>
+                            <input type="textarea" id="keterangan" name="keterangan">
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const keterangan = Jodit.make('#keterangan');
+                                });
+                            </script>
                         </div>
  
                         <div id="surat-fco">
@@ -264,14 +263,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                        <textarea id="editor"></textarea>
-                        <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const editor = Jodit.make('#editor');
-    });
-</script>
-                        </div>
+
                         
                         <button type="submit" class="btn btn-primary">Buat Surat</button>
                         
