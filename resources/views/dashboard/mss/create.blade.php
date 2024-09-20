@@ -285,6 +285,7 @@
             let maxNoSuratBA = {{ $maxNoSuratBA }};
             let maxNoSuratBAS = {{ $maxNoSuratBAS }};
             let maxNoSuratBAVP = {{ $maxNoSuratBAVP }};
+            let maxNoSuratTT = {{ $maxNoSuratTT }};
 
             function setInitialNoSurat() {
                 if (perihalSelect.value == '1') {
@@ -297,6 +298,9 @@
                 }
                 else if (perihalSelect.value == '4') {
                     noSuratInput.value = maxNoSuratBAVP + 1;
+                }
+                else if (perihalSelect.value == '7') {
+                    noSuratInput.value = maxNoSuratTT + 1;
                 }
             }
 
@@ -325,6 +329,10 @@
                         keteranganField.style.display = 'block';
                         break;
                     case '4':
+                    keteranganField.style.display = 'block';
+                    break;
+
+                    case '7':
                     keteranganField.style.display = 'block';
                     break;
                     // Add more cases if needed for other perihal options
@@ -361,6 +369,13 @@
                 prefixInput.value = 'BAS';
                 noSuratInput.value = maxNoSuratBAVP + 1;
                 break;
+
+                case '7':
+                perihalInput.value = 'Tanda Terima';
+                prefixInput.value = 'TT';
+                noSuratInput.value = maxNoSuratTT + 1;
+                break;
+
             default:
                 perihalInput.value = '';
                 prefixInput.value = '';
@@ -400,8 +415,9 @@
                     prefixInput.value = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
                     perihalType = 'BAVB';
                     break;
-                case '5':
-                    perihalType = 'BA-KETERLAMBATAN';
+                case '7':
+                    prefixInput.value = `Tanda Terima-${noSurat}/${romanMonth}/${year}`;
+                    perihalType = 'TT';
                     break;
                 default:
                     perihalType = 'BA'; // Default value if needed

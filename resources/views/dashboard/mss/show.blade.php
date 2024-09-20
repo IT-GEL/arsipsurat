@@ -2,7 +2,7 @@
 
 @section('container')
 
-@if ( $mss->perihal  == "Full Corporate Offer (FCO)")
+@if ( $mss->idPerihal  == "1")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">

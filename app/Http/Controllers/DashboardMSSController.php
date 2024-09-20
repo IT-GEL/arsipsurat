@@ -53,7 +53,8 @@ class DashboardMSSController extends Controller
         $maxNoSuratBA = MSS::where('idPerihal', '2')->max('noSurat') ?? 0;
         $maxNoSuratBAS = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
         $maxNoSuratBAVP = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
-        $maxNoSurat = MSS::where('idPerihal', '5')->max('noSurat') ?? 0;
+        $maxNoSuratTT = MSS::where('idPerihal', '7')->max('noSurat') ?? 0;
+        $maxNoSurat = MSS::where('idPerihal', '6')->max('noSurat') ?? 0;
 
         
     
@@ -65,6 +66,7 @@ class DashboardMSSController extends Controller
             'maxNoSuratBA' => $maxNoSuratBA, // Pass max noSurat BA
             'maxNoSuratBAS' => $maxNoSuratBA, // Pass max noSurat BA
             'maxNoSuratBAVP' => $maxNoSuratBAVP, // Pass max noSurat BA
+            'maxNoSuratTT' => $maxNoSuratBAVP, // Pass max noSurat BA
         ]);
     }
     
@@ -200,6 +202,30 @@ class DashboardMSSController extends Controller
 
     return redirect('/dashboard/mss')->with('success', 'Surat berhasil di edit!');
 }
+
+public function approve(Request $request, MSS $mss)
+{
+    dd($request->all()); // Check incoming data
+
+    $rules = [
+        'approve' => 'required|string|max:255', // This field should be required
+        'qr' => 'nullable|string|max:255',
+    ];
+
+    // Optional: Validate noSurat if necessary
+    if ($request->has('noSurat') && $request->noSurat != $mss->noSurat) {
+        $rules['noSurat'] = 'required|numeric|unique:mss';
+    }
+
+    // Validate the request
+    $validatedData = $request->validate($rules);
+
+    // Update the model with validated data
+    $mss->approve($validatedData);
+
+    return redirect('/dashboard/mss')->with('success', 'Surat berhasil diapprove!');
+}
+
 
 
     /**

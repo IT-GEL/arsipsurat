@@ -56,11 +56,14 @@
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
                             <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
-                            <form action="/dashboard/mss/{{ $item->id }}" method="post">
-                                <input type="hidden" id="approve" name="approve" class="form-control @error('approve') is-invalid @enderror" value="yes" required>
-                                <input type="hidden" id="qr" name="qr" class="form-control @error('qr') is-invalid @enderror" value="" required>
+                            <form action="/dashboard/mss/{{ $item->id }}" method="post" class="d-inline delete-form">
+                                @method('put')
+                                @csrf 
+                                <input type="hidden" name="approve" value="yes">
+                                <input type="hidden" name="qr" value="">
                                 <button class="btn btn-sm btn-secondary approve-button" data-approved="false" onclick="berhasil(this)"><i class="bi bi-check2-square"></i></button>
                             </form>
+
                         </td>
                     </tr>
                     @endforeach
@@ -112,20 +115,20 @@ document.querySelectorAll('.delete-button').forEach(button => {
 
 function berhasil(button) {
     const isApproved = button.getAttribute('data-approved') === 'true';
-    
+
     if (!isApproved) {
-        // Change the button color to green
         button.classList.remove('btn-secondary');
         button.classList.add('btn-success');
-        
-        // Update the data attribute
         button.setAttribute('data-approved', 'true');
+        button.disabled = true; // Disable to prevent double submissions
 
         Swal.fire({
             title: "Approved!",
             text: "Berhasil di approve",
             icon: "success",
             confirmButtonText: "OK"
+        }).then(() => {
+            button.closest('form').submit(); // Submit the form
         });
     } else {
         Swal.fire({
@@ -136,6 +139,8 @@ function berhasil(button) {
         });
     }
 }
+
+
 
 
 </script>
