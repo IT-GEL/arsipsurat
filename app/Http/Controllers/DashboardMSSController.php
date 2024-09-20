@@ -52,8 +52,8 @@ class DashboardMSSController extends Controller
         $maxNoSuratFCO = MSS::where('idPerihal', '1')->max('noSurat') ?? 0;
         $maxNoSuratBA = MSS::where('idPerihal', '2')->max('noSurat') ?? 0;
         $maxNoSuratBAS = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
-        $maxNoSuratBA = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
-        $maxNoSuratFCO = MSS::where('idPerihal', '5')->max('noSurat') ?? 0;
+        $maxNoSuratBAVP = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
+        $maxNoSurat = MSS::where('idPerihal', '5')->max('noSurat') ?? 0;
 
         
     
@@ -64,6 +64,7 @@ class DashboardMSSController extends Controller
             'maxNoSuratFCO' => $maxNoSuratFCO, // Pass max noSurat FCO
             'maxNoSuratBA' => $maxNoSuratBA, // Pass max noSurat BA
             'maxNoSuratBAS' => $maxNoSuratBA, // Pass max noSurat BA
+            'maxNoSuratBAVP' => $maxNoSuratBAVP, // Pass max noSurat BA
         ]);
     }
     
@@ -77,6 +78,8 @@ class DashboardMSSController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         $validatedData = $request->validate([
             'idPerihal' => 'required|numeric|max:255',
             'perihal' => 'required|string|max:255',
@@ -85,7 +88,7 @@ class DashboardMSSController extends Controller
             'pttujuan' => 'nullable|string|max:255',
             'ptkunjungan' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:255',
-            'keterangan' => 'nullable|string|max:255',
+            'keterangan' => 'nullable|string|max:9999',
             'commodity' => 'nullable|string|max:255',
             'source' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:255',
@@ -157,12 +160,14 @@ class DashboardMSSController extends Controller
     public function update(Request $request, MSS $mss)
 {
     $rules = [
+        'idPerihal' => 'required|numeric|max:255',
         'perihal' => 'required|string|max:255',
         'noSurat' => 'required|numeric',
+        'prefix' => 'required|string|max:255',
         'pttujuan' => 'nullable|string|max:255',
         'ptkunjungan' => 'nullable|string|max:255',
         'alamat' => 'nullable|string|max:255',
-        'keterangan' => 'nullable|string|max:255',
+        'keterangan' => 'nullable|string|max:9999',
         'commodity' => 'nullable|string|max:255',
         'source' => 'nullable|string|max:255',
         'country' => 'nullable|string|max:255',
@@ -180,6 +185,8 @@ class DashboardMSSController extends Controller
         'tglSurat' => 'nullable|date',
         'ettd' => 'nullable|string|max:255',
         'ttd' => 'nullable|string|max:255',
+        'approve' => 'nullable|string|max:255',
+        'qr' => 'nullable|string|max:255',
         'namaTtd' => 'nullable|string|max:255',
     ];
 

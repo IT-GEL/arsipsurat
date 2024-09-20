@@ -1,4 +1,4 @@
-@if ( $mss->perihal  == "Full Corporate Offer (FCO)")
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +14,12 @@
     }
 
     body {
-        margin: 20mm; /* Set your own margins */
         font-family: 'Times New Roman', Times, serif;
         background-image: url('{{ asset('img/KOP.png') }}');
         background-size: contain; /* Adjusts the image to fit within the body without stretching */
         background-repeat: no-repeat; /* Prevents the image from repeating */
         background-position: center; /* Centers the image */
+        padding-top: 10;
         height: 100vh; /* Ensures the body takes the full height */
     }
 
@@ -29,23 +29,23 @@
             -webkit-print-color-adjust: exact; /* Ensure color and background images are printed */
             print-color-adjust: exact;
         }
+        table {
+                page-break-inside: avoid;
+            }
     }
 </style>
 
   </head>
-  <body onload="window.print()">
-    <center>
-      <table width="450">
-        <tr>
-        <tr>
-            <td><img src="{{ asset('dashmin/img/GEL.png') }}" width="110" height="110" /></td>
-            <td style="font-family: 'Times New Roman', Times, serif; font-size: 13px">
-            <center>
+  <body onload="window.print()"><br><br><br><br><br><br><br>
+  <center>
+
+  @if ( $mss->idPerihal  == "1")
                         <table width="545">
                             <tr>
                                 <td style="text-align: left">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
                             </tr>
                         </table>
+                        <br><br>
                         <table width="545">
                             <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; font-weight: bold; font:uppercase" class="text">
@@ -161,10 +161,6 @@
                             </tr>
                         </table>
                         <br>
-                    </center>
-  </body>
-</html>
-
 @endif
 
 
@@ -172,43 +168,8 @@
 
 
 
-@if ( $mss->perihal  == "Surat Izin Masuk Tambang")
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  <head>
-    <title>FORMULIR KEBUTUHAN BASIS MSS | {{ $mss->perihal }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('dashmin/img/GEL.png') }}">
-    <style>
-    /* General Body Styles */
-    @page {
-        size: A4; /* Specify A4 size */
-        margin: 0; /* Remove default margins */
-    }
-
-    body {
-        font-family: 'Times New Roman', Times, serif;
-        background-image: url('{{ asset('img/KOP.png') }}');
-        background-size: contain; /* Adjusts the image to fit within the body without stretching */
-        background-repeat: no-repeat; /* Prevents the image from repeating */
-        background-position: center; /* Centers the image */
-        height: 99vh; /* Ensures the body takes the full height */
-    }
-
-    /* Ensure background image is printed */
-    @media print {
-        body {
-            -webkit-print-color-adjust: exact; /* Ensure color and background images are printed */
-            print-color-adjust: exact;
-        }
-    }
-</style>
-  </head>
-  <body onload="window.print()"><br><br><br><br><br><br>
-  <center style="margin-top: 50px;">
-
-
+  @if ( $mss->idPerihal  == "2")
                         <table width="545">
                             <tr>
                                 <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
@@ -264,8 +225,60 @@
                             </tr>
                         </table>
                         <br>
-                    </center>
+                    @endif
+
+
+
+                    @if ( $mss->idPerihal  == "3")
+                        <table width="545">
+                            <tr>
+                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold" class="text">
+                                <u>BERITA ACARA</u>
+                            </tr>
+                            <tr>
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
+                            </tr>
+                        </table> 
+                        <br>
+                        <br>
+                        <table width="545">
+                            <tr>
+                                <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
+                            </tr>
+                        </table>
+                        <br><br>
+                        <table width="545">
+                            <tr>
+                            <td>{!! $mss->keterangan !!}</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table width="545">
+                            <tr>
+                            <td>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pengajuan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</td>
+                            </tr>
+                        </table>
+                        <br /><br /><br /><br /><br><br>
+                        <table width="545">
+                        <tr style="">
+                            <td style="padding-left: 45px;">Dibuat</td>
+                            <td style="padding-left: 100px;">Mengetahui</td>
+                        </tr>
+                            <tr>
+                            <td>Sales Departement,</td>
+                            </tr>
+                        </table>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
+                    @endif
+
+        </center>
   </body>
 </html>
 
-@endif

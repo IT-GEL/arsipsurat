@@ -50,14 +50,17 @@
                         <td>
                             <a class="btn btn-sm btn-primary" href="/dashboard/mss/{{ $item->id }}"><i class="bi bi-info-square"></i></a>
                             <a class="btn btn-sm btn-warning" href="/dashboard/mss/{{ $item->id }}/edit"><i class="bi bi-pencil-square"></i></a>
-                            <form action="/dashboard/mss/{{ $item->noSurat }}" method="post" class="d-inline delete-form">
+                            <form action="/dashboard/mss/{{ $item->id }}" method="post" class="d-inline delete-form">
                                 @method('delete')
                                 @csrf 
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
                             <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
-                            |
-                            <button class="btn btn-sm btn-secondary" onclick="berhasil(this)"><i class="bi bi-check2-square"></i></button>
+                            <form action="/dashboard/mss/{{ $item->id }}" method="post">
+                                <input type="hidden" id="approve" name="approve" class="form-control @error('approve') is-invalid @enderror" value="yes" required>
+                                <input type="hidden" id="qr" name="qr" class="form-control @error('qr') is-invalid @enderror" value="" required>
+                                <button class="btn btn-sm btn-secondary approve-button" data-approved="false" onclick="berhasil(this)"><i class="bi bi-check2-square"></i></button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -108,17 +111,32 @@ document.querySelectorAll('.delete-button').forEach(button => {
 });
 
 function berhasil(button) {
-    // Change the button color to green
-    button.classList.remove('btn-secondary');
-    button.classList.add('btn-success');
+    const isApproved = button.getAttribute('data-approved') === 'true';
+    
+    if (!isApproved) {
+        // Change the button color to green
+        button.classList.remove('btn-secondary');
+        button.classList.add('btn-success');
+        
+        // Update the data attribute
+        button.setAttribute('data-approved', 'true');
 
-    Swal.fire({
-        title: "Approved!",
-        text: "Berhasil di approve",
-        icon: "success",
-        confirmButtonText: "OK"
-    });
+        Swal.fire({
+            title: "Approved!",
+            text: "Berhasil di approve",
+            icon: "success",
+            confirmButtonText: "OK"
+        });
+    } else {
+        Swal.fire({
+            title: "Already Approved!",
+            text: "This document has already been approved.",
+            icon: "info",
+            confirmButtonText: "OK"
+        });
+    }
 }
+
 
 </script>
 

@@ -3,7 +3,7 @@
 @section('container')
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-            <div class="col-sm-12 col-xl-6">
+            <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Buat Surat Keterangan Marketing Sales Shipping</h6>
                     <form method="post" action="/dashboard/mss">
@@ -75,7 +75,7 @@
                         </div>
 
                         <div id="keterangan-field" class="mb-3" style="display: none;">
-                        <label for="keterangan" class="form-label">Keterangan</label>
+                        <label for="keterangan" class="form-label">Isi Surat / Keterangan</label>
                             <input type="textarea" id="keterangan" name="keterangan">
                             <script>
                                 document.addEventListener('DOMContentLoaded', function() {
@@ -272,9 +272,6 @@
         </div>
     </div>
 
-    <link rel="stylesheet"href="https://unpkg.com/jodit@4.0.1/es2021/jodit.min.css"/>
-<script src="https://unpkg.com/jodit@4.0.1/es2021/jodit.min.js"></script>
-
     <!-- Add JavaScript to handle form visibility -->
     <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -287,6 +284,7 @@
             let maxNoSuratFCO = {{ $maxNoSuratFCO }};
             let maxNoSuratBA = {{ $maxNoSuratBA }};
             let maxNoSuratBAS = {{ $maxNoSuratBAS }};
+            let maxNoSuratBAVP = {{ $maxNoSuratBAVP }};
 
             function setInitialNoSurat() {
                 if (perihalSelect.value == '1') {
@@ -297,12 +295,12 @@
                 else if (perihalSelect.value == '3') {
                     noSuratInput.value = maxNoSuratBAS + 1;
                 }
+                else if (perihalSelect.value == '4') {
+                    noSuratInput.value = maxNoSuratBAVP + 1;
+                }
             }
 
             function toggleFields() {
-                const isSuratIzin = perihalSelect.value === '2';
-                const isFco = perihalSelect.value === '1';
-
                 // Reset all fields to hidden first
                 suratizinGroup.style.display = 'none';
                 keteranganField.style.display = 'none';
@@ -326,6 +324,9 @@
                     case '3':
                         keteranganField.style.display = 'block';
                         break;
+                    case '4':
+                    keteranganField.style.display = 'block';
+                    break;
                     // Add more cases if needed for other perihal options
                     default:
                         // Optionally handle other cases or reset fields
@@ -354,6 +355,11 @@
                 perihalInput.value = 'Berita Acara Surveyor';
                 prefixInput.value = 'BAS';
                 noSuratInput.value = maxNoSuratBAS + 1;
+                break;
+                case '4':
+                perihalInput.value = 'Berita Acara Pembatalan PVR';
+                prefixInput.value = 'BAS';
+                noSuratInput.value = maxNoSuratBAVP + 1;
                 break;
             default:
                 perihalInput.value = '';
@@ -391,7 +397,8 @@
                     prefixInput.value = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
                     break;
                 case '4':
-                    perihalType = 'BA-PB';
+                    prefixInput.value = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
+                    perihalType = 'BAVB';
                     break;
                 case '5':
                     perihalType = 'BA-KETERLAMBATAN';

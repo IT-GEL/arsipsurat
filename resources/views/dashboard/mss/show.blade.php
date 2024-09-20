@@ -311,4 +311,62 @@
 
 @endif
 
+@if ( $mss->perihal  == "Berita Acara Pembatalan PVR")
+<!-- Recent Sales Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
+                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+
+                    </div>
+                    <center style="margin-top: 50px;">
+                    <table width="545">
+                            <tr>
+                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold" class="text">
+                                <u>BERITA ACARA PEMBATALAN PVR</u>
+                            </tr>
+                            <tr>
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
+                            </tr>
+                        </table> 
+                        <br>
+                        <br>
+                        <br><br>
+                        <table class="table-keterangan" width="545">
+                            <tr>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table width="545">
+                            <tr>
+                            <td>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pembatalan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</td>
+                            </tr>
+                        </table>
+                        <br /><br /><br /><br /><br><br>
+                        <table width="545">
+                        <tr style="">
+                            <td style="padding-left: 45px;">Dibuat</td>
+                            <td style="padding-left: 100px;">Mengetahui</td>
+                        </tr>
+                            <tr>
+                            <td>Sales Departement,</td>
+                            </tr>
+                        </table>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
+                    </center>
+                </div>
+            </div>
+<!-- Recent Sales End -->
+
+@endif
+
 @endsection

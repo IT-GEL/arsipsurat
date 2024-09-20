@@ -17,18 +17,18 @@
                 <div class="navbar-nav w-100">
                     <a href="/dashboard" class="nav-item nav-link {{ Request::is('dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ Request::is('it') || Request::is('ga') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Divisi</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ Request::is('it') || Request::is('ga') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>List Surat</a>
                         <div class="dropdown-menu bg-transparent border-0">
                         @if (auth()->user()->name == "IT Support")
                             <a href="/dashboard/it" class="dropdown-item {{ Request::is('dashboard/it*') ? 'active' : '' }}">
-                                <i class="bi bi-window"></i> Surat {{ auth()->user()->name }}
+                                <i class="bi bi-window"></i> {{ auth()->user()->name }}
                             </a>
                         @endif
                         @if (auth()->user()->name == "General Affair")
-                            <a href="/dashboard/ga" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-window"></i>  Surat {{ auth()->user()->name }}</a>
+                            <a href="/dashboard/ga" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-window"></i> {{ auth()->user()->name }}</a>
                         @endif
                         @if (auth()->user()->name == "Marketing Sales Shipping")
-                            <a href="/dashboard/mss" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-window"></i>  Surat {{ auth()->user()->name }}</a>
+                            <a href="/dashboard/mss" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-window"></i> {{ auth()->user()->name }}</a>
                         @endif
                         </div>
                     </div>
