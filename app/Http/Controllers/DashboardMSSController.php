@@ -83,6 +83,7 @@ class DashboardMSSController extends Controller
 
         
         $validatedData = $request->validate([
+            'kop' => 'required|string|max:255',
             'idPerihal' => 'required|numeric|max:255',
             'perihal' => 'required|string|max:255',
             'noSurat' => 'required|numeric',

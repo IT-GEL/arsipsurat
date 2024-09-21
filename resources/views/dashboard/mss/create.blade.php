@@ -10,6 +10,21 @@
                         @csrf
                         
                         <div class="mb-3">
+                            <label for="kop" class="form-label">Pilih PT</label>
+                            <select class="form-select @error('kop') is-invalid @enderror" id="kop" name="kop" required autofocus>
+                                <option value="" disabled selected>Pilih Peruntukan Surat</option>
+                                <option value="GEL">GEL</option>
+                                <option value="GSM">GSM</option>
+                            </select>
+                            
+                            @error('kop')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
                             <label for="idPerihal" class="form-label">Perihal Surat</label>
                             <select class="form-select @error('idPerihal') is-invalid @enderror" id="idPerihal" name="idPerihal" required autofocus>
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
@@ -76,7 +91,7 @@
 
                         <div id="keterangan-field" class="mb-3" style="display: none;">
                         <label for="keterangan" class="form-label">Isi Surat / Keterangan</label>
-                            <input type="textarea" id="keterangan" name="keterangan">
+                        <textarea id="keterangan" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror"></textarea>
                             <script>
                                 document.addEventListener('DOMContentLoaded', function() {
                                     const keterangan = Jodit.make('#keterangan');
@@ -165,7 +180,18 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;">
+                            <div class="fco-field mb-3">
+                                <input type="checkbox" id="toggleCIF" onclick="toggleField('cif')">
+                                <label for="toggleCIF" class="form-label">Price Schemes CIF</label>
+                                <br>
+                                <input type="checkbox" id="toggleFOB" onclick="toggleField('fob')">
+                                <label for="toggleFOB" class="form-label">Price Schemes FOB</label>
+                                <br>
+                                <input type="checkbox" id="toggleFREIGHT" onclick="toggleField('freight')">
+                                <label for="toggleFREIGHT" class="form-label">Price Schemes FREIGHT</label>
+                            </div>
+
+                            <div class="mb-3 price-scheme-fields" id="cifField" style="display: none;">
                                 <label for="cif" class="form-label">Price Scheme (CIF)</label>
                                 <input type="number" class="form-control @error('cif') is-invalid @enderror" placeholder="CIF..." id="cif" name="cif" value="{{ old('cif') }}">
                                 @error('cif')
@@ -175,7 +201,7 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;">
+                            <div class="mb-3 price-scheme-fields" id="fobField" style="display: none;">
                                 <label for="fob" class="form-label">Price Scheme (FOB)</label>
                                 <input type="number" class="form-control @error('fob') is-invalid @enderror" placeholder="FOB..." id="fob" name="fob" value="{{ old('fob') }}">
                                 @error('fob')
@@ -185,7 +211,7 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;">
+                            <div class="mb-3 price-scheme-fields" id="freightField" style="display: none;">
                                 <label for="freight" class="form-label">Price Scheme (FREIGHT)</label>
                                 <input type="number" class="form-control @error('freight') is-invalid @enderror" placeholder="FREIGHT..." id="freight" name="freight" value="{{ old('freight') }}">
                                 @error('freight')
@@ -194,6 +220,17 @@
                                     </div> 
                                 @enderror
                             </div>
+
+                            <script>
+                            function toggleField(fieldId) {
+                                const field = document.getElementById(fieldId + 'Field');
+                                const checkbox = document.getElementById('toggle' + fieldId.charAt(0).toUpperCase() + fieldId.slice(1));
+                                field.style.display = checkbox.checked ? 'block' : 'none';
+                            }
+                            </script>
+
+
+
 
                             <div class="fco-field mb-3" style="display: none;">
                                 <label for="shipschedule" class="form-label">Shipping Schedule</label>
@@ -274,12 +311,15 @@
 
     <!-- Add JavaScript to handle form visibility -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const perihalSelect = document.getElementById('idPerihal');
-        const noSuratInput = document.getElementById('noSurat');
-        const suratizinGroup = document.getElementById('surat-izin');
-        const keteranganField = document.getElementById('keterangan-field');
-        const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
+        document.addEventListener('DOMContentLoaded', function () {
+            const perihalSelect = document.getElementById('idPerihal');
+            const noSuratInput = document.getElementById('noSurat');
+            const suratizinGroup = document.getElementById('surat-izin');
+            const keteranganField = document.getElementById('keterangan-field');
+            const pttujuanClass = document.getElementById('pttujuanClass');
+            const alamatClass = document.getElementById('alamatClass');
+            const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
+
 
             let maxNoSuratFCO = {{ $maxNoSuratFCO }};
             let maxNoSuratBA = {{ $maxNoSuratBA }};
@@ -288,24 +328,18 @@
             let maxNoSuratTT = {{ $maxNoSuratTT }};
 
             function setInitialNoSurat() {
-                if (perihalSelect.value == '1') {
-                    noSuratInput.value = maxNoSuratFCO + 1;
-                } else if (perihalSelect.value == '2') {
-                    noSuratInput.value = maxNoSuratBA + 1;
-                }
-                else if (perihalSelect.value == '3') {
-                    noSuratInput.value = maxNoSuratBAS + 1;
-                }
-                else if (perihalSelect.value == '4') {
-                    noSuratInput.value = maxNoSuratBAVP + 1;
-                }
-                else if (perihalSelect.value == '7') {
-                    noSuratInput.value = maxNoSuratTT + 1;
-                }
+                const maxValues = {
+                    '1': maxNoSuratFCO,
+                    '2': maxNoSuratBA,
+                    '3': maxNoSuratBAS,
+                    '4': maxNoSuratBAVP,
+                    '7': maxNoSuratTT
+                };
+                noSuratInput.value = (maxValues[perihalSelect.value] || 0) + 1;
             }
 
-            function toggleFields() {
-                // Reset all fields to hidden first
+            function updateVisibleFields() {
+                // Hide all fields initially
                 suratizinGroup.style.display = 'none';
                 keteranganField.style.display = 'none';
                 pttujuanClass.style.display = 'none';
@@ -314,7 +348,6 @@
 
                 switch (perihalSelect.value) {
                     case '1':
-                        // Show fields specific to FCO
                         suratfcoGroups.forEach(group => group.style.display = 'block');
                         pttujuanClass.style.display = 'block';
                         alamatClass.style.display = 'block';
@@ -326,118 +359,66 @@
                         alamatClass.style.display = 'block';
                         break;
                     case '3':
-                        keteranganField.style.display = 'block';
-                        break;
                     case '4':
-                    keteranganField.style.display = 'block';
-                    break;
-
                     case '7':
-                    keteranganField.style.display = 'block';
-                    break;
-                    // Add more cases if needed for other perihal options
-                    default:
-                        // Optionally handle other cases or reset fields
+                        keteranganField.style.display = 'block';
                         break;
                 }
             }
 
+            function updatePrefix() {
+                const noSurat = String(noSuratInput.value || '0').padStart(3, '0');
+                const tglSurat = new Date(document.getElementById('tglSurat').value);
+                const romanMonth = toRoman(tglSurat.getMonth() + 1);
+                const year = tglSurat.getFullYear();
+                const prefixInput = document.getElementById('prefix');
+                
+                let perihalType;
 
-        perihalSelect.addEventListener('change', function() {
-            const selectedValue = this.value;
-            const perihalInput = document.getElementById('perihal');
-            const prefixInput = document.getElementById('prefix');
+                switch (perihalSelect.value) {
+                    case '1':
+                        prefixInput.value = `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`;
+                        break;
+                    case '2':
+                        prefixInput.value = `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`;
+                        break;
+                    case '3':
+                    case '4':
+                        prefixInput.value = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
+                        perihalType = 'BAVB'; // Update as necessary
+                        break;
+                    case '7':
+                        prefixInput.value = `Tanda Terima-${noSurat}/${romanMonth}/${year}`;
+                        perihalType = 'TT';
+                        break;
+                    default:
+                        perihalType = 'BA';
+                }
 
-            switch (selectedValue) {
-            case '1':
-                perihalInput.value = 'Full Corporate Offer';
-                prefixInput.value = 'FCO';
-                noSuratInput.value = maxNoSuratFCO + 1;
-                break;
-            case '2':
-                perihalInput.value = 'Surat Izin Masuk Tambang';
-                prefixInput.value = 'BA';
-                noSuratInput.value = maxNoSuratBA + 1;
-                break;
-            case '3':
-                perihalInput.value = 'Berita Acara Surveyor';
-                prefixInput.value = 'BAS';
-                noSuratInput.value = maxNoSuratBAS + 1;
-                break;
-                case '4':
-                perihalInput.value = 'Berita Acara Pembatalan PVR';
-                prefixInput.value = 'BAS';
-                noSuratInput.value = maxNoSuratBAVP + 1;
-                break;
-
-                case '7':
-                perihalInput.value = 'Tanda Terima';
-                prefixInput.value = 'TT';
-                noSuratInput.value = maxNoSuratTT + 1;
-                break;
-
-            default:
-                perihalInput.value = '';
-                prefixInput.value = '';
-                noSuratInput.value = '';
-        }
-
-            toggleFields();
-            updatePrefix(); // Ensure prefix is updated on selection change
-        });
-
-        function toRoman(num) {
-            const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-            return roman[num - 1] || '';
-        }
-
-        function updatePrefix() {
-            // Get the value of noSurat and ensure it's a number
-            const noSurat = String(document.getElementById('noSurat').value || '0').padStart(3, '0');
-            const tglSurat = new Date(document.getElementById('tglSurat').value);
-            const romanMonth = toRoman(tglSurat.getMonth() + 1);
-            const year = tglSurat.getFullYear();
-            const prefixInput = document.getElementById('prefix');
-            
-            let perihalType;
-
-            switch (document.getElementById('idPerihal').value) {
-                case '1':
-                    prefixInput.value = `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`;
-                    break;
-                case '2':
-                    prefixInput.value = `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`;
-                    break;
-                case '3':
-                    prefixInput.value = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
-                    break;
-                case '4':
-                    prefixInput.value = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
-                    perihalType = 'BAVB';
-                    break;
-                case '7':
-                    prefixInput.value = `Tanda Terima-${noSurat}/${romanMonth}/${year}`;
-                    perihalType = 'TT';
-                    break;
-                default:
-                    perihalType = 'BA'; // Default value if needed
+                console.log(`Prefix updated to: ${prefixInput.value}`);
             }
 
+            function toRoman(num) {
+                const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+                return roman[num - 1] || '';
+            }
 
+            perihalSelect.addEventListener('change', function() {
+                setInitialNoSurat();
+                updateVisibleFields();
+                updatePrefix();
+            });
 
-            // Debug log
-            console.log(`Prefix updated to: ${prefixInput.value}`);
-        }
+            document.getElementById('tglSurat').addEventListener('change', updatePrefix);
+            noSuratInput.addEventListener('input', updatePrefix);
 
-        document.getElementById('tglSurat').addEventListener('change', updatePrefix);
-        document.getElementById('noSurat').addEventListener('input', updatePrefix);
-        document.getElementById('idPerihal').addEventListener('change', updatePrefix);
+            // Initialize
+            setInitialNoSurat();
+            updateVisibleFields();
+            updatePrefix();
+        });
+        </script>
 
-        // Initialize
-        toggleFields();
-        updatePrefix(); // Update prefix on page load
-    });
-</script>
 
 
 

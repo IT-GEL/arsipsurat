@@ -5,7 +5,13 @@
 @if ( $mss->idPerihal  == "1")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-center rounded p-4">
+            <div class="bg-light text-center rounded p-4" 
+                style="
+                        background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
+                        background-size: contain; /* Adjusts the image to fit within the body without stretching */
+                        background-repeat: no-repeat; /* Prevents the image from repeating */
+                        background-position: center; /* Centers the image */    
+                ">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
                         <a href="/dashboard/mss/{{ $mss->noSurat }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
@@ -223,9 +229,9 @@
                             </tr>
                         </table>
                         <br><br>
-                        <table width="545">
+                        <table class="table-keterangan" width="545">
                             <tr>
-                            <td>{!! $mss->keterangan !!}</td>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
                             </tr>
                         </table>
                         <br><br>
@@ -251,13 +257,20 @@
 @if ( $mss->perihal  == "Berita Acara Surveyor")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-center rounded p-4">
+                <div class="bg-light text-center rounded p-4" 
+                style="
+                        background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
+                        background-size: contain; /* Adjusts the image to fit within the body without stretching */
+                        background-repeat: no-repeat; /* Prevents the image from repeating */
+                        background-position: center; /* Centers the image */    
+                ">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
                         <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
 
                     </div>
                     <center style="margin-top: 50px;">
+                        <br><br>
                     <table width="545">
                             <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold" class="text">
@@ -275,9 +288,9 @@
                             </tr>
                         </table>
                         <br><br>
-                        <table width="545">
+                        <table class="table-keterangan" width="545">
                             <tr>
-                            <td>{!! $mss->keterangan !!}</td>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
                             </tr>
                         </table>
                         <br>
@@ -314,7 +327,13 @@
 @if ( $mss->perihal  == "Berita Acara Pembatalan PVR")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-center rounded p-4">
+            <div class="bg-light text-center rounded p-4" 
+                style="
+                        background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
+                        background-size: contain; /* Adjusts the image to fit within the body without stretching */
+                        background-repeat: no-repeat; /* Prevents the image from repeating */
+                        background-position: center; /* Centers the image */    
+                ">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
                         <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>

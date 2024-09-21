@@ -15,7 +15,7 @@
 
     body {
         font-family: 'Times New Roman', Times, serif;
-        background-image: url('{{ asset('img/KOP.png') }}');
+        background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
         background-size: contain; /* Adjusts the image to fit within the body without stretching */
         background-repeat: no-repeat; /* Prevents the image from repeating */
         background-position: center; /* Centers the image */
@@ -33,8 +33,18 @@
                 page-break-inside: avoid;
             }
     }
-</style>
 
+    .table-keterangan {
+            border-collapse: collapse;
+            width: 545px; /* Optional: set width here if you want */
+        }
+
+        .table-keterangan td {
+            border: 2px solid;
+            padding: 8px;
+        }
+
+</style>
   </head>
   <body onload="window.print()"><br><br><br><br><br><br><br>
   <center>
@@ -170,6 +180,7 @@
 
 
   @if ( $mss->idPerihal  == "2")
+  <br><br><br>
                         <table width="545">
                             <tr>
                                 <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
@@ -207,9 +218,9 @@
                             </tr>
                         </table>
                         <br><br>
-                        <table width="545">
+                        <table class="table-keterangan" width="545">
                             <tr>
-                            <td>{!! $mss->keterangan !!}</td>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
                             </tr>
                         </table>
                         <br><br>
@@ -230,6 +241,7 @@
 
 
                     @if ( $mss->idPerihal  == "3")
+                    <br><br><br>
                         <table width="545">
                             <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold" class="text">
@@ -247,9 +259,9 @@
                             </tr>
                         </table>
                         <br><br>
-                        <table width="545">
+                        <table class="table-keterangan" width="545">
                             <tr>
-                            <td>{!! $mss->keterangan !!}</td>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
                             </tr>
                         </table>
                         <br>
