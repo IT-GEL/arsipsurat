@@ -49,6 +49,7 @@ Route::resource('/dashboard/it', DashboardITController::class)->middleware('auth
 Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth');
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
 
-Route::put('/dashboard/mss/{id}', [DashboardMSSController::class, 'approve']);
+Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
+
 
 //Route::get('/dashboard/it/cetak_pdf', [DashboardITController::class, 'cetak_pdf'])->middleware('auth');
