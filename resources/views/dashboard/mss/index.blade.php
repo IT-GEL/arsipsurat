@@ -56,15 +56,21 @@
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
                             <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
-                            <form action="{{ route('mss.approve', $item->id) }}" method="post" class="d-inline delete-form">
+                            
+                            <form action="{{ route('mss.approve', $item->id) }}" method="post" class="d-inline">
                                 @method('put')
                                 @csrf 
                                 <input type="hidden" name="approve" value="yes">
                                 <input type="hidden" name="qr" value="">
-                                <button class="btn btn-sm btn-secondary approve-button" data-approved="false" onclick="berhasil(this)"><i class="bi bi-check2-square"></i></button>
+                                <button class="btn btn-sm {{ $item->approve ? 'btn-success' : 'btn-secondary' }}" 
+                                        data-approved="{{ $item->approve }}" 
+                                        onclick="{{ $item->approve ? 'return false;' : 'berhasil(this);' }}"
+                                        {{ $item->approve ? 'disabled' : '' }}>
+                                    <i class="bi bi-check2-square"></i>
+                                </button>
                             </form>
-
                         </td>
+
                     </tr>
                     @endforeach
                 </tbody>
