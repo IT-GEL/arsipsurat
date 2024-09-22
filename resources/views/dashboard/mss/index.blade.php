@@ -56,7 +56,7 @@
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
                             <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
-                            <form action="/dashboard/mss/{{ $item->id }}" method="post" class="d-inline delete-form">
+                            <form action="{{ route('mss.approve', $item->id) }}" method="post" class="d-inline delete-form">
                                 @method('put')
                                 @csrf 
                                 <input type="hidden" name="approve" value="yes">

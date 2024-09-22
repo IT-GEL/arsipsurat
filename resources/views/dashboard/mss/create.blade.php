@@ -36,7 +36,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3" id="perihalBA" style="display: none;">
+                        <div class="mb-3" id="perihalBAClass" style="display: none;">
                             <label for="perihalBA" class="form-label" >Perihal Berita Acara</label>
                             <select class="form-select @error('perihalBA') is-invalid @enderror" id="perihalBA" name="perihalBA" required autofocus>
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
@@ -313,111 +313,115 @@
         </div>
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const perihalSelect = document.getElementById('idPerihal');
-        const noSuratInput = document.getElementById('noSurat');
-        const suratizinGroup = document.getElementById('surat-izin');
-        const keteranganField = document.getElementById('keterangan-field');
-        const pttujuanClass = document.getElementById('pttujuanClass');
-        const alamatClass = document.getElementById('alamatClass');
-        const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
-        const prefixInput = document.getElementById('prefix');
-        const tglSuratInput = document.getElementById('tglSurat');
-        const tglSuratInput = document.getElementById('tglSurat');
+document.addEventListener('DOMContentLoaded', function () {
+    const perihalSelect = document.getElementById('idPerihal');
+    const noSuratInput = document.getElementById('noSurat');
+    const suratizinGroup = document.getElementById('surat-izin');
+    const keteranganField = document.getElementById('keterangan-field');
+    const pttujuanClass = document.getElementById('pttujuanClass');
+    const alamatClass = document.getElementById('alamatClass');
+    const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
+    const prefixInput = document.getElementById('prefix');
+    const tglSuratInput = document.getElementById('tglSurat');
+    const BAClass = document.getElementById('perihalBAClass');
 
-        const maxValues = {
-            '1': {{ $maxNoSuratFCO }},
-            '2': {{ $maxNoSuratSI }},
-            '3': {{ $maxNoSuratBA }},
-            '4': {{ $maxNoSuratTT }},
+    const maxValues = {
+        '1': {{ $maxNoSuratFCO }},
+        '2': {{ $maxNoSuratSI }},
+        '3': {{ $maxNoSuratBA }},
+        '4': {{ $maxNoSuratTT }},
+    };
+
+    const PADDING_LENGTH = 3;
+
+    function setInitialNoSurat() {
+        const currentType = perihalSelect.value;
+        noSuratInput.value = (maxValues[currentType] || 0) + 1;
+    }
+
+    function updateVisibleFields() {
+        const visibilityMap = {
+            '1': () => {
+                suratfcoGroups.forEach(group => group.style.display = 'block');
+                pttujuanClass.style.display = 'block';
+                alamatClass.style.display = 'block';
+            },
+            '2': () => {
+                suratizinGroup.style.display = 'block';
+                keteranganField.style.display = 'block';
+                pttujuanClass.style.display = 'block';
+                alamatClass.style.display = 'block';
+            },
+            '3': () => {
+                suratfcoGroups.forEach(group => group.style.display = 'none');
+                keteranganField.style.display = 'block';
+                BAClass.style.display = 'block';
+            },
+            '4': () => {
+                keteranganField.style.display = 'block';
+            }
         };
 
-        function setInitialNoSurat() {
-            const currentType = perihalSelect.value;
-            noSuratInput.value = (maxValues[currentType] || 0) + 1;
+        // Hide all fields first
+        suratizinGroup.style.display = 'none';
+        keteranganField.style.display = 'none';
+        pttujuanClass.style.display = 'none';
+        alamatClass.style.display = 'none';
+        suratfcoGroups.forEach(group => group.style.display = 'none');
+
+        // Show relevant fields based on selected value
+        visibilityMap[perihalSelect.value]?.();
+    }
+
+    function updatePrefix() {
+        const noSurat = String(noSuratInput.value || '0').padStart(PADDING_LENGTH, '0');
+        const tglSurat = new Date(tglSuratInput.value);
+        const romanMonth = toRoman(tglSurat.getMonth() + 1);
+        const year = tglSurat.getFullYear();
+        let prefix;
+
+        switch (perihalSelect.value) {
+            case '1':
+                prefix = `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`;
+                break;
+            case '2':
+                prefix = `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`;
+                break;
+            case '3':
+                prefix = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
+                break;
+            case '4':
+                prefix = `Tanda Terima-${noSurat}/${romanMonth}/${year}`;
+                break;
+            default:
+                prefix = '';
         }
 
-        function updateVisibleFields() {
-            const visibilityMap = {
-                '1': () => {
-                    suratfcoGroups.forEach(group => group.style.display = 'block');
-                    pttujuanClass.style.display = 'block';
-                    alamatClass.style.display = 'block';
-                },
-                '2': () => {
-                    suratizinGroup.style.display = 'block';
-                    keteranganField.style.display = 'block';
-                    pttujuanClass.style.display = 'block';
-                    alamatClass.style.display = 'block';
-                },
-                '3': () => {
-                    suratfcoGroups.forEach(group => group.style.display = 'none');
-                    keteranganField.style.display = 'block';
-                },
-                '4': () => {
-                    keteranganField.style.display = 'block';
-                }
-            };
+        prefixInput.value = prefix;
+        console.log(`Prefix updated to: ${prefix}`);
+    }
 
-            // Hide all fields first
-            suratizinGroup.style.display = 'none';
-            keteranganField.style.display = 'none';
-            pttujuanClass.style.display = 'none';
-            alamatClass.style.display = 'none';
-            suratfcoGroups.forEach(group => group.style.display = 'none');
+    function toRoman(num) {
+        const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+        return roman[num - 1] || '';
+    }
 
-            // Show relevant fields based on selected value
-            visibilityMap[perihalSelect.value]?.();
-        }
-
-        function updatePrefix() {
-            const noSurat = String(noSuratInput.value || '0').padStart(3, '0');
-            const tglSurat = new Date(tglSuratInput.value);
-            const romanMonth = toRoman(tglSurat.getMonth() + 1);
-            const year = tglSurat.getFullYear();
-            let prefix;
-
-            switch (perihalSelect.value) {
-                case '1':
-                    prefix = `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`;
-                    break;
-                case '2':
-                    prefix = `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`;
-                    break;
-                case '3':
-                    prefix = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
-                    break;
-                case '4':
-                    prefix = `Tanda Terima-${noSurat}/${romanMonth}/${year}`;
-                    break;
-                default:
-                    prefix = '';
-            }
-
-            prefixInput.value = prefix;
-            console.log(`Prefix updated to: ${prefix}`);
-        }
-
-        function toRoman(num) {
-            const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-            return roman[num - 1] || '';
-        }
-
-        // Event listeners
-        [perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
-            element.addEventListener('change', () => {
-                setInitialNoSurat();
-                updateVisibleFields();
-                updatePrefix();
-            });
-        });
-
-        // Initialize
+    function handleFieldUpdates() {
         setInitialNoSurat();
         updateVisibleFields();
         updatePrefix();
+    }
+
+    // Event listeners
+    [perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
+        element.addEventListener('change', handleFieldUpdates);
     });
+
+    // Initialize
+    handleFieldUpdates();
+});
 </script>
+
 
 
 

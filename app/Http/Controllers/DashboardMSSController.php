@@ -163,7 +163,7 @@ class DashboardMSSController extends Controller
         ]);
 
         // Update the Approval field to 1
-        $mss->Approval = 1; // Ensure 'Approval' is the correct field name
+        $mss->approve = 1; // Ensure 'Approval' is the correct field name
         $mss->save(); // Save the changes to the database
 
         return redirect('/dashboard/mss')->with('success', 'Surat berhasil diapprove!');
