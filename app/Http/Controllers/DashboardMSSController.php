@@ -45,7 +45,7 @@ class DashboardMSSController extends Controller
         $maxNoSuratBA = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
         $maxNoSuratTT = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
 
-       d return view('dashboard.mss.create', [
+       return view('dashboard.mss.create', [
             'title' => 'MSS',
             'romanMonth' => $romanMonth,
             'maxNoSuratFCO' => $maxNoSuratFCO,
@@ -158,7 +158,7 @@ class DashboardMSSController extends Controller
     }
 
     public function approve(Request $request, MSS $mss)
-{
+    {
     try {
         $validatedData = $request->validate(['approve' => 'required|string|max:255']);
 
