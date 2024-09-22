@@ -40,19 +40,16 @@ class DashboardMSSController extends Controller
 
         // Fetch the maximum noSurat values
         $maxNoSuratFCO = MSS::where('idPerihal', '1')->max('noSurat') ?? 0;
-        $maxNoSuratBA = MSS::where('idPerihal', '2')->max('noSurat') ?? 0;
-        $maxNoSuratBAS = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
-        $maxNoSuratBAVP = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
-        $maxNoSuratTT = MSS::where('idPerihal', '7')->max('noSurat') ?? 0;
-        $maxNoSurat = MSS::where('idPerihal', '6')->max('noSurat') ?? 0;
+        $maxNoSuratSI = MSS::where('idPerihal', '2')->max('noSurat') ?? 0;
+        $maxNoSuratBA = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
+        $maxNoSuratTT = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
 
         return view('dashboard.mss.create', [
             'title' => 'MSS',
             'romanMonth' => $romanMonth,
             'maxNoSuratFCO' => $maxNoSuratFCO,
+            'maxNoSuratSI' => $maxNoSuratSI,
             'maxNoSuratBA' => $maxNoSuratBA,
-            'maxNoSuratBAS' => $maxNoSuratBAS,
-            'maxNoSuratBAVP' => $maxNoSuratBAVP,
             'maxNoSuratTT' => $maxNoSuratTT,
         ]);
     }
