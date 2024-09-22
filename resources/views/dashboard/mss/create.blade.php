@@ -38,7 +38,7 @@
 
                         <div class="mb-3" id="perihalBAClass" style="display: none;">
                             <label for="perihalBA" class="form-label" >Perihal Berita Acara</label>
-                            <select class="form-select @error('perihalBA') is-invalid @enderror" id="perihalBA" name="perihalBA" required autofocus>
+                            <select class="form-select @error('perihalBA') is-invalid @enderror" id="perihalBA" name="perihalBA">
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
                                 <option value="Surveyor">Berita Acara Surveyor</option>
                                 <option value="Pembatalan PVR">Berita Acara Pembatalan PVR</option>
@@ -49,6 +49,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="noSurat" class="form-label">Nomor Surat</label>
                             <input type="hidden" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required value="{{ old('noSurat') }}">
@@ -367,11 +368,38 @@ document.addEventListener('DOMContentLoaded', function () {
         keteranganField.style.display = 'none';
         pttujuanClass.style.display = 'none';
         alamatClass.style.display = 'none';
+        BAClass.style.display = 'none';
         suratfcoGroups.forEach(group => group.style.display = 'none');
 
         // Show relevant fields based on selected value
         visibilityMap[perihalSelect.value]?.();
     }
+
+    perihalSelect.addEventListener('change', function() {
+    const selectedValue = this.value;
+    const perihalInput = document.getElementById('perihal');
+
+        // Set perihalInput based on selected value
+        switch (selectedValue) {
+            case '1':
+                perihalInput.value = 'Full Corporate Offer';
+                break;
+            case '2':
+                perihalInput.value = 'Surat Izin Masuk Tambang';
+                break;
+            case '3':
+                perihalInput.value = 'Berita Acara';
+                break;
+            case '4':
+                perihalInput.value = 'Tanda Terima';
+                break;
+            default:
+                perihalInput.value = '';
+        }
+
+        // Call other functions if needed
+        handleFieldUpdates();
+    });
 
     function updatePrefix() {
         const noSurat = String(noSuratInput.value || '0').padStart(PADDING_LENGTH, '0');

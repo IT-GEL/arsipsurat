@@ -169,7 +169,7 @@
 
 @endif
 
-@if ( $mss->perihal  == "Surat Izin Masuk Tambang")
+@if ( $mss->idPerihal  == "2")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
@@ -254,7 +254,7 @@
 
 @endif
 
-@if ( $mss->perihal  == "Berita Acara Surveyor")
+@if ( $mss->idPerihal  == "3")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4" 
@@ -274,7 +274,7 @@
                     <table width="545">
                             <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold" class="text">
-                                <u>BERITA ACARA</u>
+                                <u>BERITA ACARA {{ $mss->perihalBA }}</u>
                             </tr>
                             <tr>
                             <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>

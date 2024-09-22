@@ -45,7 +45,7 @@
                     @foreach ($mss as $item)
                     <tr>
                         <td style="font-weight:bold;">{{ $item->prefix }}</td>
-                        <td>{{ $item->perihal }}</td>
+                        <td>{{ $item->perihal }} {{ $item->perihalBA }}</td>
                         <td>{{ date('d M Y', strtotime($item->tglSurat)) }}</td>
                         <td>
                             <a class="btn btn-sm btn-primary" href="/dashboard/mss/{{ $item->id }}"><i class="bi bi-info-square"></i></a>
