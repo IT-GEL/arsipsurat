@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MSS;
+use App\Models\DetailQr;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
@@ -44,7 +45,7 @@ class DashboardMSSController extends Controller
         $maxNoSuratBA = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
         $maxNoSuratTT = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
 
-        return view('dashboard.mss.create', [
+       d return view('dashboard.mss.create', [
             'title' => 'MSS',
             'romanMonth' => $romanMonth,
             'maxNoSuratFCO' => $maxNoSuratFCO,
@@ -157,19 +158,44 @@ class DashboardMSSController extends Controller
     }
 
     public function approve(Request $request, MSS $mss)
-    {
-        // Validate the incoming request
-        $validatedData = $request->validate([
-            'approve' => 'required|string|max:255',
-            'qr' => 'nullable|string|max:255',
-        ]);
+{
+    try {
+        $validatedData = $request->validate(['approve' => 'required|string|max:255']);
 
-        // Update the Approval field to 1
-        $mss->approve = 1; // Ensure 'Approval' is the correct field name
-        $mss->save(); // Save the changes to the database
+     
+        // Get user information
+        $user = Auth::user();
+        if (!$user) {
+            throw new \Exception('User not authenticated.');
+        }
+
+        // Prepare the QR string with user details
+        $qrString = "{$user->name} | {$user->NIK} | {$user->Jabatan}";
+        
+        // Update the approve and qr field from m_s_s table
+        $mss->approve = 1;
+        $mss->qr=$qrString;
+        
+        // Save the MSS record
+        $mss->save();
+
+        // Create an instance of the DetailQr model
+        $detailQr = new DetailQr();
+        $detailQr->nosurat = $mss->prefix; // Assuming you want to store the prefix
+        $detailQr->nama = $user->name;
+        $detailQr->NIK = $user->NIK;
+        $detailQr->jabatan = $user->Jabatan;
+        $detailQr->approve_at = now(); // Use current timestamp
+        //Save the detail_qr record
+        $detailQr->save();
 
         return redirect('/dashboard/mss')->with('success', 'Surat berhasil diapprove!');
+    } catch (\Exception $e) {
+        \Log::error($e->getMessage());
+        return redirect('/dashboard/mss')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
+
 
     public function destroy(MSS $mss)
     {
