@@ -188,10 +188,12 @@
                                 @enderror
                             </div>
 
-                            <button id="toggleCIF" class="toggle-button">Toggle CIF</button>
-                            <button id="toggleFOB" class="toggle-button">Toggle FOB</button>
-                            <button id="toggleFREIGHT" class="toggle-button">Toggle Freight</button>
+                            <div class="fco-field mb-3">
+                            <button id="toggleCIF" class="toggle-button "><i class="bi bi-toggle-on"></i> CIF</button>
+                            <button id="toggleFOB" class="toggle-button"><i class="bi bi-toggle-on"></i> FOB</button>
+                            <button id="toggleFREIGHT" class="toggle-button"><i class="bi bi-toggle-on"></i> Freight</button>
 
+                            </div>
 
                             <div class="fco-field mb-3">
                                 <label for="matauang" class="form-label" >Pilih Mata Uang Price Schemes</label>
@@ -352,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
         visibilityMap[perihalSelect.value]?.();
     }
 
-            function toggleField(fieldId) {
+    function toggleField(fieldId) {
             const field = document.getElementById(fieldId + 'Field');
             const isVisible = field.style.display === 'block';
             field.style.display = isVisible ? 'none' : 'block';
@@ -362,7 +364,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('toggleCIF').addEventListener('click', () => toggleField('cif'));
         document.getElementById('toggleFOB').addEventListener('click', () => toggleField('fob'));
         document.getElementById('toggleFREIGHT').addEventListener('click', () => toggleField('freight'));
-
 
     // Event listeners for checkboxes
     ['CIF', 'FOB', 'FREIGHT'].forEach(type => {
