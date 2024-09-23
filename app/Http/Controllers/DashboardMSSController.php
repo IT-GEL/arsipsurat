@@ -184,6 +184,7 @@ class DashboardMSSController extends Controller
             $dqr->nama = $user->name;
             $dqr->NIK = $user->NIK;
             $dqr->jabatan = $user->Jabatan;
+            $dqr->qr = $mss->qr;
             $dqr->approve_at = now(); // Use current timestamp
             // Save the detail_qr record
             $dqr->save();
@@ -214,7 +215,7 @@ class DashboardMSSController extends Controller
             mkdir($path, 0755, true);
         }
     
-        $filePath = "{$path}/detail_qr_{$dqr->id}.png";
+        $filePath = "{$path}/{$dqr->qr}.png";
     
         try {
             $writer = new \Endroid\QrCode\Writer\PngWriter(); // Ensure this line is present
