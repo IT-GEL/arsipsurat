@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\MSS;
-use App\Models\DQR;
+use App\Models\DetailQr;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+
 
 class DashboardMSSController extends Controller
 {
@@ -159,12 +162,12 @@ class DashboardMSSController extends Controller
         return redirect('/dashboard/mss')->with('success', 'Surat berhasil di edit!');
     }
 
-    public function approveAndGenerateQr(Request $request, MSS $mss)
+    public function approve(Request $request, MSS $mss)
     {
         try {
             $validatedData = $request->validate(['approve' => 'required|string|max:255']);
     
-            // Cek autentikasi pengguna
+            // Check user authentication
             $user = auth()->user();
             if (!$user) {
                 throw new \Exception('User not authenticated.');
@@ -172,51 +175,49 @@ class DashboardMSSController extends Controller
     
             // Update status persetujuan
             $mss->approve = 1;
-            $mss->qr = "QRMSS$mss->id.png"; // Contoh nama file QR
-            $mss->approve_at = now();
+            $mss->qr = "QRMSS{$mss->id}.png"; // Example QR file name
             $mss->save();
     
-            $dqr = DQR::where('nosurat', $mss->prefix)->first();
-
-            if ($dqr) {
-                $dqr->update([
-                    'name' => $user->name,
-                    'NIK' => $user->NIK,
-                    'jabatan' => 'Head MSS',
-                    'approve_at' => now(),
-                    'qr_code_url' => $qrCodeUrl // Simpan QR code URL juga
-                ]);
-            } else {
-                $dqr = DQR::create([
-                    'nosurat' => $mss->prefix,
-                    'name' => $user->name,
-                    'NIK' => $user->NIK,
-                    'jabatan' => $user->Jabatan,
-                    'approve_at' => now(),
-                    'qr_code_url' => $qrCodeUrl // Simpan QR code URL
-                ]);
-            }
-            
-               
-            // Generate QR code URL
-            $qrUrl = route('dqr.show', $user->id); // Ganti dengan rute yang sesuai
-            $qrCode = (new QrCode($qrUrl))
-                ->setSize(300)
-                ->setMargin(10);
-            $qrCodeUrl = 'data:image/png;base64,' . base64_encode($qrCode->writeString());
-    
-            // Simpan URL QR code ke dalam database
-            $dqr->qr_code_url = $qrCodeUrl;
+            // Create an instance of the DetailQr model
+            $dqr = new DetailQr();
+            $dqr->nosurat = $mss->prefix; // Store the prefix
+            $dqr->nama = $user->name;
+            $dqr->NIK = $user->NIK;
+            $dqr->jabatan = $user->Jabatan;
+            $dqr->approve_at = now(); // Use current timestamp
+            // Save the detail_qr record
             $dqr->save();
-    
-            return redirect('/dashboard/mss')->with('success', 'Surat berhasil diapprove dan QR code dihasilkan!');
+
+            // Generate and save the QR code
+            $this->generateQRCode($dqr);
+
+            return redirect('/dashboard/mss')->with('success', 'Surat berhasil diapprove!');
         } catch (\Exception $e) {
             \Log::error($e->getMessage());
             return redirect('/dashboard/mss')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    }
-    
 
+    }
+
+    // Helper method to generate QR code
+    private function generateQRCode(DetailQr $dqr)
+{
+    // Create a QR Code with the detailQr data
+    $qrData = "https://localhost:80/detailQR/{$dqr->id}";
+
+    $qrCode = QrCode::create($qrData)
+        ->setSize(300)
+        ->setMargin(10);
+
+        $path = public_path("img/qrcodes");
+        if (!is_dir($path)) {
+            mkdir($path, 0755, true);
+        }
+        $writer->write($qrCode)->saveToFile("{$path}/detail_qr_{$dqr->id}.png");
+        
+}
+
+    
       
 
 

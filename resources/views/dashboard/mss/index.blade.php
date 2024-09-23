@@ -67,10 +67,11 @@
                             </form>
                             <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
                             @if (auth()->user()->name == "Head MSS")
-                            <form action="{{ route('mss.approveAndGenerateQr', $item->id) }}" method="post" class="d-inline">
+                            <form action="{{ route('mss.approve', $item->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('put')
                                 <input type="hidden" name="approve" value="yes">
+                                
                                 <button class="btn btn-sm {{ $item->approve ? 'btn-success' : 'btn-secondary' }}" 
                                         data-approved="{{ $item->approve }}" 
                                         onclick="{{ $item->approve ? 'return false;' : 'berhasil(this);' }}"
