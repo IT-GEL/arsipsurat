@@ -51,8 +51,7 @@ Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
 
 Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
-Route::get('/qr/{id}', [DetailQrController::class, 'showByQr'])->name('qr.show');
-Route::get('/detail-qr/generate/{id}', [DetailQrController::class, 'generateQr'])->name('detailqr.generate');
+Route::get('/detailQR/{id}', [DetailQrController::class, 'index']);
 
 
 

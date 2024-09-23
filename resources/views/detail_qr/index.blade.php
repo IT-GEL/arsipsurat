@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Arsip Surat | {{ $profiles->name }}</title>
+    <title>Arsip Surat | {{ $detail->name }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta content="arsip, surat, dokumen, QR code" name="keywords">
+    <meta content="Detail surat yang terarsip beserta informasi terkait." name="description">
 
     <!-- Favicon -->
     <link href="{{ asset('img/iconWeb.png') }}" rel="icon">
@@ -34,7 +34,7 @@
         body {
             font-family: 'Open Sans', sans-serif;
             background: linear-gradient(to right, #00c6ff, #ffffff);
-            color:
+            color: #333;
         }
 
         .hero-header {
@@ -59,13 +59,13 @@
         }
 
         .hero-header h1 {
-            font-size: 4rem; /* Perbesar ukuran font untuk elemen h1 */
+            font-size: 4rem;
             margin-bottom: 20px;
             color: #fff;
         }
 
         .hero-header p {
-            font-size: 2.5rem; /* Perbesar ukuran font untuk elemen p */
+            font-size: 2.5rem;
             margin-bottom: 10px;
             color: #fff;
         }
@@ -109,18 +109,18 @@
         <div class="container py-5">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 mb-3 animated slideInDown">Surat {{mss->noSurat}} Signed by,</h1>
+                    <h1 class="display-4 mb-3 animated slideInDown">Surat {{ $detail->noSurat }} Signed by,</h1>
                     <div class="animated slideInDown">
-                        <p>Nama : {{ $profiles->name }}</p>
-                        <p>NIK: {{ $profiles->NIK }}</p>
-                        <p>Jabatan : {{ $profiles->Jabatan }}</p>
-                        <p>Tanggal Approve : {{ $mss->Jabatan }}</p>
+                        <p>Nama: {{ $detail->name }}</p>
+                        <p>NIK: {{ $detail->NIK }}</p>
+                        <p>Jabatan: {{ $detail->Jabatan }}</p>
+                        <p>Tanggal Approve: {{ $detail->tanggal_approve }}</p>
                     </div>
 
                     <button onclick="closeTab()" class="btn btn-primary py-3 px-4 animated slideInDown">Close</button>
                     <script>
                         function closeTab() {
-                            window.close(); // Menutup jendela yang dibuka oleh window.open()
+                            window.close();
                         }
                     </script>
                 </div>
