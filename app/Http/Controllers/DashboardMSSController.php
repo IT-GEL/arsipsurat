@@ -203,8 +203,11 @@ class DashboardMSSController extends Controller
     // Helper method to generate QR code
     private function generateQRCode(DetailQr $dqr)
     {
+
+        $ipAddress = getHostByName(getHostName());
+        $port = 80; // Ganti sesuai port yang Anda gunakan
         // Create a QR Code with the detailQr data
-        $qrData = "https://localhost:80/detailQR/{$dqr->id}";
+        $qrData = "http://{$ipAddress}:{$port}/detailQR/{$dqr->id}";
     
         $qrCode = QrCode::create($qrData)
             ->setSize(300)

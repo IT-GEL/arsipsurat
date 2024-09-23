@@ -293,9 +293,12 @@
                             <td style="padding-left: 45px;">Dibuat</td>
                             <td style="padding-left: 100px;">Mengetahui</td>
                         </tr>
+                        <tr>
+                      <td> <img style="height:50px; weigth:50px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
+                        </tr>
                             <tr>
                             <td>Sales Departement,</td>
-                            <td> <img src="{{ $mss->qr }}" alt="QR Code"></td>
+                        
                             </tr>
                         </table>
                         <br /><br />
@@ -374,7 +377,6 @@
                 </div>
             </div>
 <!-- Recent Sales End -->
-
 @endif
 
 @endsection
