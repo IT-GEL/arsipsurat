@@ -188,16 +188,10 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3">
-                                <input type="checkbox" id="toggleCIF">
-                                <label for="toggleCIF" class="form-label">Price Schemes CIF</label>
-                                <br>
-                                <input type="checkbox" id="toggleFOB">
-                                <label for="toggleFOB" class="form-label">Price Schemes FOB</label>
-                                <br>
-                                <input type="checkbox" id="toggleFREIGHT">
-                                <label for="toggleFREIGHT" class="form-label">Price Schemes FREIGHT</label>
-                            </div>
+                            <button id="toggleCIF" class="toggle-button">Toggle CIF</button>
+                            <button id="toggleFOB" class="toggle-button">Toggle FOB</button>
+                            <button id="toggleFREIGHT" class="toggle-button">Toggle Freight</button>
+
 
                             <div class="fco-field mb-3">
                                 <label for="matauang" class="form-label" >Pilih Mata Uang Price Schemes</label>
@@ -313,6 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const tglSuratInput = document.getElementById('tglSurat');
     const BAClass = document.getElementById('perihalBAClass');
 
+    // Max values for surat numbers
     const maxValues = {
         '1': {{ $maxNoSuratFCO }},
         '2': {{ $maxNoSuratSI }},
@@ -329,6 +324,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateVisibleFields() {
+        // Hide all fields first
+        [suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass].forEach(el => el.style.display = 'none');
+        suratfcoGroups.forEach(group => group.style.display = 'none');
+
         const visibilityMap = {
             '1': () => {
                 suratfcoGroups.forEach(group => group.style.display = 'block');
@@ -342,73 +341,48 @@ document.addEventListener('DOMContentLoaded', function () {
                 alamatClass.style.display = 'block';
             },
             '3': () => {
-                suratfcoGroups.forEach(group => group.style.display = 'none');
                 keteranganField.style.display = 'block';
                 BAClass.style.display = 'block';
             },
-            '4': () => {
-                keteranganField.style.display = 'block';
-            }
-            '5': () => {
-                keteranganField.style.display = 'block';
-            }
+            '4': () => keteranganField.style.display = 'block',
+            '5': () => keteranganField.style.display = 'block'
         };
-
-        // Hide all fields first
-        suratizinGroup.style.display = 'none';
-        keteranganField.style.display = 'none';
-        pttujuanClass.style.display = 'none';
-        alamatClass.style.display = 'none';
-        BAClass.style.display = 'none';
-        suratfcoGroups.forEach(group => group.style.display = 'none');
 
         // Show relevant fields based on selected value
         visibilityMap[perihalSelect.value]?.();
     }
 
-        function toggleField(fieldId) {
+            function toggleField(fieldId) {
             const field = document.getElementById(fieldId + 'Field');
-            const checkbox = document.getElementById('toggle' + fieldId.charAt(0).toUpperCase() + fieldId.slice(1));
-            
-            if (checkbox) {
-                console.log(`Toggling ${fieldId}Field: ${checkbox.checked}`);
-                field.style.display = checkbox.checked ? 'block' : 'none';
-            } else {
-                console.error(`Checkbox with ID toggle${fieldId.charAt(0).toUpperCase() + fieldId.slice(1)} not found.`);
-            }
+            const isVisible = field.style.display === 'block';
+            field.style.display = isVisible ? 'none' : 'block';
         }
 
-        // Event listeners for checkboxes
-        document.getElementById('toggleCIF').addEventListener('change', () => toggleField('cif'));
-        document.getElementById('toggleFOB').addEventListener('change', () => toggleField('fob'));
-        document.getElementById('toggleFREIGHT').addEventListener('change', () => toggleField('freight'));
+        // Event listeners for buttons
+        document.getElementById('toggleCIF').addEventListener('click', () => toggleField('cif'));
+        document.getElementById('toggleFOB').addEventListener('click', () => toggleField('fob'));
+        document.getElementById('toggleFREIGHT').addEventListener('click', () => toggleField('freight'));
+
+
+    // Event listeners for checkboxes
+    ['CIF', 'FOB', 'FREIGHT'].forEach(type => {
+        document.getElementById('toggle' + type).addEventListener('change', () => toggleField(type.toLowerCase()));
+    });
 
     perihalSelect.addEventListener('change', function() {
-    const selectedValue = this.value;
-    const perihalInput = document.getElementById('perihal');
+        const selectedValue = this.value;
+        const perihalInput = document.getElementById('perihal');
 
         // Set perihalInput based on selected value
-        switch (selectedValue) {
-            case '1':
-                perihalInput.value = 'Full Corporate Offer';
-                break;
-            case '2':
-                perihalInput.value = 'Surat Izin Masuk Tambang';
-                break;
-            case '3':
-                perihalInput.value = 'Berita Acara';
-                break;
-            case '4':
-                perihalInput.value = 'Tanda Terima';
-                break;
-            case '5':
-                perihalInput.value = 'Permohonan Revisi Invoice dan Pembatalan FP GEL';
-                break;
-            default:
-                perihalInput.value = '';
-        }
+        const perihalMap = {
+            '1': 'Full Corporate Offer',
+            '2': 'Surat Izin Masuk Tambang',
+            '3': 'Berita Acara',
+            '4': 'Tanda Terima',
+            '5': 'Permohonan Revisi Invoice dan Pembatalan FP GEL'
+        };
+        perihalInput.value = perihalMap[selectedValue] || '';
 
-        // Call other functions if needed
         handleFieldUpdates();
     });
 
@@ -417,30 +391,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const tglSurat = new Date(tglSuratInput.value);
         const romanMonth = toRoman(tglSurat.getMonth() + 1);
         const year = tglSurat.getFullYear();
-        let prefix;
-
-        switch (perihalSelect.value) {
-            case '1':
-                prefix = `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`;
-                break;
-            case '2':
-                prefix = `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`;
-                break;
-            case '3':
-                prefix = `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
-                break;
-            case '4':
-                prefix = `Tanda Terima-${noSurat}/${romanMonth}/${year}`;
-                break;
-            case '5':
-                prefix = `${year}/GEL-PLN/SAL-${noSurat}`;
-                break;
-            default:
-                prefix = '';
-        }
-
-        prefixInput.value = prefix;
-        console.log(`Prefix updated to: ${prefix}`);
+        
+        const prefixMap = {
+            '1': `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`,
+            '2': `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`,
+            '3': `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`,
+            '4': `Tanda Terima-${noSurat}/${romanMonth}/${year}`,
+            '5': `${year}/GEL-PLN/SAL-${noSurat}`
+        };
+        
+        prefixInput.value = prefixMap[perihalSelect.value] || '';
     }
 
     function toRoman(num) {
@@ -454,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updatePrefix();
     }
 
-    // Event listeners
+    // Event listeners for input changes
     [perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
         element.addEventListener('change', handleFieldUpdates);
     });
