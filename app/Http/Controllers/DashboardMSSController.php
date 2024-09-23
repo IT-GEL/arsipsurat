@@ -215,7 +215,7 @@ class DashboardMSSController extends Controller
             mkdir($path, 0755, true);
         }
     
-        $filePath = "{$path}/{$dqr->qr}.png";
+        $filePath = "{$path}/{$dqr->qr}";
     
         try {
             $writer = new \Endroid\QrCode\Writer\PngWriter(); // Ensure this line is present
