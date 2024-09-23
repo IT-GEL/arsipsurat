@@ -17,19 +17,7 @@
                         <a href="/dashboard/mss/{{ $mss->noSurat }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                     </div>
                     <center style="margin-top: 50px;">
-                        <table style="align-content: center">
-                            <tr>
-                            <td><img src="{{ asset('dashmin/img/GEL.png') }}" width="110" height="110" /></td>
-                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 13px">
-                                <center>
-                                <font size="5"><b>GLOBAL ENERGI LESTARI</b> </font><br />
-                                </center>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td colspan="2"><hr style="border: 1px solid" /></td>
-                            </tr>
-                        </table>
+                        <br>
                         <br />
                         <table width="545">
                             <tr>
