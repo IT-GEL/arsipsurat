@@ -4,7 +4,11 @@
 <html lang="en">
   <head>
   <head>
-    <title>FORMULIR KEBUTUHAN BASIS MSS | {{ $mss->perihal }}</title>
+    <title>{{ $mss->perihal }}
+        @if($mss->idPerihal == '3')
+        {{ $mss->perihalBA }}
+        @endif
+    </title>
     <link rel="icon" type="image/png" href="{{ asset('dashmin/img/GEL.png') }}">
     <style>
     /* General Body Styles */
@@ -50,6 +54,7 @@
   <center>
 
   @if ( $mss->idPerihal  == "1")
+  <br><br>
                         <table width="545">
                             <tr>
                                 <td style="text-align: left">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
