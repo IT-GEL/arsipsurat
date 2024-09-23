@@ -201,22 +201,37 @@ class DashboardMSSController extends Controller
 
     // Helper method to generate QR code
     private function generateQRCode(DetailQr $dqr)
-{
-    // Create a QR Code with the detailQr data
-    $qrData = "https://localhost:80/detailQR/{$dqr->id}";
-
-    $qrCode = QrCode::create($qrData)
-        ->setSize(300)
-        ->setMargin(10);
-
+    {
+        // Create a QR Code with the detailQr data
+        $qrData = "https://localhost:80/detailQR/{$dqr->id}";
+    
+        $qrCode = QrCode::create($qrData)
+            ->setSize(300)
+            ->setMargin(10);
+    
         $path = public_path("img/qrcodes");
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
         }
-        $writer->write($qrCode)->saveToFile("{$path}/detail_qr_{$dqr->id}.png");
-        
-}
-
+    
+        $filePath = "{$path}/detail_qr_{$dqr->id}.png";
+    
+        try {
+            $writer = new \Endroid\QrCode\Writer\PngWriter(); // Ensure this line is present
+            $writer->write($qrCode)->saveToFile($filePath);
+    
+            // Check if the file was created successfully
+            if (file_exists($filePath)) {
+                \Log::info("QR code generated successfully at: {$filePath}");
+            } else {
+                \Log::error("Failed to generate QR code at: {$filePath}");
+            }
+        } catch (\Exception $e) {
+            \Log::error("Error generating QR code: " . $e->getMessage());
+        }
+    }
+    
+    
     
       
 
