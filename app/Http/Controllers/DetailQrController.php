@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailQr;
 use Illuminate\Http\Request;
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\Writer\PngWriter; // Import the writer
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage; // Import Storage facade
 
 class DetailQrController extends Controller
 {
@@ -17,6 +14,7 @@ class DetailQrController extends Controller
         $detail = DetailQr::find($id);
 
         if (!$detail) {
+            Log::error("Detail not found for ID: {$id}");
             return redirect()->back()->with('error', 'Data tidak ditemukan!');
         }
 
