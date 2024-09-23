@@ -8,6 +8,8 @@
                     <h6 class="mb-4">Buat Surat Keterangan Marketing Sales Shipping</h6>
                     <form method="post" action="/dashboard/mss">
                         @csrf
+
+                        <input type="hidden" id="approve" name="approve" value="0">
                         
                         <div class="mb-3">
                             <label for="kop" class="form-label">Pilih PT</label>
@@ -29,6 +31,7 @@
                                 <option value="2">Surat Izin Masuk Tambang</option>
                                 <option value="3">Berita Acara</option>
                                 <option value="4">Tanda Terima</option>
+                                <option value="5">Permohonan Revisi Invoice dan Pembatalan FP GEL</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             @error('idPerihal')
@@ -39,11 +42,11 @@
                         <div class="mb-3" id="perihalBAClass" style="display: none;">
                             <label for="perihalBA" class="form-label" >Perihal Berita Acara</label>
                             <select class="form-select @error('perihalBA') is-invalid @enderror" id="perihalBA" name="perihalBA">
-                                <option value="" disabled selected>Pilih Peruntukan Surat</option>
+                                <option value="" disabled selected>Pilih Berita Acara</option>
                                 <option value="Surveyor">Berita Acara Surveyor</option>
                                 <option value="Pembatalan PVR">Berita Acara Pembatalan PVR</option>
-                                <option value="Pembatalan Keterlambatan Pengajuan PVR">Berita Acara Keterlambatan Pengajuan PVR</option>
-                                <option value="Permohonan Revisi Invoice dan Pembatalan FP GEL">Permohonan Revisi Invoice dan Pembatalan FP GEL</option>
+                                <option value="Keterlambatan Pengajuan PVR">Berita Acara Keterlambatan Pengajuan PVR</option>
+                                <option value="Kegiatan Cleaning Batubara">Berita Acara Kegiatan Cleaning Batubara</option>
                             </select>
                             @error('perihalBA')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -186,56 +189,39 @@
                             </div>
 
                             <div class="fco-field mb-3">
-                                <input type="checkbox" id="toggleCIF" onclick="toggleField('cif')">
+                                <input type="checkbox" id="toggleCIF">
                                 <label for="toggleCIF" class="form-label">Price Schemes CIF</label>
                                 <br>
-                                <input type="checkbox" id="toggleFOB" onclick="toggleField('fob')">
+                                <input type="checkbox" id="toggleFOB">
                                 <label for="toggleFOB" class="form-label">Price Schemes FOB</label>
                                 <br>
-                                <input type="checkbox" id="toggleFREIGHT" onclick="toggleField('freight')">
+                                <input type="checkbox" id="toggleFREIGHT">
                                 <label for="toggleFREIGHT" class="form-label">Price Schemes FREIGHT</label>
+                            </div>
+
+                            <div class="fco-field mb-3">
+                                <label for="matauang" class="form-label" >Pilih Mata Uang Price Schemes</label>
+                                <select class="form-select @error('matauang') is-invalid @enderror" id="matauang" name="matauang">
+                                    <option value="" disabled selected>Pilih Mata Uang</option>
+                                    <option value="IDR">Rupiah</option>
+                                    <option value="DOLLAR">Dollar</option>
+                                </select>
                             </div>
 
                             <div class="mb-3 price-scheme-fields" id="cifField" style="display: none;">
                                 <label for="cif" class="form-label">Price Scheme (CIF)</label>
-                                <input type="number" class="form-control @error('cif') is-invalid @enderror" placeholder="CIF..." id="cif" name="cif" value="{{ old('cif') }}">
-                                @error('cif')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div> 
-                                @enderror
+                                <input type="number" class="form-control" placeholder="CIF..." id="cif" name="cif">
                             </div>
 
                             <div class="mb-3 price-scheme-fields" id="fobField" style="display: none;">
                                 <label for="fob" class="form-label">Price Scheme (FOB)</label>
-                                <input type="number" class="form-control @error('fob') is-invalid @enderror" placeholder="FOB..." id="fob" name="fob" value="{{ old('fob') }}">
-                                @error('fob')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div> 
-                                @enderror
+                                <input type="number" class="form-control" placeholder="FOB..." id="fob" name="fob">
                             </div>
 
                             <div class="mb-3 price-scheme-fields" id="freightField" style="display: none;">
                                 <label for="freight" class="form-label">Price Scheme (FREIGHT)</label>
-                                <input type="number" class="form-control @error('freight') is-invalid @enderror" placeholder="FREIGHT..." id="freight" name="freight" value="{{ old('freight') }}">
-                                @error('freight')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div> 
-                                @enderror
-                            </div>
-
-                            <script>
-                            function toggleField(fieldId) {
-                                const field = document.getElementById(fieldId + 'Field');
-                                const checkbox = document.getElementById('toggle' + fieldId.charAt(0).toUpperCase() + fieldId.slice(1));
-                                field.style.display = checkbox.checked ? 'block' : 'none';
-                            }
-                            </script>
-
-
-
+                                <input type="number" class="form-control" placeholder="FREIGHT..." id="freight" name="freight">
+                            </div>      
 
                             <div class="fco-field mb-3" style="display: none;">
                                 <label for="shipschedule" class="form-label">Shipping Schedule</label>
@@ -304,6 +290,7 @@
                                 </div>
                             @enderror
                         </div>
+                        
 
 
                         
@@ -331,6 +318,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '2': {{ $maxNoSuratSI }},
         '3': {{ $maxNoSuratBA }},
         '4': {{ $maxNoSuratTT }},
+        '5': {{ $maxNoSuratRIPFP }},
     };
 
     const PADDING_LENGTH = 3;
@@ -361,6 +349,9 @@ document.addEventListener('DOMContentLoaded', function () {
             '4': () => {
                 keteranganField.style.display = 'block';
             }
+            '5': () => {
+                keteranganField.style.display = 'block';
+            }
         };
 
         // Hide all fields first
@@ -374,6 +365,23 @@ document.addEventListener('DOMContentLoaded', function () {
         // Show relevant fields based on selected value
         visibilityMap[perihalSelect.value]?.();
     }
+
+        function toggleField(fieldId) {
+            const field = document.getElementById(fieldId + 'Field');
+            const checkbox = document.getElementById('toggle' + fieldId.charAt(0).toUpperCase() + fieldId.slice(1));
+            
+            if (checkbox) {
+                console.log(`Toggling ${fieldId}Field: ${checkbox.checked}`);
+                field.style.display = checkbox.checked ? 'block' : 'none';
+            } else {
+                console.error(`Checkbox with ID toggle${fieldId.charAt(0).toUpperCase() + fieldId.slice(1)} not found.`);
+            }
+        }
+
+        // Event listeners for checkboxes
+        document.getElementById('toggleCIF').addEventListener('change', () => toggleField('cif'));
+        document.getElementById('toggleFOB').addEventListener('change', () => toggleField('fob'));
+        document.getElementById('toggleFREIGHT').addEventListener('change', () => toggleField('freight'));
 
     perihalSelect.addEventListener('change', function() {
     const selectedValue = this.value;
@@ -392,6 +400,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 break;
             case '4':
                 perihalInput.value = 'Tanda Terima';
+                break;
+            case '5':
+                perihalInput.value = 'Permohonan Revisi Invoice dan Pembatalan FP GEL';
                 break;
             default:
                 perihalInput.value = '';
@@ -420,6 +431,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 break;
             case '4':
                 prefix = `Tanda Terima-${noSurat}/${romanMonth}/${year}`;
+                break;
+            case '5':
+                prefix = `${year}/GEL-PLN/SAL-${noSurat}`;
                 break;
             default:
                 prefix = '';

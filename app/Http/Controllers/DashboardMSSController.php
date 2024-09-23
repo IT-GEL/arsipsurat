@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MSS;
-use App\Models\DetailQr;
+use App\Models\DQR;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
@@ -44,6 +44,7 @@ class DashboardMSSController extends Controller
         $maxNoSuratSI = MSS::where('idPerihal', '2')->max('noSurat') ?? 0;
         $maxNoSuratBA = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
         $maxNoSuratTT = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
+        $maxNoSuratRIPFP = MSS::where('idPerihal', '5')->max('noSurat') ?? 0;
 
        return view('dashboard.mss.create', [
             'title' => 'MSS',
@@ -52,6 +53,7 @@ class DashboardMSSController extends Controller
             'maxNoSuratSI' => $maxNoSuratSI,
             'maxNoSuratBA' => $maxNoSuratBA,
             'maxNoSuratTT' => $maxNoSuratTT,
+            'maxNoSuratRIPFP' => $maxNoSuratRIPFP,
         ]);
     }
 
@@ -157,44 +159,65 @@ class DashboardMSSController extends Controller
         return redirect('/dashboard/mss')->with('success', 'Surat berhasil di edit!');
     }
 
-    public function approve(Request $request, MSS $mss)
+    public function approveAndGenerateQr(Request $request, MSS $mss)
     {
-    try {
-        $validatedData = $request->validate(['approve' => 'required|string|max:255']);
+        try {
+            $validatedData = $request->validate(['approve' => 'required|string|max:255']);
+    
+            // Cek autentikasi pengguna
+            $user = auth()->user();
+            if (!$user) {
+                throw new \Exception('User not authenticated.');
+            }
+    
+            // Update status persetujuan
+            $mss->approve = 1;
+            $mss->qr = "QRMSS$mss->id.png"; // Contoh nama file QR
+            $mss->approve_at = now();
+            $mss->save();
+    
+            $dqr = DQR::where('nosurat', $mss->prefix)->first();
 
-     
-        // Get user information
-        $user = Auth::user();
-        if (!$user) {
-            throw new \Exception('User not authenticated.');
+            if ($dqr) {
+                $dqr->update([
+                    'name' => $user->name,
+                    'NIK' => $user->NIK,
+                    'jabatan' => 'Head MSS',
+                    'approve_at' => now(),
+                    'qr_code_url' => $qrCodeUrl // Simpan QR code URL juga
+                ]);
+            } else {
+                $dqr = DQR::create([
+                    'nosurat' => $mss->prefix,
+                    'name' => $user->name,
+                    'NIK' => $user->NIK,
+                    'jabatan' => $user->Jabatan,
+                    'approve_at' => now(),
+                    'qr_code_url' => $qrCodeUrl // Simpan QR code URL
+                ]);
+            }
+            
+               
+            // Generate QR code URL
+            $qrUrl = route('dqr.show', $user->id); // Ganti dengan rute yang sesuai
+            $qrCode = (new QrCode($qrUrl))
+                ->setSize(300)
+                ->setMargin(10);
+            $qrCodeUrl = 'data:image/png;base64,' . base64_encode($qrCode->writeString());
+    
+            // Simpan URL QR code ke dalam database
+            $dqr->qr_code_url = $qrCodeUrl;
+            $dqr->save();
+    
+            return redirect('/dashboard/mss')->with('success', 'Surat berhasil diapprove dan QR code dihasilkan!');
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            return redirect('/dashboard/mss')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        // Prepare the QR string with user details
-        $qrString = "{$user->name} | {$user->NIK} | {$user->Jabatan}";
-        
-        // Update the approve and qr field from m_s_s table
-        $mss->approve = 1;
-        $mss->qr=$qrString;
-        
-        // Save the MSS record
-        $mss->save();
-
-        // Create an instance of the DetailQr model
-        $detailQr = new DetailQr();
-        $detailQr->nosurat = $mss->prefix; // Assuming you want to store the prefix
-        $detailQr->nama = $user->name;
-        $detailQr->NIK = $user->NIK;
-        $detailQr->jabatan = $user->Jabatan;
-        $detailQr->approve_at = now(); // Use current timestamp
-        //Save the detail_qr record
-        $detailQr->save();
-
-        return redirect('/dashboard/mss')->with('success', 'Surat berhasil diapprove!');
-    } catch (\Exception $e) {
-        \Log::error($e->getMessage());
-        return redirect('/dashboard/mss')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
-}
+    
+
+      
 
 
     public function destroy(MSS $mss)

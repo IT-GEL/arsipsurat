@@ -307,6 +307,7 @@
                         </tr>
                             <tr>
                             <td>Sales Departement,</td>
+                            <td> <img src="{{ $mss->qr }}" alt="QR Code"></td>
                             </tr>
                         </table>
                         <br /><br />

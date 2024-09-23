@@ -38,6 +38,7 @@
                         <th scope="col">No Surat</th>
                         <th scope="col">Perihal Surat</th>
                         <th scope="col">Tanggal Surat</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -48,6 +49,15 @@
                         <td>{{ $item->perihal }} {{ $item->perihalBA }}</td>
                         <td>{{ date('d M Y', strtotime($item->tglSurat)) }}</td>
                         <td>
+                            @if($item->approve == '1')
+                            <i class="bi bi-check2-square"> Approved </i>
+                            @elseif($item->approve == '2')
+                            <i class="bi bi-x-circle"></i> Not Approved </i>
+                            @elseif($item->approve == '0')
+                            <i class="bi bi-question-circle"></i> Waiting for Approval </i>
+                            @endif
+                        </td>
+                        <td>
                             <a class="btn btn-sm btn-primary" href="/dashboard/mss/{{ $item->id }}"><i class="bi bi-info-square"></i></a>
                             <a class="btn btn-sm btn-warning" href="/dashboard/mss/{{ $item->id }}/edit"><i class="bi bi-pencil-square"></i></a>
                             <form action="/dashboard/mss/{{ $item->id }}" method="post" class="d-inline delete-form">
@@ -56,12 +66,11 @@
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
                             <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
-                            
-                            <form action="{{ route('mss.approve', $item->id) }}" method="post" class="d-inline">
+                            @if (auth()->user()->name == "Head MSS")
+                            <form action="{{ route('mss.approveAndGenerateQr', $item->id) }}" method="post" class="d-inline">
+                                @csrf
                                 @method('put')
-                                @csrf 
                                 <input type="hidden" name="approve" value="yes">
-                                <input type="hidden" name="qr" value="">
                                 <button class="btn btn-sm {{ $item->approve ? 'btn-success' : 'btn-secondary' }}" 
                                         data-approved="{{ $item->approve }}" 
                                         onclick="{{ $item->approve ? 'return false;' : 'berhasil(this);' }}"
@@ -69,6 +78,8 @@
                                     <i class="bi bi-check2-square"></i>
                                 </button>
                             </form>
+                            @endif
+
                         </td>
 
                     </tr>

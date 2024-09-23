@@ -10,23 +10,11 @@ use App\Http\Controllers\DashboardITController;
 use App\Http\Controllers\DashboardGAController;
 use App\Http\Controllers\DashboardMSSController;
 use App\Http\Controllers\DashboardTNCController;
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\DQRController; // Pastikan DQRController ada
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/profile/{id}', [ProfileController::class, 'index']);
+Route::get('/profile/{id}', [DQRController::class, 'index']);
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
@@ -40,16 +28,14 @@ Route::controller(RegisterController::class)->group(function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-// Route::get('/dashboard/cetak_pdf', [DashboardController::class, 'cetak_pdf'])->middleware('auth');
 
 Route::get('/dashboard/it/{it:id}/cetak', [DashboardITController::class, 'cetak'])->middleware('auth');
 Route::get('/dashboard/ga/{ga:id}/cetak', [DashboardGAController::class, 'cetak'])->middleware('auth');
 Route::get('/dashboard/mss/{mss:id}/cetak', [DashboardMSSController::class, 'cetak'])->middleware('auth');
+
 Route::resource('/dashboard/it', DashboardITController::class)->middleware('auth');
 Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth');
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
 
-Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
-
-
-//Route::get('/dashboard/it/cetak_pdf', [DashboardITController::class, 'cetak_pdf'])->middleware('auth');
+// Rute untuk approve dan generate QR
+Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approveAndGenerateQr'])->name('mss.approveAndGenerateQr');

@@ -19,15 +19,15 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle {{ Request::is('it') || Request::is('ga') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>List Surat</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                        @if (auth()->user()->name == "IT Support")
+                        @if (auth()->user()->name == "IT Support" || auth()->user()->name == "superadmin")
                             <a href="/dashboard/it" class="dropdown-item {{ Request::is('dashboard/it*') ? 'active' : '' }}">
                                 <i class="bi bi-window"></i> {{ auth()->user()->name }}
                             </a>
                         @endif
-                        @if (auth()->user()->name == "General Affair")
+                        @if (auth()->user()->name == "General Affair" || auth()->user()->name == "superadmin")
                             <a href="/dashboard/ga" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-window"></i> {{ auth()->user()->name }}</a>
                         @endif
-                        @if (auth()->user()->name == "Marketing Sales Shipping")
+                        @if (auth()->user()->name == "Marketing Sales Shipping" || auth()->user()->name == "superadmin" || auth()->user()->name == "Head MSS")
                             <a href="/dashboard/mss" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-window"></i> {{ auth()->user()->name }}</a>
                         @endif
                         </div>

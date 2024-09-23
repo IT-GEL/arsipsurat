@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PR; // Tambahkan Model Profile
+use App\Models\DQR; // Tambahkan Model Profile
 
-class ProfileController extends Controller
+class DQRController extends Controller
 {
     public function index($id)
     {
         // Ambil semua data dari tabel profile
-        $profiles = PR::find($id);
+        $detailQR = DQR::find($id);
 
-        return view('profile.index', [
+        return view('dqr.index', [
             'title' => 'Profile',
-            'profiles' => $profiles, // Kirim data ke view
+            'dqr' => $dqr, // Kirim data ke view
             
         ]);
     }

@@ -4,39 +4,7 @@
 
 @php
     $userName = auth()->user()->name ?? '';
-    $date = null;
-    $formattedDate = '';
-    $total = 'N/A';
-    $records = [];
-    $romanMonth = '';
 
-    switch ($userName) {
-        case "IT Support":
-            $date = $its->first()->tglSurat ?? null;
-            $total = $totalIT ?? 'N/A';
-            $records = $its ?? [];
-            break;
-        case "General Affair":
-            $date = $ga->first()->tglSurat ?? null;
-            $total = $totalGA ?? 'N/A';
-            $records = $ga ?? [];
-            break;
-        case "Marketing Sales Shipping":
-            $date = $mss->first()->tglSurat ?? null;
-            $total = $totalMSS ?? 'N/A';
-            $records = $mss ?? [];
-            break;
-        default:
-            $total = 'N/A';
-            $records = [];
-            break;
-    }
-
-    if ($date) {
-        $monthNumber = \Carbon\Carbon::parse($date)->month;
-        $romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
-        $formattedDate = formatDateIndonesian($date); // Ensure this function is defined and available
-    }
 @endphp
 
 <!-- Sale & Revenue Start -->
@@ -48,7 +16,7 @@
                 <i class="fa fa-chart-line fa-3x text-primary"></i>
                 <div class="ms-3">
                     <p class="mb-2">Total Surat IT</p>
-                    <h6 class="mb-0">{{ $total }}</h6>
+                    <h6 class="mb-0">{{ $totalIT }}</h6>
                 </div>
             </div>
         </div>
@@ -60,7 +28,7 @@
                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
                 <div class="ms-3">
                     <p class="mb-2">Total Surat Keterangan GA</p>
-                    <h6 class="mb-0">{{ $total }}</h6>
+                    <h6 class="mb-0">{{ $totalGA }}</h6>
                 </div>
             </div>
         </div>
@@ -72,7 +40,7 @@
                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
                 <div class="ms-3">
                     <p class="mb-2">Total Surat Keterangan MSS</p>
-                    <h6 class="mb-0">{{ $total }}</h6>
+                    <h6 class="mb-0">{{ $totalMSS }}</h6>
                 </div>
             </div>
         </div>
@@ -100,12 +68,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($records as $record)
+                    @forelse ($its as $it)
                     <tr>
-                        <td>ITS/{{ $record->noSurat }}/GELJKT/{{ $romanMonth }}/2024</td>
-                        <td>{{ $record->perihal }}</td>
-                        <td>{{ $record->nama }}</td>
-                        <td>{{ date('d M Y', strtotime($record->tglSurat)) }}</td>
+                        <td>{{ $it->prefix }}</td>
+                        <td>{{ $it->perihal }}</td>
+                        <td>{{ $it->nama }}</td>
+                        <td>{{ date('d M Y', strtotime($it->tglSurat)) }}</td>
                     </tr>
                     @empty
                     <tr>
@@ -138,11 +106,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($records as $record)
+                    @forelse ($gas as $ga)
                     <tr>
-                        <td>{{ $record->noSurat }}</td>
-                        <td>{{ $record->nama }}</td>
-                        <td>{{ date('d M Y', strtotime($record->tglSurat)) }}</td>
+                        <td>{{ $ga->noSurat }}</td>
+                        <td>{{ $ga->nama }}</td>
+                        <td>{{ date('d M Y', strtotime($ga->tglSurat)) }}</td>
                     </tr>
                     @empty
                     <tr>
@@ -175,11 +143,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($records as $record)
+                    @forelse ($mss as $mss)
                     <tr>
-                        <td style="font-weight:bold;">Ref. No:MSS/GEL/BA-{{ $record->noSurat }}/{{ $romanMonth }}/2024</td>
-                        <td>{{ $record->perihal }}</td>
-                        <td>{{ date('d M Y', strtotime($record->tglSurat)) }}</td>
+                        <td style="font-weight:bold;">{{ $mss->prefix }}</td>
+                        <td>{{ $mss->perihal }}</td>
+                        <td>{{ date('d M Y', strtotime($mss->tglSurat)) }}</td>
                     </tr>
                     @empty
                     <tr>
