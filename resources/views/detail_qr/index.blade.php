@@ -109,8 +109,8 @@
 <div class="container-fluid hero-header py-5">
     <div class="container py-5">
         <div class="row g-5 align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 mb-4 animated slideInDown">Surat {{ $detail->nosurat }} Signed by,</h1>
+            <div class="col-lg-12">
+                <h1 class="display-4 mb-4 animated slideInDown">Surat {{ $detail->nosurat }} <br>Signed by,</h1>
                 <div class="animated slideInDown">
                     <p>Nama: {{ $detail->nama }}</p>
                     <p>NIK: {{ $detail->NIK }}</p>
