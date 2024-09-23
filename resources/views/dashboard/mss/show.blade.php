@@ -7,6 +7,8 @@
             <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4" 
                 style="
+                        padding-top: 10;
+                        height: 120vh; /* Ensures the body takes the full height */
                         background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
                         background-size: contain; /* Adjusts the image to fit within the body without stretching */
                         background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -14,11 +16,12 @@
                 ">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                        <a href="/dashboard/mss/{{ $mss->noSurat }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                        <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                     </div>
                     <center style="margin-top: 50px;">
                         <br>
                         <br />
+                        <br>
                         <table width="545">
                             <tr>
                                 <td style="text-align: left">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
@@ -147,6 +150,76 @@
                             <td width="200">Surveyor</td>
                             <td width="10">:</td>
                             <td width="335">{{ $mss->surveyor }}</td>
+                            </tr>
+                        </table>
+                        <br><br><br><br><br>
+                    </center>
+                </div>
+            </div>
+<!-- Page ke 2-->
+            <div class="container-fluid pt-4 px-4">
+            <div class="bg-light text-center rounded p-4" 
+                style="
+                        padding-top: 10;
+                        height: 120vh; /* Ensures the body takes the full height */
+                        background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
+                        background-size: contain; /* Adjusts the image to fit within the body without stretching */
+                        background-repeat: no-repeat; /* Prevents the image from repeating */
+                        background-position: center; /* Centers the image */    
+                ">
+                    <center style="margin-top: 50px;">
+                        <br>
+                        <br>
+                        <br />
+                        <br>
+                    
+                        <table width="545">
+                            <td width="20">13. </td>
+                            <td width="200">Quality and Specification</td>
+                            <td width="10">:</td>
+                            <td width="335">{!! $mss->keterangan !!}</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <td width="20">14. </td>
+                            <td width="200">Term of Payment</td>
+                            <td width="10">:</td>
+                            <td width="335">{{ $mss->top }}</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table width="545">
+                            <tr>
+                            <td>We look forward to receiving your favorable reply. Thank you for your attention and corporation.</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <br>
+                        <br>
+                        <table width="545" style="font-weight:bold;">
+                            <tr>
+                            <td>On Behalf,</td>
+                            </tr>
+                            <tr>
+                            <td>PT. GLOBAL ENERGI LESTARI</td>
+                            </tr>
+                        </table>
+                        
+                        <br><br>
+                        @if($mss->approve == '1')
+                        <table width="545" style="font-weight:bold;">
+                            <tr>
+                            <td><img style="height:50px; weigth:50px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
+                            </tr>
+                        </table>
+                        @endif
+                        <br><br><br>
+                        <table width="545" style="font-weight:bold;">
+                            <tr>
+                            <td>Ervina W</td>
+                            </tr>
+                            <tr>
+                            <td>MSS Ops Mgr</td>
                             </tr>
                         </table>
                         <br><br><br><br><br>
@@ -293,13 +366,15 @@
                             <td style="padding-left: 45px;">Dibuat</td>
                             <td style="padding-left: 100px;">Mengetahui</td>
                         </tr>
-                        <tr>
-                      <td> <img style="height:50px; weigth:50px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
-                        </tr>
                             <tr>
                             <td>Sales Departement,</td>
                         
                             </tr>
+                        @if($mss->approve == '1')
+                        <tr>
+                      <td> <img style="height:50px; weigth:50px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
+                        </tr>
+                        @endif
                         </table>
                         <br /><br />
                         <br>
