@@ -342,6 +342,9 @@
                             <tr>
                             <td>Sales Departement,</td>
                             </tr>
+                            <tr>
+                      <td> <img style="height:50px; weigth:50px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
+                        </tr>
                         </table>
                         <br /><br />
                         <br>
