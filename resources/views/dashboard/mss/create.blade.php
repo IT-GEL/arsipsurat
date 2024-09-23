@@ -16,7 +16,8 @@
                             <select class="form-select @error('kop') is-invalid @enderror" id="kop" name="kop" required autofocus>
                                 <option value="" disabled selected>Pilih PT</option>
                                 <option value="GEL">GEL</option>
-                                <option value="GSM">GSM</option>
+                                <option value="QIN">QIN</option>
+                                <option value="ERA">ERA</option>
                             </select>
                             @error('kop')
                                 <div class="invalid-feedback">{{ $message }}</div>
