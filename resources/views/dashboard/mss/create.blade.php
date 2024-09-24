@@ -190,13 +190,6 @@
                             </div>
 
                             <div class="fco-field mb-3">
-                            <button id="toggleCIF" class="toggle-button "><i class="bi bi-toggle-on"></i> CIF</button>
-                            <button id="toggleFOB" class="toggle-button"><i class="bi bi-toggle-on"></i> FOB</button>
-                            <button id="toggleFREIGHT" class="toggle-button"><i class="bi bi-toggle-on"></i> Freight</button>
-
-                            </div>
-
-                            <div class="fco-field mb-3">
                                 <label for="matauang" class="form-label" >Pilih Mata Uang Price Schemes</label>
                                 <select class="form-select @error('matauang') is-invalid @enderror" id="matauang" name="matauang">
                                     <option value="" disabled selected>Pilih Mata Uang</option>
@@ -204,6 +197,15 @@
                                     <option value="DOLLAR">Dollar</option>
                                 </select>
                             </div>
+
+                            <div class="fco-field mb-3">
+                                <label for="toggle" class="form-label" >Price Schemes</label>
+                                <br>
+                                    <button id="toggleCIF" class="toggle-button btn btn-primary">CIF</button>
+                                    <button id="toggleFOB" class="toggle-button btn btn-primary">FOB</button>
+                                    <button id="toggleFREIGHT" class="toggle-button btn btn-primary">Freight</button>
+                            </div>
+
 
                             <div class="mb-3 price-scheme-fields" id="cifField" style="display: none;">
                                 <label for="cif" class="form-label">Price Scheme (CIF)</label>
@@ -219,6 +221,9 @@
                                 <label for="freight" class="form-label">Price Scheme (FREIGHT)</label>
                                 <input type="number" class="form-control" placeholder="FREIGHT..." id="freight" name="freight">
                             </div>      
+
+                            
+
 
                             <div class="fco-field mb-3" style="display: none;">
                                 <label for="shipschedule" class="form-label">Shipping Schedule</label>
@@ -249,6 +254,27 @@
                                     </div> 
                                 @enderror
                             </div>
+
+                            <div class="fco-field mb-3" style="display: none;">
+                                <label for="qas" class="form-label">Quality and Specification</label>
+                                <textarea id="qas" name="qas" class="form-control @error('qas') is-invalid @enderror"></textarea>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            const qas = Jodit.make('#qas');
+                                        });
+                                    </script>
+                            </div>
+
+                            <div class="fco-field mb-3" style="display: none;">
+                                <label for="top" class="form-label">Term of Payment</label>
+                                <input type="text" class="form-control @error('top') is-invalid @enderror" placeholder="Term of Payment..." id="top" name="top" value="{{ old('top') }} ">
+                                    <div class="invalid-feedback">
+                                @error('top')
+                                        {{ $message }}
+                                    </div> 
+                                @enderror
+                            </div>
+
                         </div>
 
                         <div class="mb-3 mt-3">

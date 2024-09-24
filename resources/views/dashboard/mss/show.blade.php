@@ -21,6 +21,12 @@
                     <center style="margin-top: 50px;">
                         <br>
                         <br />
+                        @if ( $mss->kop  == "QIN")
+                        <br /><br /><br />
+                        @endif
+                        @if ( $mss->kop  == "ERA")
+                        <br /><br />
+                        @endif
                         <br>
                         <table width="545">
                             <tr>
@@ -114,21 +120,66 @@
                             <td width="335">{{ $mss->dp }}</td>
                             </tr>
                         </table>
+                        @if($mss->matauang == "DOLLAR")
                         <table width="545">
-                            <td width="20"> 9. </td>
-                            <td width="200">Price Scheme</td>
-                            <td width="10">:</td>
-                            <td width="335">CIF {{ $mss->cif }}</td>
-                        <table width="545">
-                            <td width="200"></td>
-                            <td width="35"></td>
-                            <td width="335">FOB {{ $mss->fob }}</td>
+                            <tr>
+                            @if($mss->cif !== null)
+                                <td width="5"> 9. </td>
+                                <td width="120">Price Scheme</td>
+                                <td width="5">:</td>
+                                <td width="30">CIF</td>
+                                <td width="175"> $ {{ number_format($mss->cif, 0, '.', ',') }} </td>
+                            @endif
+                            </tr>
                         </table>
                         <table width="545">
-                            <td width="200"> </td>
-                            <td width="35"></td>
-                            <td width="335">FREIGHT {{ $mss->freight }}</td>
+                            <tr>
+                            @if($mss->fob !== null)
+                                <td width="150"></td>
+                                <td width="1">FOB</td>
+                                <td width="185">$ {{ number_format($mss->fob, 0, '.', ',') }}
+                            @endif   </td>
+                            </tr>
                         </table>
+                        <table width="545">
+                            <tr>
+                            @if($mss->freight !== null) 
+                                <td width="185"> </td>
+                                <td width="40">FREIGHT</td>
+                                <td width="200">$ {{ number_format($mss->freight, 0, '.', ',') }} 
+                                </td>
+                            @endif  
+                            </tr>
+                        </table>
+                    @endif
+
+                    @if($mss->matauang == "IDR")
+                        <table width="545">
+                            <tr>
+                                <td width="20"> 9. </td>
+                                <td width="200">Price Scheme</td>
+                                <td width="10">:</td>
+                                <td width="335">@if($mss->cif == "0") Rp {{ number_format($mss->cif, 0, ',', '.') }} @endif</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                                <td width="200"></td>
+                                <td width="35"></td>
+                                <td width="335">@if($mss->fob == "0") Rp {{ number_format($mss->fob, 0, ',', '.') }} @endif</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                                <td width="200"> </td>
+                                <td width="35"></td>
+                                <td width="335">@if($mss->freight == "0") Rp {{ number_format($mss->freight, 0, ',', '.') }} @endif</td>
+                            </tr>
+                        </table>
+                    @endif
+
+
+
                             </tr>
                         </table>
                         <table width="545">
@@ -172,15 +223,29 @@
                         <br>
                         <br />
                         <br>
+                        @if ( $mss->kop  == "QIN")
+                        <br /><br /><br /><br />
+                        @endif
+                        @if ( $mss->kop  == "ERA")
+                        <br /><br />
+                        @endif
                     
-                        <table width="545">
+                        <table width="545" >
+                            <tr>
                             <td width="20">13. </td>
                             <td width="200">Quality and Specification</td>
                             <td width="10">:</td>
-                            <td width="335">{!! $mss->keterangan !!}</td>
+                            <td width="335"></td>
+                            </tr>
+                        </table> <br>
+                        <table width="545" >
+                            <tr>
+                            <td width="335" class="table-keterangan">{!! $mss->qas !!}</td>
                             </tr>
                         </table>
+                        <br>
                         <table width="545">
+                            <tr>
                             <td width="20">14. </td>
                             <td width="200">Term of Payment</td>
                             <td width="10">:</td>

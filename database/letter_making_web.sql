@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2024 at 04:54 PM
+-- Generation Time: Sep 24, 2024 at 06:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `detail_qr`
+--
+
+CREATE TABLE `detail_qr` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nosurat` varchar(255) DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `NIK` varchar(255) DEFAULT NULL,
+  `jabatan` varchar(255) DEFAULT NULL,
+  `qr` text DEFAULT NULL,
+  `approve_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `detail_qr`
+--
+
+INSERT INTO `detail_qr` (`id`, `nosurat`, `nama`, `NIK`, `jabatan`, `qr`, `approve_at`, `created_at`, `updated_at`) VALUES
+(4, 'BA-002/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS6.png', '2024-09-23 00:55:51', '2024-09-23 00:55:51', '2024-09-23 00:55:51'),
+(5, 'Ref. No:MSS/GEL/FCO-001/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS5.png', '2024-09-23 01:04:06', '2024-09-23 01:04:06', '2024-09-23 01:04:06'),
+(6, 'BA-001/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS3.png', '2024-09-23 01:11:02', '2024-09-23 01:11:02', '2024-09-23 01:11:02'),
+(7, 'BA-002/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS4.png', '2024-09-23 01:15:30', '2024-09-23 01:15:30', '2024-09-23 01:15:30'),
+(8, 'BA-002/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS4.png', '2024-09-23 07:16:23', '2024-09-23 07:16:23', '2024-09-23 07:16:23'),
+(9, 'Ref. No:MSS/GEL/FCO-001/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS5.png', '2024-09-23 09:32:42', '2024-09-23 09:32:42', '2024-09-23 09:32:42'),
+(10, 'BA-003/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS7.png', '2024-09-23 11:14:04', '2024-09-23 11:14:04', '2024-09-23 11:14:04');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -35,7 +66,7 @@ CREATE TABLE `failed_jobs` (
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -56,7 +87,7 @@ CREATE TABLE `g_a_s` (
   `namaTtd` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `g_a_s`
@@ -85,7 +116,7 @@ CREATE TABLE `i_t_s` (
   `ettd` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `i_t_s`
@@ -107,7 +138,7 @@ CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `migrations`
@@ -118,7 +149,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2014_10_12_000000_create_gas_table', 2),
 (18, '2014_10_12_100000_create_password_resets_table', 2),
 (19, '2019_08_19_000000_create_failed_jobs_table', 2),
-(20, '2019_12_14_000001_create_personal_access_tokens_table', 2);
+(20, '2019_12_14_000001_create_personal_access_tokens_table', 2),
+(21, '2024_09_22_143912_create_detail_qr_table', 3);
 
 -- --------------------------------------------------------
 
@@ -145,32 +177,33 @@ CREATE TABLE `m_s_s` (
   `qty` int(255) DEFAULT NULL,
   `lp` varchar(255) DEFAULT NULL,
   `dp` varchar(255) DEFAULT NULL,
+  `matauang` varchar(255) DEFAULT NULL,
   `cif` int(255) DEFAULT NULL,
   `fob` int(255) DEFAULT NULL,
   `freight` int(255) DEFAULT NULL,
   `shipschedule` date DEFAULT NULL,
   `tcd` varchar(255) DEFAULT NULL,
+  `surveyor` varchar(255) DEFAULT NULL,
+  `qas` text DEFAULT NULL,
+  `top` varchar(255) DEFAULT NULL,
   `tglSurat` date DEFAULT NULL,
   `ttd` varchar(255) DEFAULT NULL,
   `namaTtd` varchar(255) DEFAULT NULL,
   `kop` varchar(255) NOT NULL,
   `qr` varchar(255) DEFAULT NULL,
-  `approve` varchar(255) DEFAULT NULL,
+  `approve` varchar(255) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `m_s_s`
 --
 
-INSERT INTO `m_s_s` (`id`, `noSurat`, `prefix`, `idPerihal`, `perihal`, `perihalBA`, `pttujuan`, `ptkunjungan`, `commodity`, `source`, `alamat`, `keterangan`, `country`, `spec`, `vo`, `qty`, `lp`, `dp`, `cif`, `fob`, `freight`, `shipschedule`, `tcd`, `tglSurat`, `ttd`, `namaTtd`, `kop`, `qr`, `approve`, `created_at`, `updated_at`) VALUES
-(2, '1', 'Ref. No:MSS/GEL/BA-001/IX/2024', 2, 'Surat Izin Masuk Tambang', '', 'GEL', 'GEL', NULL, NULL, '<div>EA</div>', '<div>EA</div>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-18', 'YOGI', 'YOGI', '', '', NULL, '2024-09-18 05:07:50', '2024-09-18 05:07:50'),
-(3, '1', 'BA-001/INV-SALES/IX/2024', 4, 'Berita Acara Pembatalan PVR', '', NULL, NULL, NULL, NULL, NULL, '<table style=\"border-collapse:collapse;width: 100%;\"><tbody><tr>	<td style=\"width: 14.2857%;\">dawdaiowj</td>	<td style=\"width: 14.2857%;\">awdawdawdaw</td>	<td style=\"width: 14.2857%;\">adwas</td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td></tr><tr>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td></tr><tr>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td></tr><tr>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td>	<td style=\"width: 14.2857%;\"><br></td></tr></tbody></table>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-20', 'SKawkkw', 'ygiuhiugy', '', NULL, NULL, '2024-09-19 20:13:46', '2024-09-19 20:13:46'),
-(4, '2', 'BA-002/INV-SALES/IX/2024', 3, 'Berita Acara Surveyor', '', NULL, NULL, NULL, NULL, NULL, '<p>Xdcwtfvsegybhjkl</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-20', 'sefsdsdfe', 'sefsdfse', '', NULL, NULL, '2024-09-19 20:16:24', '2024-09-19 20:16:24'),
-(5, '1', 'Ref. No:MSS/GEL/FCO-001/IX/2024', 1, 'Full Corporate Offer', '', 'PT. INDOCEMENT', NULL, 'INDONESIAN STEAM COAL', 'ERA PERKASA MINING', '<div>ABCD</div>', '<table style=\"border-collapse:collapse;width: 100%;\"><tbody><tr>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td></tr><tr>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td></tr><tr>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td></tr><tr>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td></tr><tr>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td>	<td style=\"width: 25%;\"><br></td></tr></tbody></table>', 'INDONESIA', 'GCV 3300 - 3100', '2024-09-30', 55000, 'JETTY SIP', 'CHINA', 0, 3, -1, '2024-10-20', '50 50', '2024-09-20', 'Zyah', 'Ervina Wijaya', '', NULL, NULL, '2024-09-19 20:47:21', '2024-09-19 20:47:21'),
-(6, '2', 'BA-002/INV-SALES/IX/2024', 3, 'Berita Acara Surveyor', '', NULL, NULL, NULL, NULL, NULL, '<p>awdasd</p><table style=\"border-collapse:collapse;width: 100%;\"><tbody><tr>	<td style=\"width: 20%;\">awdsadwa</td>	<td style=\"width: 20%;\">awdsad</td>	<td style=\"width: 20%;\">awdsad</td>	<td style=\"width: 20%;\">awdsawd</td>	<td style=\"width: 20%;\"><br></td></tr><tr>	<td style=\"width: 20%;\">awd</td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td></tr><tr>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td></tr><tr>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td>	<td style=\"width: 20%;\"><br></td></tr></tbody></table>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-20', 'awdsd', 'wdasdawd', 'GEL', NULL, '1', '2024-09-20 00:22:21', '2024-09-22 04:12:24'),
-(7, '3', 'BA-003/INV-SALES/IX/2024', 3, 'Berita Acara', 'Surveyor', NULL, NULL, NULL, NULL, NULL, '<p>srgawd</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-22', 'awds', 'dwdas', 'GSM', NULL, NULL, '2024-09-22 05:12:36', '2024-09-22 05:12:36');
+INSERT INTO `m_s_s` (`id`, `noSurat`, `prefix`, `idPerihal`, `perihal`, `perihalBA`, `pttujuan`, `ptkunjungan`, `commodity`, `source`, `alamat`, `keterangan`, `country`, `spec`, `vo`, `qty`, `lp`, `dp`, `matauang`, `cif`, `fob`, `freight`, `shipschedule`, `tcd`, `surveyor`, `qas`, `top`, `tglSurat`, `ttd`, `namaTtd`, `kop`, `qr`, `approve`, `created_at`, `updated_at`) VALUES
+(3, '1', 'Ref. No:MSS/GEL/FCO-001/IX/2024', 1, 'Full Corporate Offer', NULL, 'PT Borneo', NULL, 'awd', 'awd', NULL, NULL, 'aw', 'GCV 500 (ARB)', '2024-09-25', 6, 'Jetty Kalsel', 'Jetty PT.BAP', NULL, NULL, NULL, NULL, '2024-09-25', 'CIF', 'ATQ', '<table style=\"border-collapse:collapse;width: 100%;\"><tbody>\r\n<tr>\r\n	<td style=\"width: 16.6667%;\">q2eq2e213</td>\r\n	<td style=\"width: 16.6667%;\">awedawd</td>\r\n	<td style=\"width: 16.6667%;\">adsa</td>\r\n	<td style=\"width: 16.6667%;\">awdawdawd</td>\r\n	<td style=\"width: 16.6667%;\">awdad</td>\r\n	<td style=\"width: 16.6667%;\">dawdawd</td></tr>\r\n<tr>\r\n	<td style=\"width: 16.6667%;\">2qeq2e</td>\r\n	<td style=\"width: 16.6667%;\">awdawd</td>\r\n	<td style=\"width: 16.6667%;\">awdawd</td>\r\n	<td style=\"width: 16.6667%;\">dwaadwawd</td>\r\n	<td style=\"width: 16.6667%;\">dawdaw</td>\r\n	<td style=\"width: 16.6667%;\">awdawd</td></tr>\r\n<tr>\r\n	<td style=\"width: 16.6667%;\">awdawdawd</td>\r\n	<td style=\"width: 16.6667%;\">awdawd</td>\r\n	<td style=\"width: 16.6667%;\">adwawdawd</td>\r\n	<td style=\"width: 16.6667%;\">adwawd</td>\r\n	<td style=\"width: 16.6667%;\">dadwd</td>\r\n	<td style=\"width: 16.6667%;\">dawdwa</td></tr>\r\n<tr>\r\n	<td style=\"width: 16.6667%;\">awdawdwdwadawd</td>\r\n	<td style=\"width: 16.6667%;\">awddawa</td>\r\n	<td style=\"width: 16.6667%;\">dawd</td>\r\n	<td style=\"width: 16.6667%;\">aadwaw</td>\r\n	<td style=\"width: 16.6667%;\">dawdaw</td>\r\n	<td style=\"width: 16.6667%;\">awdawdaw</td></tr></tbody></table>', 'yaaa', '2024-09-24', 'Habib', 'BOBI', 'QIN', NULL, '0', '2024-09-23 21:20:47', '2024-09-23 21:20:47'),
+(4, '2', 'Ref. No:MSS/GEL/FCO-002/IX/2024', 1, 'Full Corporate Offer', NULL, 'PT Borneo', NULL, 'adcsfvacfvcad', 'acdscdc', '<div>&nbsp;oytiruesgerxhdtcyjukilho;jpolivkucjyrxtehzxthcyjuvkbil</div>', NULL, 'acwdsawcdas', 'awcddaw', '2024-09-24', 234, 'Jetty Kalsel', 'Jetty PT.BAP', 'DOLLAR', 23212342, 12343123, NULL, '2024-09-24', 'CIF', 'ATQ', '<p>awdqadawdaw</p><p>awdasdwad</p><p><br></p>', 'yaaa', '2024-09-24', 'asdawd', 'asdaw', 'QIN', NULL, '0', '2024-09-23 23:23:30', '2024-09-23 23:23:30'),
+(5, '3', 'Ref. No:MSS/GEL/FCO-003/IX/2024', 1, 'Full Corporate Offer', NULL, 'PT Borneo', NULL, 'wdsadaw', 'dasdawd', '<div>wdfsfeeeeeeee</div>', NULL, 'awdasdaw', 'awdsad', '2024-09-24', 234, 'asdaw', 'asdwa', 'IDR', NULL, 100000, 1000000, '2024-09-24', 'CIF', 'ATQ', '<p>awdasdwa</p>', 'awdsad', '2024-09-24', 'awdsa', 'awds', 'ERA', NULL, '0', '2024-09-24 09:30:16', '2024-09-24 09:30:16');
 
 -- --------------------------------------------------------
 
@@ -182,7 +215,7 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -201,7 +234,7 @@ CREATE TABLE `personal_access_tokens` (
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -215,7 +248,7 @@ CREATE TABLE `profile` (
   `NIK` varchar(100) NOT NULL,
   `Jabatan` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `profile`
@@ -232,102 +265,117 @@ INSERT INTO `profile` (`id`, `name`, `NIK`, `Jabatan`, `created_at`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `NIK` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `Jabatan` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'IT Support', 'itsupport', 'it@gel.co.id', NULL, '$2y$10$ngS3FsM352rfnOI3WTn7EO2qCzP6MbBxaObCIer7o9QjQ1jPzSX/G', NULL, '2024-09-09 21:40:26', '2024-09-09 21:40:26'),
-(2, 'General Affair', 'generalaffair', 'GeneralAffair@gel.co.id', NULL, '$2y$10$cAqkMkiF8a8jZ4vV.PUfYOjoBfaFvyyC/W33UvLh3Q8kQVXOhbH.a', NULL, '2024-09-09 23:48:15', '2024-09-09 23:48:15'),
-(3, 'Marketing Sales Shipping', 'mss', 'mss@gel.co.id', NULL, '$2y$10$upgXg18l9BtkqaIQj.QKIuwdAlUY6ERaZhh0os2ahErezKMWPKgE.', NULL, '2024-09-11 06:41:30', '2024-09-11 06:41:30'),
-(4, 'Legal', 'legal', 'Legal@Legal.com', NULL, '$2y$10$oDh2U5u75Vxis306RE2KpeP/GaAv3cGB4og4s8iOqQWNxfKCIpewq', NULL, '2024-09-12 00:23:03', '2024-09-12 00:23:03'),
-(5, 'Bank And Leasing', 'bnl', 'Bank@leasing.com', NULL, '$2y$10$W2p5L6q4JKGmw3bhN1Fe4uOOIIjyuXj7vcesiPC51GeXlFnR.R1Nq', NULL, '2024-09-12 00:23:29', '2024-09-12 00:23:29'),
-(6, 'Tax', 'tax', 'tax@tax.com', NULL, '$2y$10$PWGy8AcvPCwh5KCHSXqQxe0acaPJu1HlJcQuZSRryY4FWIH4iCRzO', NULL, '2024-09-12 00:23:55', '2024-09-12 00:23:55'),
-(7, 'Finance AR', 'far', 'far@Far.com', NULL, '$2y$10$NCnCsqXB.ECRqzwAKXY4fepNLqT6xVsOm0bUSci/UYgrnzz.x.P0S', NULL, '2024-09-12 00:24:40', '2024-09-12 00:24:40'),
-(8, 'Global Sinergi Maritim', 'gsm', 'gsm@gsm.com', NULL, '$2y$10$stB5hB2g6U1BSsKEA0IF7.mcYsN5b5twLYX1YhcGnRFgns5p74RYK', NULL, '2024-09-12 00:25:09', '2024-09-12 00:25:09'),
-(9, 'Talent and Culture', 'tnc', 'tnc@tnc.com', NULL, '$2y$10$X4emOgMmOF9Yczs6qNU4IewqsBhZtNu3hiqrF5B9w/JdP6/.VTn2O', NULL, '2024-09-12 00:26:33', '2024-09-12 00:26:33'),
-(10, 'superadmin', 'sudosu', 'super@dmin.com', NULL, '$2y$10$J3an9.fYE1zJERmYU6k.zeo23l506aNPvDb5QgcQ0mTW/fiIx8SpK', NULL, '2024-09-12 01:16:02', '2024-09-12 01:16:02');
+INSERT INTO `users` (`id`, `username`, `NIK`, `name`, `Jabatan`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'itsupport', NULL, 'IT Support', NULL, 'it@gel.co.id', NULL, '$2y$10$ngS3FsM352rfnOI3WTn7EO2qCzP6MbBxaObCIer7o9QjQ1jPzSX/G', NULL, '2024-09-09 21:40:26', '2024-09-09 21:40:26'),
+(2, 'generalaffair', NULL, 'General Affair', NULL, 'GeneralAffair@gel.co.id', NULL, '$2y$10$cAqkMkiF8a8jZ4vV.PUfYOjoBfaFvyyC/W33UvLh3Q8kQVXOhbH.a', NULL, '2024-09-09 23:48:15', '2024-09-09 23:48:15'),
+(3, 'mss', 'NIK001', 'Marketing Sales Shipping', 'MSS', 'mss@gel.co.id', NULL, '$2y$10$upgXg18l9BtkqaIQj.QKIuwdAlUY6ERaZhh0os2ahErezKMWPKgE.', NULL, '2024-09-11 06:41:30', '2024-09-11 06:41:30'),
+(4, 'legal', NULL, 'Legal', NULL, 'Legal@Legal.com', NULL, '$2y$10$oDh2U5u75Vxis306RE2KpeP/GaAv3cGB4og4s8iOqQWNxfKCIpewq', NULL, '2024-09-12 00:23:03', '2024-09-12 00:23:03'),
+(5, 'bnl', NULL, 'Bank And Leasing', NULL, 'Bank@leasing.com', NULL, '$2y$10$W2p5L6q4JKGmw3bhN1Fe4uOOIIjyuXj7vcesiPC51GeXlFnR.R1Nq', NULL, '2024-09-12 00:23:29', '2024-09-12 00:23:29'),
+(6, 'tax', NULL, 'Tax', NULL, 'tax@tax.com', NULL, '$2y$10$PWGy8AcvPCwh5KCHSXqQxe0acaPJu1HlJcQuZSRryY4FWIH4iCRzO', NULL, '2024-09-12 00:23:55', '2024-09-12 00:23:55'),
+(7, 'far', NULL, 'Finance AR', NULL, 'far@Far.com', NULL, '$2y$10$NCnCsqXB.ECRqzwAKXY4fepNLqT6xVsOm0bUSci/UYgrnzz.x.P0S', NULL, '2024-09-12 00:24:40', '2024-09-12 00:24:40'),
+(8, 'gsm', NULL, 'Global Sinergi Maritim', NULL, 'gsm@gsm.com', NULL, '$2y$10$stB5hB2g6U1BSsKEA0IF7.mcYsN5b5twLYX1YhcGnRFgns5p74RYK', NULL, '2024-09-12 00:25:09', '2024-09-12 00:25:09'),
+(9, 'tnc', NULL, 'Talent and Culture', NULL, 'tnc@tnc.com', NULL, '$2y$10$X4emOgMmOF9Yczs6qNU4IewqsBhZtNu3hiqrF5B9w/JdP6/.VTn2O', NULL, '2024-09-12 00:26:33', '2024-09-12 00:26:33'),
+(10, 'sudosu', NULL, 'superadmin', NULL, 'super@dmin.com', NULL, '$2y$10$J3an9.fYE1zJERmYU6k.zeo23l506aNPvDb5QgcQ0mTW/fiIx8SpK', NULL, '2024-09-12 01:16:02', '2024-09-12 01:16:02'),
+(11, 'hmss', NULL, 'Ervina Wijaya', 'Head Departement Shipping and Sales', 'hmss@gmail.com', NULL, '$2y$10$yO1VY8BVNIGsMl934vQrleVmXteQQF/5lnY6vmwnhvXdbzCtmSgvW', NULL, '2024-09-23 00:20:16', '2024-09-23 00:20:16');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `detail_qr`
+--
+ALTER TABLE `detail_qr`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`) USING BTREE;
 
 --
 -- Indexes for table `g_a_s`
 --
 ALTER TABLE `g_a_s`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `domisilis_nosurat_unique` (`noSurat`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `domisilis_nosurat_unique` (`noSurat`) USING BTREE;
 
 --
 -- Indexes for table `i_t_s`
 --
 ALTER TABLE `i_t_s`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `domisilis_nosurat_unique` (`noSurat`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `domisilis_nosurat_unique` (`noSurat`) USING BTREE;
 
 --
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `m_s_s`
 --
 ALTER TABLE `m_s_s`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `prefix` (`prefix`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `prefix` (`prefix`) USING BTREE;
 
 --
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  ADD PRIMARY KEY (`email`);
+  ADD PRIMARY KEY (`email`) USING BTREE;
 
 --
 -- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`) USING BTREE,
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`) USING BTREE;
 
 --
 -- Indexes for table `profile`
 --
 ALTER TABLE `profile`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `NIK` (`NIK`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `NIK` (`NIK`) USING BTREE;
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_username_unique` (`username`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `users_username_unique` (`username`) USING BTREE,
+  ADD UNIQUE KEY `users_email_unique` (`email`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `detail_qr`
+--
+ALTER TABLE `detail_qr`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -351,13 +399,13 @@ ALTER TABLE `i_t_s`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `m_s_s`
 --
 ALTER TABLE `m_s_s`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -375,7 +423,7 @@ ALTER TABLE `profile`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

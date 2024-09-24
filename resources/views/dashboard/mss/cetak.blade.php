@@ -55,6 +55,12 @@
 
   @if ( $mss->idPerihal  == "1")
   <br><br>
+  @if ( $mss->kop  == "QIN")
+                        <br /><br /><br />
+                        @endif
+                        @if ( $mss->kop  == "ERA")
+                        <br /><br />
+                        @endif
                         <table width="545">
                             <tr>
                                 <td style="text-align: left">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
@@ -184,14 +190,27 @@
                         <br>
                         <br>
                         <br>
+                        @if ( $mss->kop  == "QIN")
+                        <br /><br /><br /><br>
+                        @endif
+                        @if ( $mss->kop  == "ERA")
+                        <br /><br /><br /><br />
+                        @endif
 
-                        <table width="545">
+                        <table width="545" >
+                            <tr>
                             <td width="20">13. </td>
                             <td width="200">Quality and Specification</td>
                             <td width="10">:</td>
-                            <td width="335">{!! $mss->keterangan !!}</td>
+                            <td width="335"></td>
+                            </tr>
+                        </table> <br>
+                        <table width="545" >
+                            <tr>
+                            <td width="335" class="table-keterangan">{!! $mss->qas !!}</td>
                             </tr>
                         </table>
+                        <br>
                         <table width="545">
                             <td width="20">14. </td>
                             <td width="200">Term of Payment</td>

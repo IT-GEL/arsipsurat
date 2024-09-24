@@ -27,7 +27,7 @@
                         @if (auth()->user()->name == "General Affair" || auth()->user()->name == "superadmin")
                             <a href="/dashboard/ga" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-window"></i> {{ auth()->user()->name }}</a>
                         @endif
-                        @if (auth()->user()->name == "Marketing Sales Shipping" || auth()->user()->name == "superadmin" || auth()->user()->name == "Head MSS")
+                        @if (auth()->user()->name == "Marketing Sales Shipping" || auth()->user()->name == "superadmin" || auth()->user()->name == "Ervina Wijaya")
                             <a href="/dashboard/mss" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-window"></i> {{ auth()->user()->name }}</a>
                         @endif
                         </div>
