@@ -48,6 +48,7 @@ class DashboardMSSController extends Controller
         $maxNoSuratBA = MSS::where('idPerihal', '3')->max('noSurat') ?? 0;
         $maxNoSuratTT = MSS::where('idPerihal', '4')->max('noSurat') ?? 0;
         $maxNoSuratRIPFP = MSS::where('idPerihal', '5')->max('noSurat') ?? 0;
+        $maxNoSuratLOI = MSS::where('idPerihal', '6')->max('noSurat') ?? 0;
 
        return view('dashboard.mss.create', [
             'title' => 'MSS',
@@ -57,6 +58,7 @@ class DashboardMSSController extends Controller
             'maxNoSuratBA' => $maxNoSuratBA,
             'maxNoSuratTT' => $maxNoSuratTT,
             'maxNoSuratRIPFP' => $maxNoSuratRIPFP,
+            'maxNoSuratLOI' => $maxNoSuratLOI,
         ]);
     }
 
@@ -92,6 +94,10 @@ class DashboardMSSController extends Controller
             'surveyor' => 'nullable|string|max:255',
             'qas' => 'nullable|string|max:9999',
             'top' => 'nullable|string|max:255',
+            'delivery_basis' => 'nullable|string|max:255',
+            'contract_dur' => 'nullable|string|max:255',
+            'po' => 'nullable|string|max:255',
+
             'tglSurat' => 'nullable|date',
             'ettd' => 'nullable|string|max:255',
             'ttd' => 'nullable|string|max:255',

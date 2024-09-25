@@ -18,6 +18,7 @@
                                 <option value="GEL">GEL</option>
                                 <option value="QIN">QIN</option>
                                 <option value="ERA">ERA</option>
+                                <option value="GCR">GCR</option>
                             </select>
                             @error('kop')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -33,6 +34,7 @@
                                 <option value="3">Berita Acara</option>
                                 <option value="4">Tanda Terima</option>
                                 <option value="5">Permohonan Revisi Invoice dan Pembatalan FP GEL</option>
+                                <option value="6">Letter of Intent</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             @error('idPerihal')
@@ -109,7 +111,7 @@
                         </div>
  
                         <div id="surat-fco">
-                            <div class="fco-field mb-3" style="display: none;">
+                            <div class="fco-field mb-3" style="display: none;" id="commodity">
                                 <label for="commodity" class="form-label">Commodity</label>
                                 <input type="text" class="form-control @error('commodity') is-invalid @enderror" placeholder="Commodity..." id="commodity" name="commodity" value="{{ old('commodity') }}">
                                 @error('commodity')
@@ -129,7 +131,7 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;">
+                            <div class="fco-field mb-3" style="display: none;" id="country">
                                 <label for="country" class="form-label">Country of Origin</label>
                                 <input type="text" class="form-control @error('country') is-invalid @enderror" placeholder="Country..." id="country" name="country" value="{{ old('country') }}">
                                 @error('country')
@@ -139,8 +141,10 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;">
-                                <label for="spec" class="form-label">Typical Specification</label>
+                            <div class="fco-field mb-3" style="display: none;" id="spec">
+                                <label for="spec" class="form-label">
+                                    Typical Specification
+                                </label>
                                 <input type="text" class="form-control @error('spec') is-invalid @enderror" placeholder="Specification..." id="spec" name="spec" value="{{ old('spec') }}">
                                 @error('spec')
                                     <div class="invalid-feedback">
@@ -159,10 +163,40 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;">
+                            <div class="fco-field mb-3" style="display: none;" id="qty">
                                 <label for="qty" class="form-label">Quantity</label>
                                 <input type="number" class="form-control @error('qty') is-invalid @enderror" placeholder="Quantity..." id="qty" name="qty" value="{{ old('qty') }}">
                                 @error('qty')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div> 
+                                @enderror
+                            </div>
+
+                            <div class="fco-field mb-3" style="display: none;" id="delivery_basis">
+                                <label for="delivery_basis" class="form-label">Delivery Basis</label>
+                                <input type="text" class="form-control @error('delivery_basis') is-invalid @enderror" placeholder="Delivery Basis..." id="delivery_basis" name="delivery_basis" value="{{ old('delivery_basis') }}">
+                                @error('delivery_basis')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div> 
+                                @enderror
+                            </div>
+
+                            <div class="fco-field mb-3" style="display: none;" id="contract_dur">
+                                <label for="contract_dur" class="form-label">Contract Duration</label>
+                                <input type="text" class="form-control @error('contract_dur') is-invalid @enderror" placeholder="Contract Duration..." id="contract_dur" name="contract_dur" value="{{ old('contract_dur') }}">
+                                @error('contract_dur')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div> 
+                                @enderror
+                            </div>
+
+                            <div class="fco-field mb-3" style="display: none;" id="po">
+                                <label for="po" class="form-label">Price Offered</label>
+                                <input type="text" class="form-control @error('po') is-invalid @enderror" placeholder="Price Offered..." id="po" name="po" value="{{ old('po') }}">
+                                @error('po')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div> 
@@ -336,16 +370,47 @@ document.addEventListener('DOMContentLoaded', function () {
     const tglSuratInput = document.getElementById('tglSurat');
     const BAClass = document.getElementById('perihalBAClass');
 
-    // Max values for surat numbers
     const maxValues = {
         '1': {{ $maxNoSuratFCO }},
         '2': {{ $maxNoSuratSI }},
         '3': {{ $maxNoSuratBA }},
         '4': {{ $maxNoSuratTT }},
         '5': {{ $maxNoSuratRIPFP }},
+        '6': {{ $maxNoSuratLOI }},
     };
 
     const PADDING_LENGTH = 3;
+
+    const visibilityMap = {
+        '1': () => {
+            showFields(suratfcoGroups);
+            showFields([pttujuanClass, alamatClass]);
+        },
+        '2': () => {
+            showFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass]);
+        },
+        '3': () => {
+            showFields([keteranganField, BAClass]);
+        },
+        '4': () => showFields([keteranganField]),
+        '5': () => showFields([keteranganField]),
+        '6': () => showFields([document.getElementById('commodity'), document.getElementById('qty'), document.getElementById('country'), document.getElementById('spec'),document.getElementById('qty'),document.getElementById('delivery_basis'),document.getElementById('contract-dur'),document.getElementById('po')]),
+    };
+
+    function showFields(elements) {
+        elements.forEach(el => {
+            if (el) el.style.display = 'block';
+        });
+    }
+
+    function hideAllFields() {
+        [suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass].forEach(el => {
+            if (el) el.style.display = 'none';
+        });
+        suratfcoGroups.forEach(group => {
+            if (group) group.style.display = 'none';
+        });
+    }
 
     function setInitialNoSurat() {
         const currentType = perihalSelect.value;
@@ -353,64 +418,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateVisibleFields() {
-        // Hide all fields first
-        [suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass].forEach(el => el.style.display = 'none');
-        suratfcoGroups.forEach(group => group.style.display = 'none');
-
-        const visibilityMap = {
-            '1': () => {
-                suratfcoGroups.forEach(group => group.style.display = 'block');
-                pttujuanClass.style.display = 'block';
-                alamatClass.style.display = 'block';
-            },
-            '2': () => {
-                suratizinGroup.style.display = 'block';
-                keteranganField.style.display = 'block';
-                pttujuanClass.style.display = 'block';
-                alamatClass.style.display = 'block';
-            },
-            '3': () => {
-                keteranganField.style.display = 'block';
-                BAClass.style.display = 'block';
-            },
-            '4': () => keteranganField.style.display = 'block',
-            '5': () => keteranganField.style.display = 'block'
-        };
-
-        // Show relevant fields based on selected value
+        hideAllFields();
         visibilityMap[perihalSelect.value]?.();
     }
 
     function toggleField(fieldId) {
-            const field = document.getElementById(fieldId + 'Field');
-            const isVisible = field.style.display === 'block';
-            field.style.display = isVisible ? 'none' : 'block';
+        const field = document.getElementById(fieldId + 'Field');
+        if (field) {
+            field.style.display = field.style.display === 'block' ? 'none' : 'block';
         }
+    }
 
-        // Event listeners for buttons
-        document.getElementById('toggleCIF').addEventListener('click', () => toggleField('cif'));
-        document.getElementById('toggleFOB').addEventListener('click', () => toggleField('fob'));
-        document.getElementById('toggleFREIGHT').addEventListener('click', () => toggleField('freight'));
-
-    // Event listeners for checkboxes
     ['CIF', 'FOB', 'FREIGHT'].forEach(type => {
-        document.getElementById('toggle' + type).addEventListener('change', () => toggleField(type.toLowerCase()));
+        document.getElementById('toggle' + type).addEventListener('click', () => toggleField(type.toLowerCase()));
     });
 
     perihalSelect.addEventListener('change', function() {
         const selectedValue = this.value;
         const perihalInput = document.getElementById('perihal');
-
-        // Set perihalInput based on selected value
+        
         const perihalMap = {
             '1': 'Full Corporate Offer',
             '2': 'Surat Izin Masuk Tambang',
             '3': 'Berita Acara',
             '4': 'Tanda Terima',
-            '5': 'Permohonan Revisi Invoice dan Pembatalan FP GEL'
+            '5': 'Permohonan Revisi Invoice dan Pembatalan FP GEL',
+            '6': 'Letter of Intent (LOI) for Coal Purchase in'
         };
         perihalInput.value = perihalMap[selectedValue] || '';
-
         handleFieldUpdates();
     });
 
@@ -419,15 +454,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const tglSurat = new Date(tglSuratInput.value);
         const romanMonth = toRoman(tglSurat.getMonth() + 1);
         const year = tglSurat.getFullYear();
-        
+
         const prefixMap = {
             '1': `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`,
             '2': `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`,
             '3': `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`,
             '4': `Tanda Terima-${noSurat}/${romanMonth}/${year}`,
-            '5': `${year}/GEL-PLN/SAL-${noSurat}`
+            '5': `${year}/GEL-PLN/SAL-${noSurat}`,
+            '6': `No: MSS/GEL/LOI-${noSurat}/${romanMonth}/${year}/`
         };
-        
+
         prefixInput.value = prefixMap[perihalSelect.value] || '';
     }
 
@@ -442,7 +478,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updatePrefix();
     }
 
-    // Event listeners for input changes
     [perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
         element.addEventListener('change', handleFieldUpdates);
     });
@@ -451,6 +486,8 @@ document.addEventListener('DOMContentLoaded', function () {
     handleFieldUpdates();
 });
 </script>
+
+
 
 
 
