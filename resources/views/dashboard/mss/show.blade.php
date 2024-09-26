@@ -272,9 +272,9 @@
                         
                         <br><br>
                         @if($mss->approve == '1')
-                        <table width="545" style="font-weight:bold;">
+                        <table width="635" style="font-weight:bold;">
                             <tr>
-                            <td><img style="height:50px; weigth:50px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
+                            <td><img style="height:125px; weigth:125px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
                             </tr>
                         </table>
                         @endif
@@ -372,6 +372,13 @@
                             <td>Hormat Kami,</td>
                             </tr>
                         </table>
+                        @if($mss->approve == '1')
+                        <table width="635" style="font-weight:bold;">
+                            <tr>
+                            <td><img style="height:125px; weigth:125px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
+                            </tr>
+                        </table>
+                        @endif
                         <br>
                     </center>
                 </div>
@@ -437,7 +444,7 @@
                             </tr>
                         @if($mss->approve == '1')
                         <tr>
-                      <td> <img style="height:50px; weigth:50px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
+                      <td> <img style="height:125px; weigth:125px;padding-left:45px;" src="{{ asset('img/qrcodes/' . $mss->qr ) }}" alt="QR Code"></td>
                         </tr>
                         @endif
                         </table>
@@ -556,17 +563,22 @@
                         <br>
                         <table width="545">
                             <tr>
-                            <td>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pembatalan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</td>
+                            <td>We will be looking forward to receiving feedback from your company and we thank you in advance for your co-operation and promprt feedback. Look forward to working with you soon.</td>
                             </tr>
                         </table>
                         <br /><br /><br /><br /><br><br>
                         <table width="545">
                         <tr style="">
-                            <td style="padding-left: 45px;">Dibuat</td>
-                            <td style="padding-left: 100px;">Mengetahui</td>
+                            <td style="padding-left: 45px;">Regrad,</td>
                         </tr>
                             <tr>
-                            <td>Sales Departement,</td>
+                            <td style="font-weight:bold;">GLOBAL COAL RESOURCES</td>
+                            </tr>
+                            <br /><br />
+                            <br /><br />
+                            <br /><br />
+                            <tr>
+                            <td style="font-weight:bold;">GLOBAL COAL RESOURCES</td>
                             </tr>
                         </table>
                         <br /><br />

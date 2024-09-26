@@ -173,7 +173,7 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;" id="delivery_basis">
+                            <div class="loi-field mb-3" style="display: none;" id="delivery_basis">
                                 <label for="delivery_basis" class="form-label">Delivery Basis</label>
                                 <input type="text" class="form-control @error('delivery_basis') is-invalid @enderror" placeholder="Delivery Basis..." id="delivery_basis" name="delivery_basis" value="{{ old('delivery_basis') }}">
                                 @error('delivery_basis')
@@ -183,7 +183,7 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;" id="contract_dur">
+                            <div class="loi-field mb-3" style="display: none;" id="contract_dur">
                                 <label for="contract_dur" class="form-label">Contract Duration</label>
                                 <input type="text" class="form-control @error('contract_dur') is-invalid @enderror" placeholder="Contract Duration..." id="contract_dur" name="contract_dur" value="{{ old('contract_dur') }}">
                                 @error('contract_dur')
@@ -193,7 +193,7 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;" id="po">
+                            <div class="loi-field mb-3" style="display: none;" id="po">
                                 <label for="po" class="form-label">Price Offered</label>
                                 <input type="text" class="form-control @error('po') is-invalid @enderror" placeholder="Price Offered..." id="po" name="po" value="{{ old('po') }}">
                                 @error('po')
@@ -358,134 +358,166 @@
         </div>
     </div>
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const perihalSelect = document.getElementById('idPerihal');
-    const noSuratInput = document.getElementById('noSurat');
-    const suratizinGroup = document.getElementById('surat-izin');
-    const keteranganField = document.getElementById('keterangan-field');
-    const pttujuanClass = document.getElementById('pttujuanClass');
-    const alamatClass = document.getElementById('alamatClass');
-    const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
-    const prefixInput = document.getElementById('prefix');
-    const tglSuratInput = document.getElementById('tglSurat');
-    const BAClass = document.getElementById('perihalBAClass');
+    document.addEventListener('DOMContentLoaded', function () {
+        const perihalSelect = document.getElementById('idPerihal');
+        const noSuratInput = document.getElementById('noSurat');
+        const suratizinGroup = document.getElementById('surat-izin');
+        const keteranganField = document.getElementById('keterangan-field');
+        const pttujuanClass = document.getElementById('pttujuanClass');
+        const alamatClass = document.getElementById('alamatClass');
+        const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
+        const prefixInput = document.getElementById('prefix');
+        const tglSuratInput = document.getElementById('tglSurat');
+        const BAClass = document.getElementById('perihalBAClass');
+        const suratLOIGroups = document.querySelectorAll('#surat-fco .loi-field');
 
-    const maxValues = {
-        '1': {{ $maxNoSuratFCO }},
-        '2': {{ $maxNoSuratSI }},
-        '3': {{ $maxNoSuratBA }},
-        '4': {{ $maxNoSuratTT }},
-        '5': {{ $maxNoSuratRIPFP }},
-        '6': {{ $maxNoSuratLOI }},
-    };
-
-    const PADDING_LENGTH = 3;
-
-    const visibilityMap = {
-        '1': () => {
-            showFields(suratfcoGroups);
-            showFields([pttujuanClass, alamatClass]);
-        },
-        '2': () => {
-            showFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass]);
-        },
-        '3': () => {
-            showFields([keteranganField, BAClass]);
-        },
-        '4': () => showFields([keteranganField]),
-        '5': () => showFields([keteranganField]),
-        '6': () => showFields([document.getElementById('commodity'), document.getElementById('qty'), document.getElementById('country'), document.getElementById('spec'),document.getElementById('qty'),document.getElementById('delivery_basis'),document.getElementById('contract-dur'),document.getElementById('po')]),
-    };
-
-    function showFields(elements) {
-        elements.forEach(el => {
-            if (el) el.style.display = 'block';
-        });
-    }
-
-    function hideAllFields() {
-        [suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass].forEach(el => {
-            if (el) el.style.display = 'none';
-        });
-        suratfcoGroups.forEach(group => {
-            if (group) group.style.display = 'none';
-        });
-    }
-
-    function setInitialNoSurat() {
-        const currentType = perihalSelect.value;
-        noSuratInput.value = (maxValues[currentType] || 0) + 1;
-    }
-
-    function updateVisibleFields() {
-        hideAllFields();
-        visibilityMap[perihalSelect.value]?.();
-    }
-
-    function toggleField(fieldId) {
-        const field = document.getElementById(fieldId + 'Field');
-        if (field) {
-            field.style.display = field.style.display === 'block' ? 'none' : 'block';
-        }
-    }
-
-    ['CIF', 'FOB', 'FREIGHT'].forEach(type => {
-        document.getElementById('toggle' + type).addEventListener('click', () => toggleField(type.toLowerCase()));
-    });
-
-    perihalSelect.addEventListener('change', function() {
-        const selectedValue = this.value;
-        const perihalInput = document.getElementById('perihal');
-        
-        const perihalMap = {
-            '1': 'Full Corporate Offer',
-            '2': 'Surat Izin Masuk Tambang',
-            '3': 'Berita Acara',
-            '4': 'Tanda Terima',
-            '5': 'Permohonan Revisi Invoice dan Pembatalan FP GEL',
-            '6': 'Letter of Intent (LOI) for Coal Purchase in'
+        const maxValues = {
+            '1': {{ $maxNoSuratFCO }},
+            '2': {{ $maxNoSuratSI }},
+            '3': {{ $maxNoSuratBA }},
+            '4': {{ $maxNoSuratTT }},
+            '5': {{ $maxNoSuratRIPFP }},
+            '6': {{ $maxNoSuratLOI }},
         };
-        perihalInput.value = perihalMap[selectedValue] || '';
+
+        const PADDING_LENGTH = 3;
+
+        const visibilityMap = {
+            '1': () => {
+                showFields(suratfcoGroups);
+                showFields([pttujuanClass, alamatClass]);
+            },
+            '2': () => {
+                showFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass]);
+            },
+            '3': () => {
+                showFields([keteranganField, BAClass]);
+            },
+            '4': () => showFields([keteranganField]),
+            '5': () => showFields([keteranganField]),
+            '6': () => {
+                showFields([
+                    ...suratLOIGroups,
+                    document.getElementById('commodity'),
+                    document.getElementById('qty'),
+                    document.getElementById('country'),
+                    document.getElementById('spec')
+                ]);
+            }
+        };
+
+        function showFields(elements) {
+            elements.forEach(el => {
+                if (el instanceof HTMLElement) {
+                    el.style.display = 'block';
+                } else if (typeof el === 'string') {
+                    const element = document.getElementById(el);
+                    if (element) {
+                        element.style.display = 'block';
+                    } else {
+                        console.warn(`Element with ID '${el}' not found.`);
+                    }
+                }
+            });
+        }
+
+        function hideFields(elements) {
+            elements.forEach(el => {
+                if (el instanceof HTMLElement) {
+                    el.style.display = 'none';
+                } else if (typeof el === 'string') {
+                    const element = document.getElementById(el);
+                    if (element) {
+                        element.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function hideAllFields() {
+            hideFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass]);
+            suratfcoGroups.forEach(group => {
+                if (group) group.style.display = 'none';
+            });
+        }
+
+        function setInitialNoSurat() {
+            const currentType = perihalSelect.value;
+            noSuratInput.value = (maxValues[currentType] || 0) + 1;
+        }
+
+        function updateVisibleFields() {
+            hideAllFields();
+            visibilityMap[perihalSelect.value]?.();
+        }
+
+        function toggleField(fieldId) {
+            const field = document.getElementById(fieldId + 'Field');
+            if (field) {
+                field.style.display = field.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+
+        ['CIF', 'FOB', 'FREIGHT'].forEach(type => {
+            document.getElementById('toggle' + type).addEventListener('click', () => toggleField(type.toLowerCase()));
+        });
+
+        perihalSelect.addEventListener('change', function() {
+            const selectedValue = this.value;
+            const perihalInput = document.getElementById('perihal');
+
+            const perihalMap = {
+                '1': 'Full Corporate Offer',
+                '2': 'Surat Izin Masuk Tambang',
+                '3': 'Berita Acara',
+                '4': 'Tanda Terima',
+                '5': 'Permohonan Revisi Invoice dan Pembatalan FP GEL',
+                '6': 'Letter of Intent (LOI) for Coal Purchase in'
+            };
+            perihalInput.value = perihalMap[selectedValue] || '';
+            handleFieldUpdates();
+        });
+
+        function updatePrefix() {
+            const noSurat = String(noSuratInput.value || '0').padStart(PADDING_LENGTH, '0');
+            const tglSurat = new Date(tglSuratInput.value);
+            const romanMonth = toRoman(tglSurat.getMonth() + 1);
+            const year = tglSurat.getFullYear();
+
+            const prefixMap = {
+                '1': `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`,
+                '2': `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`,
+                '3': `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`,
+                '4': `Tanda Terima-${noSurat}/${romanMonth}/${year}`,
+                '5': `${year}/GEL-PLN/SAL-${noSurat}`,
+                '6': `No: MSS/GEL/LOI-${noSurat}/${romanMonth}/${year}/`
+            };
+
+            prefixInput.value = prefixMap[perihalSelect.value] || '';
+        }
+
+        function toRoman(num) {
+            const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+            return roman[num - 1] || '';
+        }
+
+        function handleFieldUpdates() {
+            setInitialNoSurat();
+            updateVisibleFields();
+            updatePrefix();
+        }
+
+        [perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
+            element.addEventListener('change', handleFieldUpdates);
+        });
+
+        // Initialize
         handleFieldUpdates();
     });
 
-    function updatePrefix() {
-        const noSurat = String(noSuratInput.value || '0').padStart(PADDING_LENGTH, '0');
-        const tglSurat = new Date(tglSuratInput.value);
-        const romanMonth = toRoman(tglSurat.getMonth() + 1);
-        const year = tglSurat.getFullYear();
 
-        const prefixMap = {
-            '1': `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`,
-            '2': `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`,
-            '3': `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`,
-            '4': `Tanda Terima-${noSurat}/${romanMonth}/${year}`,
-            '5': `${year}/GEL-PLN/SAL-${noSurat}`,
-            '6': `No: MSS/GEL/LOI-${noSurat}/${romanMonth}/${year}/`
-        };
+    </script>
 
-        prefixInput.value = prefixMap[perihalSelect.value] || '';
-    }
-
-    function toRoman(num) {
-        const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-        return roman[num - 1] || '';
-    }
-
-    function handleFieldUpdates() {
-        setInitialNoSurat();
-        updateVisibleFields();
-        updatePrefix();
-    }
-
-    [perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
-        element.addEventListener('change', handleFieldUpdates);
-    });
-
-    // Initialize
-    handleFieldUpdates();
-});
-</script>
 
 
 
