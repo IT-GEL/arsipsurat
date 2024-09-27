@@ -543,10 +543,24 @@
                     </div>
                     <br>
                     <br>
+                    <table width="545">
+                        <tr>
+                        <td style="border: 0px;">{{$mss->tempat}} {{ $mss->tgl}}</td>
+                        </tr>
+                    </table>
+                    <br>
                     <center style="margin-top: 50px;">
                         <table width="545" style="font-weight:bold;"">
                             <tr>
-                            <td style="border: 0px;">Att:</td>
+                            <td style="border: 0px;">The Director</td>
+                            <td style="border: 0px;">{{$mss->pttujuan}}</td>
+                            <td style="border: 0px;" width="30">{!! $mss->alamat !!}</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table width="545" style="font-weight:bold;"">
+                            <tr>
+                            <td style="border: 0px;">Att : {{ $mss->atasnama}}</td>
                             </tr>
                         </table>
                         <br>
@@ -630,8 +644,8 @@
                         </table>
                         <br /><br /><br /><br /><br><br>
                         <table width="545">
-                        <tr style="">
-                            <td style="padding-left: 45px;">Regrad,</td>
+                        <tr>
+                            <td>Regrad,</td>
                         </tr>
                             <tr>
                             <td style="font-weight:bold;">GLOBAL COAL RESOURCES Pte Ltd.</td>
