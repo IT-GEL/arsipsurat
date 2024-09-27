@@ -5,14 +5,14 @@
 @if ( $mss->idPerihal  == "1")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-            <div class="bg-light text-center rounded p-4" 
+            <div class="bg-light text-center rounded p-4"
                 style="
                         padding-top: 10;
                         height: 120vh; /* Ensures the body takes the full height */
                         background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
                         background-size: contain; /* Adjusts the image to fit within the body without stretching */
                         background-repeat: no-repeat; /* Prevents the image from repeating */
-                        background-position: center; /* Centers the image */    
+                        background-position: center; /* Centers the image */
                 ">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
@@ -53,7 +53,7 @@
                             <tr>
                             <td style="text-align: center; font-weight: bold; font:italic">{{ $mss->prefix }}</td>
                             </tr>
-                        </table> 
+                        </table>
                         <br>
                         <table width="545">
                             <tr>
@@ -143,12 +143,12 @@
                         </table>
                         <table width="545">
                             <tr>
-                            @if($mss->freight !== null) 
+                            @if($mss->freight !== null)
                                 <td width="185"> </td>
                                 <td width="40">FREIGHT</td>
-                                <td width="200">$ {{ number_format($mss->freight, 0, '.', ',') }} 
+                                <td width="200">$ {{ number_format($mss->freight, 0, '.', ',') }}
                                 </td>
-                            @endif  
+                            @endif
                             </tr>
                         </table>
                     @endif
@@ -209,14 +209,14 @@
             </div>
 <!-- Page ke 2-->
             <div class="container-fluid pt-4 px-4">
-            <div class="bg-light text-center rounded p-4" 
+            <div class="bg-light text-center rounded p-4"
                 style="
                         padding-top: 10;
                         height: 120vh; /* Ensures the body takes the full height */
                         background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
                         background-size: contain; /* Adjusts the image to fit within the body without stretching */
                         background-repeat: no-repeat; /* Prevents the image from repeating */
-                        background-position: center; /* Centers the image */    
+                        background-position: center; /* Centers the image */
                 ">
                     <center style="margin-top: 50px;">
                         <br>
@@ -229,7 +229,7 @@
                         @if ( $mss->kop  == "ERA")
                         <br /><br />
                         @endif
-                    
+
                         <table width="545" >
                             <tr>
                             <td width="20">13. </td>
@@ -269,7 +269,7 @@
                             <td>PT. GLOBAL ENERGI LESTARI</td>
                             </tr>
                         </table>
-                        
+
                         <br><br>
                         @if($mss->approve == '1')
                         <table width="635" style="font-weight:bold;">
@@ -333,7 +333,7 @@
                             <tr>
                             <td>{!! $mss->alamat !!}</td>
                             </tr>
-                        </table> 
+                        </table>
                         <br>
                         <table width="545">
                             <tr>
@@ -344,7 +344,7 @@
                             <tr>
                             <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
                             </tr>
-                        </table> 
+                        </table>
                         <br>
                         <table width="545">
                             <tr>
@@ -390,12 +390,12 @@
 @if ( $mss->idPerihal  == "3")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-center rounded p-4" 
+                <div class="bg-light text-center rounded p-4"
                 style="
                         background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
                         background-size: contain; /* Adjusts the image to fit within the body without stretching */
                         background-repeat: no-repeat; /* Prevents the image from repeating */
-                        background-position: center; /* Centers the image */    
+                        background-position: center; /* Centers the image */
                 ">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
@@ -412,7 +412,7 @@
                             <tr>
                             <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
                             </tr>
-                        </table> 
+                        </table>
                         <br>
                         <br>
                         <table width="545">
@@ -440,7 +440,7 @@
                         </tr>
                             <tr>
                             <td>Sales Departement,</td>
-                        
+
                             </tr>
                         @if($mss->approve == '1')
                         <tr>
@@ -466,12 +466,12 @@
 @if ( $mss->perihal  == "Berita Acara Pembatalan PVR")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-            <div class="bg-light text-center rounded p-4" 
+            <div class="bg-light text-center rounded p-4"
                 style="
                         background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
                         background-size: contain; /* Adjusts the image to fit within the body without stretching */
                         background-repeat: no-repeat; /* Prevents the image from repeating */
-                        background-position: center; /* Centers the image */    
+                        background-position: center; /* Centers the image */
                 ">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
@@ -487,7 +487,7 @@
                             <tr>
                             <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
                             </tr>
-                        </table> 
+                        </table>
                         <br>
                         <br>
                         <br><br>
@@ -529,12 +529,12 @@
 @if ( $mss->idPerihal  == "6")
 <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-            <div class="bg-light text-center rounded p-4" 
+            <div class="bg-light text-center rounded p-4"
                 style="
                         background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
                         background-size: contain; /* Adjusts the image to fit within the body without stretching */
                         background-repeat: no-repeat; /* Prevents the image from repeating */
-                        background-position: center; /* Centers the image */    
+                        background-position: center; /* Centers the image */
                 ">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
@@ -544,6 +544,14 @@
                     <br>
                     <br>
                     <center style="margin-top: 50px;">
+                        <table width="545" style="font-weight:bold;"">
+                            <tr>
+                            <td style="border: 0px;">Att:</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <br>
+
                     <table width="545">
                             <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold" class="text">
@@ -553,7 +561,7 @@
                             <tr>
                             <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}</td>
                             </tr>
-                        </table> 
+                        </table>
                         <br>
                         <br>
                         <br><br>
