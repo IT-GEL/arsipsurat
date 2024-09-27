@@ -567,50 +567,50 @@
                         <table width="545">
                             <tr>
                             <td style="padding-left:50px;">COMMODITY</td>
-                            <td width="5">:</td>
-                            <td >{{ $mss->comodity}}</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->comodity}}</td>
                             </tr>
                         </table>
                         <table width="545">
                             <tr>
                                 <td style="padding-left:50px;">SPECIFICATION</td>
-                                <td>:</td>
-                                <td >{{ $mss->spec}}</td>
+                                <td width="10">:</td>
+                                <td width="250">{{ $mss->spec}}</td>
                             </tr>
                         </table>
                         <table width="545">
                             <tr>
                                 <td style="padding-left:50px;">COUNTRY OF ORIGIN</td>
-                                <td>:</td>
-                                <td >{{ $mss->country}}</td>
+                                <td width="10">:</td>
+                                <td width="250">{{ $mss->country}}</td>
                             </tr>
                         </table>
                         <table width="545">
                             <tr>
                             <td style="padding-left:50px;">QUANTITY</td>
-                            <td>:</td>
-                            <td >{{ $mss->qty}}</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->qty}}</td>
                             </tr>
                         </table>
                         <table width="545">
                             <tr>
                             <td style="padding-left:50px;">DELIVERY BASIS</td>
-                            <td>:</td>
-                            <td >{{ $mss->delivery_basis}}</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->delivery_basis}}</td>
                             </tr>
                         </table>
                         <table width="545">
                             <tr>
                             <td style="padding-left:50px;">CONTRACT DURATION</td>
-                            <td>:</td>
-                            <td >{{ $mss->contract_dur}}</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->contract_dur}}</td>
                             </tr>
                         </table>
                         <table width="545">
                             <tr>
                             <td style="padding-left:50px;">PRICE OFFER</td>
-                            <td>:</td>
-                            <td >{{ $mss->po}}</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->po}}</td>
                             </tr>
                         </table>
 

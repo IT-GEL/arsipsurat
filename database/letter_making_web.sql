@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2024 at 01:37 PM
+-- Generation Time: Sep 27, 2024 at 05:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -50,7 +50,8 @@ INSERT INTO `detail_qr` (`id`, `nosurat`, `nama`, `NIK`, `jabatan`, `qr`, `appro
 (7, 'BA-002/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS4.png', '2024-09-23 01:15:30', '2024-09-23 01:15:30', '2024-09-23 01:15:30'),
 (8, 'BA-002/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS4.png', '2024-09-23 07:16:23', '2024-09-23 07:16:23', '2024-09-23 07:16:23'),
 (9, 'Ref. No:MSS/GEL/FCO-001/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS5.png', '2024-09-23 09:32:42', '2024-09-23 09:32:42', '2024-09-23 09:32:42'),
-(10, 'BA-003/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS7.png', '2024-09-23 11:14:04', '2024-09-23 11:14:04', '2024-09-23 11:14:04');
+(10, 'BA-003/INV-SALES/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS7.png', '2024-09-23 11:14:04', '2024-09-23 11:14:04', '2024-09-23 11:14:04'),
+(11, 'Ref. No:MSS/GEL/FCO-005/IX/2024', 'Ervina Wijaya', NULL, 'Head Departement Shipping and Sales', 'QRMSS8.png', '2024-09-25 18:55:54', '2024-09-25 18:55:54', '2024-09-25 18:55:54');
 
 -- --------------------------------------------------------
 
@@ -204,10 +205,12 @@ CREATE TABLE `m_s_s` (
 --
 
 INSERT INTO `m_s_s` (`id`, `noSurat`, `prefix`, `idPerihal`, `perihal`, `perihalBA`, `pttujuan`, `ptkunjungan`, `commodity`, `source`, `alamat`, `keterangan`, `country`, `spec`, `vo`, `qty`, `lp`, `dp`, `matauang`, `cif`, `fob`, `freight`, `shipschedule`, `tcd`, `surveyor`, `qas`, `top`, `delivery_basis`, `contract_dur`, `po`, `tglSurat`, `ttd`, `namaTtd`, `kop`, `qr`, `approve`, `created_at`, `updated_at`) VALUES
-(3, '1', 'Ref. No:MSS/GEL/FCO-001/IX/2024', 1, 'Full Corporate Offer', NULL, 'PT Borneo', NULL, 'awd', 'awd', NULL, NULL, 'aw', 'GCV 500 (ARB)', '2024-09-25', 6, 'Jetty Kalsel', 'Jetty PT.BAP', NULL, NULL, NULL, NULL, '2024-09-25', 'CIF', 'ATQ', '<table style=\"border-collapse:collapse;width: 100%;\"><tbody>\r\n<tr>\r\n	<td style=\"width: 16.6667%;\">q2eq2e213</td>\r\n	<td style=\"width: 16.6667%;\">awedawd</td>\r\n	<td style=\"width: 16.6667%;\">adsa</td>\r\n	<td style=\"width: 16.6667%;\">awdawdawd</td>\r\n	<td style=\"width: 16.6667%;\">awdad</td>\r\n	<td style=\"width: 16.6667%;\">dawdawd</td></tr>\r\n<tr>\r\n	<td style=\"width: 16.6667%;\">2qeq2e</td>\r\n	<td style=\"width: 16.6667%;\">awdawd</td>\r\n	<td style=\"width: 16.6667%;\">awdawd</td>\r\n	<td style=\"width: 16.6667%;\">dwaadwawd</td>\r\n	<td style=\"width: 16.6667%;\">dawdaw</td>\r\n	<td style=\"width: 16.6667%;\">awdawd</td></tr>\r\n<tr>\r\n	<td style=\"width: 16.6667%;\">awdawdawd</td>\r\n	<td style=\"width: 16.6667%;\">awdawd</td>\r\n	<td style=\"width: 16.6667%;\">adwawdawd</td>\r\n	<td style=\"width: 16.6667%;\">adwawd</td>\r\n	<td style=\"width: 16.6667%;\">dadwd</td>\r\n	<td style=\"width: 16.6667%;\">dawdwa</td></tr>\r\n<tr>\r\n	<td style=\"width: 16.6667%;\">awdawdwdwadawd</td>\r\n	<td style=\"width: 16.6667%;\">awddawa</td>\r\n	<td style=\"width: 16.6667%;\">dawd</td>\r\n	<td style=\"width: 16.6667%;\">aadwaw</td>\r\n	<td style=\"width: 16.6667%;\">dawdaw</td>\r\n	<td style=\"width: 16.6667%;\">awdawdaw</td></tr></tbody></table>', 'yaaa', NULL, NULL, NULL, '2024-09-24', 'Habib', 'BOBI', 'QIN', NULL, '0', '2024-09-23 21:20:47', '2024-09-23 21:20:47'),
 (4, '2', 'Ref. No:MSS/GEL/FCO-002/IX/2024', 1, 'Full Corporate Offer', NULL, 'PT Borneo', NULL, 'adcsfvacfvcad', 'acdscdc', '<div>&nbsp;oytiruesgerxhdtcyjukilho;jpolivkucjyrxtehzxthcyjuvkbil</div>', NULL, 'acwdsawcdas', 'awcddaw', '2024-09-24', 234, 'Jetty Kalsel', 'Jetty PT.BAP', 'DOLLAR', 23212342, 12343123, NULL, '2024-09-24', 'CIF', 'ATQ', '<p>awdqadawdaw</p><p>awdasdwad</p><p><br></p>', 'yaaa', NULL, NULL, NULL, '2024-09-24', 'asdawd', 'asdaw', 'QIN', NULL, '0', '2024-09-23 23:23:30', '2024-09-23 23:23:30'),
 (5, '3', 'Ref. No:MSS/GEL/FCO-003/IX/2024', 1, 'Full Corporate Offer', NULL, 'PT Borneo', NULL, 'wdsadaw', 'dasdawd', '<div>wdfsfeeeeeeee</div>', NULL, 'awdasdaw', 'awdsad', '2024-09-24', 234, 'asdaw', 'asdwa', 'IDR', NULL, 100000, 1000000, '2024-09-24', 'CIF', 'ATQ', '<p>awdasdwa</p>', 'awdsad', NULL, NULL, NULL, '2024-09-24', 'awdsa', 'awds', 'ERA', NULL, '0', '2024-09-24 09:30:16', '2024-09-24 09:30:16'),
-(6, '1', 'No: MSS/GEL/LOI-001/IX/2024/', 6, 'Letter of Intent (LOI) for Coal Purchase in', NULL, NULL, NULL, 'awd', NULL, NULL, NULL, 'aw', 'GCV 500 (ARB)', NULL, 231, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'adsawd', NULL, 'awdsdawd', '2024-09-25', 'awdsawda', 'aawdsawd', 'GCR', NULL, '0', '2024-09-25 03:59:53', '2024-09-25 03:59:53');
+(6, '1', 'No: MSS/GEL/LOI-001/IX/2024/', 6, 'Letter of Intent (LOI) for Coal Purchase in', NULL, NULL, NULL, 'awd', NULL, NULL, NULL, 'aw', 'GCV 500 (ARB)', NULL, 231, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'adsawd', NULL, 'awdsdawd', '2024-09-25', 'awdsawda', 'aawdsawd', 'GCR', NULL, '0', '2024-09-25 03:59:53', '2024-09-25 03:59:53'),
+(7, '4', 'Ref. No:MSS/GEL/FCO-004/IX/2024', 1, 'Full Corporate Offer', NULL, 'PT Borneo', NULL, 'awdnjkawdjk', 'dwakjndjkawndjka', '<div>awdjawndawndjk</div>', NULL, 'dwakjndjkawnd', 'dawjndjkanwdj', '2024-10-03', 23, 'awdasdas', 'dawdsada', 'IDR', NULL, 423123, 321123, '2024-09-27', 'qadsds', 'dawds', '<p>awdvahjwdlkakjwdak</p>', 'kdhawkjhdkjawjdn', NULL, NULL, NULL, '2024-09-26', 'awd', 'dasdw', 'GEL', NULL, '0', '2024-09-25 18:49:13', '2024-09-25 18:49:13'),
+(8, '5', 'Ref. No:MSS/GEL/FCO-005/IX/2024', 1, 'Full Corporate Offer', NULL, 'SX smb', NULL, 'klansdklnaw', 'dkanwkdnaklwd', '<div>ajnscklasdnj</div>', NULL, 'daknwdklnal', 'da,wndjknaw', '2024-09-26', 23, 'adsad', 'dasdsad', 'DOLLAR', 100, 50, NULL, '2024-09-19', 'awdsad', 'dsadasd', '<p>awdsadaw</p>', 'asdawdwa', NULL, NULL, NULL, '2024-09-26', 'adwasd', 'awdsadaw', 'GCR', 'QRMSS8.png', '1', '2024-09-25 18:52:38', '2024-09-25 18:55:54'),
+(9, '1', 'BA-001/INV-SALES/IX/2024', 3, 'Berita Acara', NULL, NULL, NULL, NULL, NULL, NULL, '<p>ini tes surat keterangan</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-26', 'gisa', 'orang', 'GEL', NULL, '0', '2024-09-25 19:39:29', '2024-09-25 19:39:29');
 
 -- --------------------------------------------------------
 
@@ -379,7 +382,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `detail_qr`
 --
 ALTER TABLE `detail_qr`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -409,7 +412,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `m_s_s`
 --
 ALTER TABLE `m_s_s`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
