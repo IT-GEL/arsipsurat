@@ -541,6 +541,8 @@
                         <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
 
                     </div>
+                    <br>
+                    <br>
                     <center style="margin-top: 50px;">
                     <table width="545">
                             <tr>
@@ -561,6 +563,58 @@
                             </tr>
                         </table>
                         <br>
+
+                        <table width="545">
+                            <tr>
+                            <td style="padding-left:50px;">COMMODITY</td>
+                            <td width="5">:</td>
+                            <td >{{ $mss->comodity}}</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                                <td style="padding-left:50px;">SPECIFICATION</td>
+                                <td>:</td>
+                                <td >{{ $mss->spec}}</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                                <td style="padding-left:50px;">COUNTRY OF ORIGIN</td>
+                                <td>:</td>
+                                <td >{{ $mss->country}}</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                            <td style="padding-left:50px;">QUANTITY</td>
+                            <td>:</td>
+                            <td >{{ $mss->qty}}</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                            <td style="padding-left:50px;">DELIVERY BASIS</td>
+                            <td>:</td>
+                            <td >{{ $mss->delivery_basis}}</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                            <td style="padding-left:50px;">CONTRACT DURATION</td>
+                            <td>:</td>
+                            <td >{{ $mss->contract_dur}}</td>
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                            <td style="padding-left:50px;">PRICE OFFER</td>
+                            <td>:</td>
+                            <td >{{ $mss->po}}</td>
+                            </tr>
+                        </table>
+
+                        <br>
                         <table width="545">
                             <tr>
                             <td>We will be looking forward to receiving feedback from your company and we thank you in advance for your co-operation and promprt feedback. Look forward to working with you soon.</td>
@@ -572,14 +626,20 @@
                             <td style="padding-left: 45px;">Regrad,</td>
                         </tr>
                             <tr>
-                            <td style="font-weight:bold;">GLOBAL COAL RESOURCES</td>
+                            <td style="font-weight:bold;">GLOBAL COAL RESOURCES Pte Ltd.</td>
                             </tr>
+
+                        </table>
+                        <br /><br />
                             <br /><br />
                             <br /><br />
-                            <br /><br />
-                            <tr>
-                            <td style="font-weight:bold;">GLOBAL COAL RESOURCES</td>
-                            </tr>
+                        <table width="545">
+                        <tr>
+                            <td style="font-weight:bold;"><u>LUHENDRI</u></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Director</td>
+                        </tr>
                         </table>
                         <br /><br />
                         <br>
