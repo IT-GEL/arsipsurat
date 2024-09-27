@@ -10,7 +10,7 @@
                         @csrf
 
                         <input type="hidden" id="approve" name="approve" value="0">
-                        
+
                         <div class="mb-3">
                             <label for="kop" class="form-label">Pilih PT</label>
                             <select class="form-select @error('kop') is-invalid @enderror" id="kop" name="kop" required autofocus>
@@ -75,7 +75,7 @@
                             @error('ptkunjungan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
-                                </div> 
+                                </div>
                             @enderror
                         </div>
 
@@ -85,15 +85,25 @@
                             @error('pttujuan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
-                                </div> 
+                                </div>
                             @enderror
                         </div>
-                        
+
                         <div id="alamatClass"class="mb-3">
                             <label for="alamat" class="form-label">Alamat PT Tujuan</label>
                             <input id="alamat" type="hidden" name="alamat">
                             <trix-editor class="form-control @error('alamat') is-invalid @enderror" input="alamat" value="{{ old('alamat') }}" placeholder="Alamat PT Tujuan"></trix-editor>
                             @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div id="att" class="mb-3" style="display: none;">
+                            <label for="att" class="form-label">Ditujukan Kepada</label>
+                            <input type="text" class="form-control @error('att') is-invalid @enderror" placeholder="Ditujukan Kepada..." id="att" name="att" value="{{ old('att') }}">
+                            @error('att')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -109,7 +119,7 @@
                                 });
                             </script>
                         </div>
- 
+
                         <div id="surat-fco">
                             <div class="fco-field mb-3" style="display: none;" id="commodity">
                                 <label for="commodity" class="form-label">Commodity</label>
@@ -117,7 +127,7 @@
                                 @error('commodity')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -127,7 +137,7 @@
                                 @error('source')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -137,7 +147,7 @@
                                 @error('country')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -149,7 +159,7 @@
                                 @error('spec')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -169,7 +179,7 @@
                                 @error('qty')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -179,7 +189,7 @@
                                 @error('delivery_basis')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -189,7 +199,7 @@
                                 @error('contract_dur')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -199,7 +209,7 @@
                                 @error('po')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -209,7 +219,7 @@
                                 @error('lp')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -219,7 +229,7 @@
                                 @error('dp')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -254,9 +264,9 @@
                             <div class="mb-3 price-scheme-fields" id="freightField" style="display: none;">
                                 <label for="freight" class="form-label">Price Scheme (FREIGHT)</label>
                                 <input type="number" class="form-control" placeholder="FREIGHT..." id="freight" name="freight">
-                            </div>      
+                            </div>
 
-                            
+
 
 
                             <div class="fco-field mb-3" style="display: none;">
@@ -275,7 +285,7 @@
                                 @error('tcd')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -285,7 +295,7 @@
                                 @error('surveyor')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -305,7 +315,7 @@
                                     <div class="invalid-feedback">
                                 @error('top')
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -337,7 +347,7 @@
                                 </div>
                             @enderror
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="namaTtd" class="form-label">Mengetahui</label>
                             <input type="text" class="form-control @error('namaTtd') is-invalid @enderror" id="namaTtd" name="namaTtd" required value="{{ old('namaTtd') }}">
@@ -347,12 +357,12 @@
                                 </div>
                             @enderror
                         </div>
-                        
 
 
-                        
+
+
                         <button type="submit" class="btn btn-primary">Buat Surat</button>
-                        
+
                     </form>
                 </div>
         </div>
@@ -364,6 +374,7 @@
         const suratizinGroup = document.getElementById('surat-izin');
         const keteranganField = document.getElementById('keterangan-field');
         const pttujuanClass = document.getElementById('pttujuanClass');
+        const att = document.getElementById('att');
         const alamatClass = document.getElementById('alamatClass');
         const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
         const prefixInput = document.getElementById('prefix');
@@ -398,6 +409,10 @@
             '6': () => {
                 showFields([
                     ...suratLOIGroups,
+                    pttujuanClass,
+                    alamatClass,
+                    att,
+                    keteranganField,
                     document.getElementById('commodity'),
                     document.getElementById('qty'),
                     document.getElementById('country'),
@@ -435,7 +450,7 @@
         }
 
         function hideAllFields() {
-            hideFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass]);
+            hideFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass, att]);
             suratfcoGroups.forEach(group => {
                 if (group) group.style.display = 'none';
             });
