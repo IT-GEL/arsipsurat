@@ -543,6 +543,8 @@
                     </div>
                     <br>
                     <br>
+                    <br>
+                    <br>
                     <table width="545">
                         <tr>
                         <td style="border: 0px;">{{$mss->tempat}} {{ $mss->tgl}}</td>
@@ -550,17 +552,23 @@
                     </table>
                     <br>
                     <center style="margin-top: 50px;">
-                        <table width="545" style="font-weight:bold;"">
+                        <table width="545" style="font-weight:bold;">
                             <tr>
                             <td style="border: 0px;">The Director</td>
-                            <td style="border: 0px;">{{$mss->pttujuan}}</td>
-                            <td style="border: 0px;" width="30">{!! $mss->alamat !!}</td>
                             </tr>
+                        </table>
+                        <table width="545" style="font-weight:bold;">
+                            <tr>
+                            <td style="border: 0px;">{{$mss->pttujuan}}</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 0px;">{!! $mss->alamat !!}</td>
+                                </tr>
                         </table>
                         <br>
                         <table width="545" style="font-weight:bold;"">
                             <tr>
-                            <td style="border: 0px;">Att : {{ $mss->atasnama}}</td>
+                            <td style="border: 0px;">Att : {{ $mss->att}}</td>
                             </tr>
                         </table>
                         <br>

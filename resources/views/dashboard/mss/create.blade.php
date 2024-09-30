@@ -81,7 +81,7 @@
 
                         <div id="pttujuanClass" class="mb-3">
                             <label for="pttujuan" class="form-label">PT Tujuan</label>
-                            <input type="text" class="form-control @error('pttujuan') is-invalid @enderror" placeholder="Isi PT Tujuan..." id="pttujuan" name="pttujuan" value="{{ old('pttujuan') }}">
+                            <input type="text" class="form-control @error('pttujuan') is-invalid @enderror" placeholder="Isi PT Tujuan..." id="pttujuan" name="pttujuan" value="">
                             @error('pttujuan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -89,10 +89,59 @@
                             @enderror
                         </div>
 
+                        <script>
+                            // Function to update PT Tujuan based on selected Perihal Surat
+                            function updatePTTujuan() {
+                                const perihalSelect = document.getElementById('idPerihal');
+                                const pttujuanInput = document.getElementById('pttujuan');
+
+                                if (perihalSelect.value === '6') {
+                                    pttujuanInput.value = 'PT BUKIT ASAM tbk';
+                                } else {
+                                    pttujuanInput.value = ''; // Clear the input if other options are selected
+                                }
+                            }
+
+                            // Add event listener for change event on page load
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const perihalSelect = document.getElementById('idPerihal');
+                                perihalSelect.addEventListener('change', updatePTTujuan);
+                            });
+                        </script>
+
                         <div id="alamatClass"class="mb-3">
                             <label for="alamat" class="form-label">Alamat PT Tujuan</label>
-                            <input id="alamat" type="hidden" name="alamat">
-                            <trix-editor class="form-control @error('alamat') is-invalid @enderror" input="alamat" value="{{ old('alamat') }}" placeholder="Alamat PT Tujuan"></trix-editor>
+                            <trix-editor
+                            class="form-control @error('alamat') is-invalid @enderror"
+                            input="alamat"
+                            value="{{ old('alamat') }}"
+                            placeholder="Alamat PT Tujuan"></trix-editor>
+
+                        <input type="hidden" id="alamat" name="alamat" value="{{ old('alamat') }}">
+
+                        <script>
+                            document.addEventListener('trix-change', function(event) {
+                                const editor = event.target;
+                                const hiddenInput = document.getElementById('alamat');
+                                hiddenInput.value = editor.editor.getDocument().toString(); // Update the hidden input with the editor's content
+                            });
+
+                            // Function to set the Trix editor value based on the select value
+                            function updateTrixValue() {
+                                const perihalSelect = document.getElementById('idPerihal');
+                                const editor = document.querySelector("trix-editor");
+
+                                if (perihalSelect.value === '6') {
+                                    const newValue = `Jl. H.R. Rasuna Said No. 15\nJakarta Selatan`;
+                                    editor.editor.loadHTML(newValue); // Set the new value in the Trix editor
+                                } else {
+                                    editor.editor.loadHTML(''); // Clear or set another value for other selections
+                                }
+                            }
+
+                            // Add event listener to the select element
+                            document.getElementById('idPerihal').addEventListener('change', updateTrixValue);
+                        </script>
                             @error('alamat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -100,24 +149,61 @@
                             @enderror
                         </div>
 
-                        <div id="att" class="mb-3" style="display: none;">
+                        <div id="attclass" class="mb-3" style="display: none;">
                             <label for="att" class="form-label">Ditujukan Kepada</label>
-                            <input type="text" class="form-control @error('att') is-invalid @enderror" placeholder="Ditujukan Kepada..." id="att" name="att" value="{{ old('att') }}">
+                            <input type="text" class="form-control @error('att') is-invalid @enderror" placeholder="Ditujukan Kepada..." id="att" name="att">
                             @error('att')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+                        <script>
+                            function updateATT() {
+                                const perihalSelect = document.getElementById('idPerihal');
+                                const ATTInput = document.getElementById('att');
+
+                                console.log('Selected value:', perihalSelect.value); // Debug log
+
+                                if (perihalSelect.value === '6') {
+                                    ATTInput.value = 'Bapak Rafli Yandra';
+                                } else {
+                                    ATTInput.value = ''; // Clear the input if other options are selected
+                                }
+                            }
+
+                            // Add event listener for change event on page load
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const perihalSelect = document.getElementById('idPerihal');
+                                perihalSelect.addEventListener('change', updateATT);
+                            });
+                        </script>
 
                         <div id="keterangan-field" class="mb-3" style="display: none;">
                         <label for="keterangan" class="form-label">Isi Surat / Keterangan</label>
-                        <textarea id="keterangan" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror"></textarea>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    const keterangan = Jodit.make('#keterangan');
-                                });
-                            </script>
+                        <textarea id="keterangan" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror">
+
+                        </textarea>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const keterangan = Jodit.make('#keterangan');
+                                const perihalSelect = document.getElementById('idPerihal');
+
+                                function updateKeterangan() {
+                                    if (perihalSelect.value === '6') {
+                                        keterangan.value = "<p>Dear Sir,</p><br><p>We, GLOBAL COAL RESOURCES Pte, Ltd., hereby state that we are in a position of an LOI and ready, willing and request for a long term contract of One – Year to purchase of coal as terms that mentioned below:</p>";
+                                    } else {
+                                        keterangan.value = ""; // Reset or set other values based on different selections
+                                    }
+                                }
+
+                                // Initial check
+                                updateKeterangan();
+
+                                // Update keterangan when the dropdown value changes
+                                perihalSelect.addEventListener('change', updateKeterangan);
+                            });
+                        </script>
                         </div>
 
                         <div id="surat-fco">
@@ -373,8 +459,9 @@
         const noSuratInput = document.getElementById('noSurat');
         const suratizinGroup = document.getElementById('surat-izin');
         const keteranganField = document.getElementById('keterangan-field');
+        const ket = document.getElementById('keterangan');
         const pttujuanClass = document.getElementById('pttujuanClass');
-        const att = document.getElementById('att');
+        const attclass = document.getElementById('attclass');
         const alamatClass = document.getElementById('alamatClass');
         const suratfcoGroups = document.querySelectorAll('#surat-fco .fco-field');
         const prefixInput = document.getElementById('prefix');
@@ -411,7 +498,7 @@
                     ...suratLOIGroups,
                     pttujuanClass,
                     alamatClass,
-                    att,
+                    attclass,
                     keteranganField,
                     document.getElementById('commodity'),
                     document.getElementById('qty'),
@@ -450,7 +537,7 @@
         }
 
         function hideAllFields() {
-            hideFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass, att]);
+            hideFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass, attclass]);
             suratfcoGroups.forEach(group => {
                 if (group) group.style.display = 'none';
             });
@@ -520,6 +607,11 @@
             setInitialNoSurat();
             updateVisibleFields();
             updatePrefix();
+
+            if(perihalSelect.value === '6'){
+                ket.value = "<p>Dear Sir,</p>";
+            }
+
         }
 
         [perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
