@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a href="http://surat-desa.test/">GEL GROUP</a>, All Right Reserved.
+                        &copy; <a href="https://gel-group.vercel.app/">GEL GROUP</a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         Created By <a href="#">IT GEL Avengers</a> 2024

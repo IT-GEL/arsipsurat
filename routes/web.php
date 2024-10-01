@@ -11,7 +11,7 @@ use App\Http\Controllers\DashboardGAController;
 use App\Http\Controllers\DashboardMSSController;
 use App\Http\Controllers\DashboardTNCController;
 use App\Http\Controllers\DetailQrController;
-
+use App\Http\Controllers\FeedbackController;
 
 
 /*
@@ -28,6 +28,7 @@ use App\Http\Controllers\DetailQrController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/profile/{id}', [ProfileController::class, 'index']);
+
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
@@ -50,8 +51,10 @@ Route::resource('/dashboard/it', DashboardITController::class)->middleware('auth
 Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth');
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
 
+
 Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
 Route::get('/detailQR/{id}', [DetailQrController::class, 'index']);
+Route::get('/feedback', [FeedbackController::class, 'index']);
 
 
 

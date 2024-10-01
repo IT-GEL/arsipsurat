@@ -62,7 +62,7 @@
                             <a class="btn btn-sm btn-warning" href="/dashboard/mss/{{ $item->id }}/edit"><i class="bi bi-pencil-square"></i></a>
                             <form action="/dashboard/mss/{{ $item->id }}" method="post" class="d-inline delete-form">
                                 @method('delete')
-                                @csrf 
+                                @csrf
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
                             <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
@@ -71,9 +71,9 @@
                                 @csrf
                                 @method('put')
                                 <input type="hidden" name="approve" value="yes">
-                                
-                                <button class="btn btn-sm {{ $item->approve ? 'btn-success' : 'btn-secondary' }}" 
-                                        data-approved="{{ $item->approve }}" 
+
+                                <button class="btn btn-sm {{ $item->approve ? 'btn-success' : 'btn-secondary' }}"
+                                        data-approved="{{ $item->approve }}"
                                         onclick="{{ $item->approve ? 'return false;' : 'berhasil(this);' }}"
                                         {{ $item->approve ? 'disabled' : '' }}>
                                     <i class="bi bi-check2-square"></i>
@@ -93,9 +93,6 @@
 </div>
 <!-- Recent Sales End -->
 
-<!-- SweetAlert CSS and JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.all.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.min.css" rel="stylesheet">
 <script type="text/javascript">
 
 const swalWithBootstrapButtons = Swal.mixin({

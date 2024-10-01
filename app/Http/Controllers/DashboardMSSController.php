@@ -65,7 +65,7 @@ class DashboardMSSController extends Controller
     public function store(Request $request)
     {
 
-        
+
         $validatedData = $request->validate([
             'kop' => 'required|string|max:255',
             'idPerihal' => 'required|numeric|max:255',
@@ -76,6 +76,7 @@ class DashboardMSSController extends Controller
             'pttujuan' => 'nullable|string|max:255',
             'ptkunjungan' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:255',
+            'att' => 'nullable|string|max:255',
             'keterangan' => 'nullable|string|max:9999',
             'commodity' => 'nullable|string|max:255',
             'source' => 'nullable|string|max:255',
@@ -141,6 +142,7 @@ class DashboardMSSController extends Controller
             'pttujuan' => 'nullable|string|max:255',
             'ptkunjungan' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:255',
+            'att' => 'nullable|string|max:255',
             'keterangan' => 'nullable|string|max:9999',
             'commodity' => 'nullable|string|max:255',
             'source' => 'nullable|string|max:255',
@@ -180,18 +182,18 @@ class DashboardMSSController extends Controller
     {
         try {
             $validatedData = $request->validate(['approve' => 'required|string|max:255']);
-    
+
             // Check user authentication
             $user = auth()->user();
             if (!$user) {
                 throw new \Exception('User not authenticated.');
             }
-    
+
             // Update status persetujuan
             $mss->approve = 1;
             $mss->qr = "QRMSS{$mss->id}.png"; // Example QR file name
             $mss->save();
-    
+
             // Create an instance of the DetailQr model
             $dqr = new DetailQr();
             $dqr->nosurat = $mss->prefix; // Store the prefix
@@ -222,22 +224,22 @@ class DashboardMSSController extends Controller
         $port = 80; // Ganti sesuai port yang Anda gunakan
         // Create a QR Code with the detailQr data
         $qrData = "http://{$ipAddress}:{$port}/detailQR/{$dqr->id}";
-    
+
         $qrCode = QrCode::create($qrData)
             ->setSize(300)
             ->setMargin(10);
-    
+
         $path = public_path("img/qrcodes");
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
         }
-    
+
         $filePath = "{$path}/{$dqr->qr}";
-    
+
         try {
             $writer = new \Endroid\QrCode\Writer\PngWriter(); // Ensure this line is present
             $writer->write($qrCode)->saveToFile($filePath);
-    
+
             // Check if the file was created successfully
             if (file_exists($filePath)) {
                 \Log::info("QR code generated successfully at: {$filePath}");
@@ -248,10 +250,10 @@ class DashboardMSSController extends Controller
             \Log::error("Error generating QR code: " . $e->getMessage());
         }
     }
-    
-    
-    
-      
+
+
+
+
 
 
     public function destroy(MSS $mss)

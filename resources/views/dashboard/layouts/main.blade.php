@@ -34,8 +34,13 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 
-    <link rel="stylesheet"href="https://unpkg.com/jodit@4.0.1/es2021/jodit.min.css"/>
-    <script src="https://unpkg.com/jodit@4.0.1/es2021/jodit.min.js"></script>
+    <link rel="stylesheet"href="https://unpkg.com/jodit@4.2.27/es2021/jodit.min.css"/>
+    <script src="https://unpkg.com/jodit@4.2.27/es2021/jodit.min.js"></script>
+
+
+    <!-- SweetAlert CSS and JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.min.css" rel="stylesheet">
 
     <style>
         trix-toolbar [data-trix-button-group="file-tools"] {
