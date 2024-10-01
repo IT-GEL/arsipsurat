@@ -30,7 +30,7 @@
                         @if (auth()->user()->name == "Marketing Sales Shipping" || auth()->user()->name == "superadmin" || auth()->user()->name == "Ervina Wijaya")
                             <a href="/dashboard/mss" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> {{ auth()->user()->name }}</a>
                         @endif
-                        <a href="/dashboard/keluhan" class="dropdown-item {{ Request::is('dashboard/keluhan*') ? 'active' : '' }}"><i class="bi bi-window"></i> Keluhan</a>
+                        <a href="/feedback" class="dropdown-item {{ Request::is('/feedback*') ? 'active' : '' }}"><i class="bi bi-window"></i> Feedback</a>
                         </div>
                     </div>
                 </div>

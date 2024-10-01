@@ -8,7 +8,7 @@
                     <h6 class="mb-4">Buat Surat Keterangan IT</h6>
                     <form method="post" action="/dashboard/it">
                         @csrf
-                        
+
                          <div class="mb-3">
                             <label for="perihal" class="form-label">Perihal Surat</label>
                             <select class="form-select @error('perihal') is-invalid @enderror" id="perihal" name="perihal" required autofocus>
@@ -25,7 +25,7 @@
                             @enderror
                         </div>
 
-                
+
                         <div class="mb-3">
                             <label for="noSurat" class="form-label">Nomor Surat</label>
                             <input type="number" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat" name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required value="{{ old('noSurat') }}">
@@ -42,7 +42,7 @@
                             @error('nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
-                                </div> 
+                                </div>
                             @enderror
                         </div>
                         <div class="mb-3">
@@ -52,7 +52,7 @@
                             @error('jabatan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
-                                </div> 
+                                </div>
                             @enderror
                         </div>
                         <div class="mb-3">
@@ -62,7 +62,7 @@
                             @error('nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
-                                </div> 
+                                </div>
                             @enderror
                         </div>
                         <div class="mb-3">
@@ -74,15 +74,7 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                        <!--<div class="mb-3 mt-3">
-                            <label for="tglSurat" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control @error('tglSurat') is-invalid @enderror" id="tglSurat" name="tglSurat" required value="{{ old('tglSurat') }}">
-                            @error('tglSurat')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div> -->
+
                         <div class="mb-3 mt-3">
                             <label for="tglSurat" class="form-label">Tanggal</label>
                             <input type="date" class="form-control @error('tglSurat') is-invalid @enderror" id="tglSurat" name="tglSurat" required value="{{ old('tglSurat') }}">
@@ -94,7 +86,7 @@
                         </div>
 
                         <script>
-                            document.addEventListener('DOMContentLoaded', function () 
+                            document.addEventListener('DOMContentLoaded', function ()
                                 {
                                 var today = new Date().toISOString().split('T')[0];
                                 document.getElementById('tglSurat').value = today;
