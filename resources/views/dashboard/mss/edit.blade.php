@@ -6,9 +6,9 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Edit Surat Keterangan Marketing Sales Shipping</h6>
-                    
+
                     <form method="post" action="/dashboard/mss/{{ $mss->id }}">
-                    
+
                         @csrf
                         @method('put')
                         <div class="mb-3">
@@ -35,30 +35,41 @@
                         </div>
 
                         <div id="surat-izin" class="mb-3" style="display: none;">
-                            <label for="ptkunjungan" class="form-label">PT Kunjungan</label>
+                            <label for="ptkunjungan" class="form-label">PT yang akan Mengunjungi Tambang </label>
                             <input type="text" class="form-control @error('ptkunjungan') is-invalid @enderror" placeholder="Isi PT Kunjungan..." id="ptkunjungan" name="ptkunjungan" value="{{ old('ptkunjungan', $mss->ptkunjungan) }}">
                             @error('ptkunjungan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
-                                </div> 
+                                </div>
                             @enderror
                         </div>
 
                         <div id="pttujuanClass" class="mb-3">
-                            <label for="pttujuan" class="form-label">PT Tujuan</label>
+                            <label for="pttujuan" class="form-label">PT yang akan di Kunjungi</label>
                             <input type="text" class="form-control @error('pttujuan') is-invalid @enderror" placeholder="Isi PT Tujuan..." id="pttujuan" name="pttujuan" value="{{ old('pttujuan', $mss->pttujuan) }}">
                             @error('pttujuan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
-                                </div> 
+                                </div>
                             @enderror
                         </div>
-                        
+
                         <div id="alamatClass"class="mb-3">
                             <label for="alamat" class="form-label">Alamat PT Tujuan</label>
                             <input id="alamat" type="hidden" name="alamat" value="{{ old('alamat', $mss->alamat)}}">
                             <trix-editor class="form-control @error('alamat') is-invalid @enderror" input="alamat" placeholder="Alamat PT Tujuan"></trix-editor>
                             @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div id="attclass" class="mb-3" style="display: none;">
+                            <label for="att" class="form-label">Ditujukan Kepada</label>
+                            <input type="text" class="form-control @error('att') is-invalid @enderror "
+                                placeholder="Ditujukan Kepada..." id="att" name="att" value="{{ old('att', $mss->att)}}">
+                            @error('att')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -78,7 +89,7 @@
                             </script>
                         </div>
 
- 
+
                         <div id="surat-fco">
                             <div class="fco-field mb-3" style="display: none;">
                                 <label for="commodity" class="form-label">Commodity</label>
@@ -86,7 +97,7 @@
                                 @error('commodity')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -96,7 +107,7 @@
                                 @error('source')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -106,7 +117,7 @@
                                 @error('country')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -116,7 +127,7 @@
                                 @error('spec')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -136,7 +147,43 @@
                                 @error('qty')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="loi-field mb-3" style="display: none;" id="delivery_basis">
+                                <label for="delivery_basis" class="form-label">Delivery Basis</label>
+                                <input type="text" class="form-control @error('delivery_basis') is-invalid @enderror"
+                                    placeholder="Delivery Basis..." id="delivery_basis" name="delivery_basis"
+                                    value="{{ old('delivery_basis', $mss->delivery_basis) }}">
+                                @error('delivery_basis')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="loi-field mb-3" style="display: none;" id="contract_dur">
+                                <label for="contract_dur" class="form-label">Contract Duration</label>
+                                <input type="text" class="form-control @error('contract_dur') is-invalid @enderror"
+                                    placeholder="Contract Duration..." id="contract_dur" name="contract_dur"
+                                    value="{{ old('contract_dur', $mss->contract_dur) }}">
+                                @error('contract_dur')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="loi-field mb-3" style="display: none;" id="po">
+                                <label for="po" class="form-label">Price Offered</label>
+                                <input type="text" class="form-control @error('po') is-invalid @enderror"
+                                    placeholder="Price Offered..." id="po" name="po"
+                                    value="{{ old('po', $mss->po) }}">
+                                @error('po')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 
@@ -146,7 +193,7 @@
                                 @error('lp')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -156,9 +203,20 @@
                                 @error('dp')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
+
+                            <div class="fco-field mb-3">
+                                <label for="matauang" class="form-label">Pilih Mata Uang Price Schemes</label>
+                                <select class="form-select @error('matauang') is-invalid @enderror" id="matauang"
+                                    name="matauang" value="{{ old('matauang', $mss->matauang) }}">
+                                    <option value="{{ old('matauang', $mss->matauang) }}" selected>{{ old('matauang', $mss->matauang) }}</option>
+                                    <option value="IDR">Rupiah</option>
+                                    <option value="DOLLAR">Dollar</option>
+                                </select>
+                            </div>
+
 
                             <div class="fco-field mb-3" style="display: none;">
                                 <label for="cif" class="form-label">Price Scheme (CIF)</label>
@@ -166,7 +224,7 @@
                                 @error('cif')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -176,7 +234,7 @@
                                 @error('fob')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -186,7 +244,7 @@
                                 @error('freight')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -206,7 +264,7 @@
                                 @error('tcd')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
 
@@ -216,7 +274,7 @@
                                 @error('surveyor')
                                     <div class="invalid-feedback">
                                         {{ $message }}
-                                    </div> 
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -240,7 +298,7 @@
                                 </div>
                             @enderror
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="namaTtd" class="form-label">Mengetahui</label>
                             <input type="text" class="form-control @error('namaTtd') is-invalid @enderror" id="namaTtd" name="namaTtd" required value="{{ old('namaTtd', $mss->namaTtd) }}">
@@ -252,9 +310,9 @@
                         </div>
 
 
-                        
+
                         <button type="submit" class="btn btn-primary">Buat Surat</button>
-                        
+
                     </form>
                 </div>
         </div>

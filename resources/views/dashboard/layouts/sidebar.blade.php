@@ -21,14 +21,14 @@
                         <div class="dropdown-menu bg-transparent border-0">
                         @if (auth()->user()->name == "IT Support" || auth()->user()->name == "superadmin")
                             <a href="/dashboard/it" class="dropdown-item {{ Request::is('dashboard/it*') ? 'active' : '' }}">
-                                <i class="bi bi-window"></i> {{ auth()->user()->name }}
+                                <i class="bi bi-window"></i> List Surat IT
                             </a>
                         @endif
                         @if (auth()->user()->name == "General Affair" || auth()->user()->name == "superadmin")
-                            <a href="/dashboard/ga" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-window"></i> {{ auth()->user()->name }}</a>
+                            <a href="/dashboard/ga" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-window"></i> List Surat GA</a>
                         @endif
                         @if (auth()->user()->name == "Marketing Sales Shipping" || auth()->user()->name == "superadmin" || auth()->user()->name == "Ervina Wijaya")
-                            <a href="/dashboard/mss" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> {{ auth()->user()->name }}</a>
+                            <a href="/dashboard/mss" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat MSS</a>
                         @endif
                         <a href="/feedback" class="dropdown-item {{ Request::is('/feedback*') ? 'active' : '' }}"><i class="bi bi-window"></i> Feedback</a>
                         </div>

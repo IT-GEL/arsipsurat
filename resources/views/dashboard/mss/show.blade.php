@@ -1,29 +1,50 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
-    @if ($mss->idPerihal == '1')
+
+    <style>
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: auto;
+            padding: 10mm;
+            border: 1px solid #D3D3D3;
+            border-radius: 5px;
+            background-color: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-content {
+            margin-left: 10mm;
+            margin-right: 10mm;
+            position: relative;
+            z-index: 10;
+            padding-bottom: 10mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Make sure the content stays in front */
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            /* Ensure the footer is behind content */
+        }
+    </style>
+
+    @if ($mss->idPerihal == '1') <!-- FCO -->
         <!-- Recent Sales Start -->
-        <style>
-            @page {
-                size: A4;
-                margin: 1cm;
-            }
 
-            .page {
-                width: 210mm;
-                min-height: 297mm;
-                margin: auto;
-                padding: 10mm;
-                border: 1px solid #D3D3D3;
-                border-radius: 5px;
-                background-color: white;
-            }
-
-            .header-content {
-                margin-left: 10mm;
-                margin-right: 10mm
-            }
-        </style>
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
             <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
                 Kembali</a>
@@ -35,10 +56,10 @@
             <div class="page">
                 <div class="header" id="header">
                     <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
                 </div>
                 <div class="header-content">
                     {{-- <center style="margin-top: 50px;"> --}}
-                    <br>
                     <table width="545">
                         <tr>
                             <td style="text-align: left">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
@@ -141,10 +162,11 @@
                     @if ($mss->matauang == 'DOLLAR')
                         <table width="545">
                             <tr>
+
+                                <td width="5"> 9. </td>
+                                <td width="120">Price Scheme</td>
+                                <td width="5">:</td>
                                 @if ($mss->cif !== null)
-                                    <td width="5"> 9. </td>
-                                    <td width="120">Price Scheme</td>
-                                    <td width="5">:</td>
                                     <td width="30">CIF</td>
                                     <td width="175"> $ {{ number_format($mss->cif, 0, '.', ',') }} </td>
                                 @endif
@@ -175,36 +197,34 @@
                     @if ($mss->matauang == 'IDR')
                         <table width="545">
                             <tr>
-                                <td width="20"> 9. </td>
-                                <td width="200">Price Scheme</td>
-                                <td width="10">:</td>
-                                <td width="335">
-                                    @if ($mss->cif == '0')
-                                        Rp {{ number_format($mss->cif, 0, ',', '.') }}
-                                    @endif
+
+                                <td width="5"> 9. </td>
+                                <td width="120">Price Scheme</td>
+                                <td width="5">:</td>
+                                @if ($mss->cif !== null)
+                                    <td width="30">CIF</td>
+                                    <td width="175"> RP {{ number_format($mss->cif, 0, '.', ',') }} </td>
+                                @endif
+                            </tr>
+                        </table>
+                        <table width="545">
+                            <tr>
+                                @if ($mss->fob !== null)
+                                    <td width="150"></td>
+                                    <td width="1">FOB</td>
+                                    <td width="185"> RP {{ number_format($mss->fob, 0, '.', ',') }}
+                                @endif
                                 </td>
                             </tr>
                         </table>
                         <table width="545">
                             <tr>
-                                <td width="200"></td>
-                                <td width="35"></td>
-                                <td width="335">
-                                    @if ($mss->fob == '0')
-                                        Rp {{ number_format($mss->fob, 0, ',', '.') }}
-                                    @endif
-                                </td>
-                            </tr>
-                        </table>
-                        <table width="545">
-                            <tr>
-                                <td width="200"> </td>
-                                <td width="35"></td>
-                                <td width="335">
-                                    @if ($mss->freight == '0')
-                                        Rp {{ number_format($mss->freight, 0, ',', '.') }}
-                                    @endif
-                                </td>
+                                @if ($mss->freight !== null)
+                                    <td width="185"> </td>
+                                    <td width="40">FREIGHT</td>
+                                    <td width="200"> RP {{ number_format($mss->freight, 0, '.', ',') }}
+                                    </td>
+                                @endif
                             </tr>
                         </table>
                     @endif
@@ -232,18 +252,6 @@
                         <td width="335">{{ $mss->surveyor }}</td>
                         </tr>
                     </table>
-                    <br><br><br><br><br>
-                    <br>
-                    <br>
-                    <br />
-                    <br>
-                    @if ($mss->kop == 'QIN')
-                        <br /><br /><br /><br />
-                    @endif
-                    @if ($mss->kop == 'ERA')
-                        <br /><br />
-                    @endif
-
                     <table width="545">
                         <tr>
                             <td width="20">13. </td>
@@ -303,8 +311,12 @@
                             <td>MSS Ops Mgr</td>
                         </tr>
                     </table>
-                    <br><br><br><br><br>
+
                     {{-- </center> --}}
+                </div>
+                <div class="footer">
+                    <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
+                        style="max-width: 100%; height: auto;">
                 </div>
             </div>
         </div>
@@ -313,30 +325,23 @@
     @endif
 
     @if ($mss->idPerihal == '2')
+        <!-- Surat Izin Masuk Tambang -->
         <!-- Recent Sales Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="bg-light text-center rounded p-4">
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                    <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                            class="bi bi-printer"></i> Cetak</a>
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+                    class="bi bi-printer"></i> Cetak</a> --}}
+            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+        </div>
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
                 </div>
-                <center style="margin-top: 50px;">
-                    <table style="align-content: center">
-                        <tr>
-                            <td><img src="{{ asset('dashmin/img/GEL.png') }}" width="110" height="110" /></td>
-                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 13px">
-                                <center>
-                                    <font size="5"><b>GLOBAL ENERGI LESTARI</b> </font>
-                                </center>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <hr style="border: 1px solid" />
-                            </td>
-                        </tr>
-                    </table>
+                <div class="header-content">
+
 
                     <table width="545">
                         <tr>
@@ -408,33 +413,54 @@
                         </table>
                     @endif
                     <br>
-                </center>
+
+                </div>
+                <div class="footer">
+                    <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
+                        style="max-width: 100%; height: auto;">
+                </div>
             </div>
         </div>
         <!-- Recent Sales End -->
     @endif
 
     @if ($mss->idPerihal == '3')
+        <!-- Berita Acara -->
         <!-- Recent Sales Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                        class="bi bi-printer"></i> Cetak</a> --}}
-                <button id="download-pdf" class="btn btn-primary">Cetak</button>
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+                    class="bi bi-printer"></i> Cetak</a> --}}
+            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+        </div>
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <style>
+                    table {
+                        border-collapse: collapse;
+                        width: 545px;
+                        /* Optional: set width here if you want */
+                    }
 
-            </div>
-            <div class="bg-light text-center rounded p-4"
-                style="
-                        background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
-                        background-size: contain; /* Adjusts the image to fit within the body without stretching */
-                        background-repeat: no-repeat; /* Prevents the image from repeating */
-                        background-position: center; /* Centers the image */
-                ">
+                    table td {
+                        border: 2px solid;
+                        padding: 8px;
+                    }
 
-                <center style="margin-top: 50px;">
+                    .ini-content td {
+                        border: 0px;
+                        padding: 0px;
+                        width: 0px;
+                    }
+                </style>
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
                     <br><br>
-                    <table width="545">
+                </div>
+                <div class="header-content">
+                    {{-- <center style="margin-top: 50px;"> --}}
+                    <table width="545" class="ini-content">
                         <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
                                 class="text">
@@ -447,27 +473,28 @@
                     </table>
                     <br>
                     <br>
-                    <table width="545">
+                    <table width="545" class="ini-content">
                         <tr>
                             <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
                         </tr>
                     </table>
                     <br><br>
-                    <table class="table-keterangan" width="545">
+
+                    {!! $mss->keterangan !!}
+                    {!! $mss->keterangan !!}
+                    {!! $mss->keterangan !!}
+                    {!! $mss->keterangan !!}
+                    {!! $mss->keterangan !!}
+                    {!! $mss->keterangan !!}
+
+                    {{-- <table class="table-keterangan" width="545">
                         <tr>
                             <td style="border: 0px;">{!! $mss->keterangan !!}</td>
                         </tr>
-                    </table>
+                    </table> --}}
                     <br>
-                    <table width="545">
-                        <tr>
-                            <td>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk
-                                permintaan pengajuan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan
-                                terimakasih..</td>
-                        </tr>
-                    </table>
                     <br /><br /><br /><br /><br><br>
-                    <table width="545">
+                    <table width="545" class="ini-content">
                         <tr style="">
                             <td style="padding-left: 45px;">Dibuat</td>
                             <td style="padding-left: 100px;">Mengetahui</td>
@@ -491,15 +518,28 @@
                     <br>
                     <br /><br />
                     <br>
-                </center>
+                    {{-- </center> --}}
+                </div>
+                <div class="footer">
+                    <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
+                        style="max-width: 100%; height: auto;">
+                </div>
             </div>
         </div>
         <!-- Recent Sales End -->
     @endif
 
-    @if ($mss->perihal == 'Berita Acara Pembatalan PVR')
+    @if ($mss->idPerihal == '4')
+        <!-- Tanda Terima -->
         <!-- Recent Sales Start -->
         <div class="container-fluid pt-4 px-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
+                {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+                        class="bi bi-printer"></i> Cetak</a> --}}
+                <button id="download-pdf" class="btn btn-primary">Cetak</button>
+
+            </div>
             <div class="bg-light text-center rounded p-4"
                 style="
                         background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
@@ -507,24 +547,117 @@
                         background-repeat: no-repeat; /* Prevents the image from repeating */
                         background-position: center; /* Centers the image */
                 ">
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                    <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                            class="bi bi-printer"></i> Cetak</a>
 
-                </div>
                 <center style="margin-top: 50px;">
+                    <br><br><br>
+                    @if ($mss->kop = 'QIN')
+                        <br><br><br>
+                    @endif
                     <table width="545">
                         <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
                                 class="text">
-                                <u>BERITA ACARA PEMBATALAN PVR</u>
+                                <u>TANDA TERIMA</u>
                         </tr>
                         <tr>
                             <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
                             </td>
                         </tr>
                     </table>
+                    <br>
+                    <br>
+                    <br>
+                    <br><br>
+                    <table class="table-keterangan" width="545">
+                        <tr>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
+                        </tr>
+                        <table width="545">
+                            <tr style="">
+                                <td style="text-align: left">Pengirim</td>
+
+
+                                <td style="text-align: right">Diterima Oleh</td>
+                            </tr>
+                            @if ($mss->approve == '1')
+                                <tr>
+                                    <td style="padding-left: 45px;"></td>
+                                    <td> <img style="height:125px; weigth:125px;padding-left:45px;"
+                                            src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
+                                </tr>
+                            @endif
+                        </table>
+                        <br><br><br /><br /><br />
+                        <table width="545">
+                            <tr style="">
+                                <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
+                            </tr>
+                        </table>
+                        <br /><br />
+                        <br>
+                        <br /><br />
+                        <br>
+
+                </center>
+            </div>
+        </div>
+        <!-- Recent Sales End -->
+    @endif
+
+    @if ($mss->idPerihal == '5')
+        <!-- Permohonan Revisi Invoice dan Pembatalan Faktur Pajak GEL -->
+        <!-- Recent Sales Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
+                {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+                        class="bi bi-printer"></i> Cetak</a> --}}
+                <button id="download-pdf" class="btn btn-primary">Cetak</button>
+
+            </div>
+            <div class="bg-light text-center rounded p-4"
+                style="
+                        background-image: url('{{ asset('img/' . $mss->kop . '-kop.png') }}');
+                        background-size: contain; /* Adjusts the image to fit within the body without stretching */
+                        background-repeat: no-repeat; /* Prevents the image from repeating */
+                        background-position: center; /* Centers the image */
+                ">
+
+                <center style="margin-top: 50px;">
+                    <br><br> <br>
+                    <br><br>
+                    <table width="545">
+                        <tr>
+                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
+                                class="text">
+                                <u>BERITA ACARA {{ $mss->perihalBA }}</u>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <?php
+                    // Get the date from the $mss object
+                    $date = $mss->tglSurat;
+
+                    // Get the day of the week (in English)
+                    $dayOfWeek = date('l', strtotime($date));
+
+                    // Define an array for Indonesian day names
+                    $indonesianDayNames = ['Sunday' => 'Minggu', 'Monday' => 'Senin', 'Tuesday' => 'Selasa', 'Wednesday' => 'Rabu', 'Thursday' => 'Kamis', 'Friday' => 'Jumat', 'Saturday' => 'Sabtu'];
+
+                    // Translate the English day name to Indonesian
+                    $indonesianDay = $indonesianDayNames[$dayOfWeek];
+                    ?>
+
+                    <table width="545">
+                        <tr>
+                            <td style="text-align: right"><?php echo $indonesianDay . ', ' . formatDateIndonesian($date); ?></td>
+                        </tr>
+                    </table>
+
                     <br>
                     <br>
                     <br><br>
@@ -534,38 +667,34 @@
                         </tr>
                     </table>
                     <br>
-                    <table width="545">
-                        <tr>
-                            <td>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk
-                                permintaan pembatalan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan
-                                terimakasih..</td>
-                        </tr>
-                    </table>
-                    <br /><br /><br /><br /><br><br>
+                    <br /><br /><br /><br /><br><br><br /><br /><br /><br /><br><br>
                     <table width="545">
                         <tr style="">
-                            <td style="padding-left: 45px;">Dibuat</td>
-                            <td style="padding-left: 100px;">Mengetahui</td>
+                            <td style="text-align: right">Diterima Oleh</td>
                         </tr>
-                        <tr>
-                            <td>Sales Departement,</td>
-                        </tr>
+                        @if ($mss->approve == '1')
+                            <tr>
+                                <td style="padding-left: 45px;"></td>
+                                <td> <img style="height:125px; weigth:125px;padding-left:45px;"
+                                        src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
+                            </tr>
+                        @endif
                     </table>
+                    <br><br><br /><br /><br />
                     <br /><br />
                     <br>
                     <br /><br />
                     <br>
-                    <br /><br />
-                    <br>
-                    <br /><br />
-                    <br>
+
                 </center>
             </div>
         </div>
         <!-- Recent Sales End -->
     @endif
 
+
     @if ($mss->idPerihal == '6')
+        <!-- Letter of Intent -->
         <!-- Recent Sales Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4"
@@ -610,7 +739,7 @@
                         <tr>
                             <td style="padding-left:50px;">COMMODITY</td>
                             <td width="10">:</td>
-                            <td width="250">{{ $mss->comodity }}</td>
+                            <td width="250">{{ $mss->commodity }}</td>
                         </tr>
                     </table>
                     <table width="545">
@@ -698,6 +827,10 @@
         </div>
         <!-- Recent Sales End -->
     @endif
+    <br /><br />
+    <br>
+    <br /><br />
+    <br>
 
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
@@ -707,7 +840,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const documentContainer = document.getElementById('contentToConvert');
-        const pageHeight = 1000; // Height of A4 in mm
+        const pageHeight = 900; // Height of A4 in mm
 
         function paginateContent() {
             const pages = Array.from(document.querySelectorAll('.page'));
@@ -723,6 +856,7 @@
 
                     // Clone the header for the new page
                     let headerClone = document.querySelector('.header').cloneNode(true);
+                    let footerClone = document.querySelector('.footer').cloneNode(true);
                     newPage.appendChild(headerClone);
 
                     let newContent = document.createElement('div');
@@ -735,10 +869,12 @@
 
                     // Append the new content to the new page
                     newPage.appendChild(newContent);
+                    newPage.appendChild(footerClone);
                     documentContainer.appendChild(newPage);
 
                     // Recalculate content height for the current page
                     contentHeight = content.scrollHeight;
+                    paginateContent();
                 }
             });
         }
