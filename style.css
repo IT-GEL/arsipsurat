@@ -1,0 +1,73 @@
+/* Set A4 size */
+@page {
+    size: A4;
+    margin: 1cm;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FAFAFA;
+}
+
+.page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: auto;
+    padding: 20mm;
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.content {
+    margin-top: 20px;
+}
+
+.commodity-table, .specification-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.commodity-table td, .specification-table th, .specification-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.specification-table th {
+    background-color: #666666;
+}
+
+@media print {
+    body {
+        width: auto; /* Ensures full width in print */
+        height: auto; /* Ensures full height in print */
+        margin: 0; /* Removes default margins */
+        box-shadow: none; /* Removes any shadow effects */
+        background-color: white; /* Ensures white background in print */
+    }
+
+    .page {
+        page-break-after: always; /* Ensures each page breaks after content */
+        box-shadow: none; /* Removes any shadow effects for print */
+        border-radius: initial; /* Resets border radius for print */
+        background-color: initial; /* Resets background color for print */
+    }
+
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px; /* Adjust height as needed */
+        background-color: white; /* Ensure it prints correctly */
+        z-index: 1000; /* Ensure it stays on top */
+        border-bottom: 1px solid #ddd; /* Optional border for clarity */
+    }
+}
