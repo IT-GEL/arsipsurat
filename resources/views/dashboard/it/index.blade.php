@@ -28,14 +28,14 @@
             @endif
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h6 class="mb-0">Daftar Surat Divisi IT</h6>
-                <a href="/dashboard/it/create" class="btn btn-primary">Tambah Surat</a>
+                <a href="{{ url('/dashboard/it/create') }}" class="btn btn-primary">Tambah Surat</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
                             <th scope="col">No Surat</th>
-                 
+
                             <th scope="col">Tanggal Surat</th>
                             <th scope="col">Nama User</th>
                             <th scope="col">Action</th>
@@ -44,20 +44,20 @@
                     <tbody>
                         @foreach ($its as $it)
                         <tr>
-                            <td>ITS/{{ $it->id }}/GELJKT/{{ $it->romanMonth }}/2024</td>
-                           
+                            <td>{{ $it->prefix }}</td>
+
                             <td>{{ date('d M Y', strtotime($it->tglSurat)); }}</td>
                             <td>{{ $it->nama }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="/dashboard/it/{{ $it->id }}">Detail</a>
-                                <a class="btn btn-sm btn-warning" href="/dashboard/it/{{ $it->id }}/edit">Edit</a>
-                                <form action="/dashboard/it/{{ $it->id }}" method="post" class="d-inline">
+                                <a class="btn btn-sm btn-primary" href="{{ url('/dashboard/it/' . $it->id) }}">Detail</a>
+                                <a class="btn btn-sm btn-warning" href="{{ url('/dashboard/it/' . $it->id . '/edit') }}">Edit</a>
+                                <form action="{{ url('/dashboard/it/' . $it->id) }}" method="post" class="d-inline">
                                     @method('delete')
-                                    @csrf 
+                                    @csrf
                                     <button class="btn btn-sm btn-danger border-0" onclick="return confirm('Kilik Oke Untuk Menghapus')">Hapus</button>
                                 </form>
                                 {{-- <a class="btn btn-sm btn-danger" href="#">Hapus</a> --}}
-                                <a class="btn btn-sm btn-success" href="/dashboard/it/{{ $it->id }}/cetak">Cetak</a>
+                                <a class="btn btn-sm btn-success" href="{{ url('/dashboard/it/' . $it->id . '/cetak') }}">Cetak</a>
                             </td>
                         </tr>
                         @endforeach

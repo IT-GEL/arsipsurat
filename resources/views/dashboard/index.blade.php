@@ -55,7 +55,7 @@
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Daftar Surat Keterangan IT</h6>
-            <a href="/dashboard/it">Lihat Semua</a>
+            <a href="{{ url('/dashboard/it') }}">Lihat Semua</a>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -94,7 +94,7 @@
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Daftar Surat Keterangan GA</h6>
-            <a href="/dashboard/ga">Lihat Semua</a>
+            <a href="{{ url('/dashboard/ga') }}">Lihat Semua</a>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -131,7 +131,7 @@
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Daftar Surat Keterangan Marketing Sales Shipping</h6>
-            <a href="/dashboard/mss">Lihat Semua</a>
+            <a href="{{ url('/dashboard/mss') }}">Lihat Semua</a>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">

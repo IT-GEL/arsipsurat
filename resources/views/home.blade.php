@@ -11,11 +11,11 @@
                     <p class="animated slideInDown">
                         Web ini merupakan aplikasi Arsip Surat yang dibuat oleh IT Team PT Global Energi Lestari
                     </p>
-                    <a href="/dashboard" class="btn btn-primary py-3 px-4 animated slideInDown">Mulai Membuat Surat</a>
+                    <a href="{{ url('/dashboard') }}" class="btn btn-primary py-3 px-4 animated slideInDown">Mulai Membuat Surat</a>
                 </div>
                 <div class="col-lg-6 animated fadeIn">
                     <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;" src="img/GEL.png"
-                        alt=""> 
+                        alt="">
                 </div>
             </div>
         </div>
@@ -24,10 +24,9 @@
 
 @endsection
 
-    
 
 
 
 
 
-    
+

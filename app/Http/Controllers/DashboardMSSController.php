@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
+use Illuminate\Support\Facades\Log;
 
 
 class DashboardMSSController extends Controller
@@ -107,7 +108,7 @@ class DashboardMSSController extends Controller
 
         MSS::create($validatedData);
 
-        return redirect('/dashboard/mss')->with('success', 'Surat berhasil ditambahkan!');
+        return redirect()->route('mss.index')->with('success', 'Surat berhasil ditambahkan!');
     }
 
     public function show(MSS $mss)
@@ -132,13 +133,14 @@ class DashboardMSSController extends Controller
 
     public function update(Request $request, MSS $mss)
     {
+
+
+
         $rules = [
-            'kop' => 'required|string|max:255',
             'idPerihal' => 'required|numeric|max:255',
             'perihal' => 'required|string|max:255',
             'perihalBA' => 'nullable|string|max:255',
             'noSurat' => 'required|numeric',
-            'prefix' => 'required|string|max:255',
             'pttujuan' => 'nullable|string|max:255',
             'ptkunjungan' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:255',
@@ -159,7 +161,7 @@ class DashboardMSSController extends Controller
             'shipschedule' => 'nullable|string|max:255',
             'tcd' => 'nullable|string|max:255',
             'surveyor' => 'nullable|string|max:255',
-            'qas' => 'nullable|string|max:255',
+            'qas' => 'nullable|string|max:9999',
             'top' => 'nullable|string|max:255',
             'tglSurat' => 'nullable|date',
             'ettd' => 'nullable|string|max:255',
@@ -175,7 +177,7 @@ class DashboardMSSController extends Controller
 
         $mss->update($validatedData);
 
-        return redirect('/dashboard/mss')->with('success', 'Surat berhasil di edit!');
+        return redirect()->route('mss.index')->with('success', 'Surat berhasil di edit!');
     }
 
     public function approve(Request $request, MSS $mss)
@@ -210,7 +212,7 @@ class DashboardMSSController extends Controller
 
             return redirect('/dashboard/mss')->with('success', 'Surat berhasil diapprove!');
         } catch (\Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
             return redirect('/dashboard/mss')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
 
@@ -220,10 +222,9 @@ class DashboardMSSController extends Controller
     private function generateQRCode(DetailQr $dqr)
     {
 
-        $ipAddress = getHostByName(getHostName());
-        $port = 80; // Ganti sesuai port yang Anda gunakan
+        $host = $_SERVER['HTTP_HOST']; // Get the host header from the request
         // Create a QR Code with the detailQr data
-        $qrData = "http://{$ipAddress}:{$port}/detailQR/{$dqr->id}";
+        $qrData = "http://{$host}:5555/detailQR/{$dqr->id}";
 
         $qrCode = QrCode::create($qrData)
             ->setSize(300)
@@ -242,12 +243,12 @@ class DashboardMSSController extends Controller
 
             // Check if the file was created successfully
             if (file_exists($filePath)) {
-                \Log::info("QR code generated successfully at: {$filePath}");
+                Log::info("QR code generated successfully at: {$filePath}");
             } else {
-                \Log::error("Failed to generate QR code at: {$filePath}");
+                Log::error("Failed to generate QR code at: {$filePath}");
             }
         } catch (\Exception $e) {
-            \Log::error("Error generating QR code: " . $e->getMessage());
+            Log::error("Error generating QR code: " . $e->getMessage());
         }
     }
 
@@ -260,7 +261,9 @@ class DashboardMSSController extends Controller
     {
         MSS::destroy($mss->id);
 
-        return redirect('/dashboard/mss')->with('success', 'Surat berhasil dihapus!');
+        return redirect()->route('mss.index')->with('success', 'Surat berhasil dihapus!');
+
+
     }
 
     public function cetak(MSS $mss)

@@ -28,7 +28,7 @@
             @endif
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h6 class="mb-0">Daftar Surat Keterangan General Affair</h6>
-                <a href="/dashboard/ga/create" class="btn btn-primary">Tambah Surat</a>
+                <a href="{{ url('/dashboard/ga/create') }}" class="btn btn-primary">Tambah Surat</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -47,14 +47,14 @@
                             <td>{{ $ga->nama }}</td>
                             <td>{{ date('d M Y', strtotime($ga->tglSurat)); }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="/dashboard/ga/{{ $ga->noSurat }}">Detail</a>
-                                <a class="btn btn-sm btn-warning" href="/dashboard/ga/{{ $ga->noSurat }}/edit">Edit</a>
-                                <form action="/dashboard/ga/{{ $ga->noSurat }}" method="post" class="d-inline">
+                                <a class="btn btn-sm btn-primary" href="{{ url('/dashboard/ga/' . $ga->noSurat) }}">Detail</a>
+                                <a class="btn btn-sm btn-warning" href="{{ url('/dashboard/ga/' . $ga->noSurat . '/edit') }}">Edit</a>
+                                <form action="{{ url('/dashboard/ga/' . $ga->noSurat) }}" method="post" class="d-inline">
                                     @method('delete')
-                                    @csrf 
+                                    @csrf
                                     <button class="btn btn-sm btn-danger border-0" onclick="return confirm('Kilik Oke Untuk Menghapus')">Hapus</button>
                                 </form>
-                                <a class="btn btn-sm btn-success" href="/dashboard/ga/{{ $ga->noSurat }}/cetak">Cetak</a>
+                                <a class="btn btn-sm btn-success" href="{{ url('/dashboard/ga/' . $ga->noSurat . '/cetak') }}">Cetak</a>
                             </td>
                         </tr>
                         @endforeach

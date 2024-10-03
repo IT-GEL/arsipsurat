@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FeedbackModels;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
@@ -13,4 +14,25 @@ class FeedbackController extends Controller
             'title' => 'Feedback',
         ]);
     }
+
+    public function store(Request $request)
+    {
+        // Validate the input
+        $request->validate([
+            'feedback' => 'required|string',
+            'acc' => 'required|string|max:255', // Validate acc as a required string
+            'users' => 'required|string|max:255', // Validate users
+        ]);
+
+        // Store the feedback in the database
+        Feedback::create([
+            'feedback' => $request->input('feedback'),
+            'acc' => Auth::user()->name, // Get the authenticated user's name
+            'users' => $request->input('users'), // Account field from the request
+        ]);
+
+        // Return JSON response for AJAX
+        return response()->json(['message' => 'Feedback submitted successfully!'], 200);
+    }
+
 }

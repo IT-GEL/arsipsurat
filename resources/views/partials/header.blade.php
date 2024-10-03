@@ -21,7 +21,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-circle"></i> {{ auth()->user()->name }}</a>
                         <div class="dropdown-menu shadow-sm m-0">
-                            <a href="/dashboard" class="dropdown-item"><i class="bi bi-layout-text-sidebar-reverse"></i> Dashboard</a>
+                            <a href="{{ url('/dashboard') }}" class="dropdown-item"><i class="bi bi-layout-text-sidebar-reverse"></i> Dashboard</a>
                             <hr class="dropdown-divider">
                             <form action="/logout" method="post">
                                 @csrf

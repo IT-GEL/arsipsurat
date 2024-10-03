@@ -13,23 +13,19 @@ use App\Http\Controllers\DashboardTNCController;
 use App\Http\Controllers\DetailQrController;
 use App\Http\Controllers\FeedbackController;
 
-
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+|--------------------------------------------------------------------------|
+| Web Routes                                                               |
+|--------------------------------------------------------------------------|
+| Here is where you can register web routes for your application. These    |
+| routes are loaded by the RouteServiceProvider within a group which      |
+| contains the "web" middleware group. Now create something great!        |
+|--------------------------------------------------------------------------|
 */
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/profile/{id}', [ProfileController::class, 'index']);
-
-
+// Authentication Routes
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'authenticate');
@@ -41,23 +37,24 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('/register', 'store');
 });
 
+// Dashboard Routes
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-// Route::get('/dashboard/cetak_pdf', [DashboardController::class, 'cetak_pdf'])->middleware('auth');
-
 Route::get('/dashboard/it/{it:id}/cetak', [DashboardITController::class, 'cetak'])->middleware('auth');
 Route::get('/dashboard/ga/{ga:id}/cetak', [DashboardGAController::class, 'cetak'])->middleware('auth');
 Route::get('/dashboard/mss/{mss:id}/cetak', [DashboardMSSController::class, 'cetak'])->middleware('auth');
 Route::resource('/dashboard/it', DashboardITController::class)->middleware('auth');
 Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth');
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
-
-
 Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
+
+// QR Detail Route
 Route::get('/detailQR/{id}', [DetailQrController::class, 'index']);
+
+// Feedback Routes
 Route::get('/feedback', [FeedbackController::class, 'index']);
+Route::get('/feedback-show/{fd}', [FeedbackController::class, 'fsshow'])->name('feedback.show');
+Route::post('/dashboard/mss', [FeedbackController::class, 'store']);
 
-
-
-//Route::get('/dashboard/it/cetak_pdf', [DashboardITController::class, 'cetak_pdf'])->middleware('auth');
-
+// Uncomment if needed
+// Route::get('/dashboard/it/cetak_pdf', [DashboardITController::class, 'cetak_pdf'])->middleware('auth');
 

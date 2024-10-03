@@ -29,7 +29,7 @@
         @endif
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Daftar Surat Divisi Marketing Sales Shipping</h6>
-            <a href="/dashboard/mss/create" class="btn btn-primary"><i class="bi bi-file-text-fill"></i> Tambah Surat</a>
+            <a href="{{ url('/dashboard/mss/create') }}" class="btn btn-primary"><i class="bi bi-file-text-fill"></i> Tambah Surat</a>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -58,14 +58,14 @@
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="/dashboard/mss/{{ $item->id }}"><i class="bi bi-info-square"></i></a>
-                            <a class="btn btn-sm btn-warning" href="/dashboard/mss/{{ $item->id }}/edit"><i class="bi bi-pencil-square"></i></a>
-                            <form action="/dashboard/mss/{{ $item->id }}" method="post" class="d-inline delete-form">
+                            <a class="btn btn-sm btn-primary" href="{{ url('/dashboard/mss/' . $item->id) }}"><i class="bi bi-info-square"></i></a>
+                            <a class="btn btn-sm btn-warning" href="{{ url('/dashboard/mss/' . $item->id . '/edit') }}" @if($item->approve == "1") style="pointer-events:none; opacity:0.5;" @endif><i class="bi bi-pencil-square"></i></a>
+                            <form action="{{ url('/dashboard/mss/' . $item->id) }}" method="post" class="d-inline delete-form">
                                 @method('delete')
                                 @csrf
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
-                            <a class="btn btn-sm btn-info" href="/dashboard/mss/{{ $item->id }}/cetak" target="_blank"><i class="bi bi-printer"></i></a>
+                            <a class="btn btn-sm btn-info" href="{{ url('/dashboard/mss/' . $item->id . '/cetak') }}" target="_blank"><i class="bi bi-printer"></i></a>
                             @if (auth()->user()->name == "Ervina Wijaya")
                             <form action="{{ route('mss.approve', $item->id) }}" method="post" class="d-inline">
                                 @csrf
@@ -154,9 +154,6 @@ function berhasil(button) {
         });
     }
 }
-
-
-
 
 </script>
 

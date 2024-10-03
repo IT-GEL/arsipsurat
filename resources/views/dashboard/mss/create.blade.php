@@ -6,7 +6,7 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Buat Surat Keterangan Marketing Sales Shipping</h6>
-                    <form method="post" action="/dashboard/mss">
+                    <form method="post" action="{{ url('/dashboard/mss') }}">
                         @csrf
 
                         <input type="hidden" id="approve" name="approve" value="0">
@@ -130,7 +130,7 @@
                                     const editor = event.target;
                                     const hiddenInput = document.getElementById('alamat');
                                     hiddenInput.value = editor.editor.getDocument()
-                                .toString(); // Update the hidden input with the editor's content
+                                        .toString(); // Update the hidden input with the editor's content
                                 });
 
                                 // Function to set the Trix editor value based on the select value
@@ -193,7 +193,6 @@
 
                         </textarea>
                             <script>
-
                                 document.addEventListener('DOMContentLoaded', function() {
                                     const keterangan = Jodit.make('#keterangan');
                                     const perihalSelect = document.getElementById('idPerihal');
@@ -437,6 +436,38 @@
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         const qas = Jodit.make('#qas');
+                                        const perihalSelect = document.getElementById('idPerihal');
+
+                                        function updateqas() {
+                                            if (perihalSelect.value === '1') {
+                                                qas.value =
+                                                    `<table style="border-collapse:collapse;width: 100%;"><tbody>
+                                                        <tr>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td></tr>
+                                                        <tr>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td></tr>
+                                                        <tr>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td>
+                                                            <td style="width: 25%;"><br></td></tr></tbody>
+                                                    </table>`;
+                                            } else {
+                                                qas.value = ""; // Reset or set other values based on different selections
+                                            }
+                                        }
+
+                                        // Initial check
+                                        updateqas();
+
+                                        // Update keterangan when the dropdown value changes
+                                        perihalSelect.addEventListener('change', updateqas);
                                     });
                                 </script>
                             </div>
@@ -637,14 +668,15 @@
                     const tglSurat = new Date(tglSuratInput.value);
                     const romanMonth = toRoman(tglSurat.getMonth() + 1);
                     const year = tglSurat.getFullYear();
+                    const kop = document.getElementById('kop').value;
 
                     const prefixMap = {
-                        '1': `Ref. No:MSS/GEL/FCO-${noSurat}/${romanMonth}/${year}`,
-                        '2': `Ref. No:MSS/GEL/BA-${noSurat}/${romanMonth}/${year}`,
+                        '1': `Ref. No:MSS/${kop}/FCO-${noSurat}/${romanMonth}/${year}`,
+                        '2': `Ref. No:MSS/${kop}/BA-${noSurat}/${romanMonth}/${year}`,
                         '3': `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`,
                         '4': `Tanda Terima-${noSurat}/${romanMonth}/${year}`,
-                        '5': `${year}/GEL-PLN/SAL-${noSurat}`,
-                        '6': `No: MSS/GEL/LOI-${noSurat}/${romanMonth}/${year}/`
+                        '5': `${year}/${kop}-PLN/SAL-${noSurat}`,
+                        '6': `No: MSS/${kop}/LOI-${noSurat}/${romanMonth}/${year}/`
                     };
 
                     prefixInput.value = prefixMap[perihalSelect.value] || '';
