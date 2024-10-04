@@ -30,6 +30,9 @@
                 @if (auth()->user()->name == "Marketing Sales Shipping" || auth()->user()->name == "superadmin" || auth()->user()->name == "Ervina Wijaya")
                     <a href="{{ url('/dashboard/mss') }}" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat MSS</a>
                 @endif
+                @if (auth()->user()->name == "Global Sinergi Maritim" || auth()->user()->name == "superadmin")
+                    <a href="{{ url('/dashboard/gsm') }}" class="dropdown-item {{ Request::is('dashboard/gsm*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat GSM</a>
+                @endif
                 <a href="{{ url('/feedback') }}" class="dropdown-item {{ Request::is('/feedback*') ? 'active' : '' }}"><i class="bi bi-window"></i> Feedback</a>
                 @if(auth()->user()->name == "IT Support" || auth()->user()->name == "superadmin")
                 <a href="{{ url('/feedback-show') }}" class="dropdown-item {{ Request::is('/feedback-show*') ? 'active' : '' }}"><i class="bi bi-window"></i> List Feedback</a>

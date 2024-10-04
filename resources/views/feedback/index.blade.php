@@ -6,7 +6,7 @@
         <div class="col-sm-12 col-xl-12">
             <div class="bg-light rounded h-100 p-4">
                 <h6 class="mb-4">Feedback Aplikasi Arsip Surat</h6>
-                <form id="feedbackForm" method="post" action="{{ url('/dashboard/mss') }}">
+                <form id="feedbackForm" method="post" action="{{ url('/feedback-upload') }}">
                     @csrf
 
                     <div id="feedback-field" class="mb-3">
@@ -27,7 +27,7 @@
 
                     <!-- Hidden input for user's account -->
                     <input type="hidden" name="acc" value="{{ auth()->user()->name }}"> <!-- Adjust based on your actual user model -->
-
+                    <input type="hidden" name="status" value="Requested">
                     <button type="submit" class="btn btn-primary">Kirim Feedback</button>
                 </form>
                 <div id="errorMessages" class="mt-3"></div> <!-- Placeholder for error messages -->

@@ -314,11 +314,11 @@
 
                     {{-- </center> --}}
                 </div>
-                @if($mss->kop == "GEL")
-                <div class="footer-page">
-                    <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
-                        style="max-width: 100%; height: auto;">
-                </div>
+                @if ($mss->kop == 'GEL')
+                    <div class="footer-page">
+                        <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
+                            style="max-width: 100%; height: auto;">
+                    </div>
                 @endif
             </div>
         </div>
@@ -417,11 +417,11 @@
                     <br>
 
                 </div>
-                @if($mss->kop == "GEL")
-                <div class="footer-page">
-                    <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
-                        style="max-width: 100%; height: auto;">
-                </div>
+                @if ($mss->kop == 'GEL')
+                    <div class="footer-page">
+                        <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
+                            style="max-width: 100%; height: auto;">
+                    </div>
                 @endif
             </div>
         </div>
@@ -485,11 +485,6 @@
                     <br><br>
 
                     {!! $mss->keterangan !!}
-                    {!! $mss->keterangan !!}
-                    {!! $mss->keterangan !!}
-                    {!! $mss->keterangan !!}
-                    {!! $mss->keterangan !!}
-                    {!! $mss->keterangan !!}
 
                     {{-- <table class="table-keterangan" width="545">
                         <tr>
@@ -524,7 +519,7 @@
                     <br>
                     {{-- </center> --}}
                 </div>
-                <div class="footer">
+                <div class="footer-page">
                     <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
                         style="max-width: 100%; height: auto;">
                 </div>
@@ -536,76 +531,63 @@
     @if ($mss->idPerihal == '4')
         <!-- Tanda Terima -->
         <!-- Recent Sales Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
+            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
-                <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <button id="download-pdf" class="btn btn-primary">Cetak</button>
 
-            </div>
-            <div class="contentToConvert">
-                <div class="page">
-                    <div class="header" id="header">
-                        <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}"
-                            style="max-width: 100%; height: auto;">
-                        <br><br>
-                    </div>
-                    <div class="header-content">
-                        {{-- <center style="margin-top: 50px;"> --}}
-                            <br><br><br>
-                            @if ($mss->kop = 'QIN')
-                                <br><br><br>
-                            @endif
-                            <table width="545">
-                                <tr>
-                                    <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
-                                        class="text">
-                                        <u>TANDA TERIMA</u>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
-                                    </td>
-                                </tr>
-                            </table>
-                            <br>
-                            <br>
-                            <br>
-                            <br><br>
-                            <table class="table-keterangan" width="545">
-                                <tr>
-                                    <td style="border: 0px;">{!! $mss->keterangan !!}</td>
-                                </tr>
-                                <table width="545">
-                                    <tr style="">
-                                        <td style="text-align: left">Pengirim</td>
+        </div>
+        <div class="contentToConvert" id="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
+                </div>
+                <div class="header-content">
+                    {{-- <center style="margin-top: 50px;"> --}}
+                    <br><br><br>
+                    @if ($mss->kop = 'QIN')
+                        <br><br><br>
+                    @endif
+                    <table width="545">
+                        <tr>
+                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
+                                class="text">
+                                <u>TANDA TERIMA</u>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <br>
+                    <br><br>
+                    <table class="table-keterangan" width="545">
+                        <tr>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
+                        </tr>
+                        <table width="545">
+                            <tr style="">
+                                <td style="text-align: left">Pengirim</td>
 
 
-                                        <td style="text-align: right">Diterima Oleh</td>
-                                    </tr>
-                                    @if ($mss->approve == '1')
-                                        <tr>
-                                            <td style="padding-left: 45px;"></td>
-                                            <td> <img style="height:125px; weigth:125px;padding-left:45px;"
-                                                    src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
-                                        </tr>
-                                    @endif
-                                </table>
-                                <br><br><br /><br /><br />
-                                <table width="545">
-                                    <tr style="">
-                                        <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
-                                    </tr>
-                                </table>
-                                <br /><br />
-                                <br>
-                                <br /><br />
-                                <br>
-
+                                <td style="text-align: right">Diterima Oleh</td>
+                            </tr>
+                        </table>
+                        <br><br><br /><br /><br />
+                        <table width="545">
+                            <tr style="">
+                                <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
+                            </tr>
+                        </table>
                         {{-- </center> --}}
-                    </div>
-
+                    </table>
+                </div>
             </div>
+            <div id="viewerContainer"></div>
         </div>
         <!-- Recent Sales End -->
     @endif
@@ -613,86 +595,84 @@
     @if ($mss->idPerihal == '5')
         <!-- Permohonan Revisi Invoice dan Pembatalan Faktur Pajak GEL -->
         <!-- Recent Sales Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-                {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
+            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
-                <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <button id="download-pdf" class="btn btn-primary">Cetak</button>
 
-            </div>
-            <div id="contentToConvert" class="contentToConvert">
-                <div class="page">
-                    <div class="header" id="header">
-                        <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}"
-                            style="max-width: 100%; height: auto;">
-                        <br><br>
-                    </div>
-                    <div class="header-content">
-                        {{-- <center style="margin-top: 50px;"> --}}
-                            <br><br> <br>
-                            <br><br>
-                            <table width="545">
-                                <tr>
-                                    <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
-                                        class="text">
-                                        <u>BERITA ACARA {{ $mss->perihalBA }}</u>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
-                                    </td>
-                                </tr>
-                            </table>
-                            <br>
-                            <?php
-                            // Get the date from the $mss object
-                            $date = $mss->tglSurat;
-
-                            // Get the day of the week (in English)
-                            $dayOfWeek = date('l', strtotime($date));
-
-                            // Define an array for Indonesian day names
-                            $indonesianDayNames = ['Sunday' => 'Minggu', 'Monday' => 'Senin', 'Tuesday' => 'Selasa', 'Wednesday' => 'Rabu', 'Thursday' => 'Kamis', 'Friday' => 'Jumat', 'Saturday' => 'Sabtu'];
-
-                            // Translate the English day name to Indonesian
-                            $indonesianDay = $indonesianDayNames[$dayOfWeek];
-                            ?>
-
-                            <table width="545">
-                                <tr>
-                                    <td style="text-align: right"><?php echo $indonesianDay . ', ' . formatDateIndonesian($date); ?></td>
-                                </tr>
-                            </table>
-
-                            <br>
-                            <br>
-                            <br><br>
-                            <table class="table-keterangan" width="545">
-                                <tr>
-                                    <td style="border: 0px;">{!! $mss->keterangan !!}</td>
-                                </tr>
-                            </table>
-                            <br>
-                            <br /><br /><br /><br /><br><br><br /><br /><br /><br /><br><br>
-                            <table width="545">
-                                <tr>
-                                    <td style="text-align: left">Dibuat Oleh</td>
-                                    <td style="text-align: right">Diterima Oleh</td>
-                                </tr>
-                                @if ($mss->approve == '1')
-                                    <tr>
-                                        <td style="text-align: left"> <img style="height:125px; weigth:125px;"
-                                                src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
-                                        <td></td>
-                                    </tr>
-                                @endif
-                            </table>
-
-                        {{-- </center> --}}
-
-            </div>
         </div>
-        <!-- Recent Sales End -->
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
+                </div>
+                <div class="header-content">
+                    {{-- <center style="margin-top: 50px;"> --}}
+                    <br><br> <br>
+                    <br><br>
+                    <table width="545">
+                        <tr>
+                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
+                                class="text">
+                                <u>BERITA ACARA {{ $mss->perihalBA }}</u>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <?php
+                    // Get the date from the $mss object
+                    $date = $mss->tglSurat;
+
+                    // Get the day of the week (in English)
+                    $dayOfWeek = date('l', strtotime($date));
+
+                    // Define an array for Indonesian day names
+                    $indonesianDayNames = ['Sunday' => 'Minggu', 'Monday' => 'Senin', 'Tuesday' => 'Selasa', 'Wednesday' => 'Rabu', 'Thursday' => 'Kamis', 'Friday' => 'Jumat', 'Saturday' => 'Sabtu'];
+
+                    // Translate the English day name to Indonesian
+                    $indonesianDay = $indonesianDayNames[$dayOfWeek];
+                    ?>
+
+                    <table width="545">
+                        <tr>
+                            <td style="text-align: right"><?php echo $indonesianDay . ', ' . formatDateIndonesian($date); ?></td>
+                        </tr>
+                    </table>
+
+                    <br>
+                    <br>
+                    <br><br>
+                    <table class="table-keterangan" width="545">
+                        <tr>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br /><br /><br /><br /><br><br><br /><br /><br /><br /><br><br>
+                    <table width="545">
+                        <tr>
+                            <td style="text-align: left">Dibuat Oleh</td>
+                            <td style="text-align: right">Diterima Oleh</td>
+                        </tr>
+                        @if ($mss->approve == '1')
+                            <tr>
+                                <td style="text-align: left"> <img style="height:125px; weigth:125px;"
+                                        src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
+                                <td></td>
+                            </tr>
+                        @endif
+                    </table>
+
+                    {{-- </center> --}}
+
+                </div>
+            </div>
+            <!-- Recent Sales End -->
     @endif
 
     @if ($mss->idPerihal == '6')
@@ -713,107 +693,107 @@
                 </div>
                 <div class="header-content">
                     {{-- <center style="margin-top: 50px;"> --}}
-                        <table width="545">
-                            <tr>
-                                <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
-                                    class="text">
-                                    <span>RE:</span> {{ $mss->perihal }}
-                                <td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
-                                </td>
-                            </tr>
-                        </table>
-                        <br><br>
-                        <table class="table-keterangan" width="545">
-                            <tr>
-                                <td style="border: 0px;">{!! $mss->keterangan !!}</td>
-                            </tr>
-                        </table>
-                        <br>
+                    <table width="545">
+                        <tr>
+                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
+                                class="text">
+                                <span>RE:</span> {{ $mss->perihal }}
+                            <td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
+                            </td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <table class="table-keterangan" width="545">
+                        <tr>
+                            <td style="border: 0px;">{!! $mss->keterangan !!}</td>
+                        </tr>
+                    </table>
+                    <br>
 
-                        <table width="545">
-                            <tr>
-                                <td style="padding-left:50px;">COMMODITY</td>
-                                <td width="10">:</td>
-                                <td width="250">{{ $mss->commodity }}</td>
-                            </tr>
-                        </table>
-                        <table width="545">
-                            <tr>
-                                <td style="padding-left:50px;">SPECIFICATION</td>
-                                <td width="10">:</td>
-                                <td width="250">{{ $mss->spec }}</td>
-                            </tr>
-                        </table>
-                        <table width="545">
-                            <tr>
-                                <td style="padding-left:50px;">COUNTRY OF ORIGIN</td>
-                                <td width="10">:</td>
-                                <td width="250">{{ $mss->country }}</td>
-                            </tr>
-                        </table>
-                        <table width="545">
-                            <tr>
-                                <td style="padding-left:50px;">QUANTITY</td>
-                                <td width="10">:</td>
-                                <td width="250">{{ $mss->qty }}</td>
-                            </tr>
-                        </table>
-                        <table width="545">
-                            <tr>
-                                <td style="padding-left:50px;">DELIVERY BASIS</td>
-                                <td width="10">:</td>
-                                <td width="250">{{ $mss->delivery_basis }}</td>
-                            </tr>
-                        </table>
-                        <table width="545">
-                            <tr>
-                                <td style="padding-left:50px;">CONTRACT DURATION</td>
-                                <td width="10">:</td>
-                                <td width="250">{{ $mss->contract_dur }}</td>
-                            </tr>
-                        </table>
-                        <table width="545">
-                            <tr>
-                                <td style="padding-left:50px;">PRICE OFFER</td>
-                                <td width="10">:</td>
-                                <td width="250">{{ $mss->po }}</td>
-                            </tr>
-                        </table>
+                    <table width="545">
+                        <tr>
+                            <td style="padding-left:50px;">COMMODITY</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->commodity }}</td>
+                        </tr>
+                    </table>
+                    <table width="545">
+                        <tr>
+                            <td style="padding-left:50px;">SPECIFICATION</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->spec }}</td>
+                        </tr>
+                    </table>
+                    <table width="545">
+                        <tr>
+                            <td style="padding-left:50px;">COUNTRY OF ORIGIN</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->country }}</td>
+                        </tr>
+                    </table>
+                    <table width="545">
+                        <tr>
+                            <td style="padding-left:50px;">QUANTITY</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->qty }}</td>
+                        </tr>
+                    </table>
+                    <table width="545">
+                        <tr>
+                            <td style="padding-left:50px;">DELIVERY BASIS</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->delivery_basis }}</td>
+                        </tr>
+                    </table>
+                    <table width="545">
+                        <tr>
+                            <td style="padding-left:50px;">CONTRACT DURATION</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->contract_dur }}</td>
+                        </tr>
+                    </table>
+                    <table width="545">
+                        <tr>
+                            <td style="padding-left:50px;">PRICE OFFER</td>
+                            <td width="10">:</td>
+                            <td width="250">{{ $mss->po }}</td>
+                        </tr>
+                    </table>
 
-                        <br>
-                        <table width="545">
-                            <tr>
-                                <td>We will be looking forward to receiving feedback from your company and we thank you in
-                                    advance for your co-operation and promprt feedback. Look forward to working with you soon.
-                                </td>
-                            </tr>
-                        </table>
-                        <br /><br />
-                        <table width="545">
-                            <tr style="">
-                                <td style="padding-left: 45px;">Regrad,</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold;">GLOBAL COAL RESOURCES Pte Ltd.</td>
-                            </tr>
+                    <br>
+                    <table width="545">
+                        <tr>
+                            <td>We will be looking forward to receiving feedback from your company and we thank you in
+                                advance for your co-operation and promprt feedback. Look forward to working with you soon.
+                            </td>
+                        </tr>
+                    </table>
+                    <br /><br />
+                    <table width="545">
+                        <tr style="">
+                            <td style="padding-left: 45px;">Regrad,</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">GLOBAL COAL RESOURCES Pte Ltd.</td>
+                        </tr>
 
-                        </table>
-                        <br /><br /><br /><br />
-                        <table width="545">
-                            <tr>
-                                <td style="font-weight:bold;"><u>LUHENDRI</u></td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold;">Director</td>
-                            </tr>
-                        </table>
+                    </table>
+                    <br /><br /><br /><br />
+                    <table width="545">
+                        <tr>
+                            <td style="font-weight:bold;"><u>LUHENDRI</u></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Director</td>
+                        </tr>
+                    </table>
                     {{-- </center> --}}
+                </div>
             </div>
-        </div>
-        <!-- Recent Sales End -->
+            <!-- Recent Sales End -->
     @endif
     <br /><br />
     <br>
@@ -824,7 +804,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
     integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const documentContainer = document.getElementById('contentToConvert');
@@ -869,11 +849,41 @@
 
         paginateContent();
 
-        document.getElementById('download-pdf').addEventListener('click', function() {
+        var pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+        pdfjsLib.getDocument('{{ asset('uploads/' . $mss->lampiran) }}').promise.then(function(pdf) {
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                pdf.getPage(pageNum).then(function(page) {
+                    var canvas = document.createElement('canvas');
+                    canvas.className = 'page';
+                    var container = document.getElementById('viewerContainer');
+                    container.appendChild(canvas);
 
+                    var viewport = page.getViewport({
+                        scale: 1
+                    });
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    var ctx = canvas.getContext('2d');
+                    var renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+
+                    page.render(renderContext);
+                });
+            }
+        });
+
+        document.getElementById('download-pdf').addEventListener('click', async function() {
+            let pages = document.getElementById('contentToConvert').querySelectorAll('.page')
+            pages.forEach(page => {
+                page.style.border = 'none';
+            });
             const element = document.getElementById('contentToConvert');
             const opt = {
-                margin: 0,
                 filename: 'document.pdf',
                 html2canvas: {
                     scale: 3,
@@ -887,7 +897,10 @@
             };
 
             // Generate the PDF
-            html2pdf().from(element).set(opt).save();
+            await html2pdf().from(element).set(opt).save();
+            pages.forEach(page => {
+                page.style.border = '1px solid #D3D3D3';
+            });
         });
 
     });

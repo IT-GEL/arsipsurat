@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardITController;
 use App\Http\Controllers\DashboardGAController;
 use App\Http\Controllers\DashboardMSSController;
+use App\Http\Controllers\DashboardGSMController;
 use App\Http\Controllers\DashboardTNCController;
 use App\Http\Controllers\DetailQrController;
 use App\Http\Controllers\FeedbackController;
@@ -39,12 +40,11 @@ Route::controller(RegisterController::class)->group(function () {
 
 // Dashboard Routes
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/it/{it:id}/cetak', [DashboardITController::class, 'cetak'])->middleware('auth');
-Route::get('/dashboard/ga/{ga:id}/cetak', [DashboardGAController::class, 'cetak'])->middleware('auth');
-Route::get('/dashboard/mss/{mss:id}/cetak', [DashboardMSSController::class, 'cetak'])->middleware('auth');
+
 Route::resource('/dashboard/it', DashboardITController::class)->middleware('auth');
 Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth');
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
+Route::resource('/dashboard/gsm', DashboardGSMController::class)->middleware('auth');
 Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
 
 // QR Detail Route
@@ -52,9 +52,16 @@ Route::get('/detailQR/{id}', [DetailQrController::class, 'index']);
 
 // Feedback Routes
 Route::get('/feedback', [FeedbackController::class, 'index']);
-Route::get('/feedback-show/{fd}', [FeedbackController::class, 'fsshow'])->name('feedback.show');
-Route::post('/dashboard/mss', [FeedbackController::class, 'store']);
+Route::post('/feedback-upload', [FeedbackController::class, 'store']);
+Route::get('/feedback-show/', [DashboardITController::class, 'feedback']);
+Route::get('/feedback-detail/{id}', [DashboardITController::class, 'fsshow']);
 
+
+
+// Route::post('/dashboard/mss', [DashboardMSSController::class, 'store']);
 // Uncomment if needed
 // Route::get('/dashboard/it/cetak_pdf', [DashboardITController::class, 'cetak_pdf'])->middleware('auth');
+// Route::get('/dashboard/it/{it:id}/cetak', [DashboardITController::class, 'cetak'])->middleware('auth');
+// Route::get('/dashboard/ga/{ga:id}/cetak', [DashboardGAController::class, 'cetak'])->middleware('auth');
+// Route::get('/dashboard/mss/{mss:id}/cetak', [DashboardMSSController::class, 'cetak'])->middleware('auth');
 

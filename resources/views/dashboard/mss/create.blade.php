@@ -6,7 +6,7 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Buat Surat Keterangan Marketing Sales Shipping</h6>
-                    <form method="post" action="{{ url('/dashboard/mss') }}">
+                    <form method="post" action="/dashboard/mss" enctype="multipart/form-data">
                         @csrf
 
                         <input type="hidden" id="approve" name="approve" value="0">
@@ -195,6 +195,7 @@
                             <script>
                                 document.addEventListener('DOMContentLoaded', function() {
                                     const keterangan = Jodit.make('#keterangan');
+                                    new DragAndDrop(keterangan);
                                     const perihalSelect = document.getElementById('idPerihal');
                                     const perihalBA = document.getElementById('perihalBA');
 
@@ -436,6 +437,7 @@
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         const qas = Jodit.make('#qas');
+                                        new DragAndDrop(qas);
                                         const perihalSelect = document.getElementById('idPerihal');
 
                                         function updateqas() {
@@ -526,8 +528,16 @@
                             @enderror
                         </div>
 
-
-
+                        <div class="mb-3">
+                            <label for="lampiran" class="form-label">Upload Lampiran (Optional)</label>
+                            <input type="file" class="form-control @error('lampiran') is-invalid @enderror"
+                                id="lampiran" name="lampiran" multiple>
+                            @error('lampiran')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Buat Surat</button>
 
@@ -536,6 +546,48 @@
             </div>
         </div>
         <script>
+            class DragAndDrop {
+                constructor(jodit) {
+                    this.jodit = jodit;
+                    this.init();
+                }
+
+                init() {
+                    const editorArea = this.jodit.container;
+
+                    editorArea.addEventListener('dragover', (event) => {
+                        event.preventDefault();
+                        editorArea.classList.add('drag-over');
+                    });
+
+                    editorArea.addEventListener('dragleave', () => {
+                        editorArea.classList.remove('drag-over');
+                    });
+
+                    editorArea.addEventListener('drop', (event) => {
+                        event.preventDefault();
+                        editorArea.classList.remove('drag-over');
+
+                        const files = event.dataTransfer.files;
+                        if (files.length > 0) {
+                            for (const file of files) {
+                                if (file.type.startsWith('image/')) {
+                                    this.handleImageUpload(file);
+                                }
+                            }
+                        }
+                    });
+                }
+
+                handleImageUpload(file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width: 100%;" />`;
+                        this.jodit.selection.insertHTML(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
             document.addEventListener('DOMContentLoaded', function() {
                 const perihalSelect = document.getElementById('idPerihal');
                 const noSuratInput = document.getElementById('noSurat');

@@ -65,6 +65,7 @@ class DashboardMSSController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
 
 
         $validatedData = $request->validate([
@@ -78,7 +79,7 @@ class DashboardMSSController extends Controller
             'ptkunjungan' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:255',
             'att' => 'nullable|string|max:255',
-            'keterangan' => 'nullable|string|max:9999',
+            'keterangan' => 'nullable|string',
             'commodity' => 'nullable|string|max:255',
             'source' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:255',
@@ -99,16 +100,25 @@ class DashboardMSSController extends Controller
             'delivery_basis' => 'nullable|string|max:255',
             'contract_dur' => 'nullable|string|max:255',
             'po' => 'nullable|string|max:255',
-
             'tglSurat' => 'nullable|date',
             'ettd' => 'nullable|string|max:255',
             'ttd' => 'nullable|string|max:255',
             'namaTtd' => 'nullable|string|max:255',
+            // 'lampiran' => 'nullable|string|max:255',
+
         ]);
+
+
+        if ($request->hasFile('lampiran')) {
+            $file = $request->file('lampiran');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+            $validatedData['lampiran'] = $filename;
+        }
 
         MSS::create($validatedData);
 
-        return redirect()->route('mss.index')->with('success', 'Surat berhasil ditambahkan!');
+        return redirect('/dashboard/mss')->with('success', 'Surat berhasil ditambahkan!');
     }
 
     public function show(MSS $mss)
@@ -145,7 +155,7 @@ class DashboardMSSController extends Controller
             'ptkunjungan' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:255',
             'att' => 'nullable|string|max:255',
-            'keterangan' => 'nullable|string|max:9999',
+            'keterangan' => 'nullable|string',
             'commodity' => 'nullable|string|max:255',
             'source' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:255',
@@ -161,7 +171,7 @@ class DashboardMSSController extends Controller
             'shipschedule' => 'nullable|string|max:255',
             'tcd' => 'nullable|string|max:255',
             'surveyor' => 'nullable|string|max:255',
-            'qas' => 'nullable|string|max:9999',
+            'qas' => 'nullable|string',
             'top' => 'nullable|string|max:255',
             'tglSurat' => 'nullable|date',
             'ettd' => 'nullable|string|max:255',
@@ -177,7 +187,7 @@ class DashboardMSSController extends Controller
 
         $mss->update($validatedData);
 
-        return redirect()->route('mss.index')->with('success', 'Surat berhasil di edit!');
+        return redirect('/dashboard/mss')->with('success', 'Surat berhasil di edit!');
     }
 
     public function approve(Request $request, MSS $mss)
@@ -261,7 +271,7 @@ class DashboardMSSController extends Controller
     {
         MSS::destroy($mss->id);
 
-        return redirect()->route('mss.index')->with('success', 'Surat berhasil dihapus!');
+        return redirect('/dashboard/mss')->with('success', 'Surat berhasil dihapus!');
 
 
     }

@@ -80,7 +80,6 @@
                                 </button>
                             </form>
                             @endif
-
                         </td>
 
                     </tr>

@@ -22,6 +22,7 @@ class FeedbackController extends Controller
             'feedback' => 'required|string',
             'acc' => 'required|string|max:255', // Validate acc as a required string
             'users' => 'required|string|max:255', // Validate users
+            'status' => 'required|string|max:255', // Validate users
         ]);
 
         // Store the feedback in the database
@@ -29,6 +30,8 @@ class FeedbackController extends Controller
             'feedback' => $request->input('feedback'),
             'acc' => Auth::user()->name, // Get the authenticated user's name
             'users' => $request->input('users'), // Account field from the request
+            'status' => $request->input('status'), // Account field from the request
+
         ]);
 
         // Return JSON response for AJAX

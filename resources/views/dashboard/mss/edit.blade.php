@@ -140,6 +140,7 @@
                                     const keteranganEditor = Jodit.make('#keterangan', {
                                         value: keteranganValue // Set the initial value here
                                     });
+                                    new DragAndDrop(keteranganEditor);
                                 });
                             </script>
                         </div>
@@ -381,6 +382,7 @@
                                         const qasEditor = Jodit.make('#qas', {
                                             value: qasValue // Set the initial value here
                                         });
+                                        new DragAndDrop(qasEditor);
                                     });
                                 </script>
                             </div>
@@ -444,6 +446,48 @@
 
         <!-- Add JavaScript to handle form visibility -->
         <script>
+            class DragAndDrop {
+                constructor(jodit) {
+                    this.jodit = jodit;
+                    this.init();
+                }
+
+                init() {
+                    const editorArea = this.jodit.container;
+
+                    editorArea.addEventListener('dragover', (event) => {
+                        event.preventDefault();
+                        editorArea.classList.add('drag-over');
+                    });
+
+                    editorArea.addEventListener('dragleave', () => {
+                        editorArea.classList.remove('drag-over');
+                    });
+
+                    editorArea.addEventListener('drop', (event) => {
+                        event.preventDefault();
+                        editorArea.classList.remove('drag-over');
+
+                        const files = event.dataTransfer.files;
+                        if (files.length > 0) {
+                            for (const file of files) {
+                                if (file.type.startsWith('image/')) {
+                                    this.handleImageUpload(file);
+                                }
+                            }
+                        }
+                    });
+                }
+
+                handleImageUpload(file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width: 100%;" />`;
+                        this.jodit.selection.insertHTML(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
             document.addEventListener('DOMContentLoaded', function() {
                 const idPerihal = document.getElementById('idPerihal');
                 const suratizinGroup = document.getElementById('surat-izin');

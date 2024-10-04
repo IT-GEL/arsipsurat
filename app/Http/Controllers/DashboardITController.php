@@ -38,16 +38,18 @@ public function feedback()
 {
     $fd = Feedback::latest()->paginate(8);
 
-    return view('dashboard.it.feedback', [
+    return view('dashboard.it.feedback-show', [
         'title' => 'Feedback Show',
         'fd' => $fd,
     ]);
 }
 
-public function fsshow(Feedback $fd)
+public function fsshow($id)
 {
-    return view('dashboard.it.feedback-show', [
-        'title' => 'Feedback Show',
+
+    $fd = Feedback::find($id);
+    return view('dashboard.it.feedback-detail', [
+        'title' => 'Feedback Detail',
         'fd' => $fd,
     ]);
 }
