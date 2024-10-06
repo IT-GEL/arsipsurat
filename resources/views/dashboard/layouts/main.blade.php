@@ -52,9 +52,10 @@
         }
 
         .table-keterangan td {
-            border: 2px solid;
+            border: 1px solid;
             padding: 8px;
         }
+
         html, body {
             height: 100%;
             margin: 0;

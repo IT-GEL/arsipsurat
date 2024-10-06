@@ -12,10 +12,10 @@
                         <input type="hidden" id="approve" name="approve" value="0">
 
                         <div class="mb-3">
-                            <label for="kop" class="form-label">Pilih PT</label>
+                            <label for="kop" class="form-label">Pilih Kop Surat PT </label>
                             <select class="form-select @error('kop') is-invalid @enderror" id="kop" name="kop"
                                 autofocus>
-                                <option value="" selected>Pilih PT</option>
+                                <option value="" selected>Tanpa Kop</option>
                                 <option value="GEL">GEL</option>
                                 <option value="QIN">QIN</option>
                                 <option value="ERA">ERA</option>
@@ -205,10 +205,17 @@
                                         if (perihalSelect.value === '6') {
                                             keterangan.value =
                                                 "<p>Dear Sir,</p><br><p>We, GLOBAL COAL RESOURCES Pte, Ltd., hereby state that we are in a position of an LOI and ready, willing and request for a long term contract of One – Year to purchase of coal as terms that mentioned below:</p>";
-                                        } else if (perihalBA.value === '') {
+                                        } else if (perihalBA.value === 'Surveyor') {
                                             keterangan.value =
-                                                `<br><br><br>
-                                                <p>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pengajuan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</p>`;
+                                                `<p style="text-align: justify;">Sesuai arahandari Bapak Dypo untuk COA TB Kasih Power 2000-1/BG Rimau 3016 dengan quantity
+                                                     8.451,191 MT dengan tujuan Jetty Senamas, Kalteng-Jetty Gresik bahwa COA tersebut
+                                                    dipakai untuk dua surveyor, yaitu PT Asiatrust Technovima Qualiti dan PT
+                                                    Calmaint Global Riset.</p>
+                                                    <br style="text-align: justify;">
+                                                    <p style="text-align: justify;">Demikian
+                                                    berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pengajuan PVR di
+                                                    bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan
+                                                    terimakasih.</p>`;
                                         } else if (perihalBA.value === 'Pembatalan PVR') {
                                             keterangan.value =
                                                 `
@@ -551,6 +558,28 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <script>
+                            function updatenamaTTD() {
+                                const BAPerihal = document.getElementById('perihalBA');
+                                const namaTTDinput = document.getElementById('namaTtd');
+
+                                console.log('Selected value:', BAPerihal.value); // Debug log
+
+                                if (BAPerihal.value === 'Surveyor') {
+                                    namaTTDinput.value = 'Dypo Fitramadhan';
+                                } else {
+                                    namaTTDinput.value = ''; // Clear the input if other options are selected
+                                }
+                            }
+
+                            // Add event listener for change event on page load
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const BAPerihal = document.getElementById('perihalBA');
+                                BAPerihal.addEventListener('change', updatenamaTTD);
+                            });
+                        </script>
+
 
                         <div class="mb-3">
                             <label for="lampiran" class="form-label">Upload Lampiran (Optional)</label>

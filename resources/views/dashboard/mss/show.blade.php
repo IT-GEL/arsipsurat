@@ -473,9 +473,11 @@
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; text-transform:uppercase; font-weight: bold"
                                 class="text">
                                 <u>BERITA ACARA {{ $mss->perihalBA }}</u>
+                            </td>
                         </tr>
                         <tr>
-                            <td style="text-align: center; font-weight: bold; font-style: italic;">{{ $mss->prefix }}
+                            <td style="text-align: center; font-weight: bold; font-style: italic;">
+                                {{ $mss->prefix }}
                             </td>
                         </tr>
                     </table>
@@ -497,6 +499,21 @@
                     </table> --}}
                     <br>
                     <br />
+
+                    @if($mss->perihalBA == "Pembatalan PVR")
+
+
+                            @if ($mss->approve == '1')
+                            <table style ="width:635;" class="ini-content">
+                            <tr>
+                                <td> <img style="height:70px;"
+                                        src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
+                            </tr>
+                            </table>
+                        @endif
+
+
+                    @else
                     <table style="width:635;" class="ini-content">
                         <tr style="">
                             <td style="padding-left: 45px;">Dibuat</td>
@@ -523,6 +540,7 @@
                             <td style="text-align: right;">{{$mss->namaTtd}}</td>
                         </tr>
                     </table>
+                    @endif
 
                     {{-- </center> --}}
                 </div>
@@ -851,7 +869,7 @@
 
                     // Recalculate content height for the current page
                     contentHeight = content.scrollHeight;
-                    paginateContent();
+
                 }
             });
         }
