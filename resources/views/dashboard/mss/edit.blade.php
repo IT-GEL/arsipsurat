@@ -437,7 +437,7 @@
 
 
 
-                        <button type="submit" class="btn btn-primary">Buat Surat</button>
+                        <button type="submit" class="btn btn-primary">Ubah Surat</button>
 
                     </form>
                 </div>

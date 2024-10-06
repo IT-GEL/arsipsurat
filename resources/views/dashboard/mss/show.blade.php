@@ -54,10 +54,12 @@
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
+
                 <div class="header" id="header">
                     <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
                     <br><br>
                 </div>
+
                 <div class="header-content">
                     {{-- <center style="margin-top: 50px;"> --}}
                     <table width="545">
@@ -459,7 +461,9 @@
                     }
                 </style>
                 <div class="header" id="header">
+                    @if($mss->kop !== null)
                     <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    @endif
                     <br><br>
                 </div>
                 <div class="header-content">
@@ -477,7 +481,7 @@
                     </table>
                     <br>
                     <br>
-                    <table width="545" class="ini-content">
+                    <table style="width:635;" class="ini-content">
                         <tr>
                             <td style="text-align: right">Jakarta, {{ formatDateIndonesian($mss->tglSurat) }}</td>
                         </tr>
@@ -492,11 +496,11 @@
                         </tr>
                     </table> --}}
                     <br>
-                    <br /><br /><br /><br /><br><br>
-                    <table width="545" class="ini-content">
+                    <br />
+                    <table style="width:635;" class="ini-content">
                         <tr style="">
                             <td style="padding-left: 45px;">Dibuat</td>
-                            <td style="padding-left: 100px;">Mengetahui</td>
+                            <td style="text-align: right;">Mengetahui</td>
                         </tr>
                         <tr>
                             <td>Sales Departement,</td>
@@ -504,24 +508,29 @@
                         </tr>
                         @if ($mss->approve == '1')
                             <tr>
-                                <td> <img style="height:125px; weigth:125px;padding-left:45px;"
+                                <td> <img style="height:70px; padding-left:155;"
                                         src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
                             </tr>
-                        @endif
+                        </table>
+                        @else
                     </table>
-                    <br /><br />
-                    <br>
-                    <br /><br />
-                    <br>
-                    <br /><br />
-                    <br>
-                    <br /><br />
-                    <br>
+                    <br><br><br><br>
+                    @endif
+
+                    <table style="width:635;" class="ini-content">
+                        <tr>
+                            <td style="padding-left: 45px;">{{$mss->ttd}}</td>
+                            <td style="text-align: right;">{{$mss->namaTtd}}</td>
+                        </tr>
+                    </table>
+
                     {{-- </center> --}}
                 </div>
                 <div class="footer-page">
+                    @if($mss->kop !== null)
                     <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
                         style="max-width: 100%; height: auto;">
+                        @endif
                 </div>
             </div>
         </div>
@@ -653,7 +662,7 @@
                         </tr>
                     </table>
                     <br>
-                    <br /><br /><br /><br /><br><br><br /><br /><br /><br /><br><br>
+                    <br /><br /><br /><br /><br><br><br /><br /><br /><br />
                     <table width="545">
                         <tr>
                             <td style="text-align: left">Dibuat Oleh</td>

@@ -14,8 +14,8 @@
                         <div class="mb-3">
                             <label for="kop" class="form-label">Pilih PT</label>
                             <select class="form-select @error('kop') is-invalid @enderror" id="kop" name="kop"
-                                required autofocus>
-                                <option value="" disabled selected>Pilih PT</option>
+                                autofocus>
+                                <option value="" selected>Pilih PT</option>
                                 <option value="GEL">GEL</option>
                                 <option value="QIN">QIN</option>
                                 <option value="ERA">ERA</option>
@@ -205,9 +205,33 @@
                                         if (perihalSelect.value === '6') {
                                             keterangan.value =
                                                 "<p>Dear Sir,</p><br><p>We, GLOBAL COAL RESOURCES Pte, Ltd., hereby state that we are in a position of an LOI and ready, willing and request for a long term contract of One – Year to purchase of coal as terms that mentioned below:</p>";
+                                        } else if (perihalBA.value === '') {
+                                            keterangan.value =
+                                                `<br><br><br>
+                                                <p>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pengajuan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</p>`;
                                         } else if (perihalBA.value === 'Pembatalan PVR') {
                                             keterangan.value =
-                                                "<br><br><br> <p>Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pengajuan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</p>";
+                                                `
+                                            <p style="text-align: justify;">Pada hari ini
+                                                <strong>Kamis</strong> tanggal <strong>Duapuluh Lima</strong>
+                                                bulan Januari tahun <strong>Dua Ribu Dua Puluh Empat&nbsp;</strong>
+                                                telah diajukan permohonan pembatalan PVR Sales PT Global Energi Lestari PVR No. 0268/PVR/LE/10/2023 dengan invoice No. 01/INV/X/RUJ/-GEL/50%/2023 tanggal 30 Oktober 2023 yang telah diajukan pada tanggal 30 Oktober 2023 dibatalkan dengan alasan shipment batal bahwa pengajuan tersebut ditagihkan ke PT Recalay Usaha Jaya.</p>
+                                            <p style="text-align: justify;">Berikut ini Table List Permintaan Pembatalan PVR Sales :&nbsp;</p>
+                                            <br><br>
+                                            <p style="text-align: justify;">Demikian berita acara ini dibuat dengan sebenarnya sebagai dokumen pendukung untuk permintaan pengajuan PVR di bagian finance. Atas perhatian dan kerjasamanya, kami ucapkan terimakasih..</p>
+                                            `
+
+
+                                        } else if (perihalBA.value === 'Kegiatan Cleaning Batubara') {
+                                            keterangan.value =
+                                                `<p style="text-align: justify;">Pada hari Rabu Tanggal 31 Bulan Juli 2024 adanya kwitansi penagihan atas biaya cleaning blok dan Operator Abby [GEL-113-2024] TB. NELLY 63 BG. NELLY 110 at Pod : PLTU Suralaya. Commenced discharge tanggal 28/7/24 jam 20.55 lt Total cargo terbongkar 9.295,606 mt. Harga mengalami perubahan dikarenakam Batubara berukuran besar-besar sehingga menyulitkan proses cleaning. Dalam proses pembongkoran tersebut dilakukan perngawasan oleh Rubby H Hutagalung agar proses bongkar berjalan dengan lancar.
+                                                    <br><br>
+                                                    <strong>Atas Nama&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : Rubby H Hutagalung
+                                                        <br>Nomor Rekening&nbsp; &nbsp; &nbsp; &nbsp; : 539301013438539
+                                                        <br>Bank&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: BRI</strong>
+                                                </p>
+                                                <p><br></p>
+                                                <p style="text-align: justify;">Demikian berita acara ini dibuat agar dapat digunakan sebagaimana mestinya. Terimakasih&nbsp;</p>`;
                                         } else {
                                             keterangan.value = ""; // Reset or set other values based on different selections
                                         }
@@ -722,16 +746,24 @@
                     const year = tglSurat.getFullYear();
                     const kop = document.getElementById('kop').value;
 
+                    const perihal = perihalSelect.value;
+                    const perihalBA = document.getElementById('perihalBA').value;
+
                     const prefixMap = {
                         '1': `Ref. No:MSS/${kop}/FCO-${noSurat}/${romanMonth}/${year}`,
                         '2': `Ref. No:MSS/${kop}/BA-${noSurat}/${romanMonth}/${year}`,
                         '3': `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`,
                         '4': `Tanda Terima-${noSurat}/${romanMonth}/${year}`,
                         '5': `${year}/${kop}-PLN/SAL-${noSurat}`,
-                        '6': `No: MSS/${kop}/LOI-${noSurat}/${romanMonth}/${year}/`
+                        '6': `No: MSS/${kop}/LOI-${noSurat}/${romanMonth}/${year}`
                     };
 
-                    prefixInput.value = prefixMap[perihalSelect.value] || '';
+                    // Add the new condition for specific case
+                    if (perihal === '3' && perihalBA === 'Kegiatan Cleaning Batubara') {
+                        prefixInput.value = `No:BA-${noSurat}/INV-SALES/${romanMonth}/${year}`;
+                    } else {
+                        prefixInput.value = prefixMap[perihal] || '';
+                    }
                 }
 
                 function toRoman(num) {
@@ -744,13 +776,9 @@
                     updateVisibleFields();
                     updatePrefix();
 
-                    if (perihalSelect.value === '6') {
-                        ket.value = "<p>Dear Sir,</p>";
-                    }
-
                 }
 
-                [perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
+                [perihalBA, perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
                     element.addEventListener('change', handleFieldUpdates);
                 });
 
