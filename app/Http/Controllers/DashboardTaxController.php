@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tax;
+use App\Models\TAX;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;

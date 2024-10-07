@@ -29,9 +29,9 @@ class DashboardPRCController extends Controller
             return $item;
         });
 
-        return view('dashboard.tnc.index', [
+        return view('dashboard.prc.index', [
             'title' => 'Surat Divisi',
-            'tnc' => $prc,
+            'prc' => $prc,
             'totalPRC' => $totalPRC,
         ]);
     }
@@ -44,7 +44,7 @@ class DashboardPRCController extends Controller
         $maxNoSuratKeagenan = PRC::where('idPerihal', '1')->max('noSurat') ?? 0;
 
 
-       return view('dashboard.tnc.create', [
+       return view('dashboard.prc.create', [
         'title' => 'PRC',
         'romanMonth' => $romanMonth,
         'maxNoSuratKeagenan' => $maxNoSuratKeagenan,
@@ -74,14 +74,14 @@ class DashboardPRCController extends Controller
 
         PRC::create($validatedData);
 
-        return redirect('/dashboard/tnc')->with('success', 'Surat berhasil ditambahkan!');
+        return redirect('/dashboard/prc')->with('success', 'Surat berhasil ditambahkan!');
     }
 
     public function show(PRC $prc)
     {
-        return view('dashboard.tnc.show', [
+        return view('dashboard.prc.show', [
             'title' => 'PRC',
-            'tnc' => $prc,
+            'prc' => $prc,
         ]);
     }
 
@@ -90,9 +90,9 @@ class DashboardPRCController extends Controller
         $monthNumber = \Carbon\Carbon::parse($prc->tglSurat)->month;
         $romanMonth = monthToRoman($monthNumber);
 
-        return view('dashboard.tnc.edit', [
+        return view('dashboard.prc.edit', [
             'title' => 'Edit',
-            'tnc' => $prc,
+            'prc' => $prc,
             'romanMonth' => $romanMonth,
         ]);
     }
@@ -136,14 +136,14 @@ class DashboardPRCController extends Controller
         ];
 
         if ($request->noSurat != $prc->noSurat) {
-            $rules['noSurat'] = 'required|numeric|unique:tnc';
+            $rules['noSurat'] = 'required|numeric|unique:prc';
         }
 
         $validatedData = $request->validate($rules);
 
         $prc->update($validatedData);
 
-        return redirect('/dashboard/tnc')->with('success', 'Surat berhasil di edit!');
+        return redirect('/dashboard/prc')->with('success', 'Surat berhasil di edit!');
     }
 
     public function approve(Request $request, PRC $prc)
@@ -176,10 +176,10 @@ class DashboardPRCController extends Controller
             // Generate and save the QR code
             $this->generateQRCode($dqr);
 
-            return redirect('/dashboard/tnc')->with('success', 'Surat berhasil diapprove!');
+            return redirect('/dashboard/prc')->with('success', 'Surat berhasil diapprove!');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect('/dashboard/tnc')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect('/dashboard/prc')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
 
     }
@@ -227,16 +227,16 @@ class DashboardPRCController extends Controller
     {
         PRC::destroy($prc->id);
 
-        return redirect('/dashboard/tnc')->with('success', 'Surat berhasil dihapus!');
+        return redirect('/dashboard/prc')->with('success', 'Surat berhasil dihapus!');
 
 
     }
 
     public function cetak(PRC $prc)
     {
-        return view('dashboard.tnc.cetak', [
+        return view('dashboard.prc.cetak', [
             'title' => 'PRC',
-            'tnc' => $prc,
+            'prc' => $prc,
         ]);
     }
 }
