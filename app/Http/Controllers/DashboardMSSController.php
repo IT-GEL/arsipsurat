@@ -234,7 +234,7 @@ class DashboardMSSController extends Controller
 
         $host = $_SERVER['HTTP_HOST']; // Get the host header from the request
         // Create a QR Code with the detailQr data
-        $qrData = "http://{$host}:5555/detailQR/{$dqr->id}";
+        $qrData = "http://{$host}/detailQR/{$dqr->id}";
 
         $qrCode = QrCode::create($qrData)
             ->setSize(300)

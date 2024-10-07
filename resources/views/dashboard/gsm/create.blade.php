@@ -4,7 +4,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
             <div class="col-sm-12 col-xl-12">
-                <div class="bg-light rounded h-100 p-4">
+                <div class="bg-light rounded h-100 mx-auto p-4" style="width: 210mm;">
                     <h6 class="mb-4">Buat Surat Keterangan Marketing Sales Shipping</h6>
                     <form method="post" action="/dashboard/gsm">
                         @csrf
@@ -24,6 +24,9 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <input type="hidden" value="GSM" id="kop" name="kop">
+
 
                         <div class="mb-3">
                             <label for="idPerihal" class="form-label">Perihal Surat</label>
@@ -49,34 +52,36 @@
                                     const keterangan = Jodit.make('#keterangan');
                                     new DragAndDrop(keterangan);
                                     const perihalSelect = document.getElementById('idPerihal');
-                                    const perihalBA = document.getElementById('perihalBA');
-
-
 
                                     function updateKeterangan() {
                                         if (perihalSelect.value === '1') {
                                             keterangan.value =
-                                                `<table style="border-collapse:collapse;width: 100%;"><tbody>
+                                                `<table style="border-collapse:collapse;width: 100%;">
+                                                    <tbody>
                                                         <tr>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td></tr>
+                                                            <td style="width: 25%;">To : PT SAMUDERA INDAH BERSAMA</td>
+                                                            <td style="width: 25%;">From : PT. GLOBAL SINERGI MARITIM</td>
+
+                                                        </tr>
                                                         <tr>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td></tr>
+                                                            <td style="width: 25%;">PIC : Pak Devi - 0813 7907 0146<br>Email : samuderaindahbersamashipping@gmail.com</td>
+                                                            <td style="width: 25%;">PIC : Lestari - 0813 9283 2325<br><br>Email : g.sinergimaritim@gmail.com</td>
+
+                                                        </tr>
                                                         <tr>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td></tr></tbody>
-                                                    </table>
-                                                    <br>
-                                                    <p>Demikianlah penunjukan ini kami buat agar dapat digunakan sebagaimana mestinya,
-                                                    atas perhatian dan kerjasamanya diucapkan terimakasih.</p>`
-                                                    ;
+                                                            <td style="width: 25%;">Ditunjuk sebagai Agen Pelayaran</td>
+                                                            <td style="width: 25%;">04 Okotober 2024</td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <p>VESSEL&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: TB. LL HELFRIT / BG. LL2714</p>
+                                                <p>DESCRIPTION OF GOODS&nbsp; &nbsp; &nbsp;: BATU BARA</p>
+                                                <p>TD RENGAT&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 04 Oktober 2024</p>
+                                                <p>ETA BANGKA&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 08 Oktober 2024</p>
+                                                <p>NO. NAHKODA&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : Ceny Sasuwuhe / 0821-5535-9901</p><br>
+                                                <p>Demikianlah penunjukan ini kami buat agar dapat digunakan sebagaimana mestinya,
+                                                    atas perhatian dan kerjasamanya diucapkan terimakasih.</p>`;
                                         } else {
                                             keterangan.value = ""; // Reset or set other values based on different selections
                                         }
@@ -87,15 +92,28 @@
 
                                     // Update keterangan when the dropdown value changes
                                     perihalSelect.addEventListener('change', updateKeterangan);
-                                    perihalBA.addEventListener('change', updateKeterangan);
+
                                 });
                             </script>
                         </div>
 
                         <div class="mb-3 mt-3">
-                            <label for="tglSurat" class="form-label">Tanggal Surat</label>
-                            <input type="date" class="form-control @error('tglSurat') is-invalid @enderror"
-                                id="tglSurat" name="tglSurat" required value="{{ old('tglSurat') }}">
+                            <label for="tglSurat" class="form-label">Tempat, Tanggal Surat</label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="tmpt" class="form-control @error('tmpt') is-invalid @enderror"
+                                            id="tmpt" name="tmpt" required value="{{ old('tmpt') }}"
+                                            placeholder="Tempat Buat Surat">
+                                    </td>
+                                    <td> , </td>
+                                    <td>
+                                        <input type="date" class="form-control @error('tglSurat') is-invalid @enderror"
+                                            id="tglSurat" name="tglSurat" required value="{{ old('tglSurat') }}">
+                                    </td>
+                                </tr>
+                            </table>
+
                             @error('tglSurat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -111,10 +129,10 @@
                         </script>
 
                         <div class="mb-3">
-                            <label for="ttd" class="form-label">Yang Membuat</label>
-                            <input type="text" class="form-control @error('ttd') is-invalid @enderror" id="ttd"
-                                name="ttd" required value="{{ old('ttd') }}">
-                            @error('ttd')
+                            <label for="y_buat" class="form-label">Yang Membuat</label>
+                            <input type="text" class="form-control @error('y_buat') is-invalid @enderror" id="y_buat"
+                                name="y_buat" required value="{{ old('y_buat') }}">
+                            @error('y_buat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -123,16 +141,20 @@
 
                         <div class="mb-3">
                             <label for="ttd" class="form-label">Approval</label>
-                            <select class="form-select @error('ttd') is-invalid @enderror" id="ttd"
-                                name="ttd" required autofocus>
-                                <option value="" disabled selected>Pilih Peruntukan Surat</option>
-                                <option value="1">Surat Penunjukan Keagenan</option>
+                            <select class="form-select @error('ttd') is-invalid @enderror" id="ttd" name="ttd"
+                                required autofocus>
+                                <option value="" disabled selected>Yang akan approve...</option>
+                                <option value="Capt. John Herley">Capt. John Herley</option>
+                                <option value="Kendrick Winata">Kendrick Winata</option>
                             </select>
-                            <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
+                            <input type="hidden" id="jabatan" name="jabatan" value="">
                             @error('ttd')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
+
+
 
 
                         <div class="mb-3">
@@ -195,7 +217,7 @@
                     reader.readAsDataURL(file);
                 }
             }
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', async function() {
                 const perihalSelect = document.getElementById('idPerihal');
                 const noSuratInput = document.getElementById('noSurat');
                 const suratizinGroup = document.getElementById('surat-izin');
@@ -203,6 +225,8 @@
                 const ket = document.getElementById('keterangan');
                 const prefixInput = document.getElementById('prefix');
                 const tglSuratInput = document.getElementById('tglSurat');
+                const jabatanInput = document.getElementById('jabatan');
+                const jabatanSelect = document.getElementById('ttd')
 
                 const PADDING_LENGTH = 3;
 
@@ -221,10 +245,30 @@
                     });
                 }
 
+                const maxValues = {
+                    '1': {{ $maxNoSuratKeagenan }},
+                };
+
                 function setInitialNoSurat() {
                     const currentType = perihalSelect.value;
                     noSuratInput.value = (maxValues[currentType] || 0) + 1;
                 }
+
+                jabatanSelect.addEventListener('change', function() {
+                    const jabatanInput = document.getElementById('jabatan');
+                    switch (this.value) {
+                        case 'Capt. John Herley':
+                            jabatanInput.value = 'Manager Operasional';
+                            console.log(jabatanInput.value);
+                            break;
+                        case 'Kendrick Winata':
+                            jabatanInput.value = 'Direktur';
+                            console.log(jabatanInput.value);
+                            break;
+                        default:
+                            jabatanInput.value = '';
+                    }
+                })
 
                 perihalSelect.addEventListener('change', function() {
                     const selectedValue = this.value;
@@ -244,7 +288,7 @@
                     const year = tglSurat.getFullYear();
 
                     const prefixMap = {
-                        '1': `No:${noSurat}/GSM/SPK/${romanMonth}/${year}`,
+                        '1': `No: ${noSurat}/GSM/SPK/${romanMonth}/${year}`,
                     };
 
                     prefixInput.value = prefixMap[perihalSelect.value] || '';
@@ -257,12 +301,7 @@
 
                 function handleFieldUpdates() {
                     setInitialNoSurat();
-                    updateVisibleFields();
                     updatePrefix();
-
-                    if (perihalSelect.value === '6') {
-                        ket.value = "<p>Dear Sir,</p>";
-                    }
 
                 }
 

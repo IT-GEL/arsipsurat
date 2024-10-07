@@ -12,9 +12,7 @@
             width: 210mm;
             min-height: 297mm;
             margin: auto;
-            padding: 10mm;
             border: 1px solid #D3D3D3;
-            border-radius: 5px;
             background-color: white;
             position: relative;
             display: flex;
@@ -22,8 +20,6 @@
         }
 
         .header-content {
-            margin-left: 10mm;
-            margin-right: 10mm;
             position: relative;
             z-index: 10;
             padding-bottom: 10mm;
@@ -54,7 +50,6 @@
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
-
                 <div class="header" id="header">
                     <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
                     <br><br>
@@ -262,9 +257,9 @@
                             <td width="335"></td>
                         </tr>
                     </table> <br>
-                    <table width="545">
+                    <table width="545" class="table-keterangan" id="table-keterangan">
                         <tr>
-                            <td width="335" class="table-keterangan">{!! $mss->qas !!}</td>
+                            <td width="335">{!! $mss->qas !!}</td>
                         </tr>
                     </table>
                     <br>
@@ -461,8 +456,9 @@
                     }
                 </style>
                 <div class="header" id="header">
-                    @if($mss->kop !== null)
-                    <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    @if ($mss->kop !== null)
+                        <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}"
+                            style="max-width: 100%; height: auto;">
                     @endif
                     <br><br>
                 </div>
@@ -490,69 +486,64 @@
                     </table>
                     <br><br>
 
-                    {!! $mss->keterangan !!}
+                    {{-- {!! $mss->keterangan !!} --}}
 
-                    {{-- <table class="table-keterangan" width="545">
+                    <table class="table-keterangan" id="table-keterangan" width="545">
                         <tr>
                             <td style="border: 0px;">{!! $mss->keterangan !!}</td>
                         </tr>
-                    </table> --}}
+                    </table>
                     <br>
                     <br />
 
-                    @if($mss->perihalBA == "Pembatalan PVR")
-
-
-                            @if ($mss->approve == '1')
+                    @if ($mss->perihalBA == 'Pembatalan PVR')
+                        @if ($mss->approve == '1')
                             <table style ="width:635;" class="ini-content">
-                            <tr>
-                                <td> <img style="height:70px;"
-                                        src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
-                            </tr>
+                                <tr>
+                                    <td> <img style="height:70px;" src="{{ asset('img/qrcodes/' . $mss->qr) }}"
+                                            alt="QR Code"></td>
+                                </tr>
                             </table>
                         @endif
-
-
                     @else
-                    <table style="width:635;" class="ini-content">
-                        <tr style="">
-                            <td style="padding-left: 45px;">Dibuat</td>
-                            <td style="text-align: right;">Mengetahui</td>
-                        </tr>
-                        <tr>
-                            <td>Sales Departement,</td>
-
-                        </tr>
-                        @if ($mss->approve == '1')
-                            <tr>
-                                <td> <img style="height:70px; padding-left:155;"
-                                        src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
+                        <table style="width:635;" class="ini-content">
+                            <tr style="">
+                                <td style="padding-left: 45px;">Dibuat</td>
+                                <td style="text-align: right;">Mengetahui</td>
                             </tr>
+                            <tr>
+                                <td>Sales Departement,</td>
+
+                            </tr>
+                            @if ($mss->approve == '1')
+                                <tr>
+                                    <td> <img style="height:70px; padding-left:155;"
+                                            src="{{ asset('img/qrcodes/' . $mss->qr) }}" alt="QR Code"></td>
+                                </tr>
                         </table>
-                        @else
-                    </table>
-                    <br><br><br><br>
+                    @else
+                        </table>
+                        <br><br><br><br>
                     @endif
 
                     <table style="width:635;" class="ini-content">
                         <tr>
-                            <td style="padding-left: 45px;">{{$mss->ttd}}</td>
-                            <td style="text-align: right;">{{$mss->namaTtd}}</td>
+                            <td style="padding-left: 45px;">{{ $mss->ttd }}</td>
+                            <td style="text-align: right;">{{ $mss->namaTtd }}</td>
                         </tr>
                     </table>
-                    @endif
+    @endif
 
-                    {{-- </center> --}}
-                </div>
-                <div class="footer-page">
-                    @if($mss->kop !== null)
-                    <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
-                        style="max-width: 100%; height: auto;">
-                        @endif
-                </div>
-            </div>
-        </div>
-        <!-- Recent Sales End -->
+    {{-- </center> --}}
+    </div>
+    <div class="footer-page">
+        @if ($mss->kop !== null)
+            <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}" style="max-width: 100%; height: auto;">
+        @endif
+    </div>
+    </div>
+    </div>
+    <!-- Recent Sales End -->
     @endif
 
     @if ($mss->idPerihal == '4')
@@ -801,7 +792,7 @@
                     <br /><br />
                     <table width="545">
                         <tr style="">
-                            <td style="padding-left: 45px;">Regrad,</td>
+                            <td style="">Regrad,</td>
                         </tr>
                         <tr>
                             <td style="font-weight:bold;">GLOBAL COAL RESOURCES Pte Ltd.</td>
@@ -843,6 +834,7 @@
             pages.forEach(page => {
                 let content = page.querySelector('.header-content');
                 let contentHeight = content.scrollHeight;
+                console.log("pages")
 
                 while (contentHeight > pageHeight) {
                     // Create a new page
@@ -851,7 +843,7 @@
 
                     // Clone the header for the new page
                     let headerClone = document.querySelector('.header').cloneNode(true);
-                    let footerClone = document.querySelector('.footer-page').cloneNode(true);
+                    let footerClone = document.querySelector('.footer-page')?.cloneNode(true);
                     newPage.appendChild(headerClone);
 
                     let newContent = document.createElement('div');
@@ -864,45 +856,50 @@
 
                     // Append the new content to the new page
                     newPage.appendChild(newContent);
-                    newPage.appendChild(footerClone);
+                    footerClone ? newPage.appendChild(footerClone) : null;
+
                     documentContainer.appendChild(newPage);
 
                     // Recalculate content height for the current page
                     contentHeight = content.scrollHeight;
-
+                    //paginateContent();
                 }
             });
         }
+
+        document.addEventListener("DOMContentLoaded", paginateContent);
 
         paginateContent();
 
         var pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc =
             'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
-        pdfjsLib.getDocument('{{ asset('uploads/' . $mss->lampiran) }}').promise.then(function(pdf) {
-            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-                pdf.getPage(pageNum).then(function(page) {
-                    var canvas = document.createElement('canvas');
-                    canvas.className = 'page';
-                    var container = document.getElementById('viewerContainer');
-                    container.appendChild(canvas);
+        @if (file_exists(public_path('uploads/' . $mss->lampiran)))
+            pdfjsLib.getDocument('{{ asset('uploads/' . $mss->lampiran) }}').promise.then(function(pdf) {
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    pdf.getPage(pageNum).then(function(page) {
+                        var canvas = document.createElement('canvas');
+                        canvas.className = 'page';
+                        var container = document.getElementById('viewerContainer');
+                        container.appendChild(canvas);
 
-                    var viewport = page.getViewport({
-                        scale: 1
+                        var viewport = page.getViewport({
+                            scale: 1
+                        });
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+
+                        var ctx = canvas.getContext('2d');
+                        var renderContext = {
+                            canvasContext: ctx,
+                            viewport: viewport
+                        };
+
+                        page.render(renderContext);
                     });
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    var ctx = canvas.getContext('2d');
-                    var renderContext = {
-                        canvasContext: ctx,
-                        viewport: viewport
-                    };
-
-                    page.render(renderContext);
-                });
-            }
-        });
+                }
+            });
+        @endif
 
         document.getElementById('download-pdf').addEventListener('click', async function() {
             let pages = document.getElementById('contentToConvert').querySelectorAll('.page')
@@ -912,12 +909,13 @@
             const element = document.getElementById('contentToConvert');
             const opt = {
                 filename: 'document.pdf',
+                margin: [-0.05, -100],
                 html2canvas: {
                     scale: 3,
                     backgroundColor: '#ffffff'
                 },
                 jsPDF: {
-                    unit: 'cm',
+                    unit: 'mm',
                     format: 'a4',
                     orientation: 'portrait'
                 }

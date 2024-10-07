@@ -46,6 +46,7 @@ Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
 Route::resource('/dashboard/gsm', DashboardGSMController::class)->middleware('auth');
 Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
+Route::put('/dashboard/gsm/{gsm}/approve', [DashboardGSMController::class, 'approve'])->name('gsm.approve');
 
 // QR Detail Route
 Route::get('/detailQR/{id}', [DetailQrController::class, 'index']);

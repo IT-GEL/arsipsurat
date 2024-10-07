@@ -4,7 +4,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
             <div class="col-sm-12 col-xl-12">
-                <div class="bg-light rounded h-100 p-4">
+                <div class="bg-light rounded h-100 mx-auto p-4">
                     <h6 class="mb-4">Edit Surat Keterangan Marketing Sales Shipping</h6>
 
                     <form method="post" action="/dashboard/mss/{{ $mss->id }}">

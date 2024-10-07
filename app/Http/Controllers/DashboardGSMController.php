@@ -41,27 +41,34 @@ class DashboardGSMController extends Controller
         // Get the current month number
         $monthNumber = date('n'); // 'n' returns the numeric representation of the month (1 to 12)
         $romanMonth = monthToRoman($monthNumber);
+        $maxNoSuratKeagenan = GSM::where('idPerihal', '1')->max('noSurat') ?? 0;
 
 
        return view('dashboard.gsm.create', [
         'title' => 'GSM',
         'romanMonth' => $romanMonth,
+        'maxNoSuratKeagenan' => $maxNoSuratKeagenan,
     ]);
 
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validatedData = $request->validate([
             'noSurat' => 'required|numeric',
+            'idPerihal' => 'required|numeric',
+            'perihal' => 'required|string',
             'prefix' => 'required|string|max:255',
             'keterangan' => 'nullable|string',
+            'tmpt' => 'nullable|string|max:255',
             'tglSurat' => 'nullable|date',
             'ttd' => 'nullable|string|max:255',
             'y_buat' => 'nullable|string|max:255',
             'jabatan' => 'nullable|string|max:255',
             'lampiran' => 'nullable|string|max:255',
-            'approve' => 'nullable|number|max:255',
+            'kop' => 'nullable|string|max:255',
+            'approve' => 'nullable|numeric|max:255',
 
         ]);
 
@@ -183,7 +190,7 @@ class DashboardGSMController extends Controller
 
         $host = $_SERVER['HTTP_HOST']; // Get the host header from the request
         // Create a QR Code with the detailQr data
-        $qrData = "http://{$host}:5555/detailQR/{$dqr->id}";
+        $qrData = "http://{$host}/detailQR/{$dqr->id}";
 
         $qrCode = QrCode::create($qrData)
             ->setSize(300)

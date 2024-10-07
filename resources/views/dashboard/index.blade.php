@@ -175,7 +175,7 @@
 <!-- Recent Sales End -->
 @endif
 
-@if ($userName == "Global Sinergi Maritim" || $userName == "superadmin" || $userName == "Capt John")
+@if ($userName == "Global Sinergi Maritim" || $userName == "superadmin" || $userName == "Capt. John Herley")
 <!-- Recent Sales Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">

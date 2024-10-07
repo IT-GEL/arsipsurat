@@ -46,7 +46,7 @@
                     @foreach ($gsm as $item)
                     <tr>
                         <td style="font-weight:bold;">{{ $item->prefix }}</td>
-                        <td>{{ $item->perihal }} {{ $item->perihalBA }}</td>
+                        <td>{{ $item->perihal }}</td>
                         <td>{{ date('d M Y', strtotime($item->tglSurat)) }}</td>
                         <td>
                             @if($item->approve == '1')
@@ -66,7 +66,8 @@
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
                             <a class="btn btn-sm btn-info" href="{{ url('/dashboard/gsm/' . $item->id . '/cetak') }}" target="_blank"><i class="bi bi-printer"></i></a>
-                            @if (auth()->user()->name == "Ervina Wijaya")
+                            @if (auth()->user()->name == "Capt. John Herley")
+
                             <form action="{{ route('gsm.approve', $item->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('put')
