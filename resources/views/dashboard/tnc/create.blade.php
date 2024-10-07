@@ -32,6 +32,11 @@
                                 name="idPerihal" required autofocus>
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
                                 <option value="1">Internal Memo</option>
+                                <option value="2">Cop Bank</option>
+                                <option value="3">BPJS</option>
+                                <option value="4">Surat Tugas</option>
+                                <option value="5">Offering Letter</option>
+                                <option value="6">Paklaring</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             @error('idPerihal')
@@ -56,17 +61,21 @@
 
 
                         <div class="mb-3">
-                            <label for="kop" class="form-label">Pilih Kop Surat</label>
-                            <select class="form-select @error('kop') is-invalid @enderror" id="kop"
-                                name="kop" required autofocus>
-                                <option value="" selected>Tanpa Kop</option>
-                                <option value="GEL">GEL</option>
-                                <option value="QIN">QIN</option>
-                                <option value="ERA">ERA</option>
-                                <option value="GCR">GCR</option>
-                            </select>
-                            @error('kop')
+                            <label for="jml_lampiran" class="form-label">Jumlah lampiran yang akan dilampirkan</label>
+                            <input type="number" name="jml_lampiran" id="jml_lampiran" class="form-control @error('jml_lampiran') is-invalid @enderror">
+                            @error('jml_lampiran')
                                 <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="lampiran" class="form-label">Upload Lampiran (Optional)</label>
+                            <input type="file" class="form-control @error('lampiran') is-invalid @enderror"
+                                id="lampiran" name="lampiran" multiple>
+                            @error('lampiran')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
 
@@ -85,32 +94,29 @@
                                     function updateKeterangan() {
                                         if (perihalSelect.value === '1') {
                                             keterangan.value =
-                                                `<table style="border-collapse:collapse;width: 100%;">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td style="width: 25%;">To : PT SAMUDERA INDAH BERSAMA</td>
-                                                            <td style="width: 25%;">From : PT. GLOBAL SINERGI MARITIM</td>
+                                                `<p class="MsoNormal" style="margin: 0px 0px 11px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify; text-indent: 48px;"><span>Dengan ini
+                                                        kami menginformasikan adanya perubahan pengiriman bukti bayar yang semula
+                                                        dikirimkan melalui Group Whatsapp masing-masing Departement menjadi via E-Mail,
+                                                        dengan rincian sebagai berikut :</span></p>
+                                                <p class="MsoListParagraphCxSpFirst" style="margin: 0px 0px 0px 48px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify; text-indent: -24px;"><span><span>1.<span style="font: 9px &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </span></span></span><span>E-mail PIC user masing-masing Department yang
+                                                        akan digunakan (terlampir).</span></p>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 25%;">PIC : Pak Devi - 0813 7907 0146<br>Email : samuderaindahbersamashipping@gmail.com</td>
-                                                            <td style="width: 25%;">PIC : Lestari - 0813 9283 2325<br><br>Email : g.sinergimaritim@gmail.com</td>
+                                                <p class="MsoListParagraphCxSpMiddle" style="margin: 0px 0px 0px 48px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify; text-indent: -24px;"><span><span>2.<span style="font: 9px &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </span></span></span><span>E-mail Vendor yang akan dikirimkan bukti
+                                                        transfer harus sudah ada pada kolom “Email” PVR.</span></p>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 25%;">Ditunjuk sebagai Agen Pelayaran</td>
-                                                            <td style="width: 25%;">04 Okotober 2024</td>
-
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <p>VESSEL&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: TB. LL HELFRIT / BG. LL2714</p>
-                                                <p>DESCRIPTION OF GOODS&nbsp; &nbsp; &nbsp;: BATU BARA</p>
-                                                <p>TD RENGAT&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 04 Oktober 2024</p>
-                                                <p>ETA BANGKA&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 08 Oktober 2024</p>
-                                                <p>NO. NAHKODA&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : Ceny Sasuwuhe / 0821-5535-9901</p><br>
-                                                <p>Demikianlah penunjukan ini kami buat agar dapat digunakan sebagaimana mestinya,
-                                                    atas perhatian dan kerjasamanya diucapkan terimakasih.</p>`;
+                                                <p class="MsoListParagraphCxSpLast" style="margin: 0px 0px 0px 48px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify;"><span>Contoh Format :<span>&nbsp; </span></span></p>
+                                                <p class="MsoListParagraphCxSpLast" style="margin: 0px 0px 0px 48px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify;"><br></p>
+                                                <p class="MsoListParagraphCxSpLast" style="margin: 0px 0px 0px 48px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify;"><br></p>
+                                                <p class="MsoListParagraph" style="margin: 0px 0px 0px 48px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify; text-indent: -24px;"><span><span>3.&nbsp;</span></span><span>Jika ada perubahan E-mail User wajib
+                                                        menginfokan secara resmi ke tim Finance AP melalui email </span><a href="mailto:finjkt.adm01@gel.co.id" style="color: blue; text-decoration: underline;"><span>finjkt.adm01@gel.co.id</span></a></p>
+                                                <p class="MsoListParagraph" style="margin: 0px 0px 0px 48px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify; text-indent: -24px;"><br></p>
+                                                <p class="MsoNormal" style="margin: 0px 0px 11px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify;"><span>Update skema pembayaran di atas <u>berlaku
+                                                            efektif per tanggal 01 Mei 2024.</u></span></p>
+                                                <p class="MsoNormal" style="margin: 0px 0px 11px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify; text-indent: 48px;"><span>Demikian
+                                                        internal memorandum ini kami buat agar dapat diimplementasikan sebagaimana
+                                                        mestinya.</span></p>`;
                                         } else {
                                             keterangan.value = ""; // Reset or set other values based on different selections
                                         }
@@ -305,6 +311,11 @@
 
                     const perihalMap = {
                         '1': 'Internal Memo',
+                        '2': 'Cop Bank',
+                        '3': 'BPJS',
+                        '4': 'Surat Tugas',
+                        '5': 'Offering Letter',
+                        '6': 'Paklaring',
                     };
                     perihalInput.value = perihalMap[selectedValue] || '';
                     handleFieldUpdates();
@@ -318,6 +329,11 @@
 
                     const prefixMap = {
                         '1': `No:${divisi}-${detaildivisi}-${noSurat}/${kop}/${romanDay}/${romanMonth}/${year}`,
+                        '2': `No:${divisi}-${detaildivisi}-${noSurat}/${kop}/${romanDay}/${romanMonth}/${year}`,
+                        '3': `No:${divisi}-${detaildivisi}-${noSurat}/${kop}/${romanDay}/${romanMonth}/${year}`,
+                        '4': `No:${divisi}-${detaildivisi}-${noSurat}/${kop}/${romanDay}/${romanMonth}/${year}`,
+                        '5': `No:${divisi}-${detaildivisi}-${noSurat}/${kop}/${romanDay}/${romanMonth}/${year}`,
+                        '6': `No:${divisi}-${detaildivisi}-${noSurat}/${kop}/${romanDay}/${romanMonth}/${year}`,
                     };
 
                     prefixInput.value = prefixMap[perihalSelect.value] || '';
