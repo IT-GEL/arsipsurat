@@ -46,7 +46,27 @@
                 Kembali</a>
             {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+
+            <div>
+                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -331,7 +351,26 @@
                 Kembali</a>
             {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div>
+                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -433,7 +472,26 @@
                 Kembali</a>
             {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div>
+                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -553,7 +611,26 @@
             <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
             {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div>
+                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
 
         </div>
         <div class="contentToConvert" id="contentToConvert">
@@ -617,7 +694,26 @@
             <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
             {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div>
+                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
 
         </div>
         <div id="contentToConvert" class="contentToConvert">
@@ -701,7 +797,26 @@
                 Kembali</a>
             {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div>
+                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">

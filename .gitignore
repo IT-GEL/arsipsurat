@@ -16,3 +16,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/log
+log/combined-0.log
+log/out-0.log

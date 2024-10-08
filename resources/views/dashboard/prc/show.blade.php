@@ -47,7 +47,26 @@
                 Kembali</a>
             {{-- <a href="/dashboard/prc/{{ $prc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div>
+                <a href="/dashboard/prc/{{ $prc->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/prc/' . $prc->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('prc.approve', $prc->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $prc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $prc->approve }}"
+                            onclick="{{ $prc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $prc->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $prc->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -58,53 +77,145 @@
                 <div class="header-content">
                     {{-- <center style="margin-top: 50px;"> --}}
 
-                    <table width="545">
-                        <tr>
-                            <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; font-weight: bold; text-transform: uppercase;"
-                                class="text">
-                                <u>{{ $prc->perihal }}</u>
-                            </td>
 
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; font-weight: bold; font:italic">{{ $prc->prefix }}</td>
-                        </tr>
-                    </table>
-                    <br>
-                    <table class="table-keterangan" width="545">
-                        <tr>
-                            <td style="border: 0px;">{!! $prc->keterangan !!}</td>
-                        </tr>
-                    </table>
-
-                    <table width="545">
-                        <tr>
-                            <td style="text-align: left">Jakarta, {{ formatDateIndonesian($prc->tglSurat) }}</td>
-                        </tr>
-                        <tr>
-                            <td>Hormat Kami,</td>
-                        </tr>
-                    </table>
-
-                    @if ($prc->approve == '1')
-                        <table width="545" style="font-weight:bold;">
+                        <br><br><br>
+                        <b><u>{{ $prc->perihal }}</u></b>
+                        <br>
+                    <div>
+                        <table style="border-collapse: collapse; width: 600; font-size:12px;">
                             <tr>
-                                <td><img style="height:125px; weigth:125px;padding-left:15px;"
-                                        src="{{ asset('img/qrcodes/' . $prc->qr) }}" alt="QR Code"></td>
+                                <td style="text-align: left; width: 15%;">Date</td>
+                                <td style="text-align: left; padding-right: 5;">:</td>
+                                <td style="text-align: left; width: 55%;">{{ $prc->tglSurat }}</td>
+
+                                <td style="text-align: left; width: 15%;">PO No</td>
+                                <td style="text-align: left; padding-right: 5;">:</td>
+                                <td style="text-align: left; width: 40%;">{{ $prc->preifx }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; width: 15%;">Vendor</td>
+                                <td style="text-align: left; padding-right: 5;">:</td>
+                                <td style="text-align: left; width: 40%;">{{ $prc->vendor }}</td>
+
+                                <td style="text-align: left; width: 15%;">PR No</td>
+                                <td style="text-align: left; padding-right: 5;">:</td>
+                                <td style="text-align: left; width: 40%;">{{ $prc->preifxPR }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; width: 15%;">Fax No.</td>
+                                <td style="text-align: left; padding-right: 5;">:</td>
+                                <td style="text-align: left; width: 40%;">{{ $prc->fax_no }}</td>
+
+                                <td style="text-align: left; width: 15%;">Quote Reff</td>
+                                <td style="text-align: left; padding-right: 5;">:</td>
+                                <td style="text-align: left; width: 40%;">{{ $prc->preifxQuote }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; width: 15%;">Att.</td>
+                                <td style="text-align: left; padding-right: 5;">:</td>
+                                <td style="text-align: left; width: 40%;">{{ $prc->att }}</td>
+
+                                <td style="text-align: left; width: 15%;">Term of Payment</td>
+                                <td style="text-align: left; padding-right: 5;">:</td>
+                                <td style="text-align: left; width: 40%;">{{ $prc->top }}</td>
                             </tr>
                         </table>
-                    @else
-                        <br><br><br><br>
-                    @endif
+                    </div>
+                    <br>
+                    <div class="thead">
+                        <table style="border-collapse: collapse; width: 100%; font-size:12px;">
+                            <tr>
+                                <td style="border: 1px solid black; padding: 4px;">No</td>
+                                <td style="border: 1px solid black; padding: 4px;">DESCRIPTION</td>
+                                <td style="border: 1px solid black; padding: 4px;">PART NUMBER</td>
+                                <td style="border: 1px solid black; padding: 4px;">QTY</td>
+                                <td style="border: 1px solid black; padding: 4px;">UNIT</td>
+                                <td style="border: 1px solid black; padding: 4px;">UNIT PRICE</td>
+                                <td style="border: 1px solid black; padding: 4px;">AMOUNT</td>
+                                <td style="border: 1px solid black; padding: 4px;">SUPPLY (ETA)</td>
+                            </tr>
+                        </table>
+                    </div>
 
-                    <table width="545" style="font-weight:bold;">
-                        <tr>
-                            <td><u>{{ $prc->ttd }}</u></td>
+
+                    <div class="tbody">
+                        <table style="border-collapse: collapse; width: 100%; font-size:12px;">
+                            @foreach ($items as $id => $item)
+                            <tr>
+
+                                <td style="border: 1px solid black; padding: 4px;">{{ $id }}</td>
+                                <td style="border: 1px solid black; padding: 4px;">{{ $item['deskripsi'] }}</td>
+                                <td style="border: 1px solid black; padding: 4px;">PART NUMBER</td>
+                                <td style="border: 1px solid black; padding: 4px;">{{ $item['qty'] }}</td>
+                                <td style="border: 1px solid black; padding: 4px;">{{ $item['satuan'] }}</td>
+                                <td style="border: 1px solid black; padding: 4px;">{{ $item['harga'] }}</td>
+                                <td style="border: 1px solid black; padding: 4px;">{{ $item['total'] }}</td>
+                                <td style="border: 1px solid black; padding: 4px;">SUPPLY (ETA)</td>
+
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
+
+
+                    <div class="terbilang">
+                    <table style="border-collapse: collapse; width: 100%;font-weight:bold; font-size:12px;">
+                        <tr style="border: 1px solid black; padding: 4px; ">
+                            <td style="border: 1px solid black; padding: 4px;" colspan="5" rowspan="5">
+                                <i><u>Terbilang :</u> Satu Juta Tiga Ratus Delapan Puluh Tujuh Ribu Lima Ratus Rupiah</i>
+                            </td>
+                            <td style="border: 1px solid black; padding: 4px;">Sub-Total</td>
+                            <td style="border: 1px solid black; padding: 4px;"></td>
+                            <td style="border: 1px solid black; padding: 4px;"></td>
                         </tr>
-                        <tr>
-                            <td>{{ $prc->jabatan }}</td>
+                        <tr style="border: 1px solid black; padding: 4px;" >
+                            <td style="border: 1px solid black; padding: 15px;"></td>
+                            <td style="border: 1px solid black; padding: 15px;"></td>
+                            <td style="border: 1px solid black; padding: 15px;"></td>
+                        </tr>
+                        <tr style="border: 1px solid black; padding: 4px;">
+
+                            <td style="border: 1px solid black; padding: 4px;">NETTO</td>
+                            <td style="border: 1px solid black; padding: 4px;">TEST</td>
+                            <td style="border: 1px solid black; padding: 4px;"></td>
+                        </tr>
+                        <tr style="border: 1px solid black; padding: 4px;">
+
+                            <td style="border: 1px solid black; padding: 4px;">PPN 11%</td>
+                            <td style="border: 1px solid black; padding: 4px;">TEST</td>
+                            <td style="border: 1px solid black; padding: 4px;"></td>
+                        </tr>
+                        <tr style="border: 1px solid black; padding: 4px;">
+                            <td style="border: 1px solid black; padding: 4px;">GRAND TOTAL</td>
+                            <td style="border: 1px solid black; padding: 4px;">TEST</td>
+                            <td style="border: 1px solid black; padding: 4px;"></td>
+                        </tr>
+
+                        <tr style=" padding: 4px;">
+                            <td style="padding: 4px;" colspan="4"><u>Delivery Date :</u></td>
+                            <td style="padding: 4px; text-align:right;"><u>Delivery To :</u></td>
+                            <td style="padding: 4px; text-transform: uppercase;" colspan="3">PT Tempirai Energy</td>
+
+
+
+
+                        </tr>
+                        <tr style="padding: 4px;">
+                            <td style="padding: 4px; text-transform: uppercase;" colspan="5"><i># FOR KALIBRASI ALAT TS SOUTH TYPE NTS-352L</i></td>
+                            <td style="padding: 4px; font-weight:normal;" colspan="3">Gedung Artha Graha</td>
+
+
+                        </tr>
+                        <tr style=" padding: 4px;">
+                            <td style=" padding: 4px; text-transform: uppercase;" colspan="5"><i># HARGA FRANCO SITE MADHUCON</i></td>
+                            <td style=" padding: 4px; font-weight:normal;" colspan="3">Jl Jendral Sudirman</td>
+
+
+
                         </tr>
                     </table>
+                    </div>
+
 
                     {{-- </center> --}}
                 </div>

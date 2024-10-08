@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardGAController;
 use App\Http\Controllers\DashboardMSSController;
 use App\Http\Controllers\DashboardGSMController;
 use App\Http\Controllers\DashboardTNCController;
+use App\Http\Controllers\DashboardPRCController;
 use App\Http\Controllers\DetailQrController;
 use App\Http\Controllers\FeedbackController;
 
@@ -46,10 +47,13 @@ Route::resource('/dashboard/ga', DashboardGAController::class)->middleware('auth
 Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('auth');
 Route::resource('/dashboard/gsm', DashboardGSMController::class)->middleware('auth');
 Route::resource('/dashboard/tnc', DashboardTNCController::class)->middleware('auth');
+Route::resource('/dashboard/prc', DashboardPRCController::class)->middleware('auth');
 
+Route::put('/dashboard/it/{it}/approve', [DashboardITController::class, 'approve'])->name('it.approve');
 Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
 Route::put('/dashboard/gsm/{gsm}/approve', [DashboardGSMController::class, 'approve'])->name('gsm.approve');
 Route::put('/dashboard/tnc/{tnc}/approve', [DashboardTNCController::class, 'approve'])->name('tnc.approve');
+Route::put('/dashboard/prc/{prc}/approve', [DashboardPRCController::class, 'approve'])->name('prc.approve');
 
 
 // QR Detail Route

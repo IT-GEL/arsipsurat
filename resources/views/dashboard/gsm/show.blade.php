@@ -47,7 +47,26 @@
                 Kembali</a>
             {{-- <a href="/dashboard/gsm/{{ $gsm->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div>
+                <a href="/dashboard/gsm/{{ $gsm->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/gsm/' . $gsm->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('gsm.approve', $gsm->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $gsm->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $gsm->approve }}"
+                            onclick="{{ $gsm->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $gsm->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $gsm->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">

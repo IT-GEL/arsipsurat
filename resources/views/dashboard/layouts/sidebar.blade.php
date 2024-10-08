@@ -21,11 +21,11 @@
                 <div class="dropdown-menu bg-transparent border-0">
                 @if (auth()->user()->name == "IT Support" || auth()->user()->name == "superadmin")
                     <a href="{{ url('/dashboard/it') }}" class="dropdown-item {{ Request::is('dashboard/it*') ? 'active' : '' }}">
-                        <i class="bi bi-window"></i> List Surat IT
+                        <i class="bi bi-envelope"></i> List Surat IT
                     </a>
                 @endif
                 @if (auth()->user()->name == "General Affair" || auth()->user()->name == "superadmin")
-                    <a href="{{ url('/dashboard/ga') }}" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-window"></i> List Surat GA</a>
+                    <a href="{{ url('/dashboard/ga') }}" class="dropdown-item {{ Request::is('dashboard/ga*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat GA</a>
                 @endif
                 @if (auth()->user()->name == "Marketing Sales Shipping" || auth()->user()->name == "superadmin" || auth()->user()->name == "Ervina Wijaya")
                     <a href="{{ url('/dashboard/mss') }}" class="dropdown-item {{ Request::is('dashboard/mss*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat MSS</a>
@@ -35,7 +35,11 @@
                 @endif
                 @if (auth()->user()->name == "Talent and Culture" || auth()->user()->name == "superadmin" || auth()->user()->name == "LALA")
                 <a href="{{ url('/dashboard/tnc') }}" class="dropdown-item {{ Request::is('dashboard/tnc*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat TNC</a>
-            @endif
+                @endif
+                @if (auth()->user()->name == "Procurement" || auth()->user()->name == "superadmin" || auth()->user()->name == "EDY")
+                <a href="{{ url('/dashboard/prc') }}" class="dropdown-item {{ Request::is('dashboard/prc*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat PRC</a>
+                @endif
+
                 <a href="{{ url('/feedback') }}" class="dropdown-item {{ Request::is('/feedback*') ? 'active' : '' }}"><i class="bi bi-window"></i> Feedback</a>
                 @if(auth()->user()->name == "IT Support" || auth()->user()->name == "superadmin")
                 <a href="{{ url('/feedback-show') }}" class="dropdown-item {{ Request::is('/feedback-show*') ? 'active' : '' }}"><i class="bi bi-window"></i> List Feedback</a>

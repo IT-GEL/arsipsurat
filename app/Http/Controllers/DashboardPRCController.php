@@ -44,33 +44,43 @@ class DashboardPRCController extends Controller
         $maxNoSuratKeagenan = PRC::where('idPerihal', '1')->max('noSurat') ?? 0;
 
 
-       return view('dashboard.prc.create', [
-        'title' => 'PRC',
-        'romanMonth' => $romanMonth,
-        'maxNoSuratKeagenan' => $maxNoSuratKeagenan,
-    ]);
-
+        return view('dashboard.prc.create', [
+            'title' => 'PRC',
+            'romanMonth' => $romanMonth,
+            'maxNoSuratKeagenan' => $maxNoSuratKeagenan,
+        ]);
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
             'noSurat' => 'required|numeric',
             'idPerihal' => 'required|numeric',
             'perihal' => 'required|string',
-            'prefix' => 'required|string|max:255',
-            'keterangan' => 'nullable|string',
+            'prefixPO' => 'required|string|max:255',
+            'prefixPR' => 'required|string|max:255',
+            'prefixQuote' => 'required|string|max:255',
+            'kop' => 'nullable|string|max:255',
+            'vendor' => 'nullable|string|max:255',
+            'faxno' => 'nullable|string|max:255',
+            'att' => 'nullable|string|max:255',
+            'prefixPR' => 'nullable|string|max:255',
+            'prefixQuote' => 'nullable|string|max:255',
+            'items' => 'required|array',
+            'devdate' => 'nullable|string|max:255',
+            'devto' => 'nullable|string|max:255',
             'tmpt' => 'nullable|string|max:255',
             'tglSurat' => 'nullable|date',
             'ttd' => 'nullable|string|max:255',
             'y_buat' => 'nullable|string|max:255',
             'jabatan' => 'nullable|string|max:255',
             'lampiran' => 'nullable|string|max:255',
-            'kop' => 'nullable|string|max:255',
             'approve' => 'nullable|numeric|max:255',
-
         ]);
+
+        $itemsJson = json_encode($validatedData['items']);
+
+        $validatedData['items'] = $itemsJson;
 
         PRC::create($validatedData);
 
@@ -79,14 +89,19 @@ class DashboardPRCController extends Controller
 
     public function show(PRC $prc)
     {
+        $itemsArray = json_decode($prc->items, true);
+
         return view('dashboard.prc.show', [
             'title' => 'PRC',
             'prc' => $prc,
+            'items' => $itemsArray,
         ]);
     }
 
     public function edit(PRC $prc)
     {
+        $items = json_decode($prc->items, true);
+
         $monthNumber = \Carbon\Carbon::parse($prc->tglSurat)->month;
         $romanMonth = monthToRoman($monthNumber);
 
@@ -94,14 +109,12 @@ class DashboardPRCController extends Controller
             'title' => 'Edit',
             'prc' => $prc,
             'romanMonth' => $romanMonth,
+            'items' => $items,
         ]);
     }
 
     public function update(Request $request, PRC $prc)
     {
-
-
-
         $rules = [
             'idPerihal' => 'required|numeric|max:255',
             'perihal' => 'required|string|max:255',
@@ -181,7 +194,6 @@ class DashboardPRCController extends Controller
             Log::error($e->getMessage());
             return redirect('/dashboard/prc')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
     }
 
     // Helper method to generate QR code
@@ -228,8 +240,6 @@ class DashboardPRCController extends Controller
         PRC::destroy($prc->id);
 
         return redirect('/dashboard/prc')->with('success', 'Surat berhasil dihapus!');
-
-
     }
 
     public function cetak(PRC $prc)
