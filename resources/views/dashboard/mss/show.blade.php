@@ -322,7 +322,7 @@
                     <br><br><br>
                     <table width="545" style="font-weight:bold;">
                         <tr>
-                            <td>Ervina W</td>
+                            <td>Ervina Wijaya</td>
                         </tr>
                         <tr>
                             <td>MSS Ops Mgr</td>
@@ -354,8 +354,10 @@
             <div>
                 <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
+
                 @if (auth()->user()->name == 'Ervina Wijaya')
                     <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
                         @csrf
@@ -608,11 +610,11 @@
         <!-- Tanda Terima -->
         <!-- Recent Sales Start -->
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
+            <a href="/dashboard/mss" class="btn btn-success mt-3"><i class="bi bi-arrow-left-square"></i> Kembali</a>
             {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
-            <div>
-                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+            <div class="mx-3">
+                <a href="{{ url('/dashboard/mss/' . $mss->id . '/cetak') }}" id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
@@ -691,14 +693,17 @@
         <!-- Permohonan Revisi Invoice dan Pembatalan Faktur Pajak GEL -->
         <!-- Recent Sales Start -->
         <div class="d-flex align-items-center justify-content-between mb-4">
+
             <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
             {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
             <div>
                 <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
+
                 @if (auth()->user()->name == 'Ervina Wijaya')
                     <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
                         @csrf
