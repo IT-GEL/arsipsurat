@@ -5,7 +5,7 @@
         <div class="row g-4">
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4 mx-auto" style="width: 210mm;">
-                    <h6 class="mb-4">Edit Surat Keterangan Marketing Sales Shipping</h6>
+                    <h6 class="mb-4">Edit Surat Keterangan Talent And Culture</h6>
 
                     <form method="post" action="/dashboard/tnc/{{ $tnc->id }}">
 
@@ -40,6 +40,17 @@
                             @enderror
                         </div>
 
+                        <div id="tujuanSurat-field" class="mb-3" style="display: none;">
+                            <label for="tujuanSurat" class="form-label">Tujuan Surat</label>
+                            <input type="text" class="form-control @error('tujuanSurat') is-invalid @enderror" id="tujuanSurat"
+                                name="tujuanSurat" required value="{{ old('tujuanSurat', $tnc->tujuanSurat) }}">
+                            @error('tujuanSurat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
                         <div id="keterangan-field" class="mb-3">
                             <label for="keterangan" class="form-label">Isi Surat / Keterangan</label>
                             <input type="hidden" id="keterangan" name="keterangan"
@@ -56,10 +67,22 @@
                         </div>
 
                         <div class="mb-3 mt-3">
-                            <label for="tglSurat" class="form-label">Tanggal Buat Surat</label>
-                            <input type="date" class="form-control @error('tglSurat') is-invalid @enderror"
-                                id="tglSurat" name="tglSurat" required value="{{ old('tglSurat', $tnc->tglSurat) }}"
-                                readonly>
+                            <label for="tglSurat" class="form-label">Tempat, Tanggal Surat</label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="tmpt" class="form-control @error('tmpt') is-invalid @enderror"
+                                            id="tmpt" name="tmpt" required value="{{ old('tmpt') }}"
+                                            placeholder="Tempat Buat Surat" readonly>
+                                    </td>
+                                    <td> , </td>
+                                    <td>
+                                        <input type="date" class="form-control @error('tglSurat') is-invalid @enderror"
+                                            id="tglSurat" name="tglSurat" required value="{{ old('tglSurat') }} "readonly>
+                                    </td>
+                                </tr>
+                            </table>
+
                             @error('tglSurat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -67,16 +90,26 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="ttd" class="form-label">Yang Menandatangani</label>
-                            <input type="text" class="form-control @error('ttd') is-invalid @enderror" id="ttd"
-                                name="ttd" required value="{{ old('ttd', $tnc->ttd) }}" readonly>
-                            @error('ttd')
+                        <div id="jml-lampiran-field" class="mb-3" style="display: none;">
+                            <label for="jml_lampiran" class="form-label" >Jumlah lampiran yang akan dilampirkan</label>
+                            <input type="number" name="jml_lampiran" id="jml_lampiran" value="{{ old('tglSurat') }}" class="form-control @error('jml_lampiran') is-invalid @enderror">
+                            @error('jml_lampiran')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div id="upload-lampiran-field" class="mb-3" style="display: none;">
+                            <label for="lampiran" class="form-label">Upload Lampiran (Optional)</label>
+                            <input type="file" class="form-control @error('lampiran') is-invalid @enderror"
+                                id="lampiran" name="lampiran" multiple>
+                            @error('lampiran')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
+
 
 
                         <button type="submit" class="btn btn-primary">Buat Surat</button>
@@ -130,6 +163,40 @@
                     reader.readAsDataURL(file);
                 }
             }
+
+            document.addEventListener('DOMContentLoaded', async function() {
+                const perihalSelect = '{{ $tnc->idPerihal }}'
+                const jml_lampiran = document.getElementById('jml-lampiran-field');
+                const upload_lampiran = document.getElementById('upload-lampiran-field');
+                const tujuanSurat = document.getElementById('tujuanSurat-field');
+
+                function showFields() {
+                    // Hide fields by default
+                    // jml_lampiran.style.display = 'none';
+                    // upload_lampiran.style.display = 'none';
+                    // tujuanSurat.style.display = 'none';
+
+                    switch (perihalSelect) {
+                        case '1':
+                            // Show fields if value is 1
+                            jml_lampiran.style.display = 'block';
+                            upload_lampiran.style.display = 'block';
+                            break;
+                        case '2':
+                            // Show fields if value is 2
+                            tujuanSurat.style.display = 'block';
+                            break;
+                        // You can add more cases here if needed
+                        default:
+                            // Default action can be empty or any other logic
+                            break;
+                    }
+                }
+
+                showFields();
+
+
+            });
 
         </script>
     @endsection

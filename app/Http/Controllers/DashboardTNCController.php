@@ -41,31 +41,49 @@ class DashboardTNCController extends Controller
         // Get the current month number
         $monthNumber = date('n'); // 'n' returns the numeric representation of the month (1 to 12)
         $romanMonth = monthToRoman($monthNumber);
-        $maxNoSuratKeagenan = TNC::where('idPerihal', '1')->max('noSurat') ?? 0;
+
+        // $maxNoSuratInternalMemo = TNC::where('idPerihal', '1')->max('noSurat') ?? 0;
+        // $maxNoSuratWaskita = TNC::where('idPerihal', '2')->max('noSurat') ?? 0;
+
+        $kopCounts = [
+            'GEL' => TNC::where('kop', 'GEL')->where('idPerihal', 1)->count(),
+            'QIN' => TNC::where('kop', 'QIN')->where('idPerihal', 1)->count(),
+            'ERA' => TNC::where('kop', 'ERA')->where('idPerihal', 1)->count(),
+            'GCR' => TNC::where('kop', 'GCR')->where('idPerihal', 1)->count(),
+        ];
+
+        // If idPerihal is 2, get the max noSurat
+        if (TNC::where('idPerihal', 2)->exists()) {
+            $maxNoSurat = TNC::where('idPerihal', 2)->max('noSurat');
+        } else {
+            $maxNoSurat = 0;
+        }
 
 
        return view('dashboard.tnc.create', [
         'title' => 'TNC',
         'romanMonth' => $romanMonth,
-        'maxNoSuratKeagenan' => $maxNoSuratKeagenan,
+        // 'maxNoSuratInternalMemo' => $maxNoSuratInternalMemo,
+        // 'maxNoSuratWaskita' => $maxNoSuratWaskita,
+        'kopCounts' => $kopCounts,
+        'maxNoSurat' => $maxNoSurat,
     ]);
 
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         $validatedData = $request->validate([
             'noSurat' => 'required|numeric',
             'idPerihal' => 'required|numeric',
             'perihal' => 'required|string',
             'prefix' => 'required|string|max:255',
+            'divisi' => 'nullable|string',
+            'tujuanSurat' => 'nullable|string',
             'keterangan' => 'nullable|string',
-            'tmpt' => 'nullable|string|max:255',
             'tglSurat' => 'nullable|date',
-            'ttd' => 'nullable|string|max:255',
-            'y_buat' => 'nullable|string|max:255',
-            'jabatan' => 'nullable|string|max:255',
+            'jml_lampiran' => 'nullable|string|max:255',
             'lampiran' => 'nullable|string|max:255',
             'kop' => 'nullable|string|max:255',
             'approve' => 'nullable|numeric|max:255',
@@ -130,9 +148,6 @@ class DashboardTNCController extends Controller
             'qas' => 'nullable|string',
             'top' => 'nullable|string|max:255',
             'tglSurat' => 'nullable|date',
-            'ettd' => 'nullable|string|max:255',
-            'ttd' => 'nullable|string|max:255',
-            'namaTtd' => 'nullable|string|max:255',
         ];
 
         if ($request->noSurat != $tnc->noSurat) {
@@ -159,7 +174,7 @@ class DashboardTNCController extends Controller
 
             // Update status persetujuan
             $tnc->approve = 1;
-            $tnc->qr = "QRGSM{$tnc->id}.png"; // Example QR file name
+            $tnc->qr = "QRTNC{$tnc->id}.png"; // Example QR file name
             $tnc->save();
 
             // Create an instance of the DetailQr model

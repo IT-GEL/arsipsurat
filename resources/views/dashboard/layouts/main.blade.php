@@ -48,7 +48,6 @@
         }
         .table-keterangan {
             border-collapse: collapse;
-            width: 545px; /* Optional: set width here if you want */
         }
 
         .table-keterangan td {

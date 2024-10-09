@@ -207,7 +207,7 @@
                                                 "<p>Dear Sir,</p><br><p>We, GLOBAL COAL RESOURCES Pte, Ltd., hereby state that we are in a position of an LOI and ready, willing and request for a long term contract of One – Year to purchase of coal as terms that mentioned below:</p>";
                                         } else if (perihalBA.value === 'Surveyor') {
                                             keterangan.value =
-                                                `<p style="text-align: justify;">Sesuai arahandari Bapak Dypo untuk COA TB Kasih Power 2000-1/BG Rimau 3016 dengan quantity
+                                                `<p style="text-align: justify;">Sesuai arahan dari Bapak Dypo untuk COA TB Kasih Power 2000-1/BG Rimau 3016 dengan quantity
                                                      8.451,191 MT dengan tujuan Jetty Senamas, Kalteng-Jetty Gresik bahwa COA tersebut
                                                     dipakai untuk dua surveyor, yaitu PT Asiatrust Technovima Qualiti dan PT
                                                     Calmaint Global Riset.</p>
@@ -474,23 +474,7 @@
                                         function updateqas() {
                                             if (perihalSelect.value === '1') {
                                                 qas.value =
-                                                    `<table style="border-collapse:collapse;width: 100%;"><tbody>
-                                                        <tr>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td></tr>
-                                                        <tr>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td></tr>
-                                                        <tr>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td>
-                                                            <td style="width: 25%;"><br></td></tr></tbody>
-                                                    </table>`;
+                                                    ``;
                                             } else {
                                                 qas.value = ""; // Reset or set other values based on different selections
                                             }

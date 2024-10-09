@@ -39,7 +39,7 @@
     </style>
 
     @if ($tnc->idPerihal == '1')
-        <!-- Surat Keagenan -->
+        <!-- Surat Internal Memo -->
         <!-- Recent Sales Start -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
@@ -58,7 +58,7 @@
                 <div class="header-content">
                     {{-- <center style="margin-top: 50px;"> --}}
 
-                    <table width="545">
+                    <table width="600">
                         <tr>
                             <td style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-align: center; font-weight: bold; text-transform: uppercase;"
                                 class="text">
@@ -71,13 +71,13 @@
                         </tr>
                     </table>
                     <br>
-                    <table class="table-keterangan" width="545">
+                    <table class="table-keterangan" width="600">
                         <tr>
                             <td style="border: 0px;">{!! $tnc->keterangan !!}</td>
                         </tr>
                     </table>
 
-                    <table width="545">
+                    <table width="600">
                         <tr>
                             <td style="text-align: left">Jakarta, {{ formatDateIndonesian($tnc->tglSurat) }}</td>
                         </tr>
@@ -87,7 +87,7 @@
                     </table>
 
                     @if ($tnc->approve == '1')
-                        <table width="545" style="font-weight:bold;">
+                        <table width="600" style="font-weight:bold;">
                             <tr>
                                 <td><img style="height:125px; weigth:125px;padding-left:15px;"
                                         src="{{ asset('img/qrcodes/' . $tnc->qr) }}" alt="QR Code"></td>
@@ -97,12 +97,107 @@
                         <br><br><br><br>
                     @endif
 
-                    <table width="545" style="font-weight:bold;">
+                    <table width="600" style="font-weight:bold;">
                         <tr>
                             <td><u>{{ $tnc->ttd }}</u></td>
                         </tr>
                         <tr>
                             <td>{{ $tnc->jabatan }}</td>
+                        </tr>
+                    </table>
+
+                    {{-- </center> --}}
+                </div>
+                @if ($tnc->kop !== null)
+                    <div class="footer-page">
+                        <img src="{{ asset('img/' . $tnc->kop . '-bottom-kop.png') }}"
+                            style="max-width: 100%; height: auto;">
+                    </div>
+                @endif
+            </div>
+        </div>
+        <!-- Recent Sales End -->
+    @endif
+
+    @if ($tnc->idPerihal == '2')
+        <!-- Surat Waskita -->
+        <!-- Recent Sales Start -->
+
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+                    class="bi bi-printer"></i> Cetak</a> --}}
+            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+        </div>
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $tnc->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
+                </div>
+                <div class="header-content">
+                    {{-- <center style="margin-top: 50px;"> --}}
+
+                    <table width="600">
+                        <tr>
+                            <td style="text-align: left">Jakarta, {{ formatDateIndonesian($tnc->tglSurat) }}</td>
+                        </tr>
+
+
+                    </table>
+                    <br>
+
+                    <table width="600">
+                        <tr>
+                            <td style="text-align: left">Nomor : {{ $tnc->prefix }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left">Perihal : {{ $tnc->perihal }}</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table width="600">
+                        <tr>
+                            <td style="text-align: left">Kepada Yth.</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left"><u><b>{{ $tnc->tujuanSurat }}</b></u></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left">Di Tempat</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="table-keterangan" width="615">
+                        <tr>
+                            <td style="border: 0px;">{!! $tnc->keterangan !!}</td>
+                        </tr>
+                    </table>
+
+                    <table width="600">
+                        <tr>
+                            <td><b>PT Global Energi Lestari</b></td>
+                        </tr>
+                    </table>
+
+                    @if ($tnc->approve == '1')
+                        <table width="600" style="font-weight:bold;">
+                            <tr>
+                                <td><img style="height:125px; weigth:125px;padding-left:15px;"
+                                        src="{{ asset('img/qrcodes/' . $tnc->qr) }}" alt="QR Code"></td>
+                            </tr>
+                        </table>
+                    @else
+                        <br><br><br><br>
+                    @endif
+
+                    <table width="600" style="font-weight:bold;">
+                        <tr>
+                            <td><u>Tuty Alawiyah, M.M</u></td>
+                        </tr>
+                        <tr>
+                            <td>Corporate Talent and Culture Manager</td>
                         </tr>
                     </table>
 
