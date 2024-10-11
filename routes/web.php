@@ -12,6 +12,8 @@ use App\Http\Controllers\DashboardMSSController;
 use App\Http\Controllers\DashboardGSMController;
 use App\Http\Controllers\DashboardTNCController;
 use App\Http\Controllers\DashboardPRCController;
+use App\Http\Controllers\DashboardFINAPController;
+use App\Http\Controllers\DashboardFINARController;
 use App\Http\Controllers\DetailQrController;
 use App\Http\Controllers\FeedbackController;
 
@@ -48,12 +50,16 @@ Route::resource('/dashboard/mss', DashboardMSSController::class)->middleware('au
 Route::resource('/dashboard/gsm', DashboardGSMController::class)->middleware('auth');
 Route::resource('/dashboard/tnc', DashboardTNCController::class)->middleware('auth');
 Route::resource('/dashboard/prc', DashboardPRCController::class)->middleware('auth');
+Route::resource('/dashboard/finap', DashboardFINAPController::class)->middleware('auth');
+Route::resource('/dashboard/finar', DashboardFINARController::class)->middleware('auth');
 
 Route::put('/dashboard/it/{it}/approve', [DashboardITController::class, 'approve'])->name('it.approve');
 Route::put('/dashboard/mss/{mss}/approve', [DashboardMSSController::class, 'approve'])->name('mss.approve');
 Route::put('/dashboard/gsm/{gsm}/approve', [DashboardGSMController::class, 'approve'])->name('gsm.approve');
 Route::put('/dashboard/tnc/{tnc}/approve', [DashboardTNCController::class, 'approve'])->name('tnc.approve');
 Route::put('/dashboard/prc/{prc}/approve', [DashboardPRCController::class, 'approve'])->name('prc.approve');
+Route::put('/dashboard/finar/{finar}/approve', [DashboardFINARController::class, 'approve'])->name('finar.approve');
+Route::put('/dashboard/finap/{finap}/approve', [DashboardFINAPController::class, 'approve'])->name('finap.approve');
 
 
 // QR Detail Route

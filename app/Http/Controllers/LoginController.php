@@ -20,7 +20,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required', 'alpha_dash', 'max:255'],
+            'username' => ['required', 'max:255'],
             'password' => ['required'],
         ]);
 

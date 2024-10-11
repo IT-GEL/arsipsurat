@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FAR;
+use App\Models\FINAR;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-class DashboardFARController extends Controller
+class DashboardFINARController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,10 @@ class DashboardFARController extends Controller
      */
     public function index()
     {
-        return view('dashboard.far.index', [
+        return view('dashboard.finar.index', [
             'title' => 'Surat Divisi',
-            'far' => FAR::latest()->paginate(8),
-            'totalFAR' => FAR::count(),
+            'finar' => FINAR::latest()->paginate(8),
+            'totalFINAR' => FINAR::count(),
         ]);
     }
 
@@ -30,8 +30,8 @@ class DashboardFARController extends Controller
      */
     public function create()
     {
-        return view('dashboard.far.create', [
-            'title' => 'FAR',
+        return view('dashboard.finar.create', [
+            'title' => 'FINAR',
         ]);
     }
 
@@ -56,36 +56,36 @@ class DashboardFARController extends Controller
             'namaTtd' => 'required|max:255',
         ]);
 
-        FAR::create($validatedData);
+        FINAR::create($validatedData);
 
-        return redirect('/dashboard/far')->with('success', 'Surat berhasil ditambahkan!');
+        return redirect('/dashboard/finar')->with('success', 'Surat berhasil ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FAR  $far
+     * @param  \App\Models\FINAR  $finar
      * @return \Illuminate\Http\Response
      */
-    public function show(FAR $far)
+    public function show(FINAR $finar)
     {
-        return view('dashboard.far.show', [
-            'title' => 'FAR',
-            'far' => $far,
+        return view('dashboard.finar.show', [
+            'title' => 'FINAR',
+            'finar' => $finar,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FAr  $far
+     * @param  \App\Models\FINAR  $finar
      * @return \Illuminate\Http\Response
      */
-    public function edit(FAR $far)
+    public function edit(FINAR $finar)
     {
-        return view('dashboard.far.edit', [
+        return view('dashboard.finar.edit', [
             'title' => 'Edit',
-            'far' => $far,
+            'finar' => $finar,
         ]);
     }
 
@@ -93,10 +93,10 @@ class DashboardFARController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Far  $far
+     * @param  \App\Models\FINAR  $finar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FAR $far)
+    public function update(Request $request, FINAR $finar)
     {
         $rules = [
             'perihal' => 'required',
@@ -110,36 +110,36 @@ class DashboardFARController extends Controller
             'namaTtd' => 'required|max:255',
         ];
 
-        if ($request->noSurat != $far->noSurat) {
-            $rules['noSurat'] = 'required|numeric|unique:far';
+        if ($request->noSurat != $finar->noSurat) {
+            $rules['noSurat'] = 'required|numeric|unique:finar';
         }
 
         $validatedData = $request->validate($rules);
 
-        FAR::where('id', $far->id)
+        FINAR::where('id', $finar->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/far')->with('success', 'Surat berhasil di edit!');
+        return redirect('/dashboard/finar')->with('success', 'Surat berhasil di edit!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FAR  $far
+     * @param  \App\Models\FINAR  $finar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FAR $far)
+    public function destroy(FINAR $finar)
     {
-        FAR::destroy($far->id);
+        FINAR::destroy($finar->id);
 
-        return redirect('/dashboard/far')->with('success', 'Surat berhasil dihapus!');
+        return redirect('/dashboard/finar')->with('success', 'Surat berhasil dihapus!');
     }
 
-    public function cetak(FAR $far)
+    public function cetak(FINAR $finar)
     {
-        return view('dashboard.far.cetak', [
-            'title' => 'FAR',
-            'far' => $far,
+        return view('dashboard.finar.cetak', [
+            'title' => 'FINAR',
+            'finar' => $finar,
         ]);
     }
 }

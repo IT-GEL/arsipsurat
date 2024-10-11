@@ -44,11 +44,11 @@
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
             <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
 
             <div>
-                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                <a id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
@@ -349,10 +349,10 @@
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
             <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
             <div>
-                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                <a  id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
 
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
@@ -472,10 +472,10 @@
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
             <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
             <div>
-                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                <a  id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
@@ -611,10 +611,10 @@
         <!-- Recent Sales Start -->
         <div class="d-flex align-items-center justify-content-between mb-4">
             <a href="/dashboard/mss" class="btn btn-success mt-3"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
             <div class="mx-3">
-                <a href="{{ url('/dashboard/mss/' . $mss->id . '/cetak') }}" id="download-pdf" class="btn btn-secondary"
+                <a id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
@@ -695,10 +695,10 @@
         <div class="d-flex align-items-center justify-content-between mb-4">
 
             <a href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i> Kembali</a>
-            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
             <div>
-                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                <a  id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
 
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
@@ -800,10 +800,10 @@
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
             <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/mss/{{ $mss->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
             <div>
-                <a href="/dashboard/mss/{{ $mss->id }}/cetak" id="download-pdf" class="btn btn-secondary"
+                <a  id="download-pdf" class="btn btn-secondary"
                     target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>

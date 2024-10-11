@@ -39,6 +39,12 @@
                 @if (auth()->user()->name == "Procurement" || auth()->user()->name == "superadmin" || auth()->user()->name == "EDY")
                 <a href="{{ url('/dashboard/prc') }}" class="dropdown-item {{ Request::is('dashboard/prc*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat PRC</a>
                 @endif
+                @if (auth()->user()->name == "Finance AP" || auth()->user()->name == "superadmin")
+                <a href="{{ url('/dashboard/finap') }}" class="dropdown-item {{ Request::is('dashboard/finap*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat Finance AP</a>
+                @endif
+                @if (auth()->user()->name == "Finance AR" || auth()->user()->name == "superadmin")
+                <a href="{{ url('/dashboard/finar') }}" class="dropdown-item {{ Request::is('dashboard/finar*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat Finance AR</a>
+                @endif
 
                 <a href="{{ url('/feedback') }}" class="dropdown-item {{ Request::is('/feedback*') ? 'active' : '' }}"><i class="bi bi-window"></i> Feedback</a>
                 @if(auth()->user()->name == "IT Support" || auth()->user()->name == "superadmin")
