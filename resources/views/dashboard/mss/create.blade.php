@@ -11,18 +11,19 @@
 
                         <input type="hidden" id="approve" name="approve" value="0">
 
+
+
                         <div class="mb-3">
-                            <label for="kop" class="form-label">Pilih Kop Surat PT </label>
-                            <select class="form-select @error('kop') is-invalid @enderror" id="kop" name="kop"
-                                autofocus>
-                                <option value="" selected>Tanpa Kop</option>
-                                <option value="GEL">GEL</option>
-                                <option value="QIN">QIN</option>
-                                <option value="ERA">ERA</option>
-                                <option value="GCR">GCR</option>
-                            </select>
-                            @error('kop')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                            <label for="noSurat" class="form-label">Nomor Surat</label>
+                            <input type="hidden" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat"
+                                name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required
+                                value="{{ old('noSurat') }}">
+                            <br>
+                            <input type="text" class="form-control" id="prefix" name="prefix" readonly>
+                            @error('noSurat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
 
@@ -37,12 +38,31 @@
                                 <option value="4">Tanda Terima</option>
                                 <option value="5">Permohonan Revisi Invoice dan Pembatalan FP GEL</option>
                                 <option value="6">Letter of Intent</option>
+                                <option value="7">SURAT PERNYATAAN KEBENARAN DOKUMEN (SPKD)</option>
+                                <option value="8">SURAT KETERANGAN ASAL BARANG (SKAB)</option>
+                                <option value="9">SURAT PERNYATAAN KUALITAS BARANG (SPKB)</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             @error('idPerihal')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="kop" class="form-label">Pilih Kop Surat PT </label>
+                            <select class="form-select @error('kop') is-invalid @enderror" id="kop" name="kop"
+                                autofocus>
+                                {{-- <option value="" selected>Tanpa Kop</option>
+                                <option value="GEL">GEL</option>
+                                <option value="QIN">QIN</option>
+                                <option value="ERA">ERA</option>
+                                <option value="GCR">GCR</option> --}}
+                            </select>
+                            @error('kop')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
 
                         <div class="mb-3" id="perihalBAClass" style="display: none;">
                             <label for="perihalBA" class="form-label">Perihal Berita Acara</label>
@@ -60,19 +80,6 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="noSurat" class="form-label">Nomor Surat</label>
-                            <input type="hidden" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat"
-                                name="noSurat" placeholder="Urutan Nomor Surat Terbaru" required
-                                value="{{ old('noSurat') }}">
-                            <br>
-                            <input type="text" class="form-control" id="prefix" name="prefix" readonly>
-                            @error('noSurat')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
 
 
                         <div id="surat-izin" class="mb-3" style="display: none;">
@@ -195,7 +202,6 @@
                             <script>
                                 document.addEventListener('DOMContentLoaded', function() {
                                     const keterangan = Jodit.make('#keterangan');
-                                    new DragAndDrop(keterangan);
                                     const perihalSelect = document.getElementById('idPerihal');
                                     const perihalBA = document.getElementById('perihalBA');
 
@@ -253,6 +259,129 @@
                                 });
                             </script>
                         </div>
+
+                        <div id="SKAB-field">
+
+                            <div class="mb-3">
+                                <label for="namaPenerima" class="form-label">Nama Penerima</label>
+                                <input type="text" class="form-control @error('namaPenerima') is-invalid @enderror"
+                                    id="namaPenerima" name="namaPenerima" value="{{ old('namaPenerima') }}">
+                                @error('namaPenerima')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="saranaAngkutan" class="form-label">Sarana Angkutan</label>
+                                <input type="text" class="form-control @error('saranaAngkutan') is-invalid @enderror"
+                                    id="saranaAngkutan" name="saranaAngkutan" value="{{ old('saranaAngkutan') }}">
+                                @error('saranaAngkutan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3 mt-3">
+                                <label for="tglPemuatan" class="form-label">Tanggal Pemuatan</label>
+                                <input type="date" class="form-control @error('tglPemuatan') is-invalid @enderror"
+                                    id="tglPemuatan" name="tglPemuatan"  value="{{ old('tglPemuatan') }}">
+                                @error('tglPemuatan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3" id="tonase-field">
+                            <label for="tonase" class="form-label">Tonase</label>
+                            <input type="text" class="form-control @error('tonase') is-invalid @enderror"
+                                id="tonase" name="tonase" value="{{ old('tonase') }}">
+                            @error('tonase')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                            <div class="mb-3" id="namaPT-field">
+                                <label for="namaPT" class="form-label">Nama PT</label>
+                                <input type="text" class="form-control @error('namaPT') is-invalid @enderror"
+                                    id="namaPT" name="ptkunjungan" value="{{ old('namaPT') }}">
+                                @error('namaPT')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3" id="pelabuhanTujuan-field">
+                                <label for="pelabuhanTujuan" class="form-label">Pelabuhan Tujuan</label>
+                                <input type="text" class="form-control @error('pelabuhanTujuan') is-invalid @enderror"
+                                    id="pelabuhanTujuan" name="pelabuhanTujuan" value="{{ old('pelabuhanTujuan') }}">
+                                @error('pelabuhanTujuan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+
+                            <div class="mb-3" id="pelabuhanMuat-field">
+                                <label for="pelabuhanMuat" class="form-label">Pelabuhan Muat</label>
+                                <input type="text" class="form-control @error('pelabuhanMuat') is-invalid @enderror"
+                                    id="pelabuhanMuat" name="pelabuhanMuat" value="{{ old('pelabuhanMuat') }}">
+                                @error('pelabuhanMuat')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                        <div id="SPKD-field" style="display: none;">
+
+                            <div class="mb-3">
+                                <label for="vessel" class="form-label">Vessel</label>
+                                <input type="text" class="form-control @error('vessel') is-invalid @enderror"
+                                    id="vessel" name="vessel" value="{{ old('vessel') }}">
+                                @error('vessel')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="btb" class="form-label">Barge/Tug Boat</label>
+                                <input type="text" class="form-control @error('btb') is-invalid @enderror"
+                                    id="btb" name="btb" value="{{ old('btb') }}">
+                                @error('btb')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3 mt-3">
+                                <label for="tglPengapalan" class="form-label">Tanggal Pengapalan</label>
+                                <input type="date" class="form-control @error('tglPengapalan') is-invalid @enderror"
+                                    id="tglPengapalan" name="tglPengapalan"  value="{{ old('tglPengapalan') }}">
+                                @error('tglPengapalan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                        </div>
+
+
 
                         <div id="surat-fco">
                             <div class="fco-field mb-3" style="display: none;" id="commodity">
@@ -425,8 +554,6 @@
                             </div>
 
 
-
-
                             <div class="fco-field mb-3" style="display: none;">
                                 <label for="shipschedule" class="form-label">Shipping Schedule</label>
                                 <input type="date" class="form-control @error('shipschedule') is-invalid @enderror"
@@ -468,7 +595,6 @@
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         const qas = Jodit.make('#qas');
-                                        new DragAndDrop(qas);
                                         const perihalSelect = document.getElementById('idPerihal');
 
                                         function updateqas() {
@@ -532,10 +658,10 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3" id="mengetahui-field">
                             <label for="namaTtd" class="form-label">Mengetahui</label>
                             <input type="text" class="form-control @error('namaTtd') is-invalid @enderror"
-                                id="namaTtd" name="namaTtd" required value="{{ old('namaTtd') }}">
+                                id="namaTtd" name="namaTtd" value="{{ old('namaTtd') }}">
                             @error('namaTtd')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -565,7 +691,7 @@
                         </script>
 
 
-                        <div class="mb-3">
+                        <div class="mb-3" id="lampiran-field">
                             <label for="lampiran" class="form-label">Upload Lampiran (Optional)</label>
                             <input type="file" class="form-control @error('lampiran') is-invalid @enderror"
                                 id="lampiran" name="lampiran" multiple>
@@ -583,48 +709,6 @@
             </div>
         </div>
         <script>
-            class DragAndDrop {
-                constructor(jodit) {
-                    this.jodit = jodit;
-                    this.init();
-                }
-
-                init() {
-                    const editorArea = this.jodit.container;
-
-                    editorArea.addEventListener('dragover', (event) => {
-                        event.preventDefault();
-                        editorArea.classList.add('drag-over');
-                    });
-
-                    editorArea.addEventListener('dragleave', () => {
-                        editorArea.classList.remove('drag-over');
-                    });
-
-                    editorArea.addEventListener('drop', (event) => {
-                        event.preventDefault();
-                        editorArea.classList.remove('drag-over');
-
-                        const files = event.dataTransfer.files;
-                        if (files.length > 0) {
-                            for (const file of files) {
-                                if (file.type.startsWith('image/')) {
-                                    this.handleImageUpload(file);
-                                }
-                            }
-                        }
-                    });
-                }
-
-                handleImageUpload(file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const img = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width: 100%;" />`;
-                        this.jodit.selection.insertHTML(img);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
             document.addEventListener('DOMContentLoaded', function() {
                 const perihalSelect = document.getElementById('idPerihal');
                 const noSuratInput = document.getElementById('noSurat');
@@ -639,6 +723,14 @@
                 const tglSuratInput = document.getElementById('tglSurat');
                 const BAClass = document.getElementById('perihalBAClass');
                 const suratLOIGroups = document.querySelectorAll('#surat-fco .loi-field');
+                const SPKDField = document.getElementById('SPKD-field');
+                const SKABField = document.getElementById('SKAB-field');
+                const mengetahuiField = document.getElementById('mengetahui-field');
+                const lampiranField = document.getElementById('lampiran-field');
+                const namaPTfield = document.getElementById('namaPT-field');
+                const pelabuhanMuatField = document.getElementById('pelabuhanMuat-field');
+                const pelabuhanTujuanField = document.getElementById('pelabuhanTujuan-field');
+                const tonaseField = document.getElementById('tonase-field');
 
                 const maxValues = {
                     '1': {{ $maxNoSuratFCO }},
@@ -647,6 +739,7 @@
                     '4': {{ $maxNoSuratTT }},
                     '5': {{ $maxNoSuratRIPFP }},
                     '6': {{ $maxNoSuratLOI }},
+                    '7': {{ $maxNoSuratLOI }},
                 };
 
                 const PADDING_LENGTH = 3;
@@ -676,7 +769,22 @@
                             document.getElementById('country'),
                             document.getElementById('spec')
                         ]);
-                    }
+                    },
+                    '7': () => {
+                                    showFields([namaPTfield, SPKDField, pelabuhanMuatField, pelabuhanTujuanField]);
+                                    hideFields([mengetahuiField, lampiranField]);
+                                },
+
+                    '8': () => {
+                                    showFields([SKABField, pelabuhanMuatField, pelabuhanTujuanField, tonaseField]);
+                                    hideFields([mengetahuiField, lampiranField]);
+                                },
+
+                    '9': () => {
+                                    showFields([tonaseField]);
+                                    hideFields([mengetahuiField, lampiranField]);
+                                },
+
                 };
 
                 function showFields(elements) {
@@ -708,7 +816,9 @@
                 }
 
                 function hideAllFields() {
-                    hideFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass, attclass]);
+                    hideFields([suratizinGroup, keteranganField, pttujuanClass, alamatClass, BAClass, attclass,
+                        SPKDField, SKABField, namaPTfield, pelabuhanMuatField, pelabuhanTujuanField, tonaseField
+                    ]);
                     suratfcoGroups.forEach(group => {
                         if (group) group.style.display = 'none';
                     });
@@ -746,7 +856,10 @@
                         '3': 'Berita Acara',
                         '4': 'Tanda Terima',
                         '5': 'Permohonan Revisi Invoice dan Pembatalan FP GEL',
-                        '6': 'Letter of Intent (LOI) for Coal Purchase in'
+                        '6': 'Letter of Intent (LOI) for Coal Purchase in',
+                        '7': 'SURAT PERNYATAAN KEBENARAN DOKUMEN (SPKD)',
+                        '8': 'SURAT KETERANGAN ASAL BARANG (SKAB)',
+                        '9': 'SURAT PERNYATAAN KUALITAS BARANG (SPKB)',
                     };
                     perihalInput.value = perihalMap[selectedValue] || '';
                     handleFieldUpdates();
@@ -768,7 +881,10 @@
                         '3': `BA-${noSurat}/INV-SALES/${romanMonth}/${year}`,
                         '4': `Tanda Terima-${noSurat}/${romanMonth}/${year}`,
                         '5': `${year}/${kop}-PLN/SAL-${noSurat}`,
-                        '6': `No: MSS/${kop}/LOI-${noSurat}/${romanMonth}/${year}`
+                        '6': `No: MSS/${kop}/LOI-${noSurat}/${romanMonth}/${year}`,
+                        '7': `No. ${noSurat}/SPKD/${kop}/${romanMonth}/${year}`,
+                        '8': `No. ${noSurat}/SKAB/${kop}/${romanMonth}/${year}`,
+                        '9': `No. ${noSurat}/SPKB/${kop}/${romanMonth}/${year}`,
                     };
 
                     // Add the new condition for specific case
@@ -779,6 +895,38 @@
                     }
                 }
 
+                function updateKopOptions() {
+                    const idPerihal = document.getElementById('idPerihal').value;
+                    const kopSelect = document.getElementById('kop');
+
+                    // Reset to show all options initially
+                    const allOptions = ['GEL', 'QIN', 'ERA', 'GCR'];
+
+
+                    if (idPerihal === '7' || idPerihal === '8' || idPerihal === '9') {
+                        const allowedOptions = ['QIN', 'ERA'];
+                        allowedOptions.forEach(option => {
+                            kopSelect.innerHTML = `<option value="" selected>Tanpa Kop</option>
+                                <option value="QIN">QIN</option>
+                                <option value="ERA">ERA</option>`;
+                        });
+                    } else {
+                        console.log('All options:', allOptions);
+                        allOptions.forEach(option => {
+                            kopSelect.innerHTML = `
+                            <option value="">Tanpa Kop</option>
+                            <option value="GEL">GEL</option>
+                            <option value="QIN">QIN</option>
+                            <option value="ERA">ERA</option>
+                            <option value="GCR">GCR</option>
+                        `;
+                        })
+                    }
+                }
+
+
+
+
                 function toRoman(num) {
                     const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
                     return roman[num - 1] || '';
@@ -788,12 +936,13 @@
                     setInitialNoSurat();
                     updateVisibleFields();
                     updatePrefix();
-
                 }
 
-                [perihalBA, perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
+                [kop, perihalBA, perihalSelect, tglSuratInput, noSuratInput].forEach(element => {
                     element.addEventListener('change', handleFieldUpdates);
                 });
+
+                perihalSelect.addEventListener('change', updateKopOptions);
 
                 // Initialize
                 handleFieldUpdates();

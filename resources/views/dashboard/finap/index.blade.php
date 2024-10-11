@@ -2,6 +2,9 @@
 
 @section('container')
 
+@if(auth()->user()->username == "finap")
+
+
 <!-- Sale & Revenue Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
@@ -9,7 +12,7 @@
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-line fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Total Surat Keterangan Finance AP</p>
+                    <p class="mb-2">Total Surat Keterangan Fina nce AP</p>
                     <h6 class="mb-0">{{ $totalFINAP }}</h6>
                 </div>
             </div>
@@ -92,6 +95,8 @@
     </div>
 </div>
 <!-- Recent Sales End -->
+
+@endif
 
 <script type="text/javascript">
 

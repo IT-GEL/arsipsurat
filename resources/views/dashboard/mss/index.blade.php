@@ -2,6 +2,8 @@
 
 @section('container')
 
+@if(auth()->user()->username == "mss" || auth()->user()->username == "hmss")
+
 <!-- Sale & Revenue Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
@@ -91,6 +93,8 @@
     </div>
 </div>
 <!-- Recent Sales End -->
+
+@endif
 
 <script type="text/javascript">
 

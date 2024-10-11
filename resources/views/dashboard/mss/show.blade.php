@@ -25,7 +25,6 @@
             padding-bottom: 10mm;
             display: flex;
             flex-direction: column;
-            align-items: center;
             /* Make sure the content stays in front */
         }
 
@@ -37,6 +36,7 @@
             /* Ensure the footer is behind content */
         }
     </style>
+    <?php \Carbon\Carbon::setLocale('id'); ?>
 
     @if ($mss->idPerihal == '1') <!-- FCO -->
         <!-- Recent Sales Start -->
@@ -48,8 +48,7 @@
                     class="bi bi-printer"></i> Cetak</a> --}}
 
             <div>
-                <a id="download-pdf" class="btn btn-secondary"
-                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
                 @if (auth()->user()->name == 'Ervina Wijaya')
@@ -352,8 +351,7 @@
             {{-- <a  class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
             <div>
-                <a  id="download-pdf" class="btn btn-secondary"
-                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
 
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
@@ -475,8 +473,7 @@
             {{-- <a  class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
             <div>
-                <a  id="download-pdf" class="btn btn-secondary"
-                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
                 @if (auth()->user()->name == 'Ervina Wijaya')
@@ -614,8 +611,7 @@
             {{-- <a  class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
             <div class="mx-3">
-                <a id="download-pdf" class="btn btn-secondary"
-                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
                 @if (auth()->user()->name == 'Ervina Wijaya')
@@ -698,8 +694,7 @@
             {{-- <a  class="btn btn-secondary" target="_blank"><i
                         class="bi bi-printer"></i> Cetak</a> --}}
             <div>
-                <a  id="download-pdf" class="btn btn-secondary"
-                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
 
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
@@ -791,7 +786,8 @@
 
                 </div>
             </div>
-            <!-- Recent Sales End -->
+        </div>
+        <!-- Recent Sales End -->
     @endif
 
     @if ($mss->idPerihal == '6')
@@ -803,8 +799,7 @@
             {{-- <a  class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
             <div>
-                <a  id="download-pdf" class="btn btn-secondary"
-                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
                 @if (auth()->user()->name == 'Ervina Wijaya')
@@ -931,8 +926,1117 @@
                     {{-- </center> --}}
                 </div>
             </div>
-            <!-- Recent Sales End -->
+        </div>
+        <!-- Recent Sales End -->
     @endif
+
+    @if ($mss->idPerihal == '7')
+        <!-- SPKD -->
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
+                    class="bi bi-printer"></i> Cetak</a> --}}
+
+            <div>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
+        </div>
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
+                </div>
+                <div class="header-content" id="header-content" style="padding-left:1in; padding-right:1in;">
+                    <h1
+                        style="margin: 0px 0px 0px 1px; text-align: center; text-indent: -1px; line-height: 107%; break-after: avoid; font-size: 19px; font-family: Cambria, serif; color: black; text-decoration: underline;">
+                        <span lang="IN" style="font-family: Arial, sans-serif;">SURAT
+                            PERNYATAAN KEBENARAN DOKUMEN (SPKD)</span></h1>
+
+                    <h2
+                        style="margin: 0px 0px 0px 1px; text-align: center; text-indent: -1px; line-height: 107%; break-after: avoid; font-size: 16px; font-family: Cambria, serif; color: black; font-weight: normal;">
+                        <strong><span lang="IN" style="font-family: Arial, sans-serif;">{{ $mss->prefix }}</span></strong></h2>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px 0px 15px; font-size: 15px; font-family: Calibri, sans-serif; line-height: 107%;">
+                        <span lang="IN" style="font-family: Arial, sans-serif;"><span>&nbsp;</span></span><br></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px 0px 13px; line-height: 115%; font-size: 15px; font-family: Calibri, sans-serif;">
+                        <span lang="EN-US" style="font-family: Arial, sans-serif;">Yang bertandatangan dibawah ini :
+                        </span></p>
+
+                    @if ($mss->kop == 'ERA')
+
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Nama</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>HARYADY WIJAYA PUTRO</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Jabatan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>DIREKTUR UTAMA</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Perusahaan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>PT. ERA PERKASA MINING</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Alamat Perusahaan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>JL. KAYU MANIS NO. 27 D<br>KEC. PAYUNG SEKAKI, PEKANBARU INDONESIA</div>
+                    </div>
+
+                    @elseif ($mss->kop == 'QIN')
+
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Nama</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>SYAHRIAL</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Jabatan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>DIREKTUR UTAMA</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Perusahaan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>PT. QUASAR INTI NUSANTARA</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Alamat Perusahaan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>JL. TUANKU TAMBUSAI NO. 323 <br>KOTA PEKANBARU - INDONESIA</div>
+                    </div>
+
+                    @endif
+
+                    <p class="MsoNormal"
+                        style="margin: 0px 0px 13px; line-height: 115%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify;">
+                        <span lang="EN-US" style="font-family: Arial, sans-serif;"><br clear="all">
+                            Menyatakan bahwa semua dokumen yang diberikan kepada surveyor yang ditetapkan
+                            Ditjen Minerba {{ $mss->ptkunjungan }} adalah Benar. Untuk penerbitan Laporan Hasil
+                            Verifikasi (LHV) pengapalan batubara ke domestik sebagai berikut : </span></p>
+
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Pelabuhan Tujuan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->pelabuhanTujuan }}</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Vessel</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>@if ($mss->vessel == null) - @else {{ $mss->vessel }} @endif</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Barge/Tug Boat</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->btb }}</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Tanggal Pengapalan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ \Carbon\Carbon::parse($mss->tglPengapalan)->translatedFormat('d F Y') }}</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline; font-size: 15px;">
+                        <div style="width: 250px;">Pelabuhan Muat</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->pelabuhanMuat }}</div>
+                    </div>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px 0px 13px; font-size: 15px; font-family: Calibri, sans-serif; line-height: 107%;">
+                        <span lang="EN-US" style="font-family: Arial, sans-serif;"><br clear="all">
+                            <span>&nbsp;</span></span></p>
+
+                    <p class="MsoNormal"
+                        style="line-height: 115%; font-size: 15px; font-family: Calibri, sans-serif; margin: 0px 0px 14px;">
+                        <span lang="EN-US" style="font-family: Arial, sans-serif;">Adalah
+                            benar sesuai ketentuan perundang-undangan yang berlaku. Apabila terdapat
+                            kesalahan yang disengaja kami siap dituntut dan diberi sanksi sesuai dengan
+                            ketentuan yang berlaku. </span></p>
+
+                    <p class="MsoNormal"
+                        style="line-height: 115%; font-size: 15px; font-family: Calibri, sans-serif; margin: 0px 0px 14px;">
+                        <span lang="EN-US" style="font-family: Arial, sans-serif;">Demikian
+                            surat pernyataan ini dibuat dengan sungguh-sungguh untuk dipergunakan
+                            sebagaimana mestinya. </span></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px; line-height: 115%; font-size: 15px; font-family: Calibri, sans-serif;"><span
+                            lang="EN-US" style="font-family: Arial, sans-serif;">Pekanbaru, <a
+                                name="_Hlk147052373"><span>&nbsp;</span></a>{{ \Carbon\Carbon::parse($mss->tglSurat)->translatedFormat('d F Y') }}</span></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px; line-height: 115%; font-size: 15px; font-family: Calibri, sans-serif;"><span
+                            lang="EN-US" style="font-family: Arial, sans-serif;">Hormat Kami </span></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px; line-height: 115%; font-size: 15px; font-family: Calibri, sans-serif;"><span
+                            lang="EN-US" style="font-family: Arial, sans-serif;">@if ($mss->kop == 'QIN') PT Quasar Inti Nusantara @elseif ($mss->kop == 'ERA') PT. Era Perkasa Mining @endif</span></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px 0px 13px; font-size: 15px; font-family: Calibri, sans-serif; line-height: 107%;">
+                        <span lang="EN-US" style="font-family: Arial, sans-serif;">&nbsp;</span><br></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px 0px 13px; font-size: 15px; font-family: Calibri, sans-serif; line-height: 107%;">
+                        <span lang="EN-US" style="font-family: Arial, sans-serif;"><span>&nbsp;</span></span><br></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px; font-size: 15px; font-family: Calibri, sans-serif; line-height: 107%;"><span
+                            lang="EN-US" style="font-family: Arial, sans-serif;">&nbsp;</span><br></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px; font-size: 15px; font-family: Calibri, sans-serif; line-height: 107%;"><span
+                            lang="EN-US" style="font-family: Arial, sans-serif;">&nbsp;</span><br></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px; font-size: 15px; font-family: Calibri, sans-serif; line-height: 107%;"><span
+                            lang="EN-US" style="font-family: Arial, sans-serif;">&nbsp;</span><br></p>
+
+                    <p class="MsoNormal"
+                        style="margin: 0px; font-size: 15px; font-family: Calibri, sans-serif; line-height: 107%;">
+                                    @if ($mss->kop == 'QIN')
+                                        <strong><u><span lang="EN-US" style="font-family: Arial, sans-serif;">Syahrial</span></u></strong></p>
+                                    @elseif ($mss->kop == 'ERA')
+                                        <strong><u><span lang="EN-US" style="font-family: Arial, sans-serif;">Haryady Wijaya Putro</span></u></strong></p>
+                                    @endif
+
+                    <p class="MsoNormal"
+                        style="margin: 0px; line-height: 115%; font-size: 15px; font-family: Calibri, sans-serif;"><span
+                            lang="EN-US" style="font-family: Arial, sans-serif;">Direktur </span></p>
+                    @if ($mss->kop == 'ERA')
+                        <div class="footer-page">
+                            <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
+                                style="max-width: 100%; height: auto;">
+                        </div>
+                    @endif
+                </div>
+            </div>
+    @endif
+
+
+
+    @if ($mss->idPerihal == '8')
+        <!-- SKAB -->
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
+                    class="bi bi-printer"></i> Cetak</a> --}}
+
+            <div>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
+        </div>
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
+                </div>
+                <div class="header-content" id="header-content" style="padding-left:1in; padding-right:1in;">
+                    <p style="margin:0cm;text-align:center;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:14.0pt;"><span lang="EN-US"
+                                dir="ltr"><strong>SURAT KETERANGAN ASAL BARANG (SKAB)</strong></span></span>
+                    </p>
+                    <p style="margin:0cm;text-align:center;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:12.0pt;"><span lang="EN-US"
+                                dir="ltr"><strong>Nomor: {{ $mss->prefix }}</strong></span></span>
+                    </p>
+                    <p style="line-height:115%;margin:0cm 0cm 10pt;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><u>
+                                <o:p><span style="text-decoration:none;"> </span></o:p>
+                            </u></span>
+                    </p>
+                    <p style="line-height:115%;margin:0cm 0cm 10pt;text-align:justify;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">Yang bertanda tangan di bawah ini, Direktur PT. Quasar Inti Nusantara,
+                                sebagai pemegang Izin Usaha Pertambangan Operasi Produksi (IUP – OP), Keputusan Bupati
+                                Kuantan Singingi, Provinsi Riau dengan Nomor : 406 Tahun 2009.</span></span>
+                    </p>
+                    <p style="line-height:115%;margin:0cm 0cm 10pt;text-align:justify;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">Surat Keterangan asal Barang (SKAB) ini sebagai dokumen resmi sahnya
+                                pengiriman Batubara yang berasal dari area IUP PT. Quasar Inti Nusantara kepada penerima
+                                batubara sebagaimana nama dan alamat yang dimaksud dalam SKAB ini, sebagai berikut
+                                :</span></span>
+                    </p>
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Asal Barang</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>PT. QUASAR INTI NUSANTARA</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Shipper</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>PT. GLOBAL ENERGI LESTARI<br>JL. SM AMIN NO. 11/8A DELIMA</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Nama Penerima</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->namaPenerima }}</div>
+                    </div>
+                    @if ($mss->kop == 'ERA')
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Notify</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->notify }}</div>
+                    </div>
+                    @endif
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Jenis Muatan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>INDONESIAN STEAM COAL</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Tonase</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->tonase }}</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Tanggal Pemuatan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ \Carbon\Carbon::parse($mss->tglPemuatan)->translatedFormat('d F Y') }}</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Sarana Angkutan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->saranaAngkutan }}</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Pelabuhan Muat</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->pelabuhanMuat }}</div>
+                    </div>
+                    <div style="display: flex; align-items: baseline;">
+                        <div style="width: 150px;">Pelabuhan Tujuan</div>
+                        <div style="margin-right: 10px;">:</div>
+                        <div>{{ $mss->pelabuhanTujuan }}</div>
+                    </div>
+                    <p style="line-height:115%;margin:0cm 0cm 10pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:115%;margin:0cm 0cm 10pt;text-align:justify;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">Pengiriman dan pengangkutan batubara yang berasal dari tambang atas nama PT.
+                                Quasar Inti Nusantara tanpa Surat Keterangan Asal Barang (SKAB) ini adalah tidak sah dan
+                                dianggap tidak pernah terjadi pengiriman dan pengangkutan batubara.</span></span>
+                    </p>
+                    <p style="line-height:115%;margin:0cm 0cm 10pt;">
+                        &nbsp;
+                    </p>
+                    <p style="margin:0cm;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Pekanbaru, {{ \Carbon\Carbon::parse($mss->tglSurat)->translatedFormat('d F Y') }}</span></span>
+                    </p>
+                    <p style="margin:0cm;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @if ($mss->kop == 'QIN') PT Quasar Inti Nusantara @elseif ($mss->kop == 'ERA') PT. Era Perkasa Mining @endif</span></span>
+                    </p>
+                    <p style="margin:0cm;">
+                        &nbsp;
+                    </p>
+                    <p style="margin:0cm;">
+                        &nbsp;
+                    </p>
+                    <p style="margin:0cm;">
+                        &nbsp;
+                    </p>
+                    <p style="margin:0cm;">
+                        &nbsp;
+                    </p>
+                    <p style="margin:0cm;tab-stops:365.25pt;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    </p>
+                    <p style="margin:0cm;">
+                        &nbsp;
+                    </p>
+                    <p
+                        style="margin:0cm;tab-stops:36.0pt 72.0pt 108.0pt 144.0pt 180.0pt 216.0pt 252.0pt 288.0pt 354.75pt;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    </p>
+                    <p style="margin:0cm;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    </p>
+                    <p style="margin:0cm;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp; <u>SYAHRIAL</u></span></span>
+                    </p>
+                    <p style="margin:0cm;">
+                        <span style="font-family:&quot;Arial&quot;,sans-serif;font-size:11pt;"><span lang="EN-US"
+                                dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;KTT</span></span>
+                    </p>
+                </div>
+                @if ($mss->kop == 'ERA')
+                    <div class="footer-page">
+                        <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
+                            style="max-width: 100%; height: auto;">
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endif
+
+    @if ($mss->idPerihal == '9')
+        <!-- SPKB -->
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="/dashboard/mss" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            {{-- <a  class="btn btn-secondary" target="_blank"><i
+                    class="bi bi-printer"></i> Cetak</a> --}}
+
+            <div>
+                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i>
+                    Cetak</a>
+                <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
+                        class="bi bi-pencil-square"></i>Edit</a>
+                @if (auth()->user()->name == 'Ervina Wijaya')
+                    <form action="{{ route('mss.approve', $mss->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+
+                        <button class="btn {{ $mss->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $mss->approve }}"
+                            onclick="{{ $mss->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $mss->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i>Approve{{ $mss->approve ? 'd' : '' }}
+                        </button>
+                    </form>
+                @endif
+            </div>
+        </div>
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $mss->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
+                </div>
+                <div class="header-content" id="header-content" style="padding-left:1in; padding-right:1in;">
+
+                    <h1
+                        style='margin-top:0cm;margin-right:.45pt;margin-bottom:.0001pt;margin-left:0cm;text-align:center;text-indent:0cm;font-size:19px;font-family:"Cambria",serif;color:black;text-decoration:underline;'>
+                        <span style='font-family:"Arial",sans-serif;'>SURAT PERNYATAAN KUALITAS BARANG (SPKB)</span>
+                    </h1>
+                    <h2
+                        style='margin-top:0cm;margin-right:.35pt;margin-bottom:0cm;margin-left:.5pt;text-align:center;text-indent:-.5pt;font-size:16px;font-family:"Cambria",serif;color:black;font-weight:normal;'>
+                        <strong><span style='font-family:"Arial",sans-serif;'>{{ $mss->prefix }}</span></strong>
+                    </h2>
+                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;'><span
+                            style="font-size:11px;">&nbsp;</span></p>
+                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'><span
+                            style='font-family:"Arial",sans-serif;'>Yang bertandatangan dibawah ini :&nbsp;</span></p>
+                    <table style="border: none;width: 551px;border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td style="width: 156.05pt;padding: 0cm;height: 16.1pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>Nama &nbsp;</span>
+                                    </p>
+                                </td>
+                                <td style="width: 257.3pt;padding: 0cm;height: 16.1pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>: @if ($mss->kop == 'ERA')
+                                                Haryady Wijaya Putro&nbsp;
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    SYAHRIAL
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 156.05pt;padding: 0cm;height: 20.2pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>Jabatan &nbsp;</span>
+                                    </p>
+                                </td>
+                                <td style="width: 257.3pt;padding: 0cm;height: 20.2pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>: @if ($mss->kop == 'ERA')
+                                                Direktur Utama&nbsp;
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    DIREKTUR
+                                                @endif </span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 156.05pt;padding: 0cm;height: 20.2pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>Perusahaan&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td style="width: 257.3pt;padding: 0cm;height: 20.2pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>: @if ($mss->kop == 'ERA')
+                                                PT. ERA PERKASA MINING
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    PT. QUASAR INTI NUSANTARA
+                                                @endif &nbsp;</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 156.05pt;padding: 0cm;height: 20.2pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>Alamat Perusahaan &nbsp;
+                                            &nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td style="width: 257.3pt;padding: 0cm;height: 20.2pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>: @if ($mss->kop == 'ERA')
+                                                Jl. Kayu Manis No. 27 D
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    JL. TUANKU TAMBUSAI NO. 323
+                                                    KOTA &nbsp; &nbsp;&nbsp;PEKANBARU - INDONESIA
+                                                @endif &nbsp;</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 156.05pt;padding: 0cm;height: 16.1pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td style="width: 257.3pt;padding: 0cm;height: 16.1pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>&nbsp; @if ($mss->kop == 'ERA')
+                                                Kec. Payung Sekaki, Pekanbaru
+                                                Indonesia &nbsp;
+                                            @endif
+                                        </span>
+                                    </p>
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>&nbsp;</span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'><span
+                            style='font-family:"Arial",sans-serif;'>Menyatakan bahwa batubara yang akan dijual domestik
+                            oleh
+                            @if ($mss->kop == 'ERA')
+                                PT. Era Perkasa Mining
+                                @endif @if ($mss->kop == 'QIN')
+                                    PT. Quasar Inti Nusantara
+                                @endif memiliki spesifikasi batubara sebagai berikut :&nbsp;
+                        </span></p>
+                    <table style="border: none;width: 637px;margin-left: 0.2pt;border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td rowspan="3"
+                                    style="width:26.6pt;border:solid black 1.0pt;padding:2.55pt 4.3pt 0cm 5.4pt;height:15.65pt;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:1.2pt;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">NO&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 124.05pt;border-top: 1pt solid black;border-left: none;border-bottom: 1pt solid black;border-right: none;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-bottom:8.0pt;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 150.45pt;border-top: 1pt solid black;border-left: none;border-bottom: 1pt solid black;border-right: none;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:4.8pt;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">ASAL BATUBARA&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 108pt;border-top: 1pt solid black;border-right: 1pt solid black;border-bottom: 1pt solid black;border-image: initial;border-left: none;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-bottom:8.0pt;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td rowspan="2"
+                                    style="width: 68.7pt;border-top: 1pt solid black;border-right: 1pt solid black;border-bottom: 1pt solid black;border-image: initial;border-left: none;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">URAIAN BARANG&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 124.05pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.9pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:5.0pt;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">NAMA PERUSAHAAN&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 150.45pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.9pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-right:1.5pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">NOMOR IUP&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 108pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.9pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-right:1.45pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">NPWP&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 124.05pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-right:1.25pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">(a)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 150.45pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-right:1.25pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">(b)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 108pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-right:1.25pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">(c)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 68.7pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-right:1.05pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">(d)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width:26.6pt;border:solid black 1.0pt;border-top:none;padding:2.55pt 4.3pt 0cm 5.4pt;height:29.05pt;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:2.0pt;line-height:106%;'>
+                                        <span style="font-family:Calibri;">1&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 124.05pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 29.05pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">
+                                            @if ($mss->kop == 'ERA')
+                                                PT. Era Perkasa Mining
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    PT. Quasar Inti Nusantara
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 150.45pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 29.05pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>
+                                            @if ($mss->kop == 'ERA')
+                                                Kpts.80/DPMPTSP/2020
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    503/DPMPTSP/IZIN
+                                                    ESDM/35
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 108pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 29.05pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">
+                                            @if ($mss->kop == 'ERA')
+                                                02.481.749.6-216.000
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    02.623.177.9
+                                                    213.001
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 68.7pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 29.05pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">INDONESIA STEAM COAL&nbsp;</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 26.6pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 124.05pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 150.45pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 108pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 68.7pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 2.55pt 4.3pt 0cm 5.4pt;height: 15.65pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                            style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                    <table style="border: none;width: 637px;margin-left: 0.5pt;border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td rowspan="3"
+                                    style="width:37.9pt;border:solid black 1.0pt;padding:3.45pt 5.6pt 0cm 5.5pt;height:20.75pt;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:4.8pt;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">NO&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td rowspan="3"
+                                    style="width:74.3pt;border:solid black 1.0pt;border-left:none;padding:3.45pt 5.6pt 0cm 5.5pt;height:20.75pt;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.1pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">TONASE&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 57.55pt;border-top: 1pt solid black;border-left: none;border-bottom: 1pt solid black;border-right: none;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 20.75pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-bottom:8.0pt;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49pt;border-top: 1pt solid black;border-left: none;border-bottom: 1pt solid black;border-right: none;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 20.75pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-bottom:8.0pt;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td colspan="3"
+                                    style="width: 168.95pt;border-top: 1pt solid black;border-left: none;border-bottom: 1pt solid black;border-right: none;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 20.75pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:15.2pt;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">KUALITAS BATUBARA&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td colspan="2"
+                                    style="width: 90.05pt;border-top: 1pt solid black;border-right: 1pt solid black;border-bottom: 1pt solid black;border-image: initial;border-left: none;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 20.75pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-bottom:8.0pt;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>&nbsp;</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 57.55pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.15pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">TM (%)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:3.4pt;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">IM(%)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 63.85pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.15pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">ASH (%)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 55.15pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:4.2pt;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">VM(%)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49.9pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.3pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">TS (%)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td colspan="2"
+                                    style="width: 90.05pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.3pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">GCV(Kcal/Kg)&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 57.55pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.35pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">AR&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.25pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">ADB&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 63.85pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.25pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">ADB&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 55.15pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-right:.1pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">ADB&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49.9pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.25pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">ADB&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 44.85pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.3pt;text-align:center;line-height:106%;'>
+                                        <strong><span style="font-family:  Calibri;">AR&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 45.15pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:5.2pt;line-height:106%;'>
+                                        <strong><span style="font-family:Calibri;">ADB&nbsp;</span></strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 37.9pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.25pt;text-align:center;line-height:106%;'>
+                                        <span style="font-family:Calibri;">1&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 74.3pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;text-align:center;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>{{ $mss->tonase }}</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 57.55pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.3pt;text-align:center;line-height:106%;'>
+                                        <span style="font-family:Calibri;">
+                                            @if ($mss->kop == 'ERA')
+                                                40.06
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    22.84
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.45pt;text-align:center;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>
+                                            @if ($mss->kop == 'ERA')
+                                                16.07
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    10.55
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 63.85pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.1pt;text-align:center;line-height:106%;'>
+                                        <span style='font-family:"Arial",sans-serif;'>
+                                            @if ($mss->kop == 'ERA')
+                                                6.09
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    7.71
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 55.15pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.1pt;text-align:center;line-height:106%;'>
+                                        <span style="font-family:Calibri;">
+                                            @if ($mss->kop == 'ERA')
+                                                39.65&nbsp;
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    43.76
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49.9pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:.45pt;text-align:center;line-height:106%;'>
+                                        <span style="font-family:Calibri;">
+                                            @if ($mss->kop == 'ERA')
+                                                0.30
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    0.55
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 44.85pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:2.6pt;line-height:106%;'>
+                                        <span style="font-family:Calibri;">
+                                            @if ($mss->kop == 'ERA')
+                                                3.760
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    5.197
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 45.15pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.45pt;vertical-align: top;">
+                                    <p
+                                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:2.6pt;line-height:106%;'>
+                                        <span style="font-family:Calibri;">
+                                            @if ($mss->kop == 'ERA')
+                                                5.265
+                                                @endif @if ($mss->kop == 'QIN')
+                                                    6.023
+                                                @endif
+                                        </span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 37.9pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 74.3pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 57.55pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 63.85pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 55.15pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 49.9pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 44.85pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 45.15pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 3.45pt 5.6pt 0cm 5.5pt;height: 16.4pt;vertical-align: top;">
+                                    <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                                        <span style="font-family:Calibri;">&nbsp;&nbsp;</span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p
+                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-bottom:10.9pt;line-height:106%;'>
+                        <span style='font-family:"Arial",sans-serif;'>&nbsp;</span>
+                    </p>
+                    <p
+                        style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-top:0cm;margin-right:0cm;margin-bottom:10.4pt;margin-left:-.25pt;'>
+                        <span style='font-family:"Arial",sans-serif;'>Demikian surat pernyataan ini dibuat dengan
+                            sungguh-sungguh untuk dipergunakan sebagaimana mestinya.&nbsp;</span>
+                    </p>
+
+                    @if ($mss->kop == 'ERA')
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'>
+                            <span style='font-family:"Arial",sans-serif;'>Pekanbaru,
+                                {{ \Carbon\Carbon::parse($mss->tglSurat)->translatedFormat('d F Y') }}</span>
+                        </p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'><span
+                                style='font-family:"Arial",sans-serif;'>Hormat Kami&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'><span
+                                style='font-family:"Arial",sans-serif;'>PT. Era Perkasa Mining&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                            <strong><u><span style='font-family:"Arial",sans-serif;'>Haryady Wijaya
+                                        Putro</span></u></strong>
+                        </p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'><span
+                                style='font-family:"Arial",sans-serif;'>Direktur Utama</span></p>
+                    @endif
+
+                    @if ($mss->kop == 'QIN')
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'>
+                            <span style='font-family:"Arial",sans-serif;'>Pekanbaru,
+                                {{ \Carbon\Carbon::parse($mss->tglSurat)->translatedFormat('d F Y') }}</span>
+                        </p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'><span
+                                style='font-family:"Arial",sans-serif;'>Hormat Kami&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'><span
+                                style='font-family:"Arial",sans-serif;'>PT. Quasar Inti Nusantara&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'><span
+                                style='font-family:"Arial",sans-serif;'>&nbsp;</span></p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;line-height:106%;'>
+                            <strong><u><span style='font-family:"Arial",sans-serif;'>Syahrial</span></u></strong>
+                        </p>
+                        <p style='margin:0cm;font-size:15px;font-family:"Tahoma",sans-serif;margin-left:-.25pt;'><span
+                                style='font-family:"Arial",sans-serif;'>Direktur</span></p>
+                    @endif
+                </div>
+                @if ($mss->kop == 'ERA')
+                    <div class="footer-page">
+                        <img src="{{ asset('img/' . $mss->kop . '-bottom-kop.png') }}"
+                            style="max-width: 100%; height: auto;">
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endif
+
+
     <br /><br />
     <br>
     <br /><br />

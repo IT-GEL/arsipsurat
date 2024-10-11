@@ -1,6 +1,8 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
+
+@if(auth()->user()->username == "ga")
 <!-- Sale & Revenue Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
@@ -64,4 +66,6 @@
         </div>
     </div>
     <!-- Recent Sales End -->
+
+    @endif
 @endsection

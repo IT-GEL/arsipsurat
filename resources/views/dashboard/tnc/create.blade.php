@@ -35,6 +35,7 @@
                                 <option value="QIN">QIN</option>
                                 <option value="ERA">ERA</option>
                                 <option value="GCR">GCR</option>
+                                <option value="KKS">KKS</option>
                             </select>
                             @error('kop')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -49,11 +50,9 @@
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
                                 <option value="1">Internal Memo</option>
                                 <option value="2">Pengajuan Test Psikolog Waskita</option>
-                                <option value="3" disabled>Cop Bank</option>
-                                <option value="4" disabled>BPJS</option>
-                                <option value="5" disabled>Surat Tugas</option>
-                                <option value="6" disabled>Offering Letter</option>
-                                <option value="7" disabled>Paklaring</option>
+                                <option value="3">Surat Keterangan Kerja</option>
+                                <option value="4">Surat Mutasi</option>
+                                <option value="5">Surat Tugas</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             @error('idPerihal')
@@ -61,10 +60,58 @@
                             @enderror
                         </div>
 
+                        <div id="identitas-field"  style="display: none;">
+                            <div id="Nama-field" class="mb-3">
+                                <label for="Nama" class="form-label" >Nama</label>
+                                <input type="text" name="Nama" id="Nama" class="form-control @error('Nama') is-invalid @enderror">
+                                @error('Nama')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div id="nik-field" class="mb-3">
+                                <label for="nik" class="form-label" >NIK</label>
+                                <input type="text" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror">
+                                @error('nik')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div id="jabatan-field" class="mb-3" style="display: none;">
+                            <label for="jabatan" class="form-label" >Jabatan</label>
+                            <input type="text" name="jabatan" id="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
+                            @error('jabatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div id="departement-field" class="mb-3" style="display: none;">
+                            <label for="departement" class="form-label" >Departement</label>
+                            <input type="text" name="departement" id="departement"  class="form-control @error('departement') is-invalid @enderror">
+                            @error('departement')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div id="terhitungTgl-field" class="mb-3" style="display: none;">
+                            <table style="width:745px;">
+                                <tr>
+                                    <td><label for="startingDate" class="form-label" >Terhitung dari tanggal</label></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- </td>
+                                    <td><label for="endDate" class="form-label" >Sampai tanggal</label></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="date" name="startingDate" id="startingDate"  class="form-control @error('startingDate') is-invalid @enderror"></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- </td>
+                                    <td><input type="date" name="endDate" id="endDate"  class="form-control @error('endDate') is-invalid @enderror"></td>
+                                </tr>
+                            </table>
+                        </div>
+
                         <div id="divisi-field" class="mb-3" style="display: none;">
                             <label for="divisi" class="form-label">Untuk Divisi</label>
                             <select class="form-select @error('divisi') is-invalid @enderror" id="divisiSelect"
-                                name="divisi" required autofocus>
+                                name="divisi" autofocus>
                                 <option value="" disabled selected>Pilih Peruntukan Divisi</option>
                                 <option value="TNC" >Talent And Culture</option>
                                 <option value="FIN-AR">Finance AR</option>
@@ -92,7 +139,9 @@
                             @enderror
                         </div>
 
-                        <div id="keterangan-field" class="mb-3">
+
+
+                        <div id="keterangan-field" class="mb-3" style="display: none;">
                             <label for="keterangan" class="form-label">Isi Surat / Keterangan</label>
                             <textarea id="keterangan" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror">
 
@@ -285,6 +334,7 @@
                 const kopSelect = document.getElementById('kop');
                 const noSuratInput = document.getElementById('noSurat');
                 const ket = document.getElementById('keterangan');
+                const keterangField = document.getElementById('keterangan-field');
                 const prefixInput = document.getElementById('prefix');
                 const tglSuratInput = document.getElementById('tglSurat');
                 const jml_lampiran = document.getElementById('jml-lampiran-field');
@@ -292,6 +342,11 @@
                 const tujuanSurat = document.getElementById('tujuanSurat-field');
                 const divisi = document.getElementById('divisi-field');
                 const divisiSelect = document.getElementById('divisiSelect');
+                const identitasField = document.getElementById('identitas-field');
+                const jabatanField = document.getElementById('jabatan-field');
+                const departementField = document.getElementById('departement-field');
+                const terhitungTglField = document.getElementById('terhitungTgl-field');
+
 
 
                 const PADDING_LENGTH = 3;
@@ -302,6 +357,12 @@
                     upload_lampiran.style.display = 'none';
                     divisi.style.display = 'none';
                     tujuanSurat.style.display = 'none';
+                    identitasField.style.display = 'none';
+                    jabatanField.style.display = 'none';
+                    departementField.style.display = 'none';
+                    keterangField.style.display = 'none';
+                    terhitungTglField.style.display = 'none';
+
 
                     switch (perihalSelect.value) {
                         case '1':
@@ -309,11 +370,22 @@
                             jml_lampiran.style.display = 'block';
                             upload_lampiran.style.display = 'block';
                             divisi.style.display = 'block';
+                            keterangField.style.display = 'block';
                             break;
 
                         case '2':
                             // Show fields if value is 1
                             tujuanSurat.style.display = 'block';
+                            keterangField.style.display = 'block';
+                            break;
+
+                        case '3':
+                            // Show fields if value is 1
+                            identitasField.style.display = 'block';
+                            jabatanField.style.display = 'block';
+                            departementField.style.display = 'block';
+                            keterangField.style.display = 'none';
+                            terhitungTglField.style.display = 'block';
                             break;
                         // You can add more cases here if needed
                         default:
@@ -348,7 +420,7 @@
                     const perihalMap = {
                         '1': 'Internal Memo',
                         '2': 'Pengajuan Test Psikologi Pegawai',
-                        '3': 'Cop Bank',
+                        '3': 'Surat Keterangan Kerja',
                         '4': 'BPJS',
                         '5': 'Surat Tugas',
                         '6': 'Offering Letter',
@@ -390,7 +462,7 @@
                     const prefixMap = {
                         '1': `No : ${divisi}-${noSurat}/${kop}/IM/${romanMonth}/${year}`,
                         '2': `${noSurat}/${kop}/TNC/${romanMonth}/${year}`,
-                        '3': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
+                        '3': `No : ${kop}/TNC/REF/${romanMonth}/${year}`,
                         '4': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
                         '5': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
                         '6': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
