@@ -34,6 +34,7 @@
                                 name="idPerihal" required autofocus>
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
                                 <option value="1">Surat Penunjukan Keagenan</option>
+                                <option value="2">Berita Acara</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             @error('idPerihal')
@@ -139,7 +140,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3" id="approval-field" style="display: none;">
                             <label for="ttd" class="form-label">Approval</label>
                             <select class="form-select @error('ttd') is-invalid @enderror" id="ttd" name="ttd"
                                 required autofocus>
@@ -152,9 +153,6 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
-
-
 
 
                         <div class="mb-3">
@@ -222,6 +220,7 @@
                 const noSuratInput = document.getElementById('noSurat');
                 const suratizinGroup = document.getElementById('surat-izin');
                 const keteranganField = document.getElementById('keterangan-field');
+                const approvalField = document.getElementById('approval-field');
                 const ket = document.getElementById('keterangan');
                 const prefixInput = document.getElementById('prefix');
                 const tglSuratInput = document.getElementById('tglSurat');
@@ -230,19 +229,24 @@
 
                 const PADDING_LENGTH = 3;
 
-                function showFields(elements) {
-                    elements.forEach(el => {
-                        if (el instanceof HTMLElement) {
-                            el.style.display = 'block';
-                        } else if (typeof el === 'string') {
-                            const element = document.getElementById(el);
-                            if (element) {
-                                element.style.display = 'block';
-                            } else {
-                                console.warn(`Element with ID '${el}' not found.`);
-                            }
-                        }
-                    });
+                function showFields() {
+                    // Hide fields by default
+                    approvalField.style.display = 'none';
+
+                    switch (perihalSelect.value) {
+                        case '1':
+                            // Show fields if value is 1
+                            approvalField.style.display = 'block';
+                            break;
+
+                        case '2':
+                            // Show fields if value is 1
+                            break;
+                        // You can add more cases here if needed
+                        default:
+                            // Default action can be empty or any other logic
+                            break;
+                    }
                 }
 
                 const maxValues = {
@@ -276,6 +280,7 @@
 
                     const perihalMap = {
                         '1': 'Surat Penunjukan Keagenan',
+                        '2': 'Berita Acara',
                     };
                     perihalInput.value = perihalMap[selectedValue] || '';
                     handleFieldUpdates();
@@ -289,6 +294,7 @@
 
                     const prefixMap = {
                         '1': `No: ${noSurat}/GSM/SPK/${romanMonth}/${year}`,
+                        '2': `No: ${noSurat}/GSM/BA/${romanMonth}/${year}`,
                     };
 
                     prefixInput.value = prefixMap[perihalSelect.value] || '';
@@ -302,6 +308,7 @@
                 function handleFieldUpdates() {
                     setInitialNoSurat();
                     updatePrefix();
+                    showFields();
 
                 }
 
