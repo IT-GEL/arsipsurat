@@ -29,7 +29,7 @@
                         <div class="mb-3">
                             <label for="kop" class="form-label">Pilih Kop Surat</label>
                             <select class="form-select @error('kop') is-invalid @enderror" id="kop"
-                                name="kop" required autofocus>
+                                name="kop" autofocus>
                                 <option value="" selected>Tanpa Kop</option>
                                 <option value="GEL">GEL</option>
                                 <option value="QIN">QIN</option>
@@ -123,7 +123,7 @@
                                 <option value="PRC" >Procurement</option>
                                 <option value="IA" >Internal Audit</option>
                                 <option value="IT" >IT</option>
-                                <option value="GSM" >Global Sinergi Maritim</option>
+                                <option value="Operation" >Operation</option>
                             </select>
                             <input type="hidden" id="divisi" name="divisi" value="{{ old('divisi') }}">
                             @error('idPerihal')
@@ -204,7 +204,26 @@
                                                 <p><br></p>
                                                 <p>Demikian surat permohonan ini dikeluarkan dan ditandatangani, atas perhatian dan kerjasamanya terima kasih.</p>
                                                 `; // Reset or set other values based on different selections
-                                        } else {
+
+                                        } else if (perihalSelect.value === '5') {
+                                            keterangan.value = `<p><span>Dalam Rangka Menghadiri Undangan
+                                                        Pembahasan Survei Kepuasan Pelanggan &amp; Mitra Batubara PT PLN Energi Primer
+                                                        Indonesia Tahun 2024 Pada Tanggal 09 Oktober 2024 S/d 11 Oktober 2024 di
+                                                        Bandung.</span></p>
+                                                <p><span>&nbsp;</span><br></p>
+                                                <p><span>Adapun hasil dalam perjalanan dinas
+                                                        diantaranya:</span></p>
+                                                <ol>
+                                                    <li><span>Laporan terkait seluruh kegiatan perjalanan dinas untuk
+                                                            BOD.</span></li>
+                                                </ol>
+                                                <p><span>Dan akan dilampirkan pada saat
+                                                        pengajuan realisasi perjalanan dinas.</span></p>
+                                                <p><span>&nbsp;</span><br></p>
+                                                <p><span>Demikian surat tugas ini diberikan
+                                                        agar dapat dipergunakan sebagaimana mestinya atas perhatian dan kerjasamanya
+                                                        diucapkan terimakasih.</span></p>`; // Reset or set other values based on different selections
+                                        }else {
                                             keterangan.value=``;
                                         }
                                     }
@@ -387,6 +406,14 @@
                             keterangField.style.display = 'none';
                             terhitungTglField.style.display = 'block';
                             break;
+
+
+                        case '5':
+                            // Show fields if value is 1
+                            identitasField.style.display = 'block';
+                            divisi.style.display = 'block';
+                            keterangField.style.display = 'block';
+                            break;
                         // You can add more cases here if needed
                         default:
                             // Default action can be empty or any other logic
@@ -445,7 +472,7 @@
                         'PRC': 'Procurement',
                         'IA': 'Internal Audit',
                         'IT': 'IT',
-                        'GSM': 'Global Sinergi Maritim',
+                        'Operation': 'Operation',
                     };
                     divisiInput.value = divisiMap[selectedValue] || '';
                     handleFieldUpdates();
@@ -464,7 +491,7 @@
                         '2': `${noSurat}/${kop}/TNC/${romanMonth}/${year}`,
                         '3': `No : ${kop}/TNC/REF/${romanMonth}/${year}`,
                         '4': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
-                        '5': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
+                        '5': `GEL/SKT/${noSurat}/${romanMonth}/${year}`,
                         '6': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
                         '7': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
                     };
