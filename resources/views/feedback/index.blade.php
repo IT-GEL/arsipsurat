@@ -16,7 +16,7 @@
                             <div class="main-container">
                                 <div class="editor-container editor-container_classic-editor" id="editor-container">
                                     <div class="editor-container__editor">
-                                        <div id="editor"></div>
+                                        <textarea name="feedback" id="editor"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -327,48 +327,6 @@
     </script>
 
     <script>
-        class DragAndDrop {
-            constructor(jodit) {
-                this.jodit = jodit;
-                this.init();
-            }
-
-            init() {
-                const editorArea = this.jodit.container;
-
-                editorArea.addEventListener('dragover', (event) => {
-                    event.preventDefault();
-                    editorArea.classList.add('drag-over');
-                });
-
-                editorArea.addEventListener('dragleave', () => {
-                    editorArea.classList.remove('drag-over');
-                });
-
-                editorArea.addEventListener('drop', (event) => {
-                    event.preventDefault();
-                    editorArea.classList.remove('drag-over');
-
-                    const files = event.dataTransfer.files;
-                    if (files.length > 0) {
-                        for (const file of files) {
-                            if (file.type.startsWith('image/')) {
-                                this.handleImageUpload(file);
-                            }
-                        }
-                    }
-                });
-            }
-
-            handleImageUpload(file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width: 100%;" />`;
-                    this.jodit.selection.insertHTML(img);
-                };
-                reader.readAsDataURL(file);
-            }
-        }
 
         document.addEventListener('DOMContentLoaded', function() {
             // const feedbackEditor = Jodit.make('#feedback', {

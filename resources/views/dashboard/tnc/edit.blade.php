@@ -186,6 +186,28 @@
                             // Show fields if value is 2
                             tujuanSurat.style.display = 'block';
                             break;
+
+                        case '3':
+                            // Show fields if value is 3
+                            identitasField.style.display = 'block';
+                            jabatanField.style.display = 'block';
+                            departementField.style.display = 'block';
+                            keterangField.style.display = 'none';
+                            terhitungTglField.style.display = 'block';
+                            break;
+
+                        case '4':
+                            // Show fields if value is 4
+                            identitasField.style.display = 'block';
+                            break;
+
+
+                        case '5':
+                            // Show fields if value is 5
+                            identitasField.style.display = 'block';
+                            divisi.style.display = 'block';
+                            keterangField.style.display = 'block';
+                            break;
                         // You can add more cases here if needed
                         default:
                             // Default action can be empty or any other logic

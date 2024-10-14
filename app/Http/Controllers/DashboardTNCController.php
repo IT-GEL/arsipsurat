@@ -52,11 +52,17 @@ class DashboardTNCController extends Controller
             'GCR' => TNC::where('kop', 'GCR')->where('idPerihal', 1)->count(),
         ];
 
+        $maxNoSuratPerihal1 = TNC::where('idPerihal', '1')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal3 = TNC::where('idPerihal', '3')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal4 = TNC::where('idPerihal', '4')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal5 = TNC::where('idPerihal', '5')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal6 = TNC::where('idPerihal', '6')->max('noSurat') ?? 0;
+
         // If idPerihal is 2, get the max noSurat
         if (TNC::where('idPerihal', 2)->exists()) {
-            $maxNoSurat = TNC::where('idPerihal', 2)->max('noSurat');
+            $maxNoSuratPerihal2 = TNC::where('idPerihal', 2)->max('noSurat');
         } else {
-            $maxNoSurat = 0;
+            $maxNoSuratPerihal2 = 0;
         }
 
 
@@ -66,7 +72,12 @@ class DashboardTNCController extends Controller
         // 'maxNoSuratInternalMemo' => $maxNoSuratInternalMemo,
         // 'maxNoSuratWaskita' => $maxNoSuratWaskita,
         'kopCounts' => $kopCounts,
-        'maxNoSurat' => $maxNoSurat,
+        'maxNoSuratPerihal1' => $maxNoSuratPerihal1,
+        'maxNoSuratPerihal2' => $maxNoSuratPerihal2,
+        'maxNoSuratPerihal3' => $maxNoSuratPerihal3,
+        'maxNoSuratPerihal4' => $maxNoSuratPerihal4,
+        'maxNoSuratPerihal5' => $maxNoSuratPerihal5,
+        'maxNoSuratPerihal6' => $maxNoSuratPerihal6,
     ]);
 
     }
@@ -82,8 +93,18 @@ class DashboardTNCController extends Controller
             'divisi' => 'nullable|string',
             'tujuanSurat' => 'nullable|string',
             'keterangan' => 'nullable|string',
-            'nama' => 'nullable|string',
+            'namaKaryawan' => 'nullable|string',
+            'idKaryawan' => 'nullable|string',
+            'jabatanAwal' => 'nullable|string',
+            'jabatanBaru' => 'nullable|string',
+            'tglEfektif' => 'nullable|date',
             'nik' => 'nullable|string',
+            'tempatLahir' => 'nullable|string',
+            'tanggalLahir' => 'nullable|date',
+            'jenisKelamin' => 'nullable|string',
+            'pendidikan' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'tanggalMasukKerja' => 'nullable|date',
             'jabatan' => 'nullable|string',
             'departement' => 'nullable|string',
             'startingDate' => 'nullable|date',

@@ -30,4 +30,54 @@ if (!function_exists('formatDateIndonesian')) {
 
         return date('j', strtotime($date)) . ' ' . $indonesianMonth . ' ' . date('Y', strtotime($date));
     }
+
+    if (!function_exists('getIndonesianDay')) {
+        function getIndonesianDay($date) {
+            $englishDayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            $indonesianDayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+            $day = date('l', strtotime($date));
+            $dayIndex = array_search($day, $englishDayNames);
+
+            return $dayIndex !== false ? $indonesianDayNames[$dayIndex] : 'Unknown';
+        }
+    }
+
+    if (!function_exists('getIndonesianMonth')) {
+        function getIndonesianMonth($date) {
+            $englishMonthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            $indonesianMonthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+            $month = date('F', strtotime($date));
+            $monthIndex = array_search($month, $englishMonthNames);
+
+            return $monthIndex !== false ? $indonesianMonthNames[$monthIndex] : 'Unknown';
+        }
+    }
+
+    if (!function_exists('getDateInText')) {
+        function getDateInText($date) {
+            // Mengonversi tanggal ke angka
+            $onlyDate = date('j', strtotime($date));
+
+            // Mengonversi angka ke teks
+            $textNumbers = [
+                1 => 'Satu', 2 => 'Dua', 3 => 'Tiga', 4 => 'Empat',
+                5 => 'Lima', 6 => 'Enam', 7 => 'Tujuh', 8 => 'Delapan',
+                9 => 'Sembilan', 10 => 'Sepuluh', 11 => 'Sebelas',
+                12 => 'Dua Belas', 13 => 'Tiga Belas', 14 => 'Empat Belas',
+                15 => 'Lima Belas', 16 => 'Enam Belas', 17 => 'Tujuh Belas',
+                18 => 'Delapan Belas', 19 => 'Sembilan Belas', 20 => 'Dua Puluh',
+                // Tambahkan lebih banyak angka jika perlu
+            ];
+
+            return $textNumbers[$onlyDate] ?? (string)$onlyDate; // Mengembalikan teks atau angka itu sendiri
+        }
+    }
+
+
+
+
 }
+
+
