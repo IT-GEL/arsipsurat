@@ -57,6 +57,7 @@ class DashboardTNCController extends Controller
         $maxNoSuratPerihal4 = TNC::where('idPerihal', '4')->max('noSurat') ?? 0;
         $maxNoSuratPerihal5 = TNC::where('idPerihal', '5')->max('noSurat') ?? 0;
         $maxNoSuratPerihal6 = TNC::where('idPerihal', '6')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal7 = TNC::where('idPerihal', '7')->max('noSurat') ?? 0;
 
         // If idPerihal is 2, get the max noSurat
         if (TNC::where('idPerihal', 2)->exists()) {
@@ -78,6 +79,7 @@ class DashboardTNCController extends Controller
         'maxNoSuratPerihal4' => $maxNoSuratPerihal4,
         'maxNoSuratPerihal5' => $maxNoSuratPerihal5,
         'maxNoSuratPerihal6' => $maxNoSuratPerihal6,
+        'maxNoSuratPerihal7' => $maxNoSuratPerihal7,
     ]);
 
     }
@@ -109,6 +111,7 @@ class DashboardTNCController extends Controller
             'departement' => 'nullable|string',
             'startingDate' => 'nullable|date',
             'endDate' => 'nullable|date',
+            'tmptTGL' => 'nullable|string',
             'tglSurat' => 'nullable|date',
             'jml_lampiran' => 'nullable|string|max:255',
             'lampiran' => 'nullable|string|max:255',

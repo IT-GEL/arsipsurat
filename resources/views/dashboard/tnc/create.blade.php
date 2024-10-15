@@ -54,6 +54,7 @@
                                 <option value="4">Surat Mutasi</option>
                                 <option value="5">Surat Tugas</option>
                                 <option value="6">PKWT</option>
+                                <option value="7">Surat Permohonan</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             @error('idPerihal')
@@ -314,7 +315,38 @@
                                                 <p><span>Demikian surat tugas ini diberikan
                                                         agar dapat dipergunakan sebagaimana mestinya atas perhatian dan kerjasamanya
                                                         diucapkan terimakasih.</span></p>`; // Reset or set other values based on different selections
-                                        }else {
+                                        } else if (perihalSelect.value === '7') {
+                                            keterangan.value = `<p style="line-height:normal;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                                                    <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;" lang="EN-US">Kepada Yth,</span>
+                                                                </p>
+                                                                <p style="line-height:normal;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                                                    <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;" lang="EN-US">Management Gedung Arta Graha</span>
+                                                                </p>
+                                                                <p style="line-height:normal;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                                                    <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;" lang="EN-US">Di Tempat</span>
+                                                                </p>
+                                                                <p style="line-height:normal;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                                                    <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;" lang="IN">Up. Bapak Adi Prayoso – Tenant Relations Officer</span>
+                                                                </p>
+                                                                <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                                                    &nbsp;
+                                                                </p>
+                                                                <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                                                    <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">Dengan Hormat,</span>
+                                                                </p>
+                                                                <p style="line-height:115%;margin-bottom:10pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                                                                    <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="EN-US">Sehubungan dengan tagihan Biaya Sewa Gedung</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="IN"> dengan&nbsp;</span><span style="font-family:Calibri, sans-serif;font-size:11pt;" lang="EN-US">No Inv</span><span style="font-family:Calibri, sans-serif;font-size:11pt;" lang="IN">oice</span><span style="font-family:Calibri, sans-serif;font-size:11pt;" lang="EN-US"> 431/INV/23 Rp. 103.614.486</span><span style="font-family:Calibri, sans-serif;font-size:11pt;" lang="IN">,-&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="IN">dan Service Charge </span><span style="font-family:Calibri, sans-serif;font-size:11pt;" lang="EN-US">N</span><span style="font-family:Calibri, sans-serif;font-size:11pt;" lang="IN">o. Ivoice.&nbsp;</span><span style="font-family:Calibri, sans-serif;font-size:11pt;" lang="EN-US">432/INV/23 Rp. 47.444.527&nbsp;Periode&nbsp;01-04-2023 to 30-06-2023&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="EN-US">yang belum kami lunasi.</span>
+                                                                </p>
+                                                                <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                                                                    <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">Dengan ini Kami memohon maaf atas keterlambatan pembayaran yang telah terjadi maka sehubungan dengan hal tersebut</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">,&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">kami bermaksud menginformasikan pembayaran&nbsp;</span><i><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">invoice</span></i><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN"> tersebut diatas rencana&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">akan dilakukan pada minggu ke </span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">31Mei 2023</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">.</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN"> Mohon agar tidak memutus layanan ataupun dikenakan </span><i><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">penalty</span></i><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN"> atas keterlambatan pembayaran ini.</span>
+                                                                </p>
+                                                                <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                                                                    <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">Demikian surat permohonan ini kami buat , atas perhatian dan kerjasamanya terima kasih.</span>
+                                                                </p>
+                                            `
+
+
+                                        } else {
                                             keterangan.value=``;
                                         }
                                     }
@@ -334,8 +366,8 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <input type="tmpt" class="form-control @error('tmpt') is-invalid @enderror"
-                                            id="tmpt" name="tmpt" required value="{{ old('tmpt') }}"
+                                        <input type="tmptTGL" class="form-control @error('tmptTGL') is-invalid @enderror"
+                                            id="tmptTGL" name="tmptTGL" required value="{{ old('tmptTGL') }}"
                                             placeholder="Tempat Buat Surat">
                                     </td>
                                     <td> , </td>
@@ -523,6 +555,12 @@
                             identitasField.style.display = 'block';
                             PKWTfield.style.display = 'block';
                             break;
+
+
+                        case '7':
+                            // Show fields if value is 5
+                            keterangField.style.display = 'block';
+                            break;
                         // You can add more cases here if needed
                         default:
                             // Default action can be empty or any other logic
@@ -544,6 +582,7 @@
                     '4': {{ $maxNoSuratPerihal4 }},
                     '5': {{ $maxNoSuratPerihal5 }},
                     '6': {{ $maxNoSuratPerihal6 }},
+                    '7': {{ $maxNoSuratPerihal7 }},
                 };
 
                 function setInitialNoSurat() {
@@ -568,8 +607,8 @@
                         '3': 'Surat Keterangan Kerja',
                         '4': 'Surat Mutasi',
                         '5': 'Surat Tugas',
-                        '6': 'PERJANJIAN KERJA WAKTU TERTENTU',
-                        '7': 'Paklaring',
+                        '6': 'Perjanjian Kerja Waktu Tertentu',
+                        '7': 'Surat Permohonan',
                     };
                     perihalInput.value = perihalMap[selectedValue] || '';
                     handleFieldUpdates();
@@ -611,7 +650,7 @@
                         '4': `${noSurat}/${kop}/HR-SM/${romanMonth}/${year}`,
                         '5': `${kop}/SKT/${noSurat}/${romanMonth}/${year}`,
                         '6': `No : TNC/${noSurat}/${kop}JKT/${romanMonth}/${year}`,
-                        '7': `No:${noSurat}/${kop}/${romanMonth}/${year}`,
+                        '7': `No. ${kop}/HR/${noSurat}/${romanMonth}/${year}`,
                     };
 
                     prefixInput.value = prefixMap[perihalSelect.value] || '';

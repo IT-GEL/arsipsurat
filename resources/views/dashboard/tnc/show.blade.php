@@ -889,74 +889,94 @@
                         <ol style="padding-left:26.13px; font-size:9.0pt;" type="A">
                             <li>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">Tanggal awal masuk bekerja</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        Tanggal awal masuk bekerja</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">{{ formatdateindonesian($tnc->tanggalMasukKerja) }}</div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        {{ formatdateindonesian($tnc->tanggalMasukKerja) }}</div>
                                 </div>
                             </li>
                             <li>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">Tempat Penerimaan</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        Tempat Penerimaan</div>
                                     <div style="margin-right: 10px;">:</div>
                                     <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">Jakarta</div>
                                 </div>
                             </li>
                             <li>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">Tempat Penugasan</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        Tempat Penugasan</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">PT Global Energi Lestari (Head Office)</div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">PT Global
+                                        Energi Lestari (Head Office)</div>
                                 </div>
                             </li>
                             <li>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">Jabatan Awal</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        Jabatan Awal</div>
                                     <div style="margin-right: 10px;">:</div>
                                     <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;"></div>
                                 </div>
                             </li>
                             <li>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">Bertanggung Jawab Kepada</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        Bertanggung Jawab Kepada</div>
                                     <div style="margin-right: 10px;">:</div>
                                     <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;"></div>
                                 </div>
                             </li>
                             <li>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">Rincian Upah</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        Rincian Upah</div>
                                     <div style="margin-right: 10px;">:</div>
                                     <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;"></div>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">a. Gaji Pokok</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">a.
+                                        Gaji Pokok</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">_______________________________per bulan</div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        _______________________________per bulan</div>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">b. Tunjangan Makan</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">b.
+                                        Tunjangan Makan</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">_______________________________per bulan</div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        _______________________________per bulan</div>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">c. Tunjangan Transportasi</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">c.
+                                        Tunjangan Transportasi</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">_______________________________per bulan</div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        _______________________________per bulan</div>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">d. Tunjangan Operasional</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">d.
+                                        Tunjangan Operasional</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">_______________________________per bulan</div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        _______________________________per bulan</div>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">e. Tunjangan Telekomunikasi</div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">e.
+                                        Tunjangan Telekomunikasi</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">_______________________________per bulan</div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        _______________________________per bulan</div>
                                 </div>
                                 <div style="display: flex; align-items: center;">
-                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;"><strong>Total THP</strong></div>
+                                    <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        <strong>Total THP</strong></div>
                                     <div style="margin-right: 10px;"><strong>:</strong></div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;"><strong>_______________________________per bulan</strong></div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
+                                        <strong>_______________________________per bulan</strong></div>
                                 </div>
                             </li>
                         </ol>
@@ -1290,30 +1310,30 @@
                             berikut&nbsp;:</span>
                     </p>
                     <p
-                    style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-indent:-18.0pt;">
-                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;"
-                            lang="FR">a) Mendidik Pekerja yang melanggar.</span>
+                        style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-indent:-18.0pt;">
+                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;" lang="FR">a)
+                            Mendidik Pekerja yang melanggar.</span>
                     </p>
                     <p
-                    style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-indent:-18.0pt;">
-                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;"
-                            lang="FR">b) Mengamankan investasi dan aset Perusahaan, serta memastikan agar
+                        style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-indent:-18.0pt;">
+                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;" lang="FR">b)
+                            Mengamankan investasi dan aset Perusahaan, serta memastikan agar
                             kegiatan bisnis Perusahaan berlangsung efektif dan efisien.</span>
                     </p>
                     <p
-                    style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-indent:-18.0pt;">
-                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;"
-                            lang="FR">c) Mencegah pengulangan pelanggaran oleh pekerja.</span>
+                        style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-indent:-18.0pt;">
+                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;" lang="FR">c)
+                            Mencegah pengulangan pelanggaran oleh pekerja.</span>
                     </p>
                     <p
-                    style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-indent:-18.0pt;">
-                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;"
-                            lang="FR">d) Menciptakan suasana lingkungan kerja yang kondusif.</span>
+                        style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-indent:-18.0pt;">
+                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;" lang="FR">d)
+                            Menciptakan suasana lingkungan kerja yang kondusif.</span>
                     </p>
                     <p
-                    style="line-height:150%;margin-bottom:0cm;margin-left:36.0pt;margin-right:0cm;margin-top:0cm;text-align:justify;text-indent:-18.0pt;">
-                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;"
-                            lang="FR">9.4 Semua arsip Pekerja termasuk sanksi disiplin yang masih berlaku
+                        style="line-height:150%;margin-bottom:0cm;margin-left:36.0pt;margin-right:0cm;margin-top:0cm;text-align:justify;text-indent:-18.0pt;">
+                        <span style="font-family:Tahoma, sans-serif;font-size:9.0pt;line-height:150%;" lang="FR">9.4
+                            Semua arsip Pekerja termasuk sanksi disiplin yang masih berlaku
                             dan berkaitan dengan pelanggaran Peraturan kerja, kehadiran , dan kinerja
                             pekerja dapat dijadikan bahan pertimbangan dalam proses kenaikan
                             pangkat/jabatan. Arsip-arsip tersebut dapat mencakup semua surat peringatan yang
@@ -1432,7 +1452,7 @@
                     <p
                         style="line-height:150%;margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;tab-stops:21.75pt;text-align:justify;">
                         <span style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:150%;"
-                            lang="EN-GB"><strong>13.&nbsp; Pernyataan Tunduk<u>&nbsp;</u></strong>:</span>
+                            lang="EN-GB"><strong>13.&nbsp; Pernyataan Tunduk </strong>:</span>
                     </p>
                     <p
                         style="line-height:150%;margin-bottom:0cm;margin-left:54.0pt;margin-right:0cm;margin-top:0cm;tab-stops:54.0pt;text-align:justify;text-indent:-31.5pt;">
@@ -1538,7 +1558,7 @@
                             lang="IN"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </strong></span><span
                             style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;letter-spacing:-.05pt;line-height:150%;"
-                            lang="SV"><strong>Pekerja&nbsp; &nbsp; &nbsp;</strong></span>
+                            lang="SV"><strong>{{ $tnc->namaKaryawan }}&nbsp; &nbsp; &nbsp;</strong></span>
                     </p>
                     <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
                         align="center">
@@ -1561,6 +1581,87 @@
                     </div>
                 @endif
             </div>
+        </div>
+    @endif
+
+
+    @if ($tnc->idPerihal == '7')
+        <!-- Surat Permohonan -->
+
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
+                class="bi bi-printer"></i> Cetak</a> --}}
+            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+        </div>
+
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $tnc->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
+                </div>
+                <div class="header-content" style="padding-left:1in; padding-right:1in;">
+
+                    <p style="line-height:150%;margin-bottom:10pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;" align="center">
+                        <a name="_Hlk132725798"><span style="font-family:&quot;Cambria&quot;,serif;font-size:16.0pt;line-height:150%;" lang="EN-US"><strong><u>SURAT PERMOHONAN</u></strong></span></a>
+                    </p>
+                    <p style="line-height:150%;margin-bottom:10pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;" align="center">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">No.&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">KKS</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">/HR/0</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">8</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">/</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">V</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">/202</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">3</span>
+                    </p>
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        &nbsp;
+                    </p>
+
+                    {!! $tnc->keterangan !!}
+
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        &nbsp;
+                    </p>
+
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">{{ $tnc->tmptTGL }},&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">{{ formatdateindonesian($tnc->tglSurat) }}</span>
+                    </p>
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong>@if($tnc->kop == 'KKS')PT.Kelinci Karya Sampoerna, @endif @if($tnc->kop == 'GEL')PT.Global Energi Lestari, @endif</strong></span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"></span>
+                    </p>
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        &nbsp;
+                    </p>
+
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong><u><o:p><span style="text-decoration:none;"> </span></o:p></u></strong></span>
+                    </p>
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong><u><o:p><span style="text-decoration:none;"> </span></o:p></u></strong></span>
+                    </p>
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong><u><o:p><span style="text-decoration:none;"> </span></o:p></u></strong></span>
+                    </p>
+                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong><u>Tuty Alawiyah, M.M</u></strong>.</span>
+                    </p>
+                    <p style="line-height:115%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <i><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="EN-US">Corporate H</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="IN">uman&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="EN-US">R</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="IN">esources</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="EN-US"> Manager</span></i>
+                    </p>
+                    <p style="line-height:115%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        &nbsp;
+                    </p>
+
+
+                </div>
+                @if ($tnc->kop !== null && file_exists(public_path('img/' . $tnc->kop . '-bottom-kop.png')))
+                    <div class="footer-page">
+                        <img src="{{ asset('    img/' . $tnc->kop . '-bottom-kop.png') }}"
+                            style="max-width: 100%; height: auto;">
+                    </div>
+                @endif
+            </div>
+        </div>
     @endif
 
 @endsection
@@ -1609,14 +1710,6 @@
                 }
             });
         }
-
-        // Move footer to the very bottom of the web page
-        document.addEventListener('DOMContentLoaded', function() {
-            const footer = document.querySelector('.footer');
-            if (footer) {
-                document.body.appendChild(footer);
-            }
-        });
 
         paginateContent();
 
