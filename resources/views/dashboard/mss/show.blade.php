@@ -48,7 +48,6 @@
                     class="bi bi-printer"></i> Cetak</a> --}}
 
             <div>
-                <a id="download-pdf" class="btn btn-secondary" target="_blank"><i class="bi bi-printer"></i> Cetak</a>
                 <a class="btn btn-primary" href="{{ url('/dashboard/mss/' . $mss->id . '/edit') }}"><i
                         class="bi bi-pencil-square"></i>Edit</a>
                 @if (auth()->user()->name == 'Ervina Wijaya')

@@ -2,7 +2,7 @@
 
 @section('container')
 
-@if(auth()->user()->username == "mss" || auth()->user()->username == "hmss")
+@if(auth()->user()->username == "mss" || auth()->user()->username == "hmss" || auth()->user()->username == 'sudosu')
 
 <!-- Sale & Revenue Start -->
 <div class="container-fluid pt-4 px-4">

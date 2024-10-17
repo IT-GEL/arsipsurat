@@ -17,17 +17,38 @@ class DashboardTNCController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tnc = TNC::latest()->paginate(8);
-        $totalTNC = TNC::count();
+        $sort = $request->input('sort', 'all');
+        $customDate = $request->input('customDate');
+        $sortBy = $request->input('sort_by', 'tglSurat'); // Default sort by 'tglSurat'
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order 'asc'
 
-        // Add romanMonth to each TNC item
-        $tnc->getCollection()->transform(function ($item) {
-            $monthNumber = \Carbon\Carbon::parse($item->tglSurat)->month;
-            $item->romanMonth = monthToRoman($monthNumber); // Ensure this function is defined and available
-            return $item;
-        });
+        $query = TNC::query();
+
+        switch ($sort) {
+            case 'today':
+                $query->whereDate('tglSurat', now()->toDateString());
+                break;
+            case 'tomorrow':
+                $query->whereDate('tglSurat', now()->addDay()->toDateString());
+                break;
+            case 'custom':
+                if ($customDate) {
+                    $query->whereDate('tglSurat', $customDate);
+                }
+                break;
+            case 'all':
+            default:
+                // No additional filtering needed
+                break;
+        }
+
+        // Apply sorting
+        $query->orderBy($sortBy, $sortOrder);
+
+        $tnc = $query->paginate(8)->appends($request->query()); // Append query parameters to pagination links
+        $totalTNC = TNC::count();
 
         return view('dashboard.tnc.index', [
             'title' => 'Surat Divisi',
@@ -35,6 +56,7 @@ class DashboardTNCController extends Controller
             'totalTNC' => $totalTNC,
         ]);
     }
+
 
     public function create()
     {
@@ -50,6 +72,7 @@ class DashboardTNCController extends Controller
             'QIN' => TNC::where('kop', 'QIN')->where('idPerihal', 1)->count(),
             'ERA' => TNC::where('kop', 'ERA')->where('idPerihal', 1)->count(),
             'GCR' => TNC::where('kop', 'GCR')->where('idPerihal', 1)->count(),
+            'KKS' => TNC::where('kop', 'KKS')->where('idPerihal', 1)->count(),
         ];
 
         $maxNoSuratPerihal1 = TNC::where('idPerihal', '1')->max('noSurat') ?? 0;
@@ -58,6 +81,7 @@ class DashboardTNCController extends Controller
         $maxNoSuratPerihal5 = TNC::where('idPerihal', '5')->max('noSurat') ?? 0;
         $maxNoSuratPerihal6 = TNC::where('idPerihal', '6')->max('noSurat') ?? 0;
         $maxNoSuratPerihal7 = TNC::where('idPerihal', '7')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal8 = TNC::where('idPerihal', '8')->max('noSurat') ?? 0;
 
         // If idPerihal is 2, get the max noSurat
         if (TNC::where('idPerihal', 2)->exists()) {
@@ -67,21 +91,21 @@ class DashboardTNCController extends Controller
         }
 
 
-       return view('dashboard.tnc.create', [
-        'title' => 'TNC',
-        'romanMonth' => $romanMonth,
-        // 'maxNoSuratInternalMemo' => $maxNoSuratInternalMemo,
-        // 'maxNoSuratWaskita' => $maxNoSuratWaskita,
-        'kopCounts' => $kopCounts,
-        'maxNoSuratPerihal1' => $maxNoSuratPerihal1,
-        'maxNoSuratPerihal2' => $maxNoSuratPerihal2,
-        'maxNoSuratPerihal3' => $maxNoSuratPerihal3,
-        'maxNoSuratPerihal4' => $maxNoSuratPerihal4,
-        'maxNoSuratPerihal5' => $maxNoSuratPerihal5,
-        'maxNoSuratPerihal6' => $maxNoSuratPerihal6,
-        'maxNoSuratPerihal7' => $maxNoSuratPerihal7,
-    ]);
-
+        return view('dashboard.tnc.create', [
+            'title' => 'TNC',
+            'romanMonth' => $romanMonth,
+            // 'maxNoSuratInternalMemo' => $maxNoSuratInternalMemo,
+            // 'maxNoSuratWaskita' => $maxNoSuratWaskita,
+            'kopCounts' => $kopCounts,
+            'maxNoSuratPerihal1' => $maxNoSuratPerihal1,
+            'maxNoSuratPerihal2' => $maxNoSuratPerihal2,
+            'maxNoSuratPerihal3' => $maxNoSuratPerihal3,
+            'maxNoSuratPerihal4' => $maxNoSuratPerihal4,
+            'maxNoSuratPerihal5' => $maxNoSuratPerihal5,
+            'maxNoSuratPerihal6' => $maxNoSuratPerihal6,
+            'maxNoSuratPerihal7' => $maxNoSuratPerihal7,
+            'maxNoSuratPerihal8' => $maxNoSuratPerihal8,
+        ]);
     }
 
     public function store(Request $request)
@@ -91,6 +115,7 @@ class DashboardTNCController extends Controller
             'noSurat' => 'required|numeric',
             'idPerihal' => 'required|numeric',
             'perihal' => 'required|string',
+            'perihalLanjutan' => 'nullable|string',
             'prefix' => 'required|string|max:255',
             'divisi' => 'nullable|string',
             'tujuanSurat' => 'nullable|string',
@@ -111,6 +136,8 @@ class DashboardTNCController extends Controller
             'departement' => 'nullable|string',
             'startingDate' => 'nullable|date',
             'endDate' => 'nullable|date',
+            'masakontrakAwal' => 'nullable|date',
+            'masakontrakAkhir' => 'nullable|date',
             'tmptTGL' => 'nullable|string',
             'tglSurat' => 'nullable|date',
             'jml_lampiran' => 'nullable|string|max:255',
@@ -226,7 +253,6 @@ class DashboardTNCController extends Controller
             Log::error($e->getMessage());
             return redirect('/dashboard/tnc')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
     }
 
     // Helper method to generate QR code
@@ -273,8 +299,6 @@ class DashboardTNCController extends Controller
         TNC::destroy($tnc->id);
 
         return redirect('/dashboard/tnc')->with('success', 'Surat berhasil dihapus!');
-
-
     }
 
     public function cetak(TNC $tnc)

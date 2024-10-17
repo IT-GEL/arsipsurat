@@ -44,7 +44,7 @@
 
 
                         <div class="mb-3">
-                            <label for="idPerihal" class="form-label">Perihal Surat</label>
+                            <label for="idPerihal" class="form-label">Jenis Surat</label>
                             <select class="form-select @error('idPerihal') is-invalid @enderror" id="idPerihal"
                                 name="idPerihal" required autofocus>
                                 <option value="" disabled selected>Pilih Peruntukan Surat</option>
@@ -55,12 +55,14 @@
                                 <option value="5">Surat Tugas</option>
                                 <option value="6">PKWT</option>
                                 <option value="7">Surat Permohonan</option>
+                                <option value="8">Surat Penawaran Kerja (Offering Letter)</option>
                             </select>
                             <input type="hidden" id="perihal" name="perihal" value="{{ old('perihal') }}">
                             @error('idPerihal')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
 
                         <div id="identitas-field"  style="display: none;">
                             <div id="Nama-field" class="mb-3">
@@ -80,7 +82,7 @@
                         </div>
 
                         <div id="pkwt-field" style="display: none;">
-                            <div id="tempatLahir" class="mb-3">
+                            <div id="tempatLahirField" class="mb-3">
                                 <table style="width:745px;">
                                     <tr>
                                         <td><label for="tempatLahir" class="form-label" >Tempat</label></td>
@@ -94,6 +96,7 @@
                                     </tr>
                                 </table>
                             </div>
+
                             <div id="jenisKelamin-field" class="mb-3">
                                 <label class="form-label">Jenis Kelamin</label>
                                 <div>
@@ -128,13 +131,29 @@
 
 
                             <div id="tanggalMasukKerja-field" class="mb-3">
-                                <label for="tanggalMasukKerja" class="form-label" >Tanggal awal masuk bekerja</label>
+                                <label for="tanggalMasukKerja" class="form-label" >Tanggal awal masuk bekerja / (Joint Date)</label>
                                 <input type="date" name="tanggalMasukKerja" id="tanggalMasukKerja" class="form-control @error('tanggalMasukKerja') is-invalid @enderror">
                                 @error('tanggalMasukKerja')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
+                        </div>
+
+                        <div id="masakontrak" style="display: none;">
+                                <table style="width:745px;">
+                                    <tr>
+                                        <td><label for="masakontrakAwal" class="form-label" >Masa Kontrak Kerja Dari (Working Period)</label></td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- </td>
+                                        <td><label for="masakontrakAkhir" class="form-label" >Sampai</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="date" name="masakontrakAwal" id="masakontrakAwal"  class="form-control @error('masakontrakAwal') is-invalid @enderror"></td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- </td>
+                                        <td><input type="date" name="masakontrakAkhir" id="masakontrakAkhir"  class="form-control @error('masakontrakAkhir') is-invalid @enderror"></td>
+                                    </tr>
+                                </table>
+                                <br>
                         </div>
 
                         <div id="mutasi-field"  style="display: none;">
@@ -166,11 +185,10 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
                         </div>
 
                         <div id="jabatan-field" class="mb-3" style="display: none;">
-                            <label for="jabatan" class="form-label" >Jabatan</label>
+                            <label for="jabatan" class="form-label" >Jabatan ( Position)</label>
                             <input type="text" name="jabatan" id="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
                             @error('jabatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -223,6 +241,15 @@
                             @enderror
                         </div>
 
+                        <div id="perihalLanjutan-field" class="mb-3"  style="display: none;">
+                            <label for="perihalLanjutan" class="form-label" >Perihal</label>
+                            <input type="text" name="perihalLanjutan" id="perihalLanjutan" class="form-control @error('perihalLanjutan') is-invalid @enderror">
+                            @error('perihalLanjutan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+
                         <div id="tujuanSurat-field" class="mb-3" style="display: none;">
                             <label for="tujuanSurat" class="form-label" >Tujuan Surat</label>
                             <input type="text" name="tujuanSurat" id="tujuanSurat" placeholder="Surat ditujukan kepada..." class="form-control @error('jml_lampiran') is-invalid @enderror">
@@ -243,9 +270,10 @@
                                     const keterangan = Jodit.make('#keterangan');
                                     new DragAndDrop(keterangan);
                                     const perihalSelect = document.getElementById('idPerihal');
+                                    const divisiSelect = document.getElementById('divisiSelect');
 
                                     function updateKeterangan() {
-                                        if (perihalSelect.value === '1') {
+                                        if (divisiSelect.value === 'FIN-AP') {
                                             keterangan.value =
                                                 `<p class="MsoNormal" style="margin: 0px 0px 11px; line-height: 107%; font-size: 15px; font-family: Calibri, sans-serif; text-align: justify; text-indent: 48px;"><span>Dengan ini
                                                         kami menginformasikan adanya perubahan pengiriman bukti bayar yang semula
@@ -356,12 +384,14 @@
 
                                     // Update keterangan when the dropdown value changes
                                     perihalSelect.addEventListener('change', updateKeterangan);
+                                    divisiSelect.addEventListener('change', updateKeterangan);
+
 
                                 });
                             </script>
                         </div>
 
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3" >
                             <label for="tglSurat" class="form-label">Tempat, Tanggal Surat</label>
                             <table>
                                 <tr>
@@ -490,9 +520,12 @@
                 const terhitungTglField = document.getElementById('terhitungTgl-field');
                 const mutasiField = document.getElementById('mutasi-field');
                 const PKWTfield = document.getElementById('pkwt-field');
-
-
-
+                const nikField = document.getElementById('nik-field');
+                const tmpttglLahir = document.getElementById('tempatLahirField');
+                const jenisKelamin = document.getElementById('jenisKelamin-field');
+                const pendidikanField = document.getElementById('pendidikan-field');
+                const masakontrakField = document.getElementById('masakontrak');
+                const perihalLanjutan = document.getElementById('perihalLanjutan-field');
 
                 const PADDING_LENGTH = 3;
 
@@ -509,6 +542,10 @@
                     terhitungTglField.style.display = 'none';
                     mutasiField.style.display = 'none';
                     PKWTfield.style.display = 'none';
+                    masakontrakField.style.display = 'none';
+                    perihalLanjutan.style.display = 'none';
+
+
 
 
                     switch (perihalSelect.value) {
@@ -518,6 +555,7 @@
                             upload_lampiran.style.display = 'block';
                             divisi.style.display = 'block';
                             keterangField.style.display = 'block';
+                            perihalLanjutan.style.display = 'block';
                             break;
 
                         case '2':
@@ -561,6 +599,17 @@
                             // Show fields if value is 5
                             keterangField.style.display = 'block';
                             break;
+
+                        case '8':
+                            // Show fields if value is 5
+                            identitasField.style.display = 'block';
+                            nikField.style.display = 'none';
+                            PKWTfield.style.display = 'block';
+                            tmpttglLahir.style.display = 'none';
+                            pendidikanField.style.display = 'none';
+                            masakontrakField.style.display = 'block';
+                            jabatanField.style.display = 'block';
+                            break;
                         // You can add more cases here if needed
                         default:
                             // Default action can be empty or any other logic
@@ -583,6 +632,7 @@
                     '5': {{ $maxNoSuratPerihal5 }},
                     '6': {{ $maxNoSuratPerihal6 }},
                     '7': {{ $maxNoSuratPerihal7 }},
+                    '8': {{ $maxNoSuratPerihal8 }},
                 };
 
                 function setInitialNoSurat() {
@@ -609,6 +659,7 @@
                         '5': 'Surat Tugas',
                         '6': 'Perjanjian Kerja Waktu Tertentu',
                         '7': 'Surat Permohonan',
+                        '8': 'Surat Penawaran Kerja (Offering Letter)',
                     };
                     perihalInput.value = perihalMap[selectedValue] || '';
                     handleFieldUpdates();
@@ -651,6 +702,7 @@
                         '5': `${kop}/SKT/${noSurat}/${romanMonth}/${year}`,
                         '6': `No : TNC/${noSurat}/${kop}JKT/${romanMonth}/${year}`,
                         '7': `No. ${kop}/HR/${noSurat}/${romanMonth}/${year}`,
+                        '8': `TNC/${noSurat}/${kop}JKT/LOO/${romanMonth}/${year}`,
                     };
 
                     prefixInput.value = prefixMap[perihalSelect.value] || '';

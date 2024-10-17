@@ -50,6 +50,11 @@
                 @if(auth()->user()->name == "IT Support" || auth()->user()->name == "superadmin")
                 <a href="{{ url('/feedback-show') }}" class="dropdown-item {{ Request::is('/feedback-show*') ? 'active' : '' }}"><i class="bi bi-window"></i> List Feedback</a>
                 @endif
+
+                @if(auth()->user()->name == "Finance AP")
+                <a href="{{ url('/inputcoa') }}" class="dropdown-item {{ Request::is('/inputcoa*') ? 'active' : '' }}"><i class="bi bi-window"></i> Input COA</a>
+                @endif
+
                 </div>
             </div>
         </div>

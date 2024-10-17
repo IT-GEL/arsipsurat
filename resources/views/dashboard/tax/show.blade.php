@@ -47,7 +47,7 @@
                 Kembali</a>
             {{-- <a href="/dashboard/tax/{{ $tax->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <button id="download-pdf" class="btn btn-primary"><i class="bi bi-file-earmark-pdf-fill"></i> Unduh</button>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">

@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
-
+<?php \Carbon\Carbon::setLocale('id'); ?>
     <style>
         @page {
             size: A4;
@@ -38,18 +38,38 @@
             /* Ensure the footer is behind content */
         }
     </style>
-    <?php \Carbon\Carbon::setLocale('id'); ?>
 
-    @if ($tnc->idPerihal == '1')
+
+    @if ($tnc->idPerihal == '1' && $tnc->divisi == 'FIN-AP')
         <!-- Surat Internal Memo -->
         <!-- Recent Sales Start -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                    class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -126,11 +146,32 @@
         <!-- Recent Sales Start -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                    class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -220,11 +261,32 @@
         <!-- SURAT KETERANGAN KERJA -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                    class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -361,18 +423,39 @@
                     @endif
                 </div>
             </div>
-            <!-- Recent Sales End -->
+        </div>
     @endif
 
     @if ($tnc->idPerihal == '4')
         <!-- SURAT MUTASI -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                    class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
         </div>
 
         <div id="contentToConvert" class="contentToConvert">
@@ -549,11 +632,32 @@
         <!-- SURAT TUGAS -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                    class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -694,20 +798,40 @@
                     </div>
                 @endif
             </div>
+        </div>
             <!-- Recent Sales End -->
     @endif
 
 
     @if ($tnc->idPerihal == '6')
         <!-- PKWT -->
-
-
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
         </div>
         <div id="contentToConvert" class="contentToConvert">
             <div class="page">
@@ -973,10 +1097,12 @@
                                 </div>
                                 <div style="display: flex; align-items: center;">
                                     <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
-                                        <strong>Total THP</strong></div>
+                                        <strong>Total THP</strong>
+                                    </div>
                                     <div style="margin-right: 10px;"><strong>:</strong></div>
                                     <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
-                                        <strong>_______________________________per bulan</strong></div>
+                                        <strong>_______________________________per bulan</strong>
+                                    </div>
                                 </div>
                             </li>
                         </ol>
@@ -1589,11 +1715,32 @@
         <!-- Surat Permohonan -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="/dashboard/tnc" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/tnc/{{ $tnc->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                class="bi bi-printer"></i> Cetak</a> --}}
-            <button id="download-pdf" class="btn btn-primary">Cetak</button>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
         </div>
 
         <div id="contentToConvert" class="contentToConvert">
@@ -1604,49 +1751,95 @@
                 </div>
                 <div class="header-content" style="padding-left:1in; padding-right:1in;">
 
-                    <p style="line-height:150%;margin-bottom:10pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;" align="center">
-                        <a name="_Hlk132725798"><span style="font-family:&quot;Cambria&quot;,serif;font-size:16.0pt;line-height:150%;" lang="EN-US"><strong><u>SURAT PERMOHONAN</u></strong></span></a>
+                    <p style="line-height:150%;margin-bottom:10pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                        align="center">
+                        <a name="_Hlk132725798"><span
+                                style="font-family:&quot;Cambria&quot;,serif;font-size:16.0pt;line-height:150%;"
+                                lang="EN-US"><strong><u>SURAT PERMOHONAN</u></strong></span></a>
                     </p>
-                    <p style="line-height:150%;margin-bottom:10pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;" align="center">
-                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">No.&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">KKS</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">/HR/0</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">8</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">/</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">V</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">/202</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">3</span>
+                    <p style="line-height:150%;margin-bottom:10pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                        align="center">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="EN-US">{{ $tnc->prefix }}</span>
                     </p>
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
                         &nbsp;
                     </p>
 
                     {!! $tnc->keterangan !!}
 
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
                         &nbsp;
                     </p>
 
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
-                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US">{{ $tnc->tmptTGL }},&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="IN">{{ formatdateindonesian($tnc->tglSurat) }}</span>
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="EN-US">{{ $tnc->tmptTGL }},&nbsp;</span><span
+                            style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="IN">{{ formatdateindonesian($tnc->tglSurat) }}</span>
                     </p>
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
-                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong>@if($tnc->kop == 'KKS')PT.Kelinci Karya Sampoerna, @endif @if($tnc->kop == 'GEL')PT.Global Energi Lestari, @endif</strong></span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"></span>
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="EN-US"><strong>
+                                @if ($tnc->kop == 'KKS')
+                                    PT.Kelinci Karya Sampoerna,
+                                    @endif @if ($tnc->kop == 'GEL')
+                                        PT.Global Energi Lestari,
+                                    @endif
+                            </strong></span><span
+                            style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="EN-US"></span>
                     </p>
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
                         &nbsp;
                     </p>
 
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
                         &nbsp;
                     </p>
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
-                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong><u><o:p><span style="text-decoration:none;"> </span></o:p></u></strong></span>
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="EN-US"><strong><u>
+                                    <o:p><span style="text-decoration:none;"> </span></o:p>
+                                </u></strong></span>
                     </p>
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
-                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong><u><o:p><span style="text-decoration:none;"> </span></o:p></u></strong></span>
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="EN-US"><strong><u>
+                                    <o:p><span style="text-decoration:none;"> </span></o:p>
+                                </u></strong></span>
                     </p>
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
-                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong><u><o:p><span style="text-decoration:none;"> </span></o:p></u></strong></span>
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="EN-US"><strong><u>
+                                    <o:p><span style="text-decoration:none;"> </span></o:p>
+                                </u></strong></span>
                     </p>
-                    <p style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
-                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;" lang="EN-US"><strong><u>Tuty Alawiyah, M.M</u></strong>.</span>
+                    <p
+                        style="line-height:150%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;text-justify:inter-ideograph;">
+                        <span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:150%;"
+                            lang="EN-US"><strong><u>Tuty Alawiyah, M.M</u></strong>.</span>
                     </p>
                     <p style="line-height:115%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
-                        <i><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="EN-US">Corporate H</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="IN">uman&nbsp;</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="EN-US">R</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="IN">esources</span><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;" lang="EN-US"> Manager</span></i>
+                        <i><span style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;"
+                                lang="EN-US">Corporate H</span><span
+                                style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;"
+                                lang="IN">uman&nbsp;</span><span
+                                style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;"
+                                lang="EN-US">R</span><span
+                                style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;"
+                                lang="IN">esources</span><span
+                                style="font-family:&quot;Cambria&quot;,serif;font-size:12.0pt;line-height:115%;"
+                                lang="EN-US"> Manager</span></i>
                     </p>
                     <p style="line-height:115%;margin-bottom:6.0pt;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
                         &nbsp;
@@ -1656,7 +1849,642 @@
                 </div>
                 @if ($tnc->kop !== null && file_exists(public_path('img/' . $tnc->kop . '-bottom-kop.png')))
                     <div class="footer-page">
-                        <img src="{{ asset('    img/' . $tnc->kop . '-bottom-kop.png') }}"
+                        <img src="{{ asset('img/' . $tnc->kop . '-bottom-kop.png') }}"
+                            style="max-width: 100%; height: auto;">
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endif
+
+
+    @if ($tnc->idPerihal == '8')
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
+        </div>
+
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <div class="header" id="header">
+                    <img src="{{ asset('img/' . $tnc->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                    <br><br>
+                </div>
+                <div class="header-content" style="padding-left:1in; padding-right:1in;">
+
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US">{{ $tnc->tmptTGL }}, {{ formatDateIndonesian($tnc->tglSurat) }}</span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;" lang="EN-US">
+                            To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;</span>
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="IN">{{ $tnc->prefix }}</span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US">Re&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : SURAT
+                            PENAWARAN KERJA (OFFERING LETTER)</span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="color:#262626;font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US"><strong><u>PRIVATE &amp; CONFIDENTIAL</u></strong></span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="IN"><strong>{{ $tnc->namaKaryawan }}</strong></span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <a name="_Hlk154664585"><span
+                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                lang="IN">{{ $tnc->alamat }}</span></a>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;" lang="EN-US">Yang
+                            terhormat&nbsp;</span><span
+                            style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;" lang="IN">
+                            @if ($tnc->jenisKelamin == 'Laki-Laki')
+                                Bapak
+                            @else()
+                                Ibu
+                            @endif{{ $tnc->namaKaryawan }},
+                        </span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;tab-stops:111.0pt;">
+                        <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                lang="EN-US">Dear </span><span
+                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;" lang="IN">
+                                @if ($tnc->jenisKelamin == 'Laki-Laki')
+                                    Mr.
+                                @else()
+                                    Ms.
+                                @endif {{ $tnc->namaKaryawan }},
+                            </span></i>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;tab-stops:111.0pt;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US">Sehubungan dengan proses rekrutmen karyawan atas nama&nbsp;</span><i><span
+                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                lang="IN">{{ $tnc->namaKaryawan }}</span></i><span
+                            style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US"><strong>,&nbsp;</strong>maka kami memberikan surat penawaran kerja yang terkait
+                            dengan posisi yang dimaksud, sehingga mampu memberikan kontribusi atas kemampuan dan pengalaman
+                            kerja Anda terhadap pertumbuhan perusahaan sebagai berikut:</span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                lang="EN-US">Refer to the recruitment process under name&nbsp;</span><span
+                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                lang="IN">{{ $tnc->namaKaryawan }}</span><span
+                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;" lang="EN-US">
+                                we would like to offer you the following position, we feel confident that you will
+                                contribute your skills and experience towards the growth of our company:</span></i>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        &nbsp;
+                    </p>
+                    <div style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;">
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 230px;">1. Tanggal Masuk kerja (Joint Date)</div>
+                            <div style="margin-right: 10px;">:</div>
+                            <div>{{ $tnc->tanggalMasukKerja }}</div>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 230px;">2. Jabatan (Position)</div>
+                            <div style="margin-right: 10px;">:</div>
+                            <div>{{ $tnc->jabatan }}</div>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 230px;">3. Masa Kontrak Kerja (Working Period)</div>
+                            <div style="margin-right: 10px;">:</div>
+                            <div>{{ formatDateIndonesian($tnc->masakontrakAwal) }} -
+                                {{ formatDateIndonesian($tnc->masakontrakAkhir) }} (3 bulan masa penyesuaian diri)</div>
+                        </div>
+                    </div>
+
+                    <figure class="table">
+                        <table style="border-collapse:collapse;border-style:none;" border="1" cellspacing="0"
+                            cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td style="background-color:#D9D9D9;border-color:windowtext;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:26.55pt;"
+                                        width="35">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <a name="_Hlk106808595"><span
+                                                    style="color:black;font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                                    lang="EN-US"><strong>No</strong></span></a>
+                                        </p>
+                                    </td>
+                                    <td style="background-color:#D9D9D9;border-bottom-style:solid;border-color:windowtext;border-left-style:none;border-right-style:solid;border-top-style:solid;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:228.35pt;"
+                                        width="304">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="color:black;font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                                lang="EN-US"><strong>Rincian</strong></span>
+                                        </p>
+                                    </td>
+                                    <td style="background-color:#D9D9D9;border-bottom-style:solid;border-color:windowtext;border-left-style:none;border-right-style:solid;border-top-style:solid;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:92.15pt;"
+                                        width="123">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="color:black;font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                                lang="EN-US"><strong>Nominal</strong></span>
+                                        </p>
+                                    </td>
+                                    <td style="background-color:#D9D9D9;border-bottom-style:solid;border-color:windowtext;border-left-style:none;border-right-style:solid;border-top-style:solid;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:104.95pt;"
+                                        width="140">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="color:black;font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                                lang="EN-US"><strong>Keterangan</strong></span>
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:26.55pt;"
+                                        width="35">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:228.35pt;"
+                                        width="304">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US"><strong>Komponen Gaji (</strong></span><i><span
+                                                    style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                    lang="EN-US"><strong>Remuneration package</strong></span></i><span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US"><strong>):</strong></span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:92.15pt;"
+                                        width="123">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:104.95pt;"
+                                        width="140">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:26.55pt;"
+                                        width="35">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">1</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:228.35pt;"
+                                        width="304">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Gaji Pokok (</span><i><span
+                                                    style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                    lang="EN-US">Basic Salary</span></i><span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">)</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:92.15pt;"
+                                        width="123">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:right;"
+                                            align="right">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:104.95pt;"
+                                        width="140">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Per Bulan</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:26.55pt;"
+                                        width="35">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">2</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:228.35pt;"
+                                        width="304">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Tunjangan Makan (</span><i><span
+                                                    style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                    lang="EN-US">Meal Allowance</span></i><span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">)</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:92.15pt;"
+                                        width="123">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:right;"
+                                            align="right">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:104.95pt;"
+                                        width="140">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Per Bulan</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:26.55pt;"
+                                        width="35">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">3</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:228.35pt;"
+                                        width="304">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Tunjangan Transportasi (</span><i><span
+                                                    style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                    lang="EN-US">Transportation Allowance</span></i><span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">)</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:92.15pt;"
+                                        width="123">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:right;"
+                                            align="right">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:104.95pt;"
+                                        width="140">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Per Bulan</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:26.55pt;"
+                                        width="35">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">4</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:228.35pt;"
+                                        width="304">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Tunjangan Telekomunikasi </span><i><span
+                                                    style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                    lang="EN-US">(Telecommunication Allowance</span></i><span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">)</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:92.15pt;"
+                                        width="123">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:right;"
+                                            align="right">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:104.95pt;"
+                                        width="140">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Per Bulan</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:26.55pt;"
+                                        width="35">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">5</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:228.35pt;"
+                                        width="304">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Tunjangan Operasional (</span><i><span
+                                                    style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                    lang="EN-US">Operational Allowance</span></i><span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">)</span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:92.15pt;"
+                                        width="123">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:right;"
+                                            align="right">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:104.95pt;"
+                                        width="140">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US">Per Bulan</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.0pt;padding:0cm 5.4pt;vertical-align:top;width:26.55pt;"
+                                        width="35">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:228.35pt;"
+                                        width="304">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US"><strong>TOTAL</strong></span>
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:92.15pt;"
+                                        width="123">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                    <td style="border-bottom:1.0pt solid windowtext;border-left-style:none;border-right:1.0pt solid windowtext;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:104.95pt;"
+                                        width="140">
+                                        <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
+                                            align="center">
+                                            <span
+                                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:9.0pt;"
+                                                lang="EN-US"><strong>Per Bulan</strong></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+
+                    <p style="margin-bottom:0cm;margin-left:18.0pt;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        &nbsp;
+                    </p>
+
+
+
+                    <ol style="font-size:9pt;margin-left:-20px;" start="4">
+                        <li>
+                            <p
+                                style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;line-height:150%;">
+                                <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                    lang="EN-US">
+                                    Masa Penilaian Kinerja berupa Indikator Kinerja (<i>Keys Performance Indicator</i>/KPI)
+                                    dilakukan setiap bulan selama masa kerja sesuai dengan kebijakan dan peraturan
+                                    perusahaan yang berlaku.</span>
+
+                            </p>
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                        lang="EN-US">The performance assessment period will be done from Keys
+                                        Performance Indicator (KPI)’s achievement every month according to the applicable
+                                        regulations in the company.</span></i>
+                            </p>
+                        </li>
+                    </ol>
+                    <ol style="font-size:9pt;margin-left:-20px;" start="5">
+                        <li>
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                    lang="EN-US">Apabila karyawan mengajukan pengunduran diri maka masa pemberitahuan
+                                    wajib diinformasikan kepada Divisi </span><i><span
+                                        style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                        lang="EN-US">Human Resources</span></i><span
+                                    style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                    lang="EN-US"> minimal 1 (satu) bulan sebelumnya setelah disetujui oleh Atasan yang
+                                    bersangkutan. Karyawan yang tidak memenuhi masa pembertahuan pengunduran diri kurang
+                                    dari 1 (satu) bulan maka dikenakan sanksi administratif berupa </span><i><span
+                                        style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                        lang="EN-US">penalty</span></i><span
+                                    style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                    lang="EN-US"> yaitu membayar sisa masa kontrak kerja yang belum diselesaikan.</span>
+                            </p>
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                        lang="EN-US">The employee may tender his/her resignation with minimum 1 (one)
+                                        month in prior after being approved from Superior and submit it to Human Resources
+                                        Division. The penalty of charging the manpower cost occurs will be applied in case
+                                        of misconduct of this offer and if the employee tenders his/her resignation less
+                                        than 1 (one) month.</span></i>
+                            </p>
+                        </li>
+                        <li>
+
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                    lang="EN-US">Karyawan wajib memberikan dedikasi sepenuhnya guna tercapainya tujuan
+                                    perusahaam, oleh karena itu karyawan tidak diperkenakan menjalankan bisnis diluar
+                                    perusahaan tanpa persetujuan dari Direktur baik secara langsung maupun tidak
+                                    langsung.</span>
+                            </p>
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                        lang="EN-US">You are expected to fully devote yourself for the organization’s
+                                        better improvement. Therefore, employee shall not, during the employment, render
+                                        services to any other business without the prior approval of the Managing Director
+                                        of the company, directly or indirectly.</span></i>
+                            </p>
+                        </li>
+                        <li>
+
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                    lang="EN-US">Upah karyawan akan dipotong biaya kepesertaan BPJS Ketenagakerjaan dan
+                                    BPJS Kesehatan setelah karyawan bekerja dengan masa kerja 3 (tiga) bulan sesuai dengan
+                                    peraturan yang berlaku.</span>
+                            </p>
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                        lang="EN-US">Monthly Net Salary will be deducted for BPJS Ketenagakerjaan and
+                                        BPJS Kesehatan’s membership after 3 months working period with the applicable
+                                        regulations.</span></i>
+                            </p>
+                        </li>
+                        <li>
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                    lang="EN-US">Berdasarkan penunjukan tugas dari Atasan karyawan yang bersangkutan,
+                                    maka karyawan wajib menyelesaikan seluruh program dan tugas&nbsp;</span>
+                            </p>
+                            <p style="margin-bottom:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                                <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                        lang="EN-US">Under the general direction of the official appointed as your
+                                        Superior, you will have responsibility to finish all programs and other duties given
+                                        by your Superior.</span></i>
+                            </p>
+                        </li>
+                    </ol>
+
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US">Mohon memberikan konfirmasi dengan menandatangani surat penawaran kerja ini.
+                            Terima kasih atas perhatian Anda.</span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                lang="EN-US">Please confirm your acceptance of this offer by signing&nbsp;and returning
+                                the copy of the offering letter.</span></i>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US">Selamat bergabung!</span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <i><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                lang="EN-US">Welcome aboard!</span></i>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        &nbsp;
+                    </p>
+
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US">Hormat kami (</span><i><span
+                                style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                                lang="EN-US">Sincerely</span></i><span
+                            style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US">),</span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US">PT. Global Energi
+                            Lestari&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Diterima oleh,</span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        &nbsp;
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US"><strong><u>Tuty Alawiyah</u></strong></span><span
+                            style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="IN"><strong><u>, M.M</u></strong></span><span
+                            style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </strong></span><span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="IN"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $tnc->namaKaryawan }}</strong></span>
+                    </p>
+                    <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
+                        <span style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US"><strong>Corporate&nbsp;</strong></span><span
+                            style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="IN"><strong>Talent &amp; Culture</strong></span><span
+                            style="font-family:&quot;Calibri Light&quot;,sans-serif;font-size:10pt;"
+                            lang="EN-US"><strong>
+                                Manager&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></span>
+                    </p>
+                    <p
+                        style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;tab-stops:72.0pt 90.0pt 522.0pt;">
+                        &nbsp;
+                    </p>
+
+                </div>
+                @if ($tnc->kop !== null && file_exists(public_path('img/' . $tnc->kop . '-bottom-kop.png')))
+                    <div class="footer-page">
+                        <img src="{{ asset('img/' . $tnc->kop . '-bottom-kop.png') }}"
                             style="max-width: 100%; height: auto;">
                     </div>
                 @endif

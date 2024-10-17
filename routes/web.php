@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardFINAPController;
 use App\Http\Controllers\DashboardFINARController;
 use App\Http\Controllers\DetailQrController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\InputCOAController;
 
 /*
 |--------------------------------------------------------------------------|
@@ -64,6 +65,7 @@ Route::put('/dashboard/finap/{finap}/approve', [DashboardFINAPController::class,
 
 // QR Detail Route
 Route::get('/detailQR/{id}', [DetailQrController::class, 'index']);
+Route::get('/inputcoa', [InputCOAController::class, 'index']);
 
 // Feedback Routes
 Route::get('/feedback', [FeedbackController::class, 'index']);

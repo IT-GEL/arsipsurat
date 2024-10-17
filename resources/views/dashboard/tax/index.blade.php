@@ -2,7 +2,7 @@
 
 @section('container')
 
-@if(auth()->user()->username == "tax")
+@if(auth()->user()->username == "tax" || auth()->user()->username == 'sudosu')
 
 <!-- Sale & Revenue Start -->
 <div class="container-fluid pt-4 px-4">
@@ -67,7 +67,7 @@
                                 @csrf
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
-                            <a class="btn btn-sm btn-info" href="{{ url('/dashboard/tax/' . $item->id . '/cetak') }}" target="_blank"><i class="bi bi-printer"></i></a>
+
                             @if (auth()->user()->name == "LALA")
 
                             <form action="{{ route('tax.approve', $item->id) }}" method="post" class="d-inline">

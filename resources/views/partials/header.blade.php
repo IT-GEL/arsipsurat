@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 @else
-                    <a href="/login" class="nav-item nav-link {{ Request::is('login') || Request::is('register') ? 'active' : '' }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                    <a href="{{ url('/login') }}" class="nav-item nav-link {{ Request::is('login') || Request::is('register') ? 'active' : '' }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                 @endauth
             </div>
         </div>

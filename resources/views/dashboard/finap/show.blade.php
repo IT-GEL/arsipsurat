@@ -43,7 +43,7 @@
         <!-- Recent Sales Start -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="/dashboard/finap" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
                 Kembali</a>
             {{-- <a href="/dashboard/finap/{{ $finap->id }}/cetak" class="btn btn-secondary" target="_blank"><i
                     class="bi bi-printer"></i> Cetak</a> --}}

@@ -18,7 +18,7 @@
             @endif
 
             <h1 class="h3 mb-3 fw-normal text-center">Silahkan Login</h1>
-            <form action="/login" method="post">
+            <form action="{{ url('/login') }}" method="post">
                 @csrf
                 <div class="form-floating">
                 <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Username" autofocus required value="{{ old('username') }}"">

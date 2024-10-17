@@ -2,7 +2,7 @@
 
 @section('container')
 
-@if(auth()->user()->username == "finap")
+@if(auth()->user()->username == "fin.ap")
 
 
 <!-- Sale & Revenue Start -->

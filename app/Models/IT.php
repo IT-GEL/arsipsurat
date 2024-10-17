@@ -13,6 +13,6 @@ class IT extends Model
 
     public function getRouteKeyName()
     {
-        return 'noSurat';
+        return 'id';
     }
 }
