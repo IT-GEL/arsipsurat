@@ -233,48 +233,6 @@
 
         <!-- Add JavaScript to handle form visibility -->
         <script>
-            class DragAndDrop {
-                constructor(jodit) {
-                    this.jodit = jodit;
-                    this.init();
-                }
-
-                init() {
-                    const editorArea = this.jodit.container;
-
-                    editorArea.addEventListener('dragover', (event) => {
-                        event.preventDefault();
-                        editorArea.classList.add('drag-over');
-                    });
-
-                    editorArea.addEventListener('dragleave', () => {
-                        editorArea.classList.remove('drag-over');
-                    });
-
-                    editorArea.addEventListener('drop', (event) => {
-                        event.preventDefault();
-                        editorArea.classList.remove('drag-over');
-
-                        const files = event.dataTransfer.files;
-                        if (files.length > 0) {
-                            for (const file of files) {
-                                if (file.type.startsWith('image/')) {
-                                    this.handleImageUpload(file);
-                                }
-                            }
-                        }
-                    });
-                }
-
-                handleImageUpload(file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const img = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width: 100%;" />`;
-                        this.jodit.selection.insertHTML(img);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
 
             document.addEventListener('DOMContentLoaded', async function() {
                 const perihalSelect = '{{ $tnc->idPerihal }}'
@@ -294,6 +252,7 @@
                     keterangField.style.display = 'none';
                     mutasiField.style.display = 'none';
                     identitasField.style.display = 'none';
+                    PKWTfield.style.display = 'none';
 
                     switch (perihalSelect) {
                         case '1':
@@ -339,6 +298,14 @@
                         case '7':
                             // Show fields if value is 5
                             keterangField.style.display = 'block';
+                            break;
+
+                        case '8':
+                            // Show fields if value is offering letter
+                            identitasField.style.display = 'block';
+                            PKWTfield.style.display = 'block';
+                            masakontrakField.style.display = 'block';
+                            jabatanField.style.display = 'block';
                             break;
                         // You can add more cases here if needed
                         default:

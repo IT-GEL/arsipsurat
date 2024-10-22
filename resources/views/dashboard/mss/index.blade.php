@@ -67,7 +67,6 @@
                                 @csrf
                                 <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i class="bi bi-trash"></i></button>
                             </form>
-                            <a class="btn btn-sm btn-info" href="{{ url('/dashboard/mss/' . $item->id . '/cetak') }}" target="_blank"><i class="bi bi-printer"></i></a>
                             @if (auth()->user()->name == "Ervina Wijaya")
                             <form action="{{ route('mss.approve', $item->id) }}" method="post" class="d-inline">
                                 @csrf

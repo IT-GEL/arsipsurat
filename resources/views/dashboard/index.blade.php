@@ -58,7 +58,7 @@
         </div>
         @endif
 
-        @if ($userName == "Talent and Culture" || $userName == "superadmin" || $userName == "LALA")
+        @if ($userName == "Talent and Culture" || $userName == "superadmin" || $userName == "Tuty Alawiyah, M.M.")
         <div class="col-sm-6 col-xl-5">
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
@@ -260,7 +260,7 @@
 <!-- Recent Sales End -->
 @endif
 
-@if ($userName == "Talent and Culture" || $userName == "superadmin" || $userName == "Lala")
+@if ($userName == "Talent and Culture" || $userName == "superadmin" || $userName == "Tuty Alawiyah, M.M.")
 <!-- Recent Sales Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">

@@ -33,7 +33,7 @@
                 @if (auth()->user()->name == "Global Sinergi Maritim" || auth()->user()->name == "superadmin" || auth()->user()->name == "Capt. John Herley")
                     <a href="{{ url('/dashboard/gsm') }}" class="dropdown-item {{ Request::is('dashboard/gsm*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat GSM</a>
                 @endif
-                @if (auth()->user()->name == "Talent and Culture" || auth()->user()->name == "superadmin" || auth()->user()->name == "LALA")
+                @if (auth()->user()->name == "Talent and Culture" || auth()->user()->name == "superadmin" || auth()->user()->name == "Tuty Alawiyah, M.M.")
                 <a href="{{ url('/dashboard/tnc') }}" class="dropdown-item {{ Request::is('dashboard/tnc*') ? 'active' : '' }}"><i class="bi bi-envelope"></i> List Surat TNC</a>
                 @endif
                 @if (auth()->user()->name == "Procurement" || auth()->user()->name == "superadmin" || auth()->user()->name == "EDY")

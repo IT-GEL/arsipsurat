@@ -43,29 +43,31 @@
         <!-- Recent Sales Start -->
 
         <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
                 Kembali</a>
-            {{-- <a href="/dashboard/finap/{{ $finap->id }}/cetak" class="btn btn-secondary" target="_blank"><i
-                    class="bi bi-printer"></i> Cetak</a> --}}
-            <div>
-                <a href="/dashboard/finap/{{ $finap->id }}/cetak" id="download-pdf" class="btn btn-secondary"
-                    target="_blank"><i class="bi bi-printer"></i> Cetak</a>
-                <a class="btn btn-primary" href="{{ url('/dashboard/finap/' . $finap->id . '/edit') }}"><i
-                        class="bi bi-pencil-square"></i>Edit</a>
-                @if (auth()->user()->name == 'Finance AP')
-                    <form action="{{ route('finap.approve', $finap->id) }}" method="post" class="d-inline">
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-
-                        <button class="btn {{ $finap->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $finap->approve }}"
-                            onclick="{{ $finap->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $finap->approve ? 'disabled' : '' }}>
-                            <i class="bi bi-check2-square"></i>Approve{{ $finap->approve ? 'd' : '' }}
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
             </div>
         </div>
 

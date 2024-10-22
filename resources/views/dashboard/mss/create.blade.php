@@ -10,9 +10,6 @@
                         @csrf
 
                         <input type="hidden" id="approve" name="approve" value="0">
-
-
-
                         <div class="mb-3">
                             <label for="noSurat" class="form-label">Nomor Surat</label>
                             <input type="hidden" class="form-control @error('noSurat') is-invalid @enderror" id="noSurat"
@@ -446,9 +443,12 @@
 
                             <div class="fco-field mb-3" style="display: none;" id="qty">
                                 <label for="qty" class="form-label">Quantity</label>
-                                <input type="number" class="form-control @error('qty') is-invalid @enderror"
-                                    placeholder="Quantity..." id="qty" name="qty"
-                                    value="{{ old('qty') }}">
+                                <div class="input-group">
+                                    <input type="number" class="form-control @error('qty') is-invalid @enderror"
+                                        placeholder="Quantity..." id="qty" name="qty"
+                                        value="{{ old('qty') }}">
+                                    <span class="input-group-text">MT</span>
+                                </div>
                                 @error('qty')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -589,30 +589,197 @@
                                 @enderror
                             </div>
 
-                            <div class="fco-field mb-3" style="display: none;">
-                                <label for="qas" class="form-label">Quality and Specification</label>
-                                <textarea id="qas" name="qas" class="form-control @error('qas') is-invalid @enderror"></textarea>
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        const qas = Jodit.make('#qas');
-                                        const perihalSelect = document.getElementById('idPerihal');
+                            <label for="qas" class="form-label">Quality and Specification</label>
+                            <div class="fco-field mb-3" style="background-color: white; border-radius: 10px; padding: 15px;">
 
-                                        function updateqas() {
-                                            if (perihalSelect.value === '1') {
-                                                qas.value =
-                                                    ``;
-                                            } else {
-                                                qas.value = ""; // Reset or set other values based on different selections
-                                            }
-                                        }
+                                <div style="display: flex; margin-top:10px">
+                                    <p class="form-label" style="width: 200px;"><strong>Parameter</strong></p>
+                                    <p class="form-label" style="margin-left: auto; width: 80px;"><strong>Unit</strong></p>
+                                    <p class="form-label" style="margin-left: auto; width: 80px;"><strong>Typical</strong></p>
+                                    <p class="form-label" style="margin-left: auto; width: 80px;"><strong>Rejection</strong></p>
+                                </div>
+                                <hr>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="gross_caloric_value" class="form-label" style="width: 200px; height: 38px;">Gross Caloric value (ARB)</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">Kcal/kg</p>
+                                    <input type="text" class="form-control @error('qas.gross_caloric_value_typical') is-invalid @enderror"
+                                        id="gross_caloric_value_typical" name="qas[gross_caloric_value_typical]" value="{{ old('qas.gross_caloric_value_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.gross_caloric_value_rejection') is-invalid @enderror"
+                                        id="gross_caloric_value_rejection" name="qas[gross_caloric_value_rejection]" value="{{ old('qas.gross_caloric_value_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.gross_caloric_value_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.gross_caloric_value_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="ash_content" class="form-label" style="width: 200px; height: 38px;">Ash Content (ADB)</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">%</p>
+                                    <input type="text" class="form-control @error('qas.ash_content_typical') is-invalid @enderror"
+                                        id="ash_content_typical" name="qas[ash_content_typical]" value="{{ old('qas.ash_content_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.ash_content_rejection') is-invalid @enderror"
+                                        id="ash_content_rejection" name="qas[ash_content_rejection]" value="{{ old('qas.ash_content_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.ash_content_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.ash_content_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="total_sulphur" class="form-label" style="width: 200px; height: 38px;">Total Sulphur (ADB)</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">%</p>
+                                    <input type="text" class="form-control @error('qas.total_sulphur_typical') is-invalid @enderror"
+                                        id="total_sulphur_typical" name="qas[total_sulphur_typical]" value="{{ old('qas.total_sulphur_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.total_sulphur_rejection') is-invalid @enderror"
+                                        id="total_sulphur_rejection" name="qas[total_sulphur_rejection]" value="{{ old('qas.total_sulphur_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.total_sulphur_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.total_sulphur_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="total_moisture" class="form-label" style="width: 200px; height: 38px;">Total Moisture (Arb)</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">%</p>
+                                    <input type="text" class="form-control @error('qas.total_moisture_typical') is-invalid @enderror"
+                                        id="total_moisture_typical" name="qas[total_moisture_typical]" value="{{ old('qas.total_moisture_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.total_moisture_rejection') is-invalid @enderror"
+                                        id="total_moisture_rejection" name="qas[total_moisture_rejection]" value="{{ old('qas.total_moisture_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.total_moisture_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.total_moisture_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="hgi" class="form-label" style="width: 200px; height: 38px;">HGI</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">%</p>
+                                    <input type="text" class="form-control @error('qas.hgi_typical') is-invalid @enderror"
+                                        id="hgi_typical" name="qas[hgi_typical]" value="{{ old('qas.hgi_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.hgi_rejection') is-invalid @enderror"
+                                        id="hgi_rejection" name="qas[hgi_rejection]" value="{{ old('qas.hgi_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.hgi_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.hgi_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="inherent_moisture" class="form-label" style="width: 200px; height: 38px;">Inherent Moisture (ADB)</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">%</p>
+                                    <input type="text" class="form-control @error('qas.inherent_moisture_typical') is-invalid @enderror"
+                                        id="inherent_moisture_typical" name="qas[inherent_moisture_typical]" value="{{ old('qas.inherent_moisture_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.inherent_moisture_rejection') is-invalid @enderror"
+                                        id="inherent_moisture_rejection" name="qas[inherent_moisture_rejection]" value="{{ old('qas.inherent_moisture_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.inherent_moisture_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.inherent_moisture_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="volatile_matter" class="form-label" style="width: 200px; height: 38px;">Volatile Matter (ADB)</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">%</p>
+                                    <input type="text" class="form-control @error('qas.volatile_matter_typical') is-invalid @enderror"
+                                        id="volatile_matter_typical" name="qas[volatile_matter_typical]" value="{{ old('qas.volatile_matter_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.volatile_matter_rejection') is-invalid @enderror"
+                                        id="volatile_matter_rejection" name="qas[volatile_matter_rejection]" value="{{ old('qas.volatile_matter_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.volatile_matter_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.volatile_matter_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="fixed_carbon" class="form-label" style="width: 200px; height: 38px;">Fixed Carbon (ADB)</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">%</p>
+                                    <input type="text" class="form-control @error('qas.fixed_carbon_typical') is-invalid @enderror"
+                                        id="fixed_carbon_typical" name="qas[fixed_carbon_typical]" value="{{ old('qas.fixed_carbon_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.fixed_carbon_rejection') is-invalid @enderror"
+                                        id="fixed_carbon_rejection" name="qas[fixed_carbon_rejection]" value="{{ old('qas.fixed_carbon_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.fixed_carbon_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.fixed_carbon_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-top:10px">
+                                    <label for="size_raw_coal" class="form-label" style="width: 200px; height: 38px;">Size Raw Coal (0-100)</label>
+                                    <p class="form-label" style="margin-left: auto; width: 80px; height: 38px;">%</p>
+                                    <input type="text" class="form-control @error('qas.size_raw_coal_typical') is-invalid @enderror"
+                                        id="size_raw_coal_typical" name="qas[size_raw_coal_typical]" value="{{ old('qas.size_raw_coal_typical') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    <input type="text" class="form-control @error('qas.size_raw_coal_rejection') is-invalid @enderror"
+                                        id="size_raw_coal_rejection" name="qas[size_raw_coal_rejection]" value="{{ old('qas.size_raw_coal_rejection') }}"
+                                        style="margin-left: auto; width: 80px; height: 38px;">
+                                    @error('qas.size_raw_coal_typical')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @error('qas.size_raw_coal_rejection')
+                                        <div class="invalid-feedback" style="font-size: 12px;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
 
-                                        // Initial check
-                                        updateqas();
-
-                                        // Update keterangan when the dropdown value changes
-                                        perihalSelect.addEventListener('change', updateqas);
-                                    });
-                                </script>
                             </div>
 
                             <div class="fco-field mb-3" style="display: none;">
@@ -626,6 +793,8 @@
                                     </div>
                                 @enderror
                             </div>
+
+
 
                         </div>
 

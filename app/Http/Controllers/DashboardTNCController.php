@@ -22,7 +22,7 @@ class DashboardTNCController extends Controller
         $sort = $request->input('sort', 'all');
         $customDate = $request->input('customDate');
         $sortBy = $request->input('sort_by', 'tglSurat'); // Default sort by 'tglSurat'
-        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order 'asc'
+        $sortOrder = $request->input('sort_order', 'desc'); // Default sort order 'desc' for newest first
 
         $query = TNC::query();
 
@@ -64,6 +64,8 @@ class DashboardTNCController extends Controller
         $monthNumber = date('n'); // 'n' returns the numeric representation of the month (1 to 12)
         $romanMonth = monthToRoman($monthNumber);
 
+        $query = TNC::query();
+
         // $maxNoSuratInternalMemo = TNC::where('idPerihal', '1')->max('noSurat') ?? 0;
         // $maxNoSuratWaskita = TNC::where('idPerihal', '2')->max('noSurat') ?? 0;
 
@@ -82,6 +84,10 @@ class DashboardTNCController extends Controller
         $maxNoSuratPerihal6 = TNC::where('idPerihal', '6')->max('noSurat') ?? 0;
         $maxNoSuratPerihal7 = TNC::where('idPerihal', '7')->max('noSurat') ?? 0;
         $maxNoSuratPerihal8 = TNC::where('idPerihal', '8')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal9 = TNC::where('idPerihal', '9')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal10 = TNC::where('idPerihal', '10')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal11 = TNC::where('idPerihal', '11')->max('noSurat') ?? 0;
+        $maxNoSuratPerihal12 = TNC::where('idPerihal', '12')->max('noSurat') ?? 0;
 
         // If idPerihal is 2, get the max noSurat
         if (TNC::where('idPerihal', 2)->exists()) {
@@ -93,6 +99,7 @@ class DashboardTNCController extends Controller
 
         return view('dashboard.tnc.create', [
             'title' => 'TNC',
+            'tnc' => $query,
             'romanMonth' => $romanMonth,
             // 'maxNoSuratInternalMemo' => $maxNoSuratInternalMemo,
             // 'maxNoSuratWaskita' => $maxNoSuratWaskita,
@@ -105,20 +112,25 @@ class DashboardTNCController extends Controller
             'maxNoSuratPerihal6' => $maxNoSuratPerihal6,
             'maxNoSuratPerihal7' => $maxNoSuratPerihal7,
             'maxNoSuratPerihal8' => $maxNoSuratPerihal8,
+            'maxNoSuratPerihal9' => $maxNoSuratPerihal9,
+            'maxNoSuratPerihal10' => $maxNoSuratPerihal10,
+            'maxNoSuratPerihal11' => $maxNoSuratPerihal11,
+            'maxNoSuratPerihal12' => $maxNoSuratPerihal12,
         ]);
     }
 
     public function store(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
         $validatedData = $request->validate([
             'noSurat' => 'required|numeric',
             'idPerihal' => 'required|numeric',
             'perihal' => 'required|string',
             'perihalLanjutan' => 'nullable|string',
-            'prefix' => 'required|string|max:255',
+            'prefix' => 'nullable|string|max:255',
             'divisi' => 'nullable|string',
             'tujuanSurat' => 'nullable|string',
+            'suratPanggilan' => 'nullable|string',
             'keterangan' => 'nullable|string',
             'namaKaryawan' => 'nullable|string',
             'idKaryawan' => 'nullable|string',
@@ -126,6 +138,7 @@ class DashboardTNCController extends Controller
             'jabatanBaru' => 'nullable|string',
             'tglEfektif' => 'nullable|date',
             'nik' => 'nullable|string',
+            'tanggungjawabKPD' => 'nullable|string',
             'tempatLahir' => 'nullable|string',
             'tanggalLahir' => 'nullable|date',
             'jenisKelamin' => 'nullable|string',
@@ -134,8 +147,11 @@ class DashboardTNCController extends Controller
             'tanggalMasukKerja' => 'nullable|date',
             'jabatan' => 'nullable|string',
             'departement' => 'nullable|string',
+            'departementBaru' => 'nullable|string',
+            'alasan' => 'nullable|string',
             'startingDate' => 'nullable|date',
             'endDate' => 'nullable|date',
+            'endDateKerja' => 'nullable|date',
             'masakontrakAwal' => 'nullable|date',
             'masakontrakAkhir' => 'nullable|date',
             'tmptTGL' => 'nullable|string',

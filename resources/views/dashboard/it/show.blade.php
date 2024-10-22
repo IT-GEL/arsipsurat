@@ -108,17 +108,21 @@
                     </p>
                     <div style="display: flex; align-items: center;">
                         <div style="width: 250px; font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>Nama</strong></div>
+                            <strong>Nama</strong>
+                        </div>
                         <div style="margin-right: 10px; font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>:</strong></div>
+                            <strong>:</strong>
+                        </div>
                         <div style="font-family:'Times New Roman', serif;font-size:12pt;"><strong>Habib Herbianto</strong>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center;">
                         <div style="width: 250px; font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>Department</strong></div>
+                            <strong>Department</strong>
+                        </div>
                         <div style="margin-right: 10px; font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>:</strong></div>
+                            <strong>:</strong>
+                        </div>
                         <div style="font-family:'Times New Roman', serif;font-size:12pt;"><strong>IT</strong></div>
                     </div>
                     <p style="line-height:115%;margin:0cm;">
@@ -134,9 +138,11 @@
                     </p>
                     <div style="display: flex; align-items: center;">
                         <div style="width: 250px; font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>Nama</strong></div>
+                            <strong>Nama</strong>
+                        </div>
                         <div style="margin-right: 10px; font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>:</strong></div>
+                            <strong>:</strong>
+                        </div>
                         <div style="font-family:'Times New Roman', serif;font-size:12pt;"><strong>{{ $it->nama }}
                                 @if ($it->noKaryawan !== null)
                                     ({{ $it->noKaryawan }})
@@ -145,11 +151,14 @@
                     </div>
                     <div style="display: flex; align-items: center;">
                         <div style="width: 250px; font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>Department</strong></div>
+                            <strong>Department</strong>
+                        </div>
                         <div style="margin-right: 10px; font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>:</strong></div>
+                            <strong>:</strong>
+                        </div>
                         <div style="font-family:'Times New Roman', serif;font-size:12pt;">
-                            <strong>{{ $it->departement }}</strong></div>
+                            <strong>{{ $it->departement }}</strong>
+                        </div>
                     </div>
                     <p style="line-height:115%;margin:0cm;">
                         &nbsp;
@@ -240,7 +249,8 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
-                    <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i class="bi bi-arrow-left-square"></i>
+                    <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                            class="bi bi-arrow-left-square"></i>
                         Kembali</a>
                     <div class="ml-auto">
                         @if (auth()->user()->name == 'IT Support')
@@ -295,7 +305,7 @@
                         </tr>
                         <tr>
                             <td style="text-align: center">Nomor :
-                                ITS/{{ $it->noSurat }}/GELJKT/{{ $romanMonth }}/2024</td>
+                                {{ $it->prefix }}</td>
                         </tr>
                     </table>
                     <br>
@@ -376,6 +386,260 @@
             </div>
         </div>
         <!-- Recent Sales End -->
+    @endif
+
+    @if ($it->idPerihal == '3')
+        <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+            <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                    class="bi bi-arrow-left-square"></i>
+                Kembali</a>
+            <div class="ml-auto">
+                @if (auth()->user()->name == 'IT Support')
+                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('put')
+                        <input type="hidden" name="approve" value="yes">
+                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $it->approve }}"
+                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $it->approve ? 'disabled' : '' }}>
+                            <i class="bi bi-check2-square"></i> Approve
+                        </button>
+                    </form>
+                @endif
+                <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
+                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                </button>
+            </div>
+        </div>
+        <div id="contentToConvert" class="contentToConvert">
+            <div class="page">
+                <table border="0" cellpadding="0" cellspacing="0" width="652" style="width: 651px;border:1px solid black;">
+
+
+                    <tbody>
+                        <tr height="25" style="height: 25px;">
+                            <td colspan="11" height="25" class="xl93" width="652" style="text-align: center; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 25px; width: 651px;">FORMULIR KEBUTUHAN BASIS IT</td>
+                        </tr>
+                        <tr height="24" style="height: 25px;">
+                            <td colspan="11" height="24" class="xl96" style="text-align: center; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 25px;">{{ $it->prefix }}</td>
+                        </tr>
+                        <tr height="40" style="height: 40px;">
+                            <td height="40" class="xl65" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 40px;">&nbsp;<br></td>
+                            <td class="xl78" colspan="5" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Saya yang bertandatangan
+                                dibawah ini,</td>
+                            <td class="xl74" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl74" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl74" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl74" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl67" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="40" style="height: 40px;">
+                            <td height="40" class="xl82" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 40px;">&nbsp;<br></td>
+                            <td class="xl81" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Nama</td>
+                            <td class="xl77" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">:</td>
+                            <td class="xl76" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">{{ $it->nama }}<br></td>
+                        </tr>
+                        <tr height="40" style="height: 40px;">
+                            <td height="40" class="xl82" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 40px;">&nbsp;<br></td>
+                            <td class="xl77" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Jabatan</td>
+                            <td class="xl77" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">:</td>
+                            <td class="xl76" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">{{ $it->jabatan }}<br></td>
+                        </tr>
+                        <tr height="40" style="height: 40px;">
+                            <td height="40" class="xl82" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 40px;">&nbsp;<br></td>
+                            <td class="xl77" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Divisi</td>
+                            <td class="xl77" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">:</td>
+                            <td class="xl76" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">{{ $it->divisi}}<br></td>
+                        </tr>
+                        <tr height="40" style="height: 40px;">
+                            <td height="40" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 40px;">&nbsp;<br></td>
+                            <td class="xl85" colspan="3" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Dengan ini mengajukan
+                                ijin untuk (Jelaskan rincian permintaan/alasan) :</td>
+                            <td class="xl74" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl66" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl66" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl66" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl66" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl67" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="40" style="height: 40px;">
+                            <td height="40" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 40px;">&nbsp;<br></td>
+                            <td colspan="9" class="xl99" width="640" style="text-align: left; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; width: 637px;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="37" style="height: 37px;">
+                            <td height="37" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 37px;">&nbsp;<br></td>
+                            <td colspan="9" class="xl102" style="text-align: left; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="29" style="height: 29px;">
+                            <td height="29" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 29px;">&nbsp;<br></td>
+                            <td class="xl92" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl72" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="40" style="height: 40px;">
+                            <td height="40" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 40px;">&nbsp;<br></td>
+                            <td colspan="9" class="xl105" width="640" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; width: 637px;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="29" style="height: 29px;">
+                            <td height="29" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 29px;">&nbsp;<br></td>
+                            <td class="xl92" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl72" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="29" style="height: 29px;">
+                            <td height="29" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 29px;">&nbsp;<br></td>
+                            <td class="xl92" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl72" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="40" style="height: 40px;">
+                            <td height="40" class="xl82" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 40px;">&nbsp;<br></td>
+                            <td class="xl81" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Pada Hari &amp; Tanggal</td>
+                            <td class="xl86" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl90" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl86" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl86" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl86" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl86" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl86" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl87" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl80" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="20" style="height: 20px;">
+                            <td height="20" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 20px;">&nbsp;<br></td>
+                            <td class="xl83" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Dept.</td>
+                            <td class="xl83" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Mengetahui,</td>
+                            <td class="xl66" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl66" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl67" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl83" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Menyetujui</td>
+                            <td class="xl65" colspan="2" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Menyetujui,</td>
+                            <td class="xl67" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="20" style="height: 20px;">
+                            <td height="20" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 20px;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl88" colspan="3" style="text-align: left; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Talent &amp; Culture</td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">General Manager - FAT</td>
+                            <td class="xl68" colspan="3" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Direktur
+                                PT GELTECH</td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="20" style="height: 20px;">
+                            <td height="20" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 20px;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl89" style="text-align: center; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="20" style="height: 20px;">
+                            <td height="20" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 20px;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl89" style="text-align: center; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="20" style="height: 20px;">
+                            <td height="20" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 20px;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl89" style="text-align: center; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="20" style="height: 20px;">
+                            <td height="20" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 20px;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl89" style="text-align: center; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="20" style="height: 20px;">
+                            <td height="20" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 20px;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl89" style="text-align: center; padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl73" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;"><br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+                        <tr height="20" style="height: 20px;">
+                            <td height="20" class="xl68" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap; height: 20px;">&nbsp;<br></td>
+                            <td class="xl84" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Tanggal :</td>
+                            <td class="xl84" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Tanggal :</td>
+                            <td class="xl71" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl91" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl72" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl84" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Tanggal :</td>
+                            <td class="xl70" colspan="2" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">Tanggal :</td>
+                            <td class="xl72" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                            <td class="xl69" style="padding-top: 1px; padding-right: 1px; padding-left: 1px; color: black; font-size: 15px; font-weight: 400; font-style: normal; text-decoration: none; font-family: Calibri, sans-serif; vertical-align: bottom; white-space: nowrap;">&nbsp;<br></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     @endif
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"

@@ -39,24 +39,24 @@
 
                             {{-- Ketika IdPerihal = 1 (Permintaan Pembelian) --}}
                             <template id="perihal-options-1">
-                                <option value="Permintaan Pembelian Laptop Baru">Permintaan Pembelian Laptop Baru
+                                <option data-perihal="perihal1" value="Permintaan Pembelian Laptop Baru">Permintaan Pembelian Laptop Baru
                                 </option>
-                                <option value="Permintaan Pembelian Sparepart Computer">Permintaan Pembelian
+                                <option data-perihal="perihal1" value="Permintaan Pembelian Sparepart Computer">Permintaan Pembelian
                                     Sparepart Computer</option>
-                                <option value="Permintaan Pembelian Sparepart Laptop">Permintaan Pembelian Sparepart
+                                <option data-perihal="perihal1" value="Permintaan Pembelian Sparepart Laptop">Permintaan Pembelian Sparepart
                                     Laptop</option>
                             </template>
                             {{-- Ketika IdPerihal = 2 (Pembuatan/Penutupan Akun Shared Folder JKT-DS) --}}
                             <template id="perihal-options-2">
-                                <option value="Pembuatan Akun Shared Folder JKT-DS">Pembuatan Akun Shared Folder
+                                <option data-perihal="perihal2" value="Pembuatan Akun Shared Folder JKT-DS">Pembuatan Akun Shared Folder
                                     JKT-DS</option>
-                                <option value="Penutupan Akun Shared Folder JKT-DS">Penutupan Akun Shared Folder
+                                <option data-perihal="perihal2" value="Penutupan Akun Shared Folder JKT-DS">Penutupan Akun Shared Folder
                                     JKT-DS</option>
                             </template>
                             {{-- Ketika IdPerihal = 3 (Pembuatan/Penutupan Akun Gelsys) --}}
                             <template id="perihal-options-3">
-                                <option value="Pembuatan Akun Gelsys">Pembuatan Akun Gelsys</option>
-                                <option value="Penutupan Akun Gelsys">Penutupan Akun Gelsys</option>
+                                <option data-perihal="perihal3" value="Pembuatan Akun Gelsys">Pembuatan Akun Gelsys</option>
+                                <option data-perihal="perihal3" value="Penutupan Akun Gelsys">Penutupan Akun Gelsys</option>
                             </template>
 
                             <div class="mb-3">
@@ -351,12 +351,19 @@
 
                     case '2':
                         // Show fields if value is 2
-
+                        namauserField.style.display = 'block';
+                        divisi.style.display = 'block';
+                        jabatanField.style.display = 'block';
+                        keterangField.style.display = 'block';
                         break;
 
                     case '3':
                         // Show fields if value is 3
-
+                        namauserField.style.display = 'block';
+                        noKaryawanField.style.display = 'block'
+                        divisi.style.display = 'block';
+                        jabatanField.style.display = 'block';
+                        keterangField.style.display = 'block';
                         break;
 
                         // You can add more cases here if needed
@@ -409,8 +416,8 @@
 
                 const prefixMap = {
                     '1': `ITS/${noSurat}/${kop}JKT/${romanMonth}/${year}`,
-                    '2': `${noSurat}/${kop}/TNC/${romanMonth}/${year}`,
-                    '3': `No : ${kop}/TNC/REF/${romanMonth}/${year}`,
+                    '2': `ITS/${noSurat}/${kop}JKT/${romanMonth}/${year}`,
+                    '3': `ITS/${noSurat}/${kop}JKT/${romanMonth}/${year}`,
                 };
 
                 prefixInput.value = prefixMap[perihalSelect.value] || '';
@@ -500,72 +507,81 @@
             Undo
         } from 'ckeditor5';
 
-        let perihalSelected = '';
-
-        let keteranganContent = `<p style="line-height:115%;margin:0cm;">
-        <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Kami merekomendasikan untuk dilakukan ${perihalSelected} dengan yang baru dan memiliki spesifikasi sebagai berikut :</span></span>
-    </p>
-    <ul style="padding-left:48px;">
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Prosesor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal i7 gen 12 atau setara</span></span>
-            </p>
-        </li>
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">RAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal 16GB</span></span>
-            </p>
-        </li>
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">SSD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal 512GB</span></span>
-            </p>
-        </li>
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Layar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 14inc Full HD</span></span>
-            </p>
-        </li>
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Fitur lain&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Port USB 3.0,HDMI</span></span>
-            </p>
-        </li>
-    </ul>`;
-
         document.getElementById('perihalLanjutan').addEventListener('change', function() {
-            perihalSelected = this.value;
+            let perihalSelected = this.value;
+            const selectedOption = this.options[this.selectedIndex];
+            const dataPerihal = selectedOption.getAttribute('data-perihal');
+            let keteranganContent = '';
 
-            keteranganContent = `<p style="line-height:115%;margin:0cm;">
-        <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Kami merekomendasikan untuk dilakukan ${perihalSelected} dengan yang baru dan memiliki spesifikasi sebagai berikut :</span></span>
-    </p>
-    <ul style="padding-left:48px;">
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Prosesor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal i7 gen 12 atau setara</span></span>
-            </p>
-        </li>
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">RAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal 16GB</span></span>
-            </p>
-        </li>
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">SSD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal 512GB</span></span>
-            </p>
-        </li>
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Layar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 14inc Full HD</span></span>
-            </p>
-        </li>
-        <li>
-            <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
-                <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Fitur lain&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Port USB 3.0,HDMI</span></span>
-            </p>
-        </li>
-    </ul>`;
+            if (dataPerihal === 'perihal1') {
+                keteranganContent = `<p style="line-height:115%;margin:0cm;">
+                    <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Kami merekomendasikan untuk dilakukan ${perihalSelected} dengan yang baru dan memiliki spesifikasi sebagai berikut :</span></span>
+                </p>
+                <ul style="padding-left:48px;">
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Prosesor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal i7 gen 12 atau setara</span></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">RAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal 16GB</span></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">SSD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Minimal 512GB</span></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Layar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 14inc Full HD</span></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Fitur lain&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Port USB 3.0,HDMI</span></span>
+                        </p>
+                    </li>
+                </ul>`;
+            } else if (dataPerihal === 'perihal2') {
+                keteranganContent = `<p style="line-height:115%;margin:0cm;">
+                    <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Kami merekomendasikan untuk dilakukan ${perihalSelected} dengan rincian sebagai berikut :</span></span>
+                </p>
+                <ul style="padding-left:48px;">
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Nama User : [Nama User]</span></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Departemen : [Departemen]</span></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Divisi : [Divisi]</span></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p style="line-height:115%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;">
+                            <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Jabatan : [Jabatan]</span></span>
+                        </p>
+                    </li>
+                </ul>`;
+            } else if (dataPerihal === "perihal3") {
+                keteranganContent = `
+                <p style="line-height:115%;margin:0cm;">
+                    <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">Pembukaan akses akun ERP GELSYS atas nama :</span></span>
+                </p>
+                <p style="line-height:115%;margin:0cm;">
+                    <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">1. MARDIAH NURAENI (LE202210005) VERIFICATOR ACCOUNTING</span></span>
+                </p>
+                <p style="line-height:115%;margin:0cm;">
+                    <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"><span lang="IN" dir="ltr">*Note : Pembukaan akses ERP Gelsys untuk PT. SLN (Bagian PVR Finance)</span></span>
+                </p>`;
+            }
             editor.setData(keteranganContent);
         })
 
@@ -747,7 +763,6 @@
                 }
             },
             placeholder: 'Type or paste your content here!',
-            initialData: keteranganContent,
             table: {
                 contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
             }

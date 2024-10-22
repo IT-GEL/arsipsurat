@@ -49,21 +49,21 @@
                 Kembali</a>
             <div class="ml-auto">
                 @if (auth()->user()->name == 'IT Support')
-                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $it->approve }}"
-                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $it->approve ? 'disabled' : '' }}>
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
                             <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
                 <button class="btn btn-primary btn-warning" style="margin-left:10px;"
-                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
-                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
                     <i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
@@ -151,21 +151,21 @@
                 Kembali</a>
             <div class="ml-auto">
                 @if (auth()->user()->name == 'IT Support')
-                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $it->approve }}"
-                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $it->approve ? 'disabled' : '' }}>
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
                             <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
                 <button class="btn btn-primary btn-warning" style="margin-left:10px;"
-                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
-                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
                     <i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
@@ -205,16 +205,16 @@
                             <td style="text-align: left">Kepada Yth.</td>
                         </tr>
                         <tr>
-                            <td style="text-align: left"><u><b>{{ $tnc->tujuanSurat }}</b></u></td>
+                            <td style="text-align: left"><u><b>Biro Konsultan Psikologi Waskita</b></u></td>
                         </tr>
                         <tr>
                             <td style="text-align: left">Di Tempat</td>
                         </tr>
                     </table>
                     <br>
-                    <table class="table-keterangan" width="615">
+                    <table class="table-keterangan" width="620">
                         <tr>
-                            <td style="border: 0px;">{!! $tnc->keterangan !!}</td>
+                            <td style="border: 0px; width: 100%; padding: 0px;">{!! $tnc->keterangan !!}</td>
                         </tr>
                     </table>
 
@@ -266,21 +266,21 @@
                 Kembali</a>
             <div class="ml-auto">
                 @if (auth()->user()->name == 'IT Support')
-                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $it->approve }}"
-                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $it->approve ? 'disabled' : '' }}>
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
                             <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
                 <button class="btn btn-primary btn-warning" style="margin-left:10px;"
-                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
-                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
                     <i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
@@ -435,21 +435,21 @@
                 Kembali</a>
             <div class="ml-auto">
                 @if (auth()->user()->name == 'IT Support')
-                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $it->approve }}"
-                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $it->approve ? 'disabled' : '' }}>
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
                             <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
                 <button class="btn btn-primary btn-warning" style="margin-left:10px;"
-                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
-                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
                     <i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
@@ -637,21 +637,21 @@
                 Kembali</a>
             <div class="ml-auto">
                 @if (auth()->user()->name == 'IT Support')
-                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $it->approve }}"
-                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $it->approve ? 'disabled' : '' }}>
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
                             <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
                 <button class="btn btn-primary btn-warning" style="margin-left:10px;"
-                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
-                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
                     <i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
@@ -811,21 +811,21 @@
                 Kembali</a>
             <div class="ml-auto">
                 @if (auth()->user()->name == 'IT Support')
-                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $it->approve }}"
-                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $it->approve ? 'disabled' : '' }}>
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
                             <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
                 <button class="btn btn-primary btn-warning" style="margin-left:10px;"
-                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
-                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
                     <i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
@@ -874,18 +874,7 @@
                     </p>
                     <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
                         align="center">
-                        <span style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;" lang="FI">No
-                            :&nbsp;</span><span
-                            style="color:black;font-family:&quot;Calibri&quot;,sans-serif;font-size:10.0pt;"
-                            lang="IN">TNC</span><span
-                            style="color:black;font-family:&quot;Calibri&quot;,sans-serif;font-size:10.0pt;"
-                            lang="EN-GB">/</span><span
-                            style="color:black;font-family:&quot;Calibri&quot;,sans-serif;font-size:10.0pt;"
-                            lang="IN">018/GELJKT/IX</span><span
-                            style="color:black;font-family:&quot;Calibri&quot;,sans-serif;font-size:10.0pt;"
-                            lang="EN-GB">/202</span><span
-                            style="color:black;font-family:&quot;Calibri&quot;,sans-serif;font-size:10.0pt;"
-                            lang="IN">4</span>
+                        <span style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;" lang="FI">{{ $tnc->prefix }}</span>
                     </p>
                     <p style="line-height:150%;margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
                         align="center">
@@ -922,7 +911,7 @@
                                     style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:115%;"
                                     lang="IN"><strong>Tuty Alawiyah, M. M.,</strong></span><span
                                     style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:115%;"
-                                    lang="EN-GB">sebagai&nbsp;</span><span
+                                    lang="EN-GB"> sebagai&nbsp;</span><span
                                     style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:115%;"
                                     lang="IN">Corporate Talent &amp; Culture Manager.</span><span
                                     style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:115%;"
@@ -1042,7 +1031,7 @@
                                     <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
                                         Jabatan Awal</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;"></div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">{{ $tnc->jabatanAwal }}</div>
                                 </div>
                             </li>
                             <li>
@@ -1050,7 +1039,7 @@
                                     <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
                                         Bertanggung Jawab Kepada</div>
                                     <div style="margin-right: 10px;">:</div>
-                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;"></div>
+                                    <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">{{ $tnc->tanggungjawabKPD }}</div>
                                 </div>
                             </li>
                             <li>
@@ -1093,7 +1082,8 @@
                                         Tunjangan Telekomunikasi</div>
                                     <div style="margin-right: 10px;">:</div>
                                     <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
-                                        _______________________________per bulan</div>
+                                        _______________________________per bulan
+                                    </div>
                                 </div>
                                 <div style="display: flex; align-items: center;">
                                     <div style="width: 175px;font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
@@ -1101,7 +1091,7 @@
                                     </div>
                                     <div style="margin-right: 10px;"><strong>:</strong></div>
                                     <div style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;">
-                                        <strong>_______________________________per bulan</strong>
+                                        <strong>__________________________per bulan</strong>
                                     </div>
                                 </div>
                             </li>
@@ -1113,12 +1103,12 @@
                         <span style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:150%;"
                             lang="IN">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span
                             style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:150%;"
-                            lang="EN-GB">(Komponen Fa, Fb, Fc, Fd &amp; Fe adalah upah tetap, yang&nbsp;akan
+                            lang="EN-GB">(Komponen Fa, Fb, Fc, Fd, Fe &amp; Ff adalah upah tetap, yang&nbsp;akan
                             digunakan&nbsp; sebagai dasar perhitungan THR).</span>
                     </p>
 
 
-                    <br><br>
+                    <br><br><br>
 
                     <p
                         style="line-height:150%;margin-bottom:0cm;margin-right:0cm;margin-top:0cm;tab-stops:list 18.0pt 36.0pt;text-align:justify;">
@@ -1130,7 +1120,7 @@
                         style="line-height:150%;margin-bottom:0cm;margin-left:36.0pt;margin-right:0cm;margin-top:0cm;tab-stops:36.0pt;text-align:justify;text-indent:-18.0pt;">
                         <span style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:150%;"
                             lang="FR">2.1 PKWT ini berlaku untuk jangka waktu efektif terhitung sejak
-                            tanggal …………………………………sampai dengan tanggal…………………………………………
+                            tanggal {{ formatDateIndonesian($tnc->tanggalMasukKerja) }} sampai dengan tanggal {{ formatDateIndonesian($tnc->endDate) }}
                             <strong>dengan masa penyesuaian diri selama 3 bulan.</strong></span>
                     </p>
                     <p
@@ -1641,28 +1631,22 @@
                             style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:150%;"
                             lang="EN-GB"><strong>Pekerja, &nbsp; &nbsp; &nbsp;</strong></span>
                     </p>
-                    <p
-                        style="line-height:150%;margin-bottom:0cm;margin-left:36.0pt;margin-right:0cm;margin-top:0cm;text-align:justify;text-indent:36.0pt;">
-                        &nbsp;
-                    </p>
-                    <p
-                        style="line-height:150%;margin-bottom:0cm;margin-left:36.0pt;margin-right:0cm;margin-top:0cm;text-align:justify;text-indent:36.0pt;">
-                        &nbsp;
-                    </p>
-                    <p
-                        style="line-height:150%;margin-bottom:0cm;margin-left:36.0pt;margin-right:0cm;margin-top:0cm;text-align:justify;text-indent:36.0pt;">
-                        &nbsp;
-                    </p>
-                    <p
-                        style="line-height:150%;margin-bottom:0cm;margin-left:36.0pt;margin-right:0cm;margin-top:0cm;text-align:justify;text-indent:36.0pt;">
-                        &nbsp;
-                    </p>
+
                     <p
                         style="line-height:150%;margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
                         <span style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;line-height:150%;"
                             lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;</span>
                     </p>
+                    @if ($tnc->approve == '1')
+                    <table width="600" style="font-weight:bold;">
+                        <tr>
+                            <td><img style="height:125px; weigth:125px;padding-left: 100px;"
+                                    src="{{ asset('img/qrcodes/' . $tnc->qr) }}" alt="QR Code"></td>
+                        </tr>
+                    </table>
+
+                @endif
                     <p
                         style="line-height:150%;margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
                         <span
@@ -1672,7 +1656,11 @@
                                 &nbsp;</strong></span><span
                             style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;letter-spacing:-.05pt;line-height:150%;"
                             lang="EN-US"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></span>
+                            <span
+                            style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;letter-spacing:-.05pt;line-height:150%;"
+                            lang="SV"><strong>{{ $tnc->namaKaryawan }}&nbsp; &nbsp; &nbsp;</strong></span>
                     </p>
+
                     <p
                         style="line-height:150%;margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:justify;">
                         <span
@@ -1682,10 +1670,9 @@
                             lang="EN-US"><strong>&nbsp; </strong></span><span
                             style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;letter-spacing:-.05pt;line-height:150%;"
                             lang="IN"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </strong></span><span
-                            style="font-family:&quot;Tahoma&quot;,sans-serif;font-size:9.0pt;letter-spacing:-.05pt;line-height:150%;"
-                            lang="SV"><strong>{{ $tnc->namaKaryawan }}&nbsp; &nbsp; &nbsp;</strong></span>
+                            </strong></span>
                     </p>
+
                     <p style="margin-bottom:0cm;margin-left:0cm;margin-right:0cm;margin-top:0cm;text-align:center;"
                         align="center">
                         <span style="font-family:&quot;Times New Roman&quot;, serif;font-size:12pt;"
@@ -1720,21 +1707,21 @@
                 Kembali</a>
             <div class="ml-auto">
                 @if (auth()->user()->name == 'IT Support')
-                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $it->approve }}"
-                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $it->approve ? 'disabled' : '' }}>
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
                             <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
                 <button class="btn btn-primary btn-warning" style="margin-left:10px;"
-                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
-                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
                     <i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
@@ -1865,21 +1852,21 @@
                 Kembali</a>
             <div class="ml-auto">
                 @if (auth()->user()->name == 'IT Support')
-                    <form action="{{ route('it.approve', $it->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('put')
                         <input type="hidden" name="approve" value="yes">
-                        <button class="btn btn-primary {{ $it->approve ? 'btn-success' : 'btn-secondary' }}"
-                            data-approved="{{ $it->approve }}"
-                            onclick="{{ $it->approve ? 'return false;' : 'berhasil(this);' }}"
-                            {{ $it->approve ? 'disabled' : '' }}>
+                        <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                            data-approved="{{ $tnc->approve }}"
+                            onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                            {{ $tnc->approve ? 'disabled' : '' }}>
                             <i class="bi bi-check2-square"></i> Approve
                         </button>
                     </form>
                 @endif
                 <button class="btn btn-primary btn-warning" style="margin-left:10px;"
-                    href="{{ url('/dashboard/it/' . $it->id . '/edit') }}"
-                    @if ($it->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                    href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                    @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
                     <i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
@@ -2492,6 +2479,527 @@
         </div>
     @endif
 
+    @if($tnc->idPerihal == "9")
+
+            <!-- Surat Permohonan Promosi -->
+
+            <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+                <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                        class="bi bi-arrow-left-square"></i>
+                    Kembali</a>
+                <div class="ml-auto">
+                    @if (auth()->user()->name == 'IT Support')
+                        <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
+                            @csrf
+                            @method('put')
+                            <input type="hidden" name="approve" value="yes">
+                            <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                                data-approved="{{ $tnc->approve }}"
+                                onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                                {{ $tnc->approve ? 'disabled' : '' }}>
+                                <i class="bi bi-check2-square"></i> Approve
+                            </button>
+                        </form>
+                    @endif
+                    <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                        href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                        @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </button>
+                    <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                        <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+                    </button>
+                </div>
+            </div>
+
+            <div id="contentToConvert" class="contentToConvert">
+                <div class="page">
+                    <div class="header" id="header">
+                        <img src="{{ asset('img/' . $tnc->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                        <br><br>
+                    </div>
+                    <div class="header-content" style="padding-left:1in; padding-right:1in;">
+
+
+                        <div class="container-p9" style="
+                            border: 1px solid black;
+                            padding: 10px;margin-left: -50px;width:700px;">
+                            <div class="header-p9">
+
+                        <table>
+                            <tr>
+                             <td rowspan="4" style="text-align: center; border:1px solid black;">
+                              <img alt="Company Logo" height="100" src="{{ asset('img/' . $tnc->kop . '-Kecil.png') }}" width="200"/>
+                             </td>
+                             <td colspan="2" width="200px" style="text-align: center; border:1px solid black;">
+                              <strong>
+                               PERMOHONAN
+                               <br/>
+                               PROMOSI
+                              </strong>
+                             </td>
+                             <td style="border: 1px solid black;" width="300px" rowspan="4">
+                              <table style="font-size: 14px;">
+                               <tbody>
+                                <tr>
+                                 <td width="125px">
+                                  Name
+                                 </td>
+                                 <td>
+                                  :
+                                 </td>
+                                 <td>
+                                  {{ $tnc->namaKaryawan }}
+                                 </td>
+                                </tr>
+                                <tr>
+                                 <td>
+                                  Tgl. Masuk Kerja
+                                 </td>
+                                 <td>
+                                  :
+                                 </td>
+                                 <td>
+                                    {{ formatDateIndonesian($tnc->tanggalMasukKerja) }}
+                                 </td>
+                                </tr>
+                                <tr>
+                                 <td>
+                                  Jabatan
+                                 </td>
+                                 <td>
+                                  :
+                                 </td>
+                                 <td>
+                                    {{ $tnc->jabatanAwal }}
+                                 </td>
+                                </tr>
+                                <tr>
+                                 <td>
+                                  Departemen
+                                 </td>
+                                 <td>
+                                  :
+                                 </td>
+                                 <td>
+                                    {{ $tnc->departement}}
+                                 </td>
+                                </tr>
+                               </tbody>
+                              </table>
+                             </td>
+                            </tr>
+                            <tr>
+                             <td colspan="2" style="text-align: center;border:1px solid black;">
+
+                               PROPOSAL FOR
+                               <br/>
+                               PROMOTION
+
+                             </td>
+                            </tr>
+                           </table>
+                          </div>
+                          <div class="section" style="border-left: 1px solid black;border-right: 1px solid black;">
+                           <table class="no-border-table" style="width: 100%; font-size:13px;">
+                            <tbody>
+                                <tr>
+                                    <th colspan="3" style="border-bottom: 1px solid black;text-align:center;">
+                                        <br>
+                                    </th>
+                                   </tr>
+                             <tr>
+                              <th colspan="3" style="border-bottom: 1px solid black;text-align:center;">
+                               <i>DIUSULKAN UNTUK PROMOSI PADA / PROPOSED TO BE PROMOTED :</i>
+                              </th>
+                             </tr>
+                             <tr>
+                              <td class="no-border-cell">
+                               <u>Jabatan baru</u>
+                               <br/>
+                               <i>New Position</i>
+                              </td>
+                              <td style="width:1px;">:</td>
+                              <td style="width:400px;">
+                               {{ $tnc->jabatanBaru }}
+                              </td>
+                             </tr>
+                             <tr>
+                              <td class="no-border-cell">
+                               <u>Bagian</u>
+                               <br/>
+                               <i>Department</i>
+                              </td>
+                              <td style="width:1px;">:</td>
+                              <td style="width:400px;">
+                                {{ $tnc->departementBaru }}
+                              </td>
+                             </tr>
+                             <tr>
+                              <td class="no-border-cell">
+                                <u>Alasan</u>
+                               <br/>
+                               <i>Reason</i>
+                              </td>
+                              <td style="width:1px;">:</td>
+                              <td style="width:400px;">
+                                {{ $tnc->alasan }}
+                              </td>
+                             </tr>
+                             <tr>
+                              <td class="no-border-cell">
+                                <u> Mulai tanggal</u>
+                               <br/>
+                               <i>Starting from</i>
+                              </td>
+                              <td style="width:1px;">:</td>
+                              <td style="width:400px;">
+                               {{ formatDateindonesian($tnc->startingDate) }}
+                              </td>
+                             </tr>
+                            </tbody>
+                           </table>
+                          </div>
+                          <div class="section" style="border: 1px solid black;">
+                           <table style="font-size:13px;">
+                            <tr>
+                             <td width="400px">
+                              Diajukkan oleh / Proposed by :
+                              <br><br><br><br><br>
+                             </td>
+                             <td>
+                              Dikonfirmasi Oleh / Confirmed by :
+                              <br><br><br><br><br>
+                             </td>
+                            </tr>
+
+                            <tr>
+                             <td>
+                              Corporate TC Manager
+                              <br class="spaced-br"/>
+                              Tanggal / Date :
+                             </td>
+                             <td>
+                              Direktur / Penanggung Jawab Unit Usaha
+                              <br/>
+                              Tanggal / Date :
+                             </td>
+                            </tr>
+                           </table>
+                          </div>
+                          <div class="section" style="border: 1px solid black;">
+                           <table style="width: 650px; font-size:13px;">
+                            <tr>
+                             <th colspan="2" style="border-bottom:1px solid black;text-align:center;">
+                              Diisi oleh Bagian Sumber Daya Manusia / To be filled by Human Resources Department
+                             </th>
+                            </tr>
+                            <tr>
+                             <td style="border-right:1px solid black;">
+                              <strong>SEKARANG</strong> / PRESENT
+                             </td>
+                             <td>
+                              <strong>DIUSULKAN</strong> / PROPOSED
+                             </td>
+                            </tr>
+                            <tr>
+                             <td style="border-right:1px solid black;">
+                              Gaji Pokok
+                              <br/>
+                              Tunjangan Makan
+                              <br/>
+                              Tunjangan Jabatan
+                              <br/>
+                              Tunjangan Transportasi
+                              <br/>
+                              Tunjangan Telekomunikasi
+                              <br/>
+                              Tunjangan Operasional
+                              <br/>
+                              <strong>Total</strong>
+                             </td>
+                             <td>
+                              Gaji Pokok
+                              <br/>
+                              Tunjangan Makan
+                              <br/>
+                              Tunjangan Jabatan
+                              <br/>
+                              Tunjangan Transportasi
+                              <br/>
+                              Tunjangan Telekomunikasi
+                              <br/>
+                              Tunjangan Operasional
+                              <br/>
+                              <strong>Total</strong>
+                             </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="section" style="border: 1px solid black;">
+                        <table style="font-size:13px;">
+                                   <tr>
+                                    <td colspan="2" style="border-right:1px solid black;width:325px;">
+                                     Dikonfirmasi Oleh / <i>Confirmed by :</i>
+                                    </td>
+                                    <td colspan="2">
+                                        Disetujui oleh / <i>Approved by :</i>
+                                    </td>
+                                   </tr>
+                                   <tr>
+                                    <td style="padding-right:100px;">
+                                     <br/><br><br><br>
+                                     Dept. Head
+                                     <br/>
+                                     Tanggal / <i>Date :</i>
+                                    </td>
+                                    <td style="border-right:1px solid black; padding-right:10px;">
+                                        <br><br><br><br>
+                                        Corp. TC Manager
+                                        <br/>
+                                        Tanggal / Date :
+                                    </td>
+                                    <td style="padding-right:100px;">
+                                        <br/><br><br><br>
+                                        Business Controller
+                                        <br/>
+                                        Tanggal / <i>Date :</i>
+                                       </td>
+                                       <td>
+                                           <br><br><br><br>
+                                           DIREKTUR
+                                           <br/>
+                                           Tanggal / Date :
+                                       </td>
+                                   </tr>
+                               </table>
+
+                        </div>
+                           </div>
+
+
+
+
+        </div>
+        @if ($tnc->kop !== null && file_exists(public_path('img/' . $tnc->kop . '-bottom-kop.png')))
+            <div class="footer-page">
+                <img src="{{ asset('img/' . $tnc->kop . '-bottom-kop.png') }}"
+                    style="max-width: 100%; height: auto;">
+            </div>
+        @endif
+        </div>
+        </div>
+    @endif
+
+
+    @if ($tnc->idPerihal == '10')
+    <!-- BPJS -->
+    <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+        <a id="backBtn" href="{{ url()->previous() }}" class="btn btn-success"><i
+                class="bi bi-arrow-left-square"></i>
+            Kembali</a>
+        <div class="ml-auto">
+            @if (auth()->user()->name == 'IT Support')
+                <form action="{{ route('it.approve', $tnc->id) }}" method="post" class="d-inline">
+                    @csrf
+                    @method('put')
+                    <input type="hidden" name="approve" value="yes">
+                    <button class="btn btn-primary {{ $tnc->approve ? 'btn-success' : 'btn-secondary' }}"
+                        data-approved="{{ $tnc->approve }}"
+                        onclick="{{ $tnc->approve ? 'return false;' : 'berhasil(this);' }}"
+                        {{ $tnc->approve ? 'disabled' : '' }}>
+                        <i class="bi bi-check2-square"></i> Approve
+                    </button>
+                </form>
+            @endif
+            <button class="btn btn-primary btn-warning" style="margin-left:10px;"
+                href="{{ url('/dashboard/it/' . $tnc->id . '/edit') }}"
+                @if ($tnc->approve == '1') style="pointer-events:none; opacity:0.5;" @endif>
+                <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button id="download-pdf" class="btn btn-primary" style="margin-left:10px;">
+                <i class="bi bi-file-earmark-pdf-fill"></i> Unduh
+            </button>
+        </div>
+    </div>
+
+    <div id="contentToConvert" class="contentToConvert">
+        <div class="page">
+            <div class="header" id="header">
+                <img src="{{ asset('img/' . $tnc->kop . '-kop-atas.png') }}" style="max-width: 100%; height: auto;">
+                <br><br>
+            </div>
+            <div class="header-content" style="padding-left:1in; padding-right:1in;">
+
+
+                <div class="WordSection1" style="page:WordSection1;">
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="IN" dir="ltr">{{ $tnc->tmptTGL }},&nbsp;</span><span lang="EN-US" dir="ltr">{{ formatDateIndonesian($tnc->tglSurat) }}</span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm;tab-stops:35.45pt;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="IN" dir="ltr">No  : {{ $tnc->prefix }}</span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;tab-stops:35.45pt;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="IN" dir="ltr">Re : SURAT PEMANGGILAN <span style="text-transform:uppercase;">{{ $tnc->suratPanggilan }}</span></span></span>
+                    </p>
+                    <br><br>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        <span style="color:white;font-family:Calibri, sans-serif;font-size:11pt;"><span style="text-effect:outline;" lang="EN-US" dir="ltr"><strong><u>PRIVATE &amp; CONFIDENTIAL</u></strong></span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="IN" dir="ltr"><strong>Kepada Yth.</strong></span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="EN-US" dir="ltr"><strong>{{ $tnc->namaKaryawan }}</strong></span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="EN-US" dir="ltr"><strong>{{ $tnc->jabatan }}</strong></span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="IN" dir="ltr"><strong>PT Global&nbsp;</strong></span><span lang="EN-US" dir="ltr"><strong>Energi&nbsp;Lestari</strong></span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="IN" dir="ltr"><strong>Di tempat</strong></span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        {!! $tnc->keterangan !!}
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="IN" dir="ltr">Hormat kami (</span><i><span lang="IN" dir="ltr">Sincerely</span></i><span lang="IN" dir="ltr">),</span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><span lang="IN" dir="ltr">PT. Global Energi Lestari</span></span>
+                    </p>
+                    <p style="line-height:normal;margin:0cm;text-autospace:none;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:normal;margin:0cm;text-autospace:none;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:normal;margin:0cm;text-autospace:none;">
+                        &nbsp;
+                    </p>
+                    <p>
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><strong><u>Tuty Alawiyah, M.M</u></strong></span><br>
+                        <span style="font-family:Calibri, sans-serif;font-size:11pt;"><strong>Corporate Talent &amp; Culture Manager</strong></span>
+                    </p>
+                    <p style="line-height:normal;margin:0cm;text-autospace:none;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:normal;margin:0cm;text-autospace:none;">
+                        &nbsp;
+                    </p>
+                </div>
+                <div class="page-break" style="page-break-after:always;">
+                    <span style="display:none;">&nbsp;</span>
+                </div>
+
+                <div class="WordSection1" style="page:WordSection1;">
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;text-align:center;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;text-align:center;">
+                        <span style="font-family:Calibri, sans-serif;font-size:14.0pt;"><span style="line-height:107%;" lang="IN" dir="ltr"><strong>TANDA TERIMA</strong></span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;text-align:center;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;text-align:center;">
+                        &nbsp;
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td width="200px">
+                                Nama
+                            </td>
+                            <td>
+                                :
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tanggal
+                            </td>
+                            <td>
+                                :
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Jam
+                            </td>
+                            <td>
+                                :
+                            </td>
+                        </tr>
+                    </table>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        <span style="font-family:&quot;AAAAAC+Calibri&quot;,sans-serif;font-size:11.5pt;"><span style="line-height:107%;" lang="IN" dir="ltr">Telah dokumen surat pemanggilan pertama atas nama&nbsp;</span><span style="line-height:107%;" lang="EN-US" dir="ltr">{{ $tnc->namaKaryawan }}</span><span style="line-height:107%;" lang="IN" dir="ltr"> dengan nomor surat&nbsp;</span></span><span style="font-family:&quot;AAAAAG+Calibri-Light&quot;,sans-serif;font-size:11pt;"><span lang="IN" dir="ltr">{{ $tnc->prefix }}.</span></span>
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+                    <p style="line-height:107%;margin:0cm 0cm 8pt;">
+                        &nbsp;
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td width="450px">
+                            Diberikan oleh,
+                            </td>
+                            <td style="text-align: center;">
+                               Diterima oleh,
+                            </td>
+                        </tr>
+                        <tr height="150px">
+                            <td><br></td>
+                        </tr>
+                        <tr>
+                            <td width="450px">
+                                (….……………….………………)
+                                </td>
+                                <td style="text-align: right;">
+                                    (….……………….………………)
+                                </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+    </div>
+    @if ($tnc->kop !== null && file_exists(public_path('img/' . $tnc->kop . '-bottom-kop.png')))
+        <div class="footer-page">
+            <img src="{{ asset('img/' . $tnc->kop . '-bottom-kop.png') }}"
+                style="max-width: 100%; height: auto;">
+        </div>
+    @endif
+    </div>
+    </div>
+@endif
+
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
     integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
@@ -2548,7 +3056,7 @@
             });
             const element = document.getElementById('contentToConvert');
             const opt = {
-                filename: 'document.pdf',
+                filename: '{{ $tnc->idPerihal == 6 ? "PKWT - " . $tnc->namaKaryawan : "document tnc" }}.pdf',
                 margin: [-0.05, -100],
                 html2canvas: {
                     scale: 3,

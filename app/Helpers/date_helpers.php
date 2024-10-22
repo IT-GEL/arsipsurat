@@ -68,6 +68,10 @@ if (!function_exists('formatDateIndonesian')) {
                 12 => 'Dua Belas', 13 => 'Tiga Belas', 14 => 'Empat Belas',
                 15 => 'Lima Belas', 16 => 'Enam Belas', 17 => 'Tujuh Belas',
                 18 => 'Delapan Belas', 19 => 'Sembilan Belas', 20 => 'Dua Puluh',
+                21 => 'Dua Puluh Satu',  22 => 'Dua Puluh Dua',  23 => 'Dua Puluh Tiga',
+                24 => 'Dua Puluh Empat', 25 => 'Dua Puluh Lima', 26 => 'Dua Puluh Enam',
+                27 => 'Dua Puluh Tujuh', 28 => 'Dua Puluh Delapan', 29 => 'Dua Puluh Sembilan',
+                30 => 'Tiga Puluh', 31 => 'Tiga Puluh Satu',
                 // Tambahkan lebih banyak angka jika perlu
             ];
 

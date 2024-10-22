@@ -2,7 +2,7 @@
 
 @section('container')
 
-    @if (auth()->user()->username == 'tnc' || auth()->user()->username == 'sudosu')
+    @if (auth()->user()->username == 'tnc' || auth()->user()->username == 'sudosu' || auth()->user()->username == 'head.tnc')
         <!-- Sale & Revenue Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
@@ -92,7 +92,7 @@
                             @foreach ($tnc as $item)
                                 <tr>
                                     <td style="font-weight:bold;">{{ $item->prefix }}</td>
-                                    <td>{{ $item->perihal }}</td>
+                                    <td>@if($item->idPerihal == '6')PKWT-{{ $item->namaKaryawan }}@else{{ $item->perihal }}@endif</td>
                                     <td>{{ date('d M Y', strtotime($item->tglSurat)) }}</td>
                                     <td>
                                         @if ($item->approve == '1')
@@ -118,6 +118,21 @@
                                             <button type="button" class="btn btn-sm btn-danger border-0 delete-button"><i
                                                     class="bi bi-trash"></i></button>
                                         </form>
+
+
+                                        <form action="{{ route('tnc.approve', $item->id) }}" method="post" class="d-inline">
+                                            @csrf
+                                            @method('put')
+                                            <input type="hidden" name="approve" value="yes">
+
+                                            <button class="btn btn-sm {{ $item->approve ? 'btn-success' : 'btn-secondary' }}"
+                                                    data-approved="{{ $item->approve }}"
+                                                    onclick="{{ $item->approve ? 'return false;' : 'berhasil(this);' }}"
+                                                    {{ $item->approve ? 'disabled' : '' }}>
+                                                <i class="bi bi-check2-square"></i>
+                                            </button>
+                                        </form>
+
                                     </td>
                                 </tr>
                             @endforeach

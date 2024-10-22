@@ -6,7 +6,7 @@
         <div class="row g-4">
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 mx-auto p-4" style="width: 210mm;">
-                    <h6 class="mb-4">Buat Surat Keterangan Talent And Culture</h6>
+                    <h6 class="mb-4">Buat Surat Keterangan Finnace AP</h6>
                     <form method="post" action="/dashboard/finap">
                         @csrf
 
@@ -44,27 +44,27 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="cicilanDari" class="form-label">Cicilan Dari</label>
-                            <input type="text" class="form-control @error('cicilanDari') is-invalid @enderror" id="cicilanDari" placeholder="Contoh : '12'"
-                                name="cicilanDari" required value="{{ old('cicilanDari') }}">
-                            @error('cicilanDari')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="cicilanSampai" class="form-label">Cicilan Sampai</label>
-                            <input type="text" class="form-control @error('cicilanSampai') is-invalid @enderror" id="cicilanSampai" placeholder="Contoh : '27'"
-                                name="cicilanSampai" required value="{{ old('cicilanSampai') }}">
-                            @error('cicilanSampai')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="cicilanDari" class="form-label">Cicilan Ke</label>
+                                <input type="text" class="form-control @error('cicilanDari') is-invalid @enderror" id="cicilanDari" placeholder="Contoh : '12'"
+                                    name="cicilanDari" required value="{{ old('cicilanDari') }}">
+                                @error('cicilanDari')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3">
+                                <label for="cicilanSampai" class="form-label">Cicilan Dari</label>
+                                <input type="text" class="form-control @error('cicilanSampai') is-invalid @enderror" id="cicilanSampai" placeholder="Contoh : '27'"
+                                    name="cicilanSampai" required value="{{ old('cicilanSampai') }}">
+                                @error('cicilanSampai')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
 
 
@@ -79,60 +79,50 @@
                             @enderror
                         </div>
 
-
-
                         <label for="keterangan" class="form-label">Daftar Pembayaran</label>
                         <div id="keterangan-field" class="mb-3 rounded p-3" style="background-color: white">
-                            <div id="items-container">
-                                @php $itemCount = isset($items) ? count($items) : 1; @endphp
-                                @for ($i = 1; $i <= $itemCount; $i++)
-                                    <div class="item rounded border border-secondary p-3 mb-3"
-                                        id="item-{{ $i }}">
-                                        <div class="row">
-                                            <div>
-                                                <label for="keterangan" class="form-label">Keterangan</label>
-                                                <input type="text" class="form-control"
-                                                    id="deskripsi-{{ $i }}"
-                                                    name="items[{{ $i }}][deskripsi]" required
-                                                    value="{{ old('items.' . $i . '.deskripsi', $items[$i]['deskripsi'] ?? '') }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label for="pokok-{{ $i }}" class="form-label">Pokok</label>
-                                                <input type="text" class="form-control" id="pokok-{{ $i }}"
-                                                    name="items[{{ $i }}][pokok]" required
-                                                    value="{{ old('items.' . $i . '.pokok', $items[$i]['pokok'] ?? '') }}">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="bunga-{{ $i }}" class="form-label">Bunga</label>
-                                                <input type="text" class="form-control"
-                                                    id="bunga-{{ $i }}"
-                                                    name="items[{{ $i }}][bunga]"
-                                                    value="{{ old('items.' . $i . '.bunga', $items[$i]['bunga'] ?? '') }}">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="admin-{{ $i }}" class="form-label">Admin</label>
-                                                <input type="text" class="form-control"
-                                                    id="admin-{{ $i }}"
-                                                    name="items[{{ $i }}][admin]"
-                                                    value="{{ old('items.' . $i . '.admin', $items[$i]['admin'] ?? '') }}">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="denda-{{ $i }}" class="form-label">Denda</label>
-                                                <input type="text" class="form-control"
-                                                    id="denda-{{ $i }}"
-                                                    name="items[{{ $i }}][denda]"
-                                                    value="{{ old('items.' . $i . '.denda', $items[$i]['denda'] ?? '') }}">
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-danger mt-3 delete-item">Hapus Item</button>
+                            <div class="item rounded border border-secondary p-3 mb-3">
+                                <div class="row">
+                                    <div>
+                                        <label for="keterangan" class="form-label">Keterangan</label>
+                                        <input type="text" class="form-control"
+                                            id="deskripsi"
+                                            name="item[deskripsi]" required
+                                            value="{{ old('item.deskripsi', $item['deskripsi'] ?? '') }}">
                                     </div>
-                                @endfor
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="pokok" class="form-label">Pokok</label>
+                                        <input type="text" class="form-control" id="pokok"
+                                            name="item[pokok]" required
+                                            value="{{ old('item.pokok', $item['pokok'] ?? '') }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="bunga" class="form-label">Bunga</label>
+                                        <input type="text" class="form-control"
+                                            id="bunga"
+                                            name="item[bunga]"
+                                            value="{{ old('item.bunga', $item['bunga'] ?? '') }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="admin" class="form-label">Admin</label>
+                                        <input type="text" class="form-control"
+                                            id="admin"
+                                            name="item[admin]"
+                                            value="{{ old('item.admin', $item['admin'] ?? '') }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="denda" class="form-label">Denda</label>
+                                        <input type="text" class="form-control"
+                                            id="denda"
+                                            name="item[denda]"
+                                            value="{{ old('item.denda', $item['denda'] ?? '') }}">
+                                    </div>
+                                </div>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <button type="button" class="btn btn-secondary" id="add-item">Tambah Item</button>
                                 <div class="mb-9">
                                     <label for="total" class="form-label">Total</label>
                                     <input type="text" class="form-control @error('total') is-invalid @enderror"
@@ -216,93 +206,25 @@
                                 }
 
                                 document.addEventListener('DOMContentLoaded', function() {
-                                    const itemsContainer = document.getElementById('items-container');
-                                    const addItemButton = document.getElementById('add-item');
                                     const totalInput = document.getElementById('total');
                                     const terbilangInput = document.getElementById('terbilang');
-                                    let itemCount = {{ $itemCount }}; // Start item count based on the number of items
 
-                                    function calculateTotal(item) {
-                                        const pokokInputs = document.querySelectorAll('[name^="items"][name$="[pokok]"]');
-                                        const bungaInputs = document.querySelectorAll('[name^="items"][name$="[bunga]"]');
-                                        const adminInputs = document.querySelectorAll('[name^="items"][name$="[admin]"]');
-                                        const dendaInputs = document.querySelectorAll('[name^="items"][name$="[denda]"]');
-                                        const totalInput = document.getElementById('total');
+                                    function calculateTotal() {
+                                        const pokokInput = document.getElementById('pokok');
+                                        const bungaInput = document.getElementById('bunga');
+                                        const adminInput = document.getElementById('admin');
+                                        const dendaInput = document.getElementById('denda');
 
                                         let total = 0;
 
-                                        pokokInputs.forEach(input => {
-                                            total += parseFloat(input.value) || 0;
-                                        });
-
-                                        bungaInputs.forEach(input => {
-                                            total += parseFloat(input.value) || 0;
-                                        });
-
-                                        adminInputs.forEach(input => {
-                                            total += parseFloat(input.value) || 0;
-                                        });
-
-                                        dendaInputs.forEach(input => {
-                                            total += parseFloat(input.value) || 0;
-                                        });
+                                        total += parseFloat(pokokInput.value) || 0;
+                                        total += parseFloat(bungaInput.value) || 0;
+                                        total += parseFloat(adminInput.value) || 0;
+                                        total += parseFloat(dendaInput.value) || 0;
 
                                         totalInput.value = total;
                                         updateTerbilang();
                                     }
-
-                                    function addItem() {
-                                        itemCount++;
-                                        const newItem = document.querySelector('.item').cloneNode(true);
-                                        newItem.id = `item-${itemCount}`;
-                                        newItem.querySelectorAll('input').forEach(input => {
-                                            const name = input.name.replace(/\d+/, itemCount); // Adjust index in name
-                                            input.name = name;
-                                            input.id = name;
-                                            input.value = '';
-                                        });
-                                        itemsContainer.appendChild(newItem);
-
-                                        newItem.querySelector('[name$="[pokok]"]').addEventListener('input', () => calculateTotal(newItem));
-                                        newItem.querySelector('[name$="[bunga]"]').addEventListener('input', () => calculateTotal(newItem));
-                                        newItem.querySelector('[name$="[admin]"]').addEventListener('input', () => calculateTotal(newItem));
-                                        newItem.querySelector('[name$="[denda]"]').addEventListener('input', () => calculateTotal(newItem));
-                                        newItem.querySelector('.delete-item').addEventListener('click', () => deleteItem(newItem));
-
-                                        updateDeleteButtons();
-                                    }
-
-                                    function deleteItem(item) {
-                                        item.remove();
-                                        itemCount--;
-                                        updateDeleteButtons();
-                                        calculateTotal(); // Recalculate total after item deletion
-                                    }
-
-                                    function updateDeleteButtons() {
-                                        const deleteButtons = document.querySelectorAll('.delete-item');
-                                        if (deleteButtons.length === 1) {
-                                            deleteButtons[0].disabled = true;
-                                        } else {
-                                            deleteButtons.forEach(button => button.disabled = false);
-                                        }
-                                    }
-
-                                    addItemButton.addEventListener('click', addItem);
-
-                                    document.querySelectorAll('.item').forEach(item => {
-                                        item.querySelector('[name$="[pokok]"]').addEventListener('input', () => calculateTotal(
-                                            item));
-                                        item.querySelector('[name$="[bunga]"]').addEventListener('input', () => calculateTotal(
-                                            item));
-                                        item.querySelector('[name$="[admin]"]').addEventListener('input', () => calculateTotal(
-                                            item));
-                                        item.querySelector('[name$="[denda]"]').addEventListener('input', () => calculateTotal(
-                                            item));
-                                        item.querySelector('.delete-item').addEventListener('click', () => deleteItem(item));
-                                    });
-
-                                    updateDeleteButtons();
 
                                     function updateTerbilang() {
                                         const totalValue = parseFloat(totalInput.value.replace(/[^0-9,-]+/g, "").replace(",", "."));
@@ -313,8 +235,12 @@
                                         }
                                     }
 
-                                    totalInput.addEventListener('input', updateTerbilang);
-                                    updateTerbilang(); // Initialize on load
+                                    const inputs = document.querySelectorAll('#pokok, #bunga, #admin, #denda');
+                                    inputs.forEach(input => {
+                                        input.addEventListener('input', calculateTotal);
+                                    });
+
+                                    calculateTotal(); // Initialize on load
                                 });
                             </script>
                         </div>
@@ -391,5 +317,40 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const cicilanDariInput = document.getElementById('cicilanDari');
+                const cicilanSampaiInput = document.getElementById('cicilanSampai');
+                const pembayaranAtasInput = document.getElementById('pembayaranAtas');
+
+                function updateKeterangan() {
+                    pembayaranAtasInput.value = pembayaranAtasInput.value.toUpperCase();
+                    const cicilanDari = cicilanDariInput.value;
+                    const cicilanSampai = cicilanSampaiInput.value;
+                    const pembayaranAtas = pembayaranAtasInput.value;
+
+                    const deskripsiInput = document.getElementById(`deskripsi`);
+                    if (deskripsiInput) {
+                        deskripsiInput.value = `PEMBAYARAN POKOK CICILAN KE-${cicilanDari} DARI ${cicilanSampai} ATAS PEMBELIAN ${pembayaranAtas}`;
+                    }
+
+                }
+
+                cicilanDariInput.addEventListener('input', function() {
+                    updateKeterangan();
+                });
+
+                cicilanSampaiInput.addEventListener('input', function() {
+                    updateKeterangan();
+                });
+
+                pembayaranAtasInput.addEventListener('input', function() {
+                    updateKeterangan();
+                });
+            });
+        </script>
+
+
 
     @endsection

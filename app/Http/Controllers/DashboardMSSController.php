@@ -105,7 +105,7 @@ class DashboardMSSController extends Controller
             'shipschedule' => 'nullable|string|max:255',
             'tcd' => 'nullable|string|max:255',
             'surveyor' => 'nullable|string|max:255',
-            'qas' => 'nullable|string|max:9999',
+            'qas' => 'nullable|array',
             'top' => 'nullable|string|max:255',
             'delivery_basis' => 'nullable|string|max:255',
             'contract_dur' => 'nullable|string|max:255',
@@ -118,6 +118,10 @@ class DashboardMSSController extends Controller
 
         ]);
 
+        // Convert 'qas' array to JSON
+        if ($request->has('qas')) {
+            $validatedData['qas'] = json_encode($request->qas);
+        }
 
         if ($request->hasFile('lampiran')) {
             $file = $request->file('lampiran');
@@ -126,6 +130,7 @@ class DashboardMSSController extends Controller
             $validatedData['lampiran'] = $filename;
         }
 
+        // dd($validatedData);
         MSS::create($validatedData);
 
         return redirect('/dashboard/mss')->with('success', 'Surat berhasil ditambahkan!');
@@ -133,9 +138,12 @@ class DashboardMSSController extends Controller
 
     public function show(MSS $mss)
     {
+        $qas = json_decode($mss->qas, true);
+
         return view('dashboard.mss.show', [
             'title' => 'MSS',
             'mss' => $mss,
+            'qas' => $qas,
         ]);
     }
 
@@ -153,8 +161,6 @@ class DashboardMSSController extends Controller
 
     public function update(Request $request, MSS $mss)
     {
-
-
 
         $rules = [
             'idPerihal' => 'required|numeric|max:255',
@@ -181,7 +187,7 @@ class DashboardMSSController extends Controller
             'shipschedule' => 'nullable|string|max:255',
             'tcd' => 'nullable|string|max:255',
             'surveyor' => 'nullable|string|max:255',
-            'qas' => 'nullable|string',
+            'qas' => 'nullable|array',
             'top' => 'nullable|string|max:255',
             'tglSurat' => 'nullable|date',
             'ettd' => 'nullable|string|max:255',
@@ -196,6 +202,10 @@ class DashboardMSSController extends Controller
         $validatedData = $request->validate($rules);
 
         $mss->update($validatedData);
+
+        if ($request->has('qas')) {
+            $validatedData['qas'] = json_encode($request->qas);
+        }
 
         return redirect('/dashboard/mss')->with('success', 'Surat berhasil di edit!');
     }
